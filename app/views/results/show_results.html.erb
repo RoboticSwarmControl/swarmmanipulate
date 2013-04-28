@@ -1,0 +1,9 @@
+<h1> RESULTS </h1>
+
+<ul>
+    <% @results.each do |r| %>
+        <li>
+        <%= r.task %> | <%= r.participant %> | <%= r.runtime %>
+        </li>
+    <% end %>
+</ul>

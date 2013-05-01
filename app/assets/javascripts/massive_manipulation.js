@@ -64,7 +64,6 @@ var app = (function () {
         }
 	};
 
-    var countRobtosAtGoal = 0;
 
     var countRobots = function () {
         var ret = 0;
@@ -104,24 +103,20 @@ var app = (function () {
         $canvas.clearCanvas();
         
         var countRobotsAtGoal = 0;
+	var colorGoal;
         for (var i =0; i<myGoalsX.length; i++) {
-            context.strokeStyle = "rgb(0, 255, 0)"; 			
+            colorGoal = "rgb(0, 255, 0)"; 			
             for (var j = 0; j < numrobots; ++j) {
                 var roboPosition = m_Robot[j].GetPosition();
                 if( mathutils.lineDistance( myGoalsX[i],myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    context.strokeStyle = "rgb(255, 0, 0)"; 
+                    colorGoal = "rgb(255, 0, 0)"; 
                     countRobotsAtGoal++;
                 }
             }
             // draw the goal positions
-            context.beginPath();
-            context.arc(myGoalsX[i]*30,myGoalsY[i]*30,0.5*30,0,2*Math.PI);
-            context.stroke();
+	    drawCircle(myGoalsX[i],myGoalsY[i],0.5,colorGoal);
         }
         
-        $canvas.rotateCanvas({ x: 5 * 30, y: 5 * 30, rotate: angle})
-                      .drawArc({ fillStyle: "orange", x: 5 * 30, y: 5 * 30, radius: radius * 30})
-                      .restoreCanvas();
         
         //draw robots and obstacles
         for (b = world.GetBodyList() ; b; b = b.GetNext())

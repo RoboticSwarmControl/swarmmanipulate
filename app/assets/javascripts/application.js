@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require underscore
+//= require_tree ./lib
+//= require_tree ./utils
+//= require_tree ./core
+//= require_tree ./tasks
+//= require massive_manipulation

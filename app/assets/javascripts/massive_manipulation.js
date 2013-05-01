@@ -114,7 +114,7 @@ var app = (function () {
                 }
             }
             // draw the goal positions
-	    drawCircle(myGoalsX[i],myGoalsY[i],0.5,colorGoal);
+	    drawutils.drawCircle(myGoalsX[i],myGoalsY[i],0.5,colorGoal);
         }
         
         

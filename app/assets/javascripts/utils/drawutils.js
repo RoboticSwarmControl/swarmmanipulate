@@ -15,6 +15,14 @@ var drawutils = (function(){
             context.arc(x*30,y*30,radius*30,0,2*Math.PI);
             context.stroke();
     };
+    
+   var drawRobot = function (x,y,radius,color,theta) {
+	    context.strokeStyle = color; 
+	    context.beginPath();
+	    // TODO: what is this *30 value?
+            context.arc(x*30,y*30,radius*30,0,2*Math.PI);
+            context.stroke();
+    };
 
     var drawRect = function (x,y,w,h,color) {
     };

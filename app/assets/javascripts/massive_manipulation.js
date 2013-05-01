@@ -45,12 +45,6 @@ var app = (function () {
     // robots
     var m_Robot = [];
     var numrobots = 8;
-	
-    var lineDistance = function ( x1,y1,x2,y2) {
-        var xs = x1 - x2;
-        var ys = y1- y2;
-        return Math.sqrt( (xs*xs) + (ys*ys) );
-	};
 
     var update = function() {
         // apply the user force to all the robots
@@ -77,7 +71,7 @@ var app = (function () {
         for (var i = 0; i<myGoalsX.length; i++) {
             for (var j = 0; j < m_Robot.length; j++) {
                 var roboPosition = m_Robot[j].GetPosition();
-                if( lineDistance( myGoalsX[i],myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
+                if( mmutils.lineDistance( myGoalsX[i],myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
                     ret++;
                 }
             }
@@ -114,7 +108,7 @@ var app = (function () {
             context.strokeStyle = "rgb(0, 255, 0)"; 			
             for (var j = 0; j < numrobots; ++j) {
                 var roboPosition = m_Robot[j].GetPosition();
-                if( lineDistance( myGoalsX[i],myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
+                if( mmutils.lineDistance( myGoalsX[i],myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
                     context.strokeStyle = "rgb(255, 0, 0)"; 
                     countRobotsAtGoal++;
                 }

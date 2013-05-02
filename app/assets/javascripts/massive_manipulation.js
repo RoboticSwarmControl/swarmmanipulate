@@ -100,7 +100,8 @@ var app = (function () {
     };
 
     var draw = function () {
-        $canvas.clearCanvas();
+//        $canvas.clearCanvas();
+        drawutils.clearCanvas();
         
         var countRobotsAtGoal = 0;
 	var colorGoal;
@@ -169,8 +170,9 @@ var app = (function () {
      }; //end draw
      
     var init = function() {
-        context = $("#canvas")[0].getContext('2d'); 
-        $canvas = $("#canvas");
+//        context = $("#canvas")[0].getContext('2d'); 
+//        $canvas = $("#canvas");
+         drawutils.init();        
 	    
          // used for?
          var fixDef = new b2FixtureDef;

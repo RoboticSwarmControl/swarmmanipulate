@@ -100,7 +100,6 @@ var app = (function () {
     };
 
     var draw = function () {
-//        $canvas.clearCanvas();
         drawutils.clearCanvas();
         
         var countRobotsAtGoal = 0;
@@ -115,7 +114,8 @@ var app = (function () {
                 }
             }
             // draw the goal positions
-	    drawutils.drawCircle(myGoalsX[i],myGoalsY[i],0.5,colorGoal);
+            // the 30s we see scattered through here are canvas scaling factor -- crertel
+	    drawutils.drawCircle(30*myGoalsX[i],30*myGoalsY[i],30*0.5,colorGoal);
         }
         
         
@@ -127,14 +127,7 @@ var app = (function () {
                 if (b.GetUserData() == 'robot') {
                      var radius = f.GetShape().GetRadius();
                      var pos = b.GetPosition();
-                     $canvas.rotateCanvas({
-                          x: pos.x * 30, y: pos.y * 30,
-                          rotate: angle
-                      }).drawArc({
-                          fillStyle: "blue",						  
-                          x: pos.x * 30, y: pos.y * 30,
-                          radius: radius * 30
-                      }).restoreCanvas();
+                     drawutils.drawCircle( 30*pos.x, 30*pos.y, 30*radius, "blue");
                 } else {
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
@@ -146,16 +139,7 @@ var app = (function () {
                       color = 'blue';
                     }
 
-                    $canvas.rotateCanvas({
-                        x: pos.x * 30, y: pos.y * 30,
-                        rotate: angle
-                    }).drawRect({
-                        fillStyle: color,
-                        x: pos.x * 30, y: pos.y * 30,
-                        width: X * 30,
-                        height: Y * 30,
-                        cornerRadius: 0
-                    }).restoreCanvas();
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                }
             }
         }
@@ -170,8 +154,6 @@ var app = (function () {
      }; //end draw
      
     var init = function() {
-//        context = $("#canvas")[0].getContext('2d'); 
-//        $canvas = $("#canvas");
          drawutils.init();        
 	    
          // used for?

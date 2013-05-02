@@ -8,6 +8,10 @@
 */
 
 var drawutils = (function(){
+    
+    var context = null;
+    var $canvas = null;
+
     var drawCircle = function (x,y,radius,color) {
 	    context.strokeStyle = color; 
 	    context.beginPath();
@@ -31,8 +35,19 @@ var drawutils = (function(){
 
     var drawRect = function (x,y,w,h,color) {
     };
+
+    var init = function () {
+        context = $("#canvas")[0].getContext('2d');
+        $canvas = $("#canvas");
+    };
+
+    var clearCanvas = function() {
+        $canvas.clearCanvas();
+    };
     
     return { drawCircle : drawCircle,
-             drawRect : drawRect       
+             drawRect : drawRect,
+             clearCanvas : clearCanvas,
+             init : init
     };
 })();

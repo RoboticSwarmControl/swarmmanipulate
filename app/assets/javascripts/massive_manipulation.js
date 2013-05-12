@@ -8,24 +8,11 @@
  */
 
 var app = (function () {
-
     // Setup some sweet, sweet type abbreviations
-    var b2Vec2 = Box2D.Common.Math.b2Vec2;
-    var b2AABB = Box2D.Collision.b2AABB;
-    var b2BodyDef = Box2D.Dynamics.b2BodyDef;
-    var b2Body = Box2D.Dynamics.b2Body;
-    var b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
-    var b2Fixture = Box2D.Dynamics.b2Fixture;
-    var b2World = Box2D.Dynamics.b2World;
-    var b2MassData = Box2D.Collision.Shapes.b2MassData;
-    var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
-    var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
-    var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
-    var b2MouseJointDef =  Box2D.Dynamics.Joints.b2MouseJointDef;
     var impulse = 1.0;
-    var impulseV= new b2Vec2(0,0);
+    var impulseV= new phys.vec2(0,0);
 	  
-    var world = new b2World( new b2Vec2(0, 00), //gravity  setting to zero removes gravity
+    var world = new phys.world( new phys.vec2(0, 00), //gravity  setting to zero removes gravity
                              true );            //allow sleep
     var timeStart = null;
     var timeFinish = null;
@@ -49,7 +36,7 @@ var app = (function () {
     var update = function() {
         // apply the user force to all the robots
         for(var i =0; i<m_Robot.length; i++) {
-            m_Robot[i].ApplyForce(impulseV,m_Robot[i].GetWorldPoint(new b2Vec2(0,0)));
+            m_Robot[i].ApplyForce(impulseV,m_Robot[i].GetWorldPoint(new phys.vec2(0,0)));
         }
        
         world.Step(1 / 60, 10, 10);
@@ -157,17 +144,17 @@ var app = (function () {
          drawutils.init();        
 	    
          // used for?
-         var fixDef = new b2FixtureDef;
+         var fixDef = new phys.fixtureDef;//b2FixtureDef;
          fixDef.density = 1.0;
          fixDef.friction = 0.5;
          fixDef.restitution = 0.2;  //bouncing value
          
-         var bodyDef = new b2BodyDef;
+         var bodyDef = new phys.bodyDef;
 
          //create ground rectangleA
     	 bodyDef.userData = 'obstacle';
-         bodyDef.type = b2Body.b2_staticBody;
-         fixDef.shape = new b2PolygonShape;
+         bodyDef.type = phys.body.b2_staticBody;
+         fixDef.shape = new phys.polyShape;
          fixDef.shape.SetAsBox(20, 2);
          bodyDef.position.Set(10, 600 / 30 + 1.8); //bottom
 	    
@@ -182,13 +169,13 @@ var app = (function () {
          world.CreateBody(bodyDef).CreateFixture(fixDef);
 
     	 //create an object to move
-    	 bodyDef.type = b2Body.b2_staticBody;
+    	 bodyDef.type = phys.body.b2_staticBody;
 	     fixDef.density = 10.0;
          fixDef.friction = 0.5;
          fixDef.restitution = 0.2;  //bouncing value
          bodyDef.position.Set(10,10);
 		 bodyDef.userData = 'obstacle';
-		 fixDef.shape = new b2PolygonShape;
+		 fixDef.shape = new phys.polyShape;
 		 fixDef.shape.SetAsBox(0.5,0.5);
 		 var obst = world.CreateBody(bodyDef);
 		 obst.CreateFixture(fixDef);
@@ -196,12 +183,12 @@ var app = (function () {
 	     obst.m_linearDamping = 0.1;
          
          //create some robots
-    	 bodyDef.type = b2Body.b2_dynamicBody;
+    	 bodyDef.type = phys.body.b2_dynamicBody;
 	     fixDef.density = 1.0;
          fixDef.friction = 0.5;
          fixDef.restitution = 0.2;  //bouncing value
          for(var i = 0; i < numrobots; ++i) {
-            fixDef.shape = new b2CircleShape( 0.5 ); // radius .5 robots
+            fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
             bodyDef.userData = 'robot';
             bodyDef.position.x = Math.random() * 10;
             bodyDef.position.y = Math.random() * 10;

@@ -74,7 +74,7 @@ var baseTask = {
      */
     evaluateCompletion: function( goals, props, robots) {
         return false;
-    }
+    },
 
     /* 
      * Function to handle drawing the simulation.
@@ -127,7 +127,7 @@ var baseTask = {
 
         // do the loop
         requestAnimFrame( this._update );
-    };
+    },
 
     /*
      * Function to run the simulation.

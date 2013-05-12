@@ -25,9 +25,7 @@ var app = (function () {
 //    var myGoalsX = [8,7,9,7,8,9,7,9];
 //    var myGoalsY = [6,7,7,8,8,8,9,9];
     var myGoalsX = [8,7,9];
-    var myGoalsY = [6,7,7];
-    
-    
+    var myGoalsY = [6,7,7];    
    
     // robots
     var m_Robot = [];
@@ -50,7 +48,6 @@ var app = (function () {
             requestAnimFrame(animloop);
         }
 	};
-
 
     var countRobots = function () {
         var ret = 0;
@@ -104,7 +101,6 @@ var app = (function () {
             // the 30s we see scattered through here are canvas scaling factor -- crertel
 	    drawutils.drawCircle(30*myGoalsX[i],30*myGoalsY[i],30*0.5,colorGoal);
         }
-        
         
         //draw robots and obstacles
         for (b = world.GetBodyList() ; b; b = b.GetNext())
@@ -197,17 +193,6 @@ var app = (function () {
 	        m_Robot[i].m_angularDamping = 1;
 	        m_Robot[i].m_linearDamping = 1;
          }
-	
-         /* requestAnimationFrame polyfill */
-    	 window.requestAnimFrame = ( function() {
-    		return  window.requestAnimationFrame || 
-    		window.webkitRequestAnimationFrame   || 
-    		window.mozRequestAnimationFrame      || 
-    		window.oRequestAnimationFrame        || 
-	    	window.msRequestAnimationFrame       || 
-    		function( callback, element) { window.setTimeout(callback, 1000 / 60);};
-	    })();
-
 	  
         /* setup key listeners */
     	document.addEventListener( "keydown", function(e){

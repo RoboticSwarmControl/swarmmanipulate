@@ -3,7 +3,7 @@ var phys = {
     AABB: Box2D.Collision.b2AABB,
     bodyDef: Box2D.Dynamics.b2BodyDef,
     body: Box2D.Dynamics.b2Body,
-    fixtureDef: Box2D.Dynamics.b2Fixture,
+    fixtureDef: Box2D.Dynamics.b2FixtureDef,
     world: Box2D.Dynamics.b2World,
     massData: Box2D.Collision.Shapes.b2MassData,
     polyShape: Box2D.Collision.Shapes.b2PolygonShape,

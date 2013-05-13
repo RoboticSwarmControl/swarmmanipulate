@@ -107,33 +107,16 @@ var mazePositioningTask = _.extend({}, baseTask, {
     },
 
     evaluateCompletion: function( options ) {
-        var robotsAtGoal = this._countRobots();
-        var neededRobots = this._myGoalsX.length;
-
-        // we're done if all robots are on the goals
-        return robotsAtGoal == neededRobots;
+        // need to check if object has been moved into the goal zone
+        return false;
     },
 
     draw: function() {
         drawutils.clearCanvas();
         var that = this;
-        var countRobotsAtGoal = 0;
         var colorGoal;
 
-        // draw goals 
-        for (var i =0; i<this._myGoalsX.length; i++) {
-            colorGoal = "rgb(0, 255, 0)"; 			
-            _.each( that._robots, function(r) {
-                var roboPosition = r.GetPosition();
-                if( mathutils.lineDistance( that._myGoalsX[i],that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    colorGoal = "rgb(255, 0, 0)"; 
-                    countRobotsAtGoal++;
-                }
-            });
-            // draw the goal positions
-            // the 30s we see scattered through here are canvas scaling factor -- crertel
-            drawutils.drawCircle(30*this._myGoalsX[i],30*this._myGoalsY[i],30*0.5,colorGoal);
-        }
+        // draw goal zone
 
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())
@@ -176,20 +159,6 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._world.ClearForces();
     },
 
-    // function to get the number of robots within distance of a goal
-    _countRobots: function () {
-        var ret = 0;
-        var that = this;
-        for (var i = 0; i<this._myGoalsX.length; i++) {
-            _.each( that._robots, function(r) {
-                var roboPosition = r.GetPosition();
-                if( mathutils.lineDistance( that._myGoalsX[i], that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    ret++;
-                }
-            });
-        }
-        return ret;
-    },
 });
 
 // this makes sure that the "this" context is properly set

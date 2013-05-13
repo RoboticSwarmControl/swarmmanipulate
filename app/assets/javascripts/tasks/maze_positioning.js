@@ -56,6 +56,8 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create shaping block
+        bodyDef.type = phys.body.b2_dynamicBody;
+        bodyDef.userData = "workpiece";
         bodyDef.position.Set(10,10);
         fixDef.shape.SetAsBox(0.5,0.5);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
@@ -128,6 +130,13 @@ var mazePositioningTask = _.extend({}, baseTask, {
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                } else if (b.GetUserData() == 'workpiece') {
+                    // draw the obstacles
+                    var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
+                    var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
+                    var pos = b.GetPosition();
+                    var color = 'green';
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

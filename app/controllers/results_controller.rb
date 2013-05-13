@@ -5,7 +5,8 @@ class ResultsController < ApplicationController
     end
 
     def create
-        @result = Result.new( :task=>params[:task], :participant=>params[:participant], :runtime=>params[:runtime] )
+        #@result = Result.new( :task=>params[:task], :participant=>params[:participant], :runtime=>params[:runtime] )
+        @result = Result.new( :task=>params[:task], :participant=>request.remote_ip, :runtime=>params[:runtime] )
         @result.save
 
         redirect_to :action=>'show'

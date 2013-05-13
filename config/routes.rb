@@ -1,8 +1,9 @@
 Ensemble::Application.routes.draw do
 
-  root :to => "static#show"
+  root :to => "static#landing"
 
-  match "/index.html" => "static#show"
+  match "/index.html" => "static#landing"
+  match "/task/:task_name" => "static#task"
 
   match "/show_results" => 'results#show_results'
   match "/results/show" => 'results#show'

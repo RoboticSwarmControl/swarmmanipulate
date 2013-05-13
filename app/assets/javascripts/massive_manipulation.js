@@ -136,8 +136,10 @@ var app = (function () {
         $('#cc').html(string); //USERDATA WILL SHOWN IN "div" WITH ID "cc" 
      }; //end draw
      
-    var init = function() {
-         drawutils.init();        
+    var init = function( taskname) {
+         drawutils.init();
+
+         alert(taskname);
 	    
          // used for?
          var fixDef = new phys.fixtureDef;//b2FixtureDef;

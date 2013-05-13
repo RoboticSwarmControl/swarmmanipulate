@@ -130,10 +130,13 @@ var positionRobotsTask = _.extend({}, baseTask, {
             var angle = b.GetAngle()*(180/Math.PI);
             for(f = b.GetFixtureList(); f; f = f.GetNext()) {
                 if (b.GetUserData() == 'robot') {
+                    // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawCircle( 30*pos.x, 30*pos.y, 30*radius, "blue");
+//                    drawutils.drawCircle( 30*pos.x, 30*pos.y, 30*radius, "blue");
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
                 } else {
+                    // draw the sides
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();

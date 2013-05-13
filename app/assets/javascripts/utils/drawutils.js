@@ -22,7 +22,15 @@ var drawutils = (function(){
     };
     
    var drawRobot = function (x,y,theta,radius,colorFill,colorEdge) {
-	   
+	    context.strokeStyle = colorEdge; 
+        context.fillStyle = colorFill;
+	    context.beginPath();
+	    // TODO: what is this *30 value?
+        // 30 appears to be a scaling factor to match the canvas size. -- crertel
+        context.arc(x,y,radius,0,2*Math.PI);
+        context.fill();
+        context.stroke();
+/*	   
 	   $canvas.rotateCanvas({
                           x: pos.x * 30, y: pos.y * 30,
                           rotate: theta
@@ -31,7 +39,7 @@ var drawutils = (function(){
                           x: pos.x * 30, y: pos.y * 30,
                           radius: radius * 30
                       }).restoreCanvas();
-	   
+*/	   
     };
 
     var drawRect = function (x,y,w,h,color) {
@@ -53,6 +61,7 @@ var drawutils = (function(){
     
     return { drawCircle : drawCircle,
              drawRect : drawRect,
+             drawRobot: drawRobot,
              clearCanvas : clearCanvas,
              init : init
     };

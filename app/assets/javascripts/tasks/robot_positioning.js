@@ -100,6 +100,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
         var robotsAtGoal = this._countRobots();
         var neededRobots = this._myGoalsX.length;
 
+        // we're done if all robots are on the goals
         return robotsAtGoal == neededRobots;
     },
 
@@ -133,18 +134,15 @@ var positionRobotsTask = _.extend({}, baseTask, {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-//                    drawutils.drawCircle( 30*pos.x, 30*pos.y, 30*radius, "blue");
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
                 } else {
-                    // draw the sides
+                    // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = 'orange';
                     if(b.GetUserData() == 'obstacle') {
                         color = 'red';
-                    } else if(b.GetUserData() == 'rectangleB') {
-                        color = 'blue';
                     }
 
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);

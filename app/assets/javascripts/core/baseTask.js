@@ -102,8 +102,8 @@ var baseTask = {
      */
     _update: function( ) {
         // draw the simulation
-        this.draw( this._options );
         this.update( this._options );
+        this.draw( this._options );
 
         // check to see if we've reached completion.
         if ( this.evaluateCompletion( this._options ) ) {

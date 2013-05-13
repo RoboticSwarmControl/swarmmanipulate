@@ -21,81 +21,49 @@ var baseTask = {
     taskName: "base task",
 
     /*
-     * Function to setup goals.
+     * Function to setup the task.
      * This should be overridden by the user as needed.
-     * @param goals -- in/out initially empty array of goal objects
      * @param options -- object of options that might be important
      */
-    setupGoals: function( goals, options ) {
-    },
-
-    /*
-     * Function to setup robots.
-     * This should be overridden by the user as needed.
-     * @param goals -- in/out initially empty array of robot objects
-     * @param options -- object of options that might be important
-     */
-    setupRobots: function( robots, options ) {
-    },
-
-    /*
-     * Function to setup the static props.
-     * This should be overridden by the user as needed.
-     * @param staticProps -- in/out initially empty array of static props
-     * @param options -- object of options that might be important
-     */
-    setupStaticProps: function( staticProps, options ) {
-    },
-
-    /*
-     * Function to setup the dynamic props.
-     * This should be overridden by the user as needed.
-     * @param staticProps -- in/out initially empty array of dynamic props
-     * @param options -- object of options that might be important
-     */
-    setupDynamicProps: function( dynamicProps, options ) {
+    setupTask: function( options ) {
     },
     
     /*
      * Function to setup controller method.
      * This should be overridden by the user as needed.
-     * @param robots -- in array of robots to control
      * @param options -- object of options that might be important
      */
-    setupController: function (robots, options) {
+    setupController: function( options ) {
     },
 
     /*
      * Function to evaluate whether or not a task has been completed.
      * This should be overridden by the user as needed.
-     * @param goals -- array of goal objects
-     * @param props -- array of dynamic props
-     * @param robots -- array of robots
+     * @param options -- object of options that might be important
      */
-    evaluateCompletion: function( goals, props, robots) {
+    evaluateCompletion: function( options ) {
         return false;
     },
 
     /* 
      * Function to handle drawing the simulation.
      * This should be overridden by the user as needed.
+     * @param options -- object of options that might be important
      */
-    draw: function() {
+    draw: function( options ) {
     },
 
     /*
      * Function to handle updating the simulation.
      * This should be overridden by the user as needed.
+     * @param options -- object of options that might be important
      */
-    update: function() {
+    update: function( options ) {
     },
 
-    goals: [],
-    robots: [],
-    staticProps: [],
-    dynamicProps: [],
-    runtime: 0,
-    startTime: null,
+    _robots: [],
+    _runtime: 0,
+    _startTime: null,
 
     /*
      * Function to initialize and begin the task.
@@ -109,23 +77,20 @@ var baseTask = {
      *                   Other options depend on the subclass.
      */
     init: function( options ) {
+        this._options = options;
 
-        alert(this.taskName);
         // setup the draw utilities
         drawutils.init();
 
         // setup the simulation
-        this.setupGoals(goals, options);
-        this.setupRobots(robots, options);
-        this.setupStaticProps(staticProps, options);
-        this.setupDynamicProps(dynamicProps, options);
+        this.setupTask( this._options );
 
         // register the handlers
-        this.setupController(robots, options);
+        this.setupController( this._options );
 
         // initialize the time
-        this.startTime = new Date();
-        this.runtime = 0.0;
+        this._startTime = new Date();
+        this._runtime = 0.0;
 
         // do the loop
         requestAnimFrame( this._update );
@@ -135,27 +100,30 @@ var baseTask = {
      * Function to run the simulation.
      * This generally SHOULD NOT be overidden.
      */
-    _update: function() {
+    _update: function( ) {
         // draw the simulation
-        this.draw();
-        this.update();
+        this.draw( this._options );
+        this.update( this._options );
 
         // check to see if we've reached completion.
-        if ( this.evaluateCompletion(goals, dynamicProps, robots) ) {
+        if ( this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
-            alert("Task complete. Time to finish was "+ this.runtime +" seconds.");
+            alert("Task complete. Time to finish was "+ this._runtime +" seconds.");
             $.ajax( { type: "POST",
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, runtime:this.runtime, participant:"web"}
+                      data: { task:this.taskName, runtime:this._runtime, participant:"web"}
             });
+
             // at this point, we do not reschedule, and the task ends.
+            return;
         } else {
             // if not, schedule ourselves again and update the time.
             // Mr. Bones says, "The ride never ends!"
             requestAnimFrame( this._update );
-            this.runtime = (new Date().getTime() - this.timeStart)/1000.0; 
+            this._runtime = (new Date().getTime() - this._timeStart)/1000.0; 
         }
     }
 };
+

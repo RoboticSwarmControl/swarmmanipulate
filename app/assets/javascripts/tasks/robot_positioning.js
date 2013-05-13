@@ -1,64 +1,66 @@
 var positionRobotsTask = _.extend({}, baseTask, {
     taskName: "robot_positioning",
 
-    _numrobots: 8,
-    _robots: [],
-    _impulse: 1,
-    _impulseV: new phys.vec2(0,0),
-    _world: new phys.world( new phys.vec2(0, 00), true ),
-    _zeroReferencePoint: new phys.vec2(0,0),
-    _myGoalsX: [8,7,9],
-    _myGoalsY: [6,7,7],    
+    _numrobots: 8,                                          // number of robots
+    _robots: [],                                            // array of bodies representing the robots
+    _impulse: 1,                                            // impulse to move robots by
+    _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
+    _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
+    _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
+    _myGoalsX: [8,7,9],                                     // x-coord of goals
+    _myGoalsY: [6,7,7],                                     // y-coord of goals
 
     setupTask: function( options ) {
-        // used for?
-        var fixDef = new phys.fixtureDef;//b2FixtureDef;
+        // fixture definition for obstacles
+        var fixDef = new phys.fixtureDef;
         fixDef.density = 1.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
 
+        // body definition for obstacles
         var bodyDef = new phys.bodyDef;
-
-        //create ground rectangleA
         bodyDef.userData = 'obstacle';
         bodyDef.type = phys.body.b2_staticBody;
-        fixDef.shape = new phys.polyShape;
-        fixDef.shape.SetAsBox(20, 2);
-        bodyDef.position.Set(10, 600 / 30 + 1.8); //bottom
 
-        var bodyBottom = this._world.CreateBody(bodyDef);
-        bodyBottom.CreateFixture(fixDef);
+        //create ground obstacles
+        fixDef.shape = new phys.polyShape;
+
+        // reshape fixture def to be horizontal bar
+        fixDef.shape.SetAsBox(20, 2);
+
+        // create bottom wall
+        bodyDef.position.Set(10, 600 / 30 + 1.8);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create top wall
         bodyDef.position.Set(10, -1.8);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+ 
+        // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(2, 14);
+        
+        // create left wall
         bodyDef.position.Set(-1.8, 13);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create right wall
         bodyDef.position.Set(21.8, 13); // right side
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-        //create an object to move
-        bodyDef.type = phys.body.b2_staticBody;
-        fixDef.density = 10.0;
-        fixDef.friction = 0.5;
-        fixDef.restitution = 0.2;  //bouncing value
+        // create shaping block
         bodyDef.position.Set(10,10);
-        bodyDef.userData = 'obstacle';
-        fixDef.shape = new phys.polyShape;
         fixDef.shape.SetAsBox(0.5,0.5);
-        var obst = this._world.CreateBody(bodyDef);
-        obst.CreateFixture(fixDef);
-        obst.m_angularDamping = 0.1;
-        obst.m_linearDamping = 0.1;
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         //create some robots
         this._robots = [];
         bodyDef.type = phys.body.b2_dynamicBody;
+        bodyDef.userData = 'robot';
         fixDef.density = 1.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
+        fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
-            fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
-            bodyDef.userData = 'robot';
             bodyDef.position.x = Math.random() * 10;
             bodyDef.position.y = Math.random() * 10;
             this._robots[i] = this._world.CreateBody(bodyDef);
@@ -144,7 +146,6 @@ var positionRobotsTask = _.extend({}, baseTask, {
                     if(b.GetUserData() == 'obstacle') {
                         color = 'red';
                     }
-
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 }
             }
@@ -154,6 +155,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
         $('#cc').html(string);
     },
 
+    // update function run every frame to update our robots
     update: function() {
         var that = this;
         // apply the user force to all the robots
@@ -166,6 +168,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
         this._world.ClearForces();
     },
 
+    // function to get the number of robots within distance of a goal
     _countRobots: function () {
         var ret = 0;
         var that = this;
@@ -181,10 +184,12 @@ var positionRobotsTask = _.extend({}, baseTask, {
     },
 });
 
+// this makes sure that the "this" context is properly set
 for (var m in positionRobotsTask) {
     if (typeof positionRobotsTask[m] == "function") {
         positionRobotsTask[m] = _.bind( positionRobotsTask[m], positionRobotsTask );
     }
 }
 
+// register our task with the application
 app.registerTask( positionRobotsTask );

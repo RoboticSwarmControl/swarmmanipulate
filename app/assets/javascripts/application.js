@@ -16,5 +16,5 @@
 //= require_tree ./lib
 //= require_tree ./utils
 //= require_tree ./core
-//= require_tree ./tasks
 //= require massive_manipulation
+//= require_tree ./tasks

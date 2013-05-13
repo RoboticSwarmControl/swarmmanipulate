@@ -135,11 +135,25 @@ var app = (function () {
         string = "Time = "+ runtime +"s<br>Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) or (a,w,s,d).<br><br><strong>"+countRobots()+" at goal</strong>";
         $('#cc').html(string); //USERDATA WILL SHOWN IN "div" WITH ID "cc" 
      }; //end draw
+
+    var registeredTasks = [];
+
+    var registerTask = function( task ) {
+        alert("Registered task " + task.taskName);
+        registeredTasks.push(task);
+    };
      
     var init = function( taskname) {
-         drawutils.init();
 
-         alert(taskname);
+        // make sure that we have the requested task registered with the app
+        task = _.find( registeredTasks, function(t){ return t.taskName === taskname; });
+        if ( !task) {
+            // if we don't have the task, abort
+            alert("Unable to find task " + taskname );
+            return;
+        }
+
+         drawutils.init();
 	    
          // used for?
          var fixDef = new phys.fixtureDef;//b2FixtureDef;
@@ -227,5 +241,6 @@ var app = (function () {
         /* setup and start animation loop */
         requestAnimFrame(animloop);
     };
-    return { init: init};
+    return { init: init,
+             registerTask: registerTask};
 })(); 

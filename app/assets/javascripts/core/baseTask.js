@@ -109,6 +109,8 @@ var baseTask = {
      *                   Other options depend on the subclass.
      */
     init: function( options ) {
+
+        alert(this.taskName);
         // setup the draw utilities
         drawutils.init();
 

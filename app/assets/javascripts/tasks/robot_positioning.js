@@ -2,6 +2,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
     taskName: "robot_positioning",
 
     _numrobots: 8,
+    _robots: [],
     _impulse: 1,
     _impulseV: new phys.vec2(0,0),
     _world: new phys.world( new phys.vec2(0, 00), true ),
@@ -105,9 +106,10 @@ var positionRobotsTask = _.extend({}, baseTask, {
     draw: function() {
         drawutils.clearCanvas();
         var that = this;
-
         var countRobotsAtGoal = 0;
         var colorGoal;
+
+        // draw goals 
         for (var i =0; i<this._myGoalsX.length; i++) {
             colorGoal = "rgb(0, 255, 0)"; 			
             _.each( that._robots, function(r) {

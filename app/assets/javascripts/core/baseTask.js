@@ -61,7 +61,6 @@ var baseTask = {
     update: function( options ) {
     },
 
-    _robots: [],
     _runtime: 0,
     _startTime: null,
 
@@ -69,10 +68,6 @@ var baseTask = {
      * Function to initialize and begin the task.
      * This generally SHOULD NOT be overidden.
      * @param options -- object of options to pass.
-     *                   Options include:
-     *                   {
-     *                      "$canvas": jQuery canvas element to draw to
-     *                   }
      *
      *                   Other options depend on the subclass.
      */
@@ -101,7 +96,7 @@ var baseTask = {
      * This generally SHOULD NOT be overidden.
      */
     _update: function( ) {
-        // draw the simulation
+        // step and draw the simulation
         this.update( this._options );
         this.draw( this._options );
 

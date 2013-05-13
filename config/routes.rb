@@ -5,7 +5,7 @@ Ensemble::Application.routes.draw do
   match "/index.html" => "static#landing"
   match "/task/:task_name" => "static#task"
 
-  match "/show_results" => 'results#show_results'
+  match "/show_results" => 'results#show'
   match "/results/show" => 'results#show'
 
   resource :result

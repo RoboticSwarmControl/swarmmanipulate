@@ -122,7 +122,7 @@ var baseTask = {
             // if not, schedule ourselves again and update the time.
             // Mr. Bones says, "The ride never ends!"
             requestAnimFrame( this._update );
-            this._runtime = (new Date().getTime() - this._timeStart)/1000.0; 
+            this._runtime = (new Date().getTime() - this._startTime)/1000.0; 
         }
     }
 };

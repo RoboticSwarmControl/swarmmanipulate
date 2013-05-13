@@ -6,7 +6,6 @@
 var app = (function () {
     var registeredTasks = [];
     var registerTask = function( task ) {
-        alert("Registered task " + task.taskName);
         registeredTasks.push(task);
     };
      

@@ -57,10 +57,10 @@ var mazePositioningTask = _.extend({}, baseTask, {
         bodyDef.position.Set(20, 13);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-        // create shaping block
+        // create block
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = "workpiece";
-        bodyDef.position.Set(10,10);
+        bodyDef.position.Set(10,16.5);
         fixDef.shape.SetAsBox(0.5,0.5);
         this._blocks.push( this._world.CreateBody(bodyDef));
         this._blocks[0].CreateFixture(fixDef);
@@ -69,6 +69,8 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._goals.push( { x: 16, y: 3.5, w:5, h:5  } );
 
         // create some robots
+        var xoffset = 2;
+        var yoffset = 16;
         this._robots = [];
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
@@ -77,8 +79,8 @@ var mazePositioningTask = _.extend({}, baseTask, {
         fixDef.restitution = 0.2;  //bouncing value
         fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
-            bodyDef.position.x = Math.random() * 10;
-            bodyDef.position.y = Math.random() * 10;
+            bodyDef.position.x = (i%4) + xoffset;
+            bodyDef.position.y = Math.floor(i/4) + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 1;

@@ -3,6 +3,8 @@ var mazePositioningTask = _.extend({}, baseTask, {
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
+    _blocks: [],                                            // array of bodies representing workpieces
+    _goals: [],                                             // array of goals where blocks should go
     _impulse: 1,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
@@ -60,9 +62,13 @@ var mazePositioningTask = _.extend({}, baseTask, {
         bodyDef.userData = "workpiece";
         bodyDef.position.Set(10,10);
         fixDef.shape.SetAsBox(0.5,0.5);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+        this._blocks.push( this._world.CreateBody(bodyDef));
+        this._blocks[0].CreateFixture(fixDef);
 
-        //create some robots
+        // create the goal
+        this._goals.push( { x: 16, y: 3.5, w:5, h:5  } );
+
+        // create some robots
         this._robots = [];
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
@@ -119,6 +125,9 @@ var mazePositioningTask = _.extend({}, baseTask, {
         var colorGoal;
 
         // draw goal zone
+        _.each(that._goals, function (g) { 
+            drawutils.drawEmptyRect( 30*g.x, 30*g.y, 30*g.w, 30*g.h, "green");
+        });
 
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())

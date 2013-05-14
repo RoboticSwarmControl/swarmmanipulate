@@ -3,12 +3,12 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
+    _blocks: [],                                            // array of bodies representing blocks
+    _goals: [],                                             // array of goals of form {x,y,w,h}
     _impulse: 1,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
-    _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
-    _myGoalsX: [8,7,9],                                     // x-coord of goals
-    _myGoalsY: [6,7,7],                                     // y-coord of goals
+    _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application    
 
     setupTask: function( options ) {
         // fixture definition for obstacles
@@ -36,12 +36,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         bodyDef.position.Set(10, 0);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-        // create mid lower wall
-        bodyDef.position.Set(25, 6.66);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
-        
-        // create mid upper wall
-        bodyDef.position.Set(-5, 13.33);
+        // create middle wall
+        fixDef.shape.SetAsBox( 4, .2);
+        bodyDef.position.Set(10, 10);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
  
         // reshape fixture def to be vertical bar
@@ -55,14 +52,27 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         bodyDef.position.Set(20, 13);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-        // create shaping block
+        // create pyramid blocks
+        this._blocks = [];
         bodyDef.type = phys.body.b2_dynamicBody;
-        bodyDef.userData = "workpiece";
-        bodyDef.position.Set(10,10);
-        fixDef.shape.SetAsBox(0.5,0.5);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+        bodyDef.userData = 'workpiece';
+        fixDef.shape = new phys.polyShape();
+        fixDef.shape.SetAsBox( .5,.5);
+        fixDef.density = 1.0;
+        fixDef.friction = 0.5;
+        fixDef.restitution = 0.2;  //bouncing value
+        for(var i = 0; i < 6; ++i) {
+            bodyDef.position.x = 4.5 + 2*i;
+            bodyDef.position.y = 15;
+            this._blocks[i] = this._world.CreateBody(bodyDef);
+            this._blocks[i].CreateFixture(fixDef);
+            this._blocks[i].m_angularDamping = 1;
+            this._blocks[i].m_linearDamping = 1;
+        }
 
-        //create some robots
+        // create some robots
+        var xoffset = 8;
+        var yoffset = 4;
         this._robots = [];
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
@@ -71,13 +81,21 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         fixDef.restitution = 0.2;  //bouncing value
         fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
-            bodyDef.position.x = Math.random() * 10;
-            bodyDef.position.y = Math.random() * 10;
+            bodyDef.position.x = (i%4)*1.2 + xoffset;
+            bodyDef.position.y = 1.2*Math.floor( i/4 ) + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 1;
             this._robots[i].m_linearDamping = 1;
         }
+
+        // create goals
+        this._goals.push( {x:10.0, y:7.2, w:0.6, h:0.6} );
+        this._goals.push( {x:9.5,  y:8.2, w:0.6, h:0.6} );
+        this._goals.push( {x:10.5,  y:8.2, w:0.6, h:0.6} );
+        this._goals.push( {x:9,  y:9.2, w:0.6, h:0.6} );
+        this._goals.push( {x:10.0, y:9.2, w:0.6, h:0.6} );
+        this._goals.push( {x:11,  y:9.2, w:0.6, h:0.6} );
     },
 
     setupController: function ( options ) {
@@ -119,6 +137,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         var colorGoal;
 
         // draw goal zone
+        _.each( that._goals, function(g) {
+            drawutils.drawEmptyRect(30*g.x, 30*g.y, 30*g.w, 30*g.h, "green");
+        });
 
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())

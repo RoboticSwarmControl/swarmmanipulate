@@ -36,6 +36,14 @@ var drawutils = (function(){
         });
     };
 
+    var drawEmptyRect = function (x,y,w,h,color) {
+        $canvas.drawRect({
+            strokeStyle:color,
+            x: x, y: y,
+            width: w, height: h, cornerRadius: 0
+        });
+    };
+
     var init = function () {
         context = $("#canvas")[0].getContext('2d');
         $canvas = $("#canvas");
@@ -47,6 +55,7 @@ var drawutils = (function(){
     
     return { drawCircle : drawCircle,
              drawRect : drawRect,
+             drawEmptyRect : drawEmptyRect,
              drawRobot: drawRobot,
              clearCanvas : clearCanvas,
              init : init

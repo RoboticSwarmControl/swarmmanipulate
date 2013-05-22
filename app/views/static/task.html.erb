@@ -1,14 +1,27 @@
-<h1> Massive Manipulation: <%= @task_name_pretty %> </h1>
+<% content_for :sidebar do %>
+    <script>
+        $(function() { app.init( '<%= @task_name%>' ); });
+    </script>
 
-<canvas id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
-</canvas>
+    <h1> Massive Manipulation</h1>
+    <%= link_to "/" do %>
+        Return to task selection...
+    <% end %>
+    <hr>
+    <Strong> Task: </strong>
+    <em> <%= @task_name_pretty %> </em>
 
-<div id="cc">
-</div>
+    <br>
+<% end %>
 
-<script>
-    $(function() { app.init( '<%= @task_name%>' ); });
-</script>
+<% content_for :workspace do %>
 
-<br>
- <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw">Video showing automated solution</a>
+    <canvas id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
+    </canvas>
+
+    <div id="cc">
+    </div>
+
+    <br>
+     <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw">Video showing automated solution</a>
+<% end %>

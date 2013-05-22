@@ -8,5 +8,5 @@ var phys = {
     massData: Box2D.Collision.Shapes.b2MassData,
     polyShape: Box2D.Collision.Shapes.b2PolygonShape,
     circleShape: Box2D.Collision.Shapes.b2CircleShape,
-    mouseJointDef: Box2D.Dynamics.Joints.b2MouseJointDef
+    mouseJointDef: Box2D.Dynamics.Joints.b2MouseJointDef,
 };

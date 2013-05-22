@@ -5,12 +5,10 @@ var mazePositioningTask = _.extend({}, baseTask, {
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing workpieces
     _goals: [],                                             // array of goals where blocks should go
-    _impulse: 1,                                            // impulse to move robots by
+    _impulse: 2,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
-    _myGoalsX: [8,7,9],                                     // x-coord of goals
-    _myGoalsY: [6,7,7],                                     // y-coord of goals
 
     setupTask: function( options ) {
         // fixture definition for obstacles
@@ -61,12 +59,20 @@ var mazePositioningTask = _.extend({}, baseTask, {
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = "workpiece";
         bodyDef.position.Set(10,16.5);
+        fixDef.isSensor = false;
         fixDef.shape.SetAsBox(0.5,0.5);
         this._blocks.push( this._world.CreateBody(bodyDef));
         this._blocks[0].CreateFixture(fixDef);
 
         // create the goal
-        this._goals.push( { x: 16, y: 3.5, w:5, h:5  } );
+        bodyDef.type = phys.body.b2_dynamicBody;
+        bodyDef.userData = "goal";
+        bodyDef.position.Set(17,3.35);
+        this._goals.push( this._world.CreateBody(bodyDef) );
+        fixDef.isSensor = true;
+        fixDef.shape = new phys.polyShape;
+        fixDef.shape.SetAsBox(3,2.9);
+        this._goals[0].CreateFixture(fixDef);
 
         // create some robots
         var xoffset = 2;
@@ -77,6 +83,7 @@ var mazePositioningTask = _.extend({}, baseTask, {
         fixDef.density = 1.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
+        fixDef.isSensor = false;
         fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
             bodyDef.position.x = (i%4) + xoffset;
@@ -117,8 +124,18 @@ var mazePositioningTask = _.extend({}, baseTask, {
     },
 
     evaluateCompletion: function( options ) {
+        var ret = true;
         // need to check if object has been moved into the goal zone
-        return false;
+        var that = this;
+        _.each(that._blocks, function (b) {
+            // we use _.every because it will stop iterating on success
+            _.every(that._goals, function (g) {
+                ret = g.GetFixtureList().GetAABB().Contains( b.GetFixtureList().GetAABB() );
+                return !ret;
+            });
+        });
+        
+        return ret;
     },
 
     draw: function() {
@@ -128,7 +145,13 @@ var mazePositioningTask = _.extend({}, baseTask, {
 
         // draw goal zone
         _.each(that._goals, function (g) { 
-            drawutils.drawEmptyRect( 30*g.x, 30*g.y, 30*g.w, 30*g.h, "green");
+                    var f = g.GetFixtureList();
+                    var verts = f.GetShape().GetVertices();
+                    var X = verts[1].x - verts[0].x; 
+                    var Y = verts[2].y - verts[1].y;
+                    var pos = g.GetPosition();
+                    var color = 'orange';
+                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
         });
 
         //draw robots and obstacles
@@ -136,6 +159,9 @@ var mazePositioningTask = _.extend({}, baseTask, {
         {
             var angle = b.GetAngle()*(180/Math.PI);
             for(f = b.GetFixtureList(); f; f = f.GetNext()) {
+                if (b.GetUserData() == 'goal') {
+                    continue; // we drew the goal earlier
+                }
                 if (b.GetUserData() == 'robot') {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();

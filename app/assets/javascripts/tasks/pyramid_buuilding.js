@@ -90,12 +90,23 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         }
 
         // create goals
-        this._goals.push( {x:10.0, y:7.2, w:0.6, h:0.6} );
-        this._goals.push( {x:9.5,  y:8.2, w:0.6, h:0.6} );
-        this._goals.push( {x:10.5,  y:8.2, w:0.6, h:0.6} );
-        this._goals.push( {x:9,  y:9.2, w:0.6, h:0.6} );
-        this._goals.push( {x:10.0, y:9.2, w:0.6, h:0.6} );
-        this._goals.push( {x:11,  y:9.2, w:0.6, h:0.6} );
+        var goalPositions = [ {x:10.0, y:7.2},
+                              {x:9.5, y:8.2}, {x:10.5, y:8.2},
+                              {x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}];
+        fixDef.isSensor = true;
+        fixDef.shape = new phys.polyShape;
+        fixDef.shape.SetAsBox(.2,.2);
+        bodyDef.type = phys.body.b2_dynamicBody;
+        bodyDef.userData = "goal";
+        var that = this;
+        _.each(goalPositions, function (gp) {
+            var body;
+            bodyDef.position.Set(gp.x,gp.y);
+            body = that._world.CreateBody(bodyDef);
+            body.CreateFixture(fixDef);
+            that._goals.push(body);
+            console.log(body);
+        });
     },
 
     setupController: function ( options ) {
@@ -127,8 +138,23 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
     },
 
     evaluateCompletion: function( options ) {
+        var ret = true;
         // need to check if object has been moved into the goal zone
-        return false;
+        var that = this;
+        var blockupied = 0;
+        // for each goal, see if it contains a block
+        _.each(that._blocks, function (b) {
+            var blockAABB = b.GetFixtureList().GetAABB();
+            _.every(that._goals, function (g) {
+                ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
+                if (ret) {
+                    blockupied++;
+                }
+                return !ret;
+            });
+        });
+       
+        return blockupied == this._goals.length;
     },
 
     draw: function() {
@@ -137,8 +163,14 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         var colorGoal;
 
         // draw goal zone
-        _.each( that._goals, function(g) {
-            drawutils.drawEmptyRect(30*g.x, 30*g.y, 30*g.w, 30*g.h, "green");
+        _.each(that._goals, function (g) { 
+                    var f = g.GetFixtureList();
+                    var verts = f.GetShape().GetVertices();
+                    var X = verts[1].x - verts[0].x; 
+                    var Y = verts[2].y - verts[1].y;
+                    var pos = g.GetPosition();
+                    var color = 'orange';
+                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
         });
 
         //draw robots and obstacles
@@ -146,6 +178,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         {
             var angle = b.GetAngle()*(180/Math.PI);
             for(f = b.GetFixtureList(); f; f = f.GetNext()) {
+                if (b.GetUserData() == 'goal') {
+                    continue;
+                }
                 if (b.GetUserData() == 'robot') {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();

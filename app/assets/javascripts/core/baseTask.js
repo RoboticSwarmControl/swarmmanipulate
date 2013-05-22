@@ -19,6 +19,7 @@
 
 var baseTask = {
     taskName: "base task",
+    shownNotice: false,
 
     /*
      * Function to setup the task.
@@ -83,9 +84,6 @@ var baseTask = {
         // register the handlers
         this.setupController( this._options );
 
-        // initialize the time
-        this._startTime = new Date();
-        this._runtime = 0.0;
 
         // do the loop
         requestAnimFrame( this._update );
@@ -99,6 +97,14 @@ var baseTask = {
         // step and draw the simulation
         this.update( this._options );
         this.draw( this._options );
+        if (! this.shownNotice ){
+            alert("Click okay when you're ready to start!");
+    
+            // initialize the time
+            this._startTime = new Date();
+            this._runtime = 0.0;
+            this.shownNotice = true;
+        }
 
         // check to see if we've reached completion.
         if ( this.evaluateCompletion( this._options ) ) {

@@ -100,7 +100,7 @@ var baseTask = {
         this.update( this._options );
         this.draw( this._options );
 
-	string = "Time = " + (this._runtime).toFixed(2) + "s";
+	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
         $('#cc').html(string);
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {

@@ -1,5 +1,7 @@
 var positionRobotsTask = _.extend({}, baseTask, {
     taskName: "robot_positioning",
+// TODO: display this information in the left pane…  What is task_name_pretty???
+    instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -83,7 +85,15 @@ var positionRobotsTask = _.extend({}, baseTask, {
                 case 68 : that._impulseV.x = that._impulse; break;
                 case 87 : that._impulseV.y = -that._impulse; break;
                 case 83 : that._impulseV.y = that._impulse; break;
-            }} , false );
+            }
+        //check if this is the first keypress -- TODO:  this should be shared code.
+	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
+            { 
+            that.firstKeyPressed  = true;
+            that._startTime = new Date();
+            that._runtime = 0.0;
+            }
+	} , false );
 
         document.addEventListener( "keyup", function(e){
             switch (e.keyCode) {
@@ -150,9 +160,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
                 }
             }
         }
-
-        string = "Time = " + this._runtime;
-        $('#cc').html(string);
+        
     },
 
     // update function run every frame to update our robots

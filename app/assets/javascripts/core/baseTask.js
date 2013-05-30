@@ -20,6 +20,7 @@
 var baseTask = {
     taskName: "base task",
     shownNotice: false,
+    instructions: "Default instructions.",
     firstKeyPressed : false,
     isTaskComplete : false,
 
@@ -36,8 +37,43 @@ var baseTask = {
      * This should be overridden by the user as needed.
      * @param options -- object of options that might be important
      */
-    setupController: function( options ) {
+    setupController: function ( options ) {
+        var that = this;
+        /* setup key listeners */
+	//todo: this should be shared code
+        document.addEventListener( "keydown", function(e){
+            switch (e.keyCode) {
+                case 37 : that._impulseV.x = -that._impulse; break; //left
+                case 39 : that._impulseV.x = that._impulse; break;  //right
+                case 38 : that._impulseV.y = -that._impulse; break; //down
+                case 40 : that._impulseV.y = that._impulse; break;  //up
+                case 65 : that._impulseV.x = -that._impulse; break;
+                case 68 : that._impulseV.x = that._impulse; break;
+                case 87 : that._impulseV.y = -that._impulse; break;
+                case 83 : that._impulseV.y = that._impulse; break;
+            }
+        //check if this is the first keypress -- TODO:  this should be shared code.
+	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
+            { 
+            that.firstKeyPressed  = true;
+            that._startTime = new Date();
+            that._runtime = 0.0;
+            }
+	} , false );
+
+        document.addEventListener( "keyup", function(e){
+            switch (e.keyCode) {
+                case 37 : that._impulseV.x = 0; break;
+                case 39 : that._impulseV.x = 0; break;
+                case 38 : that._impulseV.y = 0; break;
+                case 40 : that._impulseV.y = 0; break;
+                case 65 : that._impulseV.x = 0; break;
+                case 68 : that._impulseV.x = 0; break;
+                case 87 : that._impulseV.y = 0; break;
+                case 83 : that._impulseV.y = 0; break;
+            }} , false );
     },
+
 
     /*
      * Function to evaluate whether or not a task has been completed.
@@ -69,7 +105,7 @@ var baseTask = {
 
     /*
      * Function to initialize and begin the task.
-     * This generally SHOULD NOT be overidden.
+     * This generally SHOULD NOT be overridden.
      * @param options -- object of options to pass.
      *
      *                   Other options depend on the subclass.
@@ -86,6 +122,9 @@ var baseTask = {
         // register the handlers
         this.setupController( this._options );
 
+        // add instructions to the page
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         // do the loop
         requestAnimFrame( this._update );
@@ -101,7 +140,7 @@ var baseTask = {
         this.draw( this._options );
 
 	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
-        $('#cc').html(string);
+        $('#taskFeedback').html(string);
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.

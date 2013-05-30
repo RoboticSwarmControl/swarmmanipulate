@@ -1,6 +1,6 @@
 var pyramidBuildingTask = _.extend({}, baseTask, {
     taskName: "pyramid_building",
-    instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: "use the robots (blue) to move the blocks (green) to the goal positions (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots

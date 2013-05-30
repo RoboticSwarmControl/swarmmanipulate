@@ -20,6 +20,7 @@
 var baseTask = {
     taskName: "base task",
     shownNotice: false,
+    instructions: "Default instructions.",
 
     /*
      * Function to setup the task.
@@ -83,6 +84,10 @@ var baseTask = {
 
         // register the handlers
         this.setupController( this._options );
+
+        // add instructions to the pag
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h3>How to play</h3><p>" + this.instructions + "<p>") );
 
 
         // do the loop

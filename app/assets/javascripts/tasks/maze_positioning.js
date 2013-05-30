@@ -1,5 +1,6 @@
 var mazePositioningTask = _.extend({}, baseTask, {
     taskName: "maze_positioning",
+    instructions: "Move the box through the maze.",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots

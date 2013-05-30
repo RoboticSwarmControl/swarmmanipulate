@@ -28,21 +28,27 @@ var drawutils = (function(){
         context.stroke();
     };
 
-    var drawRect = function (x,y,w,h,color) {
+    var drawRect = function (x,y,w,h,color,angle) {
+	//default value for angle if needed
+	angle = typeof angle !== 'undefined' ? angle : 0;
         $canvas.drawRect({
             fillStyle:color,
             x: x, y: y,
-            width: w, height: h, cornerRadius: 0
+            width: w, height: h, cornerRadius: 0, rotate: angle
         });
     };
 
     var drawEmptyRect = function (x,y,w,h,color) {
+	//default value for angle if needed
+	angle = typeof angle !== 'undefined' ? angle : 0;
         $canvas.drawRect({
             strokeStyle:color,
             x: x, y: y,
-            width: w, height: h, cornerRadius: 0
+            width: w, height: h, cornerRadius: 0, rotate: angle
         });
     };
+
+
 
     var init = function () {
         context = $("#canvas")[0].getContext('2d');

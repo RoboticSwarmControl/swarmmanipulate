@@ -21,6 +21,8 @@ var baseTask = {
     taskName: "base task",
     shownNotice: false,
     instructions: "Default instructions.",
+    firstKeyPressed : false,
+    isTaskComplete : false,
 
     /*
      * Function to setup the task.
@@ -89,38 +91,33 @@ var baseTask = {
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h3>How to play</h3><p>" + this.instructions + "<p>") );
 
-
         // do the loop
         requestAnimFrame( this._update );
     },
 
     /*
      * Function to run the simulation.
-     * This generally SHOULD NOT be overidden.
+     * This generally SHOULD NOT be overridden.
      */
     _update: function( ) {
         // step and draw the simulation
         this.update( this._options );
         this.draw( this._options );
-        if (! this.shownNotice ){
-            alert("Click okay when you're ready to start!");
-    
-            // initialize the time
-            this._startTime = new Date();
-            this._runtime = 0.0;
-            this.shownNotice = true;
-        }
 
+	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
+        $('#cc').html(string);
         // check to see if we've reached completion.
-        if ( this.evaluateCompletion( this._options ) ) {
+        if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
-            alert("Task complete. Time to finish was "+ this._runtime +" seconds.");
+	    // TODO: don't use a dialog box.  Instead, halt the program and overlay a "Task Complete"
+            alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
             $.ajax( { type: "POST",
                       url: "/result",
                       dataType: "json",
                       async: false,
                       data: { task:this.taskName, runtime:this._runtime, participant:"web"}
             });
+            this.isTaskComplete = true;
 
             // at this point, we do not reschedule, and the task ends.
             return;
@@ -128,7 +125,10 @@ var baseTask = {
             // if not, schedule ourselves again and update the time.
             // Mr. Bones says, "The ride never ends!"
             requestAnimFrame( this._update );
-            this._runtime = (new Date().getTime() - this._startTime)/1000.0; 
+	    if( this.firstKeyPressed == true)
+	       this._runtime = (new Date().getTime() - this._startTime)/1000.0; 
+	    else
+               this._runtime = 0.00;
         }
     }
 };

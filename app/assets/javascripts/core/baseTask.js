@@ -23,6 +23,10 @@ var baseTask = {
     instructions: "Default instructions.",
     firstKeyPressed : false,
     isTaskComplete : false,
+    keyL: null,
+    keyR: null,
+    keyU: null,
+    keyD: null,
 
     /*
      * Function to setup the task.
@@ -40,39 +44,38 @@ var baseTask = {
     setupController: function ( options ) {
         var that = this;
         /* setup key listeners */
-	//todo: this should be shared code
         document.addEventListener( "keydown", function(e){
             switch (e.keyCode) {
-                case 37 : that._impulseV.x = -that._impulse; break; //left
-                case 39 : that._impulseV.x = that._impulse; break;  //right
-                case 38 : that._impulseV.y = -that._impulse; break; //down
-                case 40 : that._impulseV.y = that._impulse; break;  //up
-                case 65 : that._impulseV.x = -that._impulse; break;
-                case 68 : that._impulseV.x = that._impulse; break;
-                case 87 : that._impulseV.y = -that._impulse; break;
-                case 83 : that._impulseV.y = that._impulse; break;
+                case 37 : if(that.keyL==null){that.keyL = new Date().getTime();} break; //left
+                case 39 : if(that.keyR==null){that.keyR = new Date().getTime();}  break;  //right
+                case 38 : if(that.keyU==null){that.keyU = new Date().getTime();}  break; //down
+                case 40 : if(that.keyD==null){that.keyD = new Date().getTime();}  break;  //up
+                case 65 : if(that.keyL==null){that.keyL = new Date().getTime();}  break;
+                case 68 : if(that.keyR==null){that.keyR = new Date().getTime();}  break;
+                case 87 : if(that.keyU==null){that.keyU = new Date().getTime();}  break;
+                case 83 : if(that.keyD==null){that.keyD = new Date().getTime();}  break;
             }
-        //check if this is the first keypress -- TODO:  this should be shared code.
-	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
+        //check if this is the first valid keypress, if so, starts the timer
+	if( that._startTime == null && ( that.keyL != null || that.keyR != null || that.keyU != null || that.keyD != null))
             { 
-            that.firstKeyPressed  = true;
-            that._startTime = new Date();
+            that._startTime = new Date().getTime();
             that._runtime = 0.0;
             }
 	} , false );
 
         document.addEventListener( "keyup", function(e){
             switch (e.keyCode) {
-                case 37 : that._impulseV.x = 0; break;
-                case 39 : that._impulseV.x = 0; break;
-                case 38 : that._impulseV.y = 0; break;
-                case 40 : that._impulseV.y = 0; break;
-                case 65 : that._impulseV.x = 0; break;
-                case 68 : that._impulseV.x = 0; break;
-                case 87 : that._impulseV.y = 0; break;
-                case 83 : that._impulseV.y = 0; break;
+                case 37 : that.keyL = null; break;
+                case 39 : that.keyR = null; break;
+                case 38 : that.keyU = null; break;
+                case 40 : that.keyD = null; break;
+                case 65 : that.keyL = null; break;
+                case 68 : that.keyR = null; break;
+                case 87 : that.keyU = null; break;
+                case 83 : that.keyD = null; break;
             }} , false );
     },
+
 
 
     /*
@@ -150,7 +153,7 @@ var baseTask = {
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, runtime:this._runtime, participant:"web"}
+                      data: { task:this.taskName, runtime:this._runtime, numrobots:_numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
 
@@ -160,10 +163,10 @@ var baseTask = {
             // if not, schedule ourselves again and update the time.
             // Mr. Bones says, "The ride never ends!"
             requestAnimFrame( this._update );
-	    if( this.firstKeyPressed == true)
-	       this._runtime = (new Date().getTime() - this._startTime)/1000.0; 
-	    else
+	    if( this._startTime == null)
                this._runtime = 0.00;
+	    else
+               this._runtime = (new Date().getTime() - this._startTime)/1000.0;
         }
     }
 };

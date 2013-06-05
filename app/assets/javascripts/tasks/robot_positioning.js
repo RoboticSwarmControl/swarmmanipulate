@@ -67,9 +67,13 @@ var positionRobotsTask = _.extend({}, baseTask, {
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
         fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
+        var rowLength = 3;
         for(var i = 0; i < this._numrobots; ++i) {
-            bodyDef.position.x = Math.random() * 10;
-            bodyDef.position.y = Math.random() * 10;
+            //bodyDef.position.x = Math.random() * 10;
+            //bodyDef.position.y = Math.random() * 10;
+
+            bodyDef.position.x = (i%rowLength)*2.1*0.5 + 12;
+            bodyDef.position.y = Math.floor(i/rowLength)-2.1*0.5 + 8;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 1;

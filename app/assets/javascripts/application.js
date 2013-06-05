@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require colorbox-rails
 //= require underscore
 //= require_tree ./lib
 //= require_tree ./utils

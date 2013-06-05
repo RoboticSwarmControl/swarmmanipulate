@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428154800) do
+ActiveRecord::Schema.define(:version => 20130605032813) do
 
   create_table "results", :force => true do |t|
     t.string   "task"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20130428154800) do
     t.string   "runtime"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "robot_count"
   end
 
 end

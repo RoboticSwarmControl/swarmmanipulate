@@ -138,11 +138,15 @@ var baseTask = {
      * This generally SHOULD NOT be overridden.
      */
     _update: function( ) {
-        // step and draw the simulation
+        // step the simulation
+        // TODO: Have the update run multiple times if the delay incurred by 
+        // requestAnimFrame is greater than 60hz.
         this.update( this._options );
+
+        // draw the simulation
         this.draw( this._options );
 
-	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
+    	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
         $('#taskFeedback').html(string);
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
@@ -153,7 +157,7 @@ var baseTask = {
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, runtime:this._runtime, numrobots:_numrobots, participant:"web"}
+                      data: { task:this.taskName, runtime:this._runtime, numrobots:this._numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
 

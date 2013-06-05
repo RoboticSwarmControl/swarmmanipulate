@@ -1,5 +1,7 @@
 <h1> RESULTS </h1>
-
+<%= link_to "/" do %>
+        Return to task selection...
+    <% end %>
 <% @charts.each do |taskname, imgurl| %>
     <h2><%=taskname%></h2>
     <img src="<%= imgurl %>">

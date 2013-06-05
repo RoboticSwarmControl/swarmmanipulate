@@ -17,6 +17,7 @@
  *
  */
 
+
 var baseTask = {
     taskName: "base task",
     shownNotice: false,
@@ -152,7 +153,6 @@ var baseTask = {
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
 	    // TODO: don't use a dialog box.  Instead, halt the program and overlay a "Task Complete"
-            alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
             $.ajax( { type: "POST",
                       url: "/result",
                       dataType: "json",
@@ -160,7 +160,7 @@ var baseTask = {
                       data: { task:this.taskName, runtime:this._runtime, numrobots:this._numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
-
+            alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
             // at this point, we do not reschedule, and the task ends.
             return;
         } else {

@@ -1,5 +1,12 @@
 <h1> RESULTS </h1>
 
+<% @charts.each do |taskname, imgurl| %>
+    <h2><%=taskname%></h2>
+    <img src="<%= imgurl %>">
+    </img>
+<% end %>
+
+
 <ul>
     <% @results.each do |r| %>
         <li>

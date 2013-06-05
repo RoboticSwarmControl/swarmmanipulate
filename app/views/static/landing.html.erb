@@ -1,9 +1,14 @@
 <script>
     $(document).ready(function(){
-        $.colorbox({width:"50%", height:"50%",inline:true, href:"#terms-of-service"});
-        $("#-tos-accept-button").on("click", function () {
-            $.colorbox.remove();
-        });
+
+        if (document.cookie.indexOf("tos_seen") == -1) {
+
+            $.colorbox({width:"50%", height:"50%",inline:true, href:"#terms-of-service"});
+            $("#-tos-accept-button").on("click", function () {
+                $.colorbox.remove();
+                document.cookie = "tos_seen=true";
+            });
+        }
     });
 </script>
 

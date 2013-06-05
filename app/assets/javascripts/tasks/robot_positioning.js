@@ -9,7 +9,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
 
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
-    _impulse: 1,                                            // impulse to move robots by
+    _impulse: 2,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
@@ -82,9 +82,9 @@ var positionRobotsTask = _.extend({}, baseTask, {
         }
     },
 
-    setupController: function ( options ) {
+   /* setupController: function ( options ) {
         var that = this;
-        /* setup key listeners */
+        // setup key listeners 
         document.addEventListener( "keydown", function(e){
             switch (e.keyCode) {
                 case 37 : that._impulseV.x = -that._impulse; break;
@@ -116,7 +116,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
                 case 87 : that._impulseV.y = 0; break;
                 case 83 : that._impulseV.y = 0; break;
             }} , false );
-    },
+    },*/
 
     evaluateCompletion: function( options ) {
         var robotsAtGoal = this._countRobots();
@@ -185,10 +185,23 @@ var positionRobotsTask = _.extend({}, baseTask, {
     // update function run every frame to update our robots
     update: function() {
         var that = this;
+        var maxImpTime = 1.0; //seconds to maximum impulse
+        that._impulseV.x = 0;
+        that._impulseV.y = 0;
+        var dateNow = new Date().getTime();
+
+        if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyL)/1000.0);} 
+        if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(maxImpTime, (dateNow-that.keyR)/1000.0);} 
+        if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyU)/1000.0);} 
+        if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(maxImpTime, (dateNow-that.keyD)/1000.0);} 
+
+
         // apply the user force to all the robots
         _.each( that._robots, function(r) { 
             r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
         } );
+
+
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);

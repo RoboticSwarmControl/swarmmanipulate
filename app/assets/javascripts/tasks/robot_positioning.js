@@ -1,9 +1,8 @@
 var positionRobotsTask = _.extend({}, baseTask, {
     taskName: "robot_positioning",
-// TODO: display this information in the left pane…  What is task_name_pretty???
     instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
-    _numrobots: 8,                                          // number of robots
+    _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
     _impulse: 1,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots

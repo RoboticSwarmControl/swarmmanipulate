@@ -23,6 +23,10 @@ var baseTask = {
     instructions: "Default instructions.",
     firstKeyPressed : false,
     isTaskComplete : false,
+    keyL: null,
+    keyR: null,
+    keyU: null,
+    keyD: null,
 
     /*
      * Function to setup the task.
@@ -37,8 +41,42 @@ var baseTask = {
      * This should be overridden by the user as needed.
      * @param options -- object of options that might be important
      */
-    setupController: function( options ) {
+    setupController: function ( options ) {
+        var that = this;
+        /* setup key listeners */
+        document.addEventListener( "keydown", function(e){
+            switch (e.keyCode) {
+                case 37 : if(that.keyL==null){that.keyL = new Date().getTime();} break; //left
+                case 39 : if(that.keyR==null){that.keyR = new Date().getTime();}  break;  //right
+                case 38 : if(that.keyU==null){that.keyU = new Date().getTime();}  break; //down
+                case 40 : if(that.keyD==null){that.keyD = new Date().getTime();}  break;  //up
+                case 65 : if(that.keyL==null){that.keyL = new Date().getTime();}  break;
+                case 68 : if(that.keyR==null){that.keyR = new Date().getTime();}  break;
+                case 87 : if(that.keyU==null){that.keyU = new Date().getTime();}  break;
+                case 83 : if(that.keyD==null){that.keyD = new Date().getTime();}  break;
+            }
+        //check if this is the first valid keypress, if so, starts the timer
+	if( that._startTime == null && ( that.keyL != null || that.keyR != null || that.keyU != null || that.keyD != null))
+            { 
+            that._startTime = new Date().getTime();
+            that._runtime = 0.0;
+            }
+	} , false );
+
+        document.addEventListener( "keyup", function(e){
+            switch (e.keyCode) {
+                case 37 : that.keyL = null; break;
+                case 39 : that.keyR = null; break;
+                case 38 : that.keyU = null; break;
+                case 40 : that.keyD = null; break;
+                case 65 : that.keyL = null; break;
+                case 68 : that.keyR = null; break;
+                case 87 : that.keyU = null; break;
+                case 83 : that.keyD = null; break;
+            }} , false );
     },
+
+
 
     /*
      * Function to evaluate whether or not a task has been completed.
@@ -70,7 +108,7 @@ var baseTask = {
 
     /*
      * Function to initialize and begin the task.
-     * This generally SHOULD NOT be overidden.
+     * This generally SHOULD NOT be overridden.
      * @param options -- object of options to pass.
      *
      *                   Other options depend on the subclass.
@@ -87,9 +125,9 @@ var baseTask = {
         // register the handlers
         this.setupController( this._options );
 
-        // add instructions to the pag
+        // add instructions to the page
         $("#task-instructions").empty();
-        $("#task-instructions").append( $( "<h3>How to play</h3><p>" + this.instructions + "<p>") );
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         // do the loop
         requestAnimFrame( this._update );
@@ -105,7 +143,7 @@ var baseTask = {
         this.draw( this._options );
 
 	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
-        $('#cc').html(string);
+        $('#taskFeedback').html(string);
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
@@ -115,7 +153,7 @@ var baseTask = {
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, runtime:this._runtime, participant:"web"}
+                      data: { task:this.taskName, runtime:this._runtime, numrobots:_numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
 
@@ -125,10 +163,10 @@ var baseTask = {
             // if not, schedule ourselves again and update the time.
             // Mr. Bones says, "The ride never ends!"
             requestAnimFrame( this._update );
-	    if( this.firstKeyPressed == true)
-	       this._runtime = (new Date().getTime() - this._startTime)/1000.0; 
-	    else
+	    if( this._startTime == null)
                this._runtime = 0.00;
+	    else
+               this._runtime = (new Date().getTime() - this._startTime)/1000.0;
         }
     }
 };

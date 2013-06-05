@@ -1,8 +1,9 @@
 var mazePositioningTask = _.extend({}, baseTask, {
     taskName: "maze_positioning",
-    instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: " move an object (green) to the goal area (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
-    _numrobots: 8,                                          // number of robots
+    _numrobots: Math.floor((Math.random()*500)+1),                                           // number of robots
+    _robotRadius: 0.5,
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing workpieces
     _goals: [],                                             // array of goals where blocks should go
@@ -61,7 +62,7 @@ var mazePositioningTask = _.extend({}, baseTask, {
         bodyDef.userData = "workpiece";
         bodyDef.position.Set(10,16.5);
         fixDef.isSensor = false;
-        fixDef.shape.SetAsBox(0.5,0.5);
+        fixDef.shape.SetAsBox(2,2);
         this._blocks.push( this._world.CreateBody(bodyDef));
         this._blocks[0].CreateFixture(fixDef);
 
@@ -76,8 +77,11 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        var xoffset = 2;
-        var yoffset = 16;
+this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
+	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
+	var rowLength = Math.floor(7/(2*this._robotRadius));
+        var xoffset = this._robotRadius+0.5;
+        var yoffset = 14+this._robotRadius;
         this._robots = [];
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
@@ -85,10 +89,10 @@ var mazePositioningTask = _.extend({}, baseTask, {
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
         fixDef.isSensor = false;
-        fixDef.shape = new phys.circleShape( 0.5 ); // radius .5 robots
+        fixDef.shape = new phys.circleShape( this._robotRadius ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
-            bodyDef.position.x = (i%4) + xoffset;
-            bodyDef.position.y = Math.floor(i/4) + yoffset;
+            bodyDef.position.x = (i%rowLength)*2.1*this._robotRadius + xoffset;
+            bodyDef.position.y = Math.floor(i/rowLength)*2.1*this._robotRadius + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 1;
@@ -96,42 +100,7 @@ var mazePositioningTask = _.extend({}, baseTask, {
         }
     },
 
-    setupController: function ( options ) {
-        var that = this;
-        /* setup key listeners */
-        document.addEventListener( "keydown", function(e){
-            switch (e.keyCode) {
-                case 37 : that._impulseV.x = -that._impulse; break;
-                case 39 : that._impulseV.x = that._impulse; break;
-                case 38 : that._impulseV.y = -that._impulse; break;
-                case 40 : that._impulseV.y = that._impulse; break;
-                case 65 : that._impulseV.x = -that._impulse; break;
-                case 68 : that._impulseV.x = that._impulse; break;
-                case 87 : that._impulseV.y = -that._impulse; break;
-                case 83 : that._impulseV.y = that._impulse; break;
-            }
-        //check if this is the first keypress -- TODO:  this should be shared code.
-	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
-            { 
-            that.firstKeyPressed  = true;
-            that._startTime = new Date();
-            that._runtime = 0.0;
-            }
-	} , false );
-
-        document.addEventListener( "keyup", function(e){
-            switch (e.keyCode) {
-                case 37 : that._impulseV.x = 0; break;
-                case 39 : that._impulseV.x = 0; break;
-                case 38 : that._impulseV.y = 0; break;
-                case 40 : that._impulseV.y = 0; break;
-                case 65 : that._impulseV.x = 0; break;
-                case 68 : that._impulseV.x = 0; break;
-                case 87 : that._impulseV.y = 0; break;
-                case 83 : that._impulseV.y = 0; break;
-            }} , false );
-    },
-
+    
     evaluateCompletion: function( options ) {
         var ret = true;
         // need to check if object has been moved into the goal zone
@@ -203,6 +172,19 @@ var mazePositioningTask = _.extend({}, baseTask, {
     // update function run every frame to update our robots
     update: function() {
         var that = this;
+	var maxImpTime = 2.0; //seconds to maximum impulse
+        that._impulseV.x = 0;
+        that._impulseV.y = 0;
+	var dateNow = new Date().getTime();
+
+	if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyL)/1000.0);} 
+	if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(maxImpTime, (dateNow-that.keyR)/1000.0);} 
+	if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyU)/1000.0);} 
+	if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(maxImpTime, (dateNow-that.keyD)/1000.0);} 
+
+        var forceScaler = (that._robotRadius*that._robotRadius)/0.25;   
+that._impulseV.x *=  forceScaler;    
+that._impulseV.y *=  forceScaler;   
         // apply the user force to all the robots
         _.each( that._robots, function(r) { 
             r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );

@@ -77,7 +77,7 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
+        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
 	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;

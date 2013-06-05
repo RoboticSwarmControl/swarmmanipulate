@@ -5,6 +5,7 @@
 var positionRobotsTask = _.extend({}, baseTask, {
  taskName: "robot_positioning",
     instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    video: "http://www.youtube.com/watch?v=5p_XIad5-Cw",
 
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -12,8 +13,8 @@ var positionRobotsTask = _.extend({}, baseTask, {
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
-    _myGoalsX: [8,7,9],                                     // x-coord of goals
-    _myGoalsY: [6,7,7],                                     // y-coord of goals
+    _myGoalsX: [8,7,9,7,8,9,7,9,7,9],                                     // x-coord of goals
+    _myGoalsY: [6,7,7,8,8,8,9,9,6,6],                                     // y-coord of goals
 
     setupTask: function( options ) {
         // fixture definition for obstacles
@@ -59,6 +60,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
 
         //create some robots
         this._robots = [];
+        this.instructions = "Move the " + this._numrobots + " robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
         fixDef.density = 1.0;
@@ -72,6 +74,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 1;
             this._robots[i].m_linearDamping = 1;
+            this._robots[i].atGoal = false;
         }
     },
 
@@ -113,7 +116,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
 
     evaluateCompletion: function( options ) {
         var robotsAtGoal = this._countRobots();
-        var neededRobots = this._myGoalsX.length;
+        var neededRobots = this._numrobots;
 
         // we're done if all robots are on the goals
         return robotsAtGoal == neededRobots;
@@ -124,14 +127,20 @@ var positionRobotsTask = _.extend({}, baseTask, {
         var that = this;
         var countRobotsAtGoal = 0;
         var colorGoal;
+        
+        //initialize robots to not be at goal
+        _.each( that._robots, function(r) {
+                r.atGoal = false;
+                });
 
         // draw goals 
-        for (var i =0; i<this._myGoalsX.length; i++) {
+        for (var i =0; i< this._numrobots; i++) { //this._myGoalsX.length
             colorGoal = "rgb(0, 255, 0)"; 			
             _.each( that._robots, function(r) {
                 var roboPosition = r.GetPosition();
                 if( mathutils.lineDistance( that._myGoalsX[i],that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
                     colorGoal = "rgb(255, 0, 0)"; 
+                    r.atGoal = true;
                     countRobotsAtGoal++;
                 }
             });
@@ -149,7 +158,10 @@ var positionRobotsTask = _.extend({}, baseTask, {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    if (b.atGoal == true )
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "lightblue","blue"); }
+                    else
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); }
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -183,7 +195,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
     _countRobots: function () {
         var ret = 0;
         var that = this;
-        for (var i = 0; i<this._myGoalsX.length; i++) {
+        for (var i = 0; i<this._numrobots; i++) {
             _.each( that._robots, function(r) {
                 var roboPosition = r.GetPosition();
                 if( mathutils.lineDistance( that._myGoalsX[i], that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {

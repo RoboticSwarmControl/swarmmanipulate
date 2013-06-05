@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
 
     def create
         #@result = Result.new( :task=>params[:task], :participant=>params[:participant], :runtime=>params[:runtime] )
-        @result = Result.new( :task=>params[:task], :participant=>Digest::md5.hexdigest(request.remote_ip), :runtime=>params[:runtime], :robot_count=>params[:numrobots] )
+        @result = Result.new( :task=>params[:task], :participant=>Digest::MD5.hexdigest(request.remote_ip), :runtime=>params[:runtime], :robot_count=>params[:numrobots] )
         @result.save
 
         redirect_to :action=>'show'

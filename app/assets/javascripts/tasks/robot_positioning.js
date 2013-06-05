@@ -1,5 +1,9 @@
+// TODO:  random number of robots (better: let each user name try 1-8 robots)
+// TODO:  change color of robots at goal
+
+
 var positionRobotsTask = _.extend({}, baseTask, {
-    taskName: "robot_positioning",
+ taskName: "robot_positioning",
     instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots

@@ -160,7 +160,18 @@ var baseTask = {
                       data: { task:this.taskName, runtime:this._runtime, numrobots:this._numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
-            alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
+                    // draw seethrough grey box
+            drawutils.drawRect(300,300, 590,590, "rgba(200, 200, 200, 0.8)");
+            $("canvas").drawText({
+              fillStyle: "green",
+              fontSize: "50pt",
+              strokeStyle: "green",
+              scale: 2,
+              strokeWidth: 0,
+              x: 300, y: 200,
+              text: "Task completed in "+ (this._runtime).toFixed(2) +" seconds!"
+            });
+        //    alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
             // at this point, we do not reschedule, and the task ends.
             return;
         } else {
@@ -172,6 +183,7 @@ var baseTask = {
 	    else
                this._runtime = (new Date().getTime() - this._startTime)/1000.0;
         }
+
     }
 };
 

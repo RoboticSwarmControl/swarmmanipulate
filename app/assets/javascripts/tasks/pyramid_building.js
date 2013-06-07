@@ -6,7 +6,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing blocks
     _goals: [],                                             // array of goals of form {x,y,w,h}
-    _impulse: 1,                                            // impulse to move robots by
+    _impulse: 50,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application    
@@ -14,7 +14,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
     setupTask: function( options ) {
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
-        fixDef.density = 1.0;
+        fixDef.density = 20.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
 
@@ -59,7 +59,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
         bodyDef.userData = 'workpiece';
         fixDef.shape = new phys.polyShape();
         fixDef.shape.SetAsBox( .5,.5);
-        fixDef.density = 1.0;
+        fixDef.density = 10.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
         for(var i = 0; i < 6; ++i) {
@@ -86,8 +86,8 @@ var pyramidBuildingTask = _.extend({}, baseTask, {
             bodyDef.position.y = 1.2*Math.floor( i/4 ) + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
-            this._robots[i].m_angularDamping = 1;
-            this._robots[i].m_linearDamping = 1;
+            this._robots[i].m_angularDamping = 10;
+            this._robots[i].m_linearDamping = 10;
         }
 
         // create goals

@@ -9,7 +9,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
 
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
-    _impulse: 2,                                            // impulse to move robots by
+    _impulse: 50,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
@@ -76,8 +76,8 @@ var positionRobotsTask = _.extend({}, baseTask, {
             bodyDef.position.y = Math.floor(i/rowLength)-2.1*0.5 + 8;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
-            this._robots[i].m_angularDamping = 1;
-            this._robots[i].m_linearDamping = 1;
+            this._robots[i].m_angularDamping = 10;
+            this._robots[i].m_linearDamping = 10;
             this._robots[i].atGoal = false;
         }
     },

@@ -7,6 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<script>
+    $(document).ready(function(){
+
+        if (document.cookie.indexOf("tos_seen") == -1) {
+
+            $.colorbox({width:"50%", height:"50%",inline:true, href:"#terms-of-service"});
+            $("#-tos-accept-button").on("click", function () {
+                $.colorbox.remove();
+                document.cookie = "tos_seen=true";
+            });
+        }
+    });
+</script>
     <div class="container">
         <div class="row-fluid">
             <div class="span4">

@@ -1,18 +1,20 @@
-<h1> RESULTS </h1>
-<%= link_to "/" do %>
-        Return to task selection...
+<div class="container">
+    <h1> RESULTS </h1>
+    <%= link_to "/" do %>
+            Return to task selection...
+        <% end %>
+    <% @charts.each do |taskname, imgurl| %>
+        <h2><%=taskname%></h2>
+        <img src="<%= imgurl %>">
+        </img>
     <% end %>
-<% @charts.each do |taskname, imgurl| %>
-    <h2><%=taskname%></h2>
-    <img src="<%= imgurl %>">
-    </img>
-<% end %>
 
 
-<ul>
-    <% @results.each do |r| %>
-        <li>
-        <%= r.task %> | <%= r.participant %> | <%= r.runtime %> | <%= r.robot_count %>
-        </li>
-    <% end %>
-</ul>
+    <ul>
+        <% @results.each do |r| %>
+            <li>
+            <%= r.task %> | <%= r.participant %> | <%= r.runtime %> | <%= r.robot_count %>
+            </li>
+        <% end %>
+    </ul>
+</div>

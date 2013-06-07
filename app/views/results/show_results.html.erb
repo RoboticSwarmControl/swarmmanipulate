@@ -1,8 +1,18 @@
 <div class="container">
-    <h1> RESULTS </h1>
+    <h1> RESULTS
+        <br>
+    <span class="btn-group">
+        <%= link_to "As CSV", "/show_results.csv", :class=>"btn btn-mini btn-info"%>
+        <%= link_to "As JSON", "/show_results.json", :class=>"btn btn-mini btn-info"%>
+    </span>
+</h1>
+
+    <br>
     <%= link_to "/" do %>
             Return to task selection...
-        <% end %>
+    <% end %>
+    <br>
+
     <% @charts.each do |taskname, imgurl| %>
         <h2><%=taskname%></h2>
         <img src="<%= imgurl %>">

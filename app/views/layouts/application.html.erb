@@ -21,7 +21,12 @@
     });
 </script>
 
-<%= yield %>
+
+    <%= render "shared/navbar" %>
+
+    <%= yield %>
+
+
     <div style="display:none">
     <div id="terms-of-service">
         <h3>SwarmControl Terms of Service and Consent
@@ -100,6 +105,8 @@
         </div>
 
     </div>
+    
+    <%= render "shared/footer"%>
 
 </body>
 </html>

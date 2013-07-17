@@ -124,6 +124,7 @@ var positionRobotsTask = _.extend({}, baseTask, {
 
         // we're done if all robots are on the goals
         return robotsAtGoal == neededRobots;
+        
     },
 
     draw: function() {

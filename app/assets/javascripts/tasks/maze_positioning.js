@@ -58,11 +58,38 @@ var mazePositioningTask = _.extend({}, baseTask, {
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create block
-        bodyDef.type = phys.body.b2_dynamicBody;
+ /*       bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = "workpiece";
         bodyDef.position.Set(10,16.5);
         fixDef.isSensor = false;
         fixDef.shape.SetAsBox(2,2);
+        this._blocks.push( this._world.CreateBody(bodyDef));
+        this._blocks[0].CreateFixture(fixDef);
+*/
+
+        // This defines a hexagon in CCW order.
+        // http://blog.sethladd.com/2011/09/box2d-and-polygons-for-javascript.html
+        bodyDef.type = phys.body.b2_dynamicBody;
+        bodyDef.userData = "workpiece";
+        bodyDef.position.Set(10,16.5);
+        fixDef.isSensor = false;
+        var Mpoints = [ 
+        {x: 1, y: 0}, 
+        {x: 1/2, y: Math.sqrt(3)/2}, 
+        {x: -1/2, y:Math.sqrt(3)/2},
+        {x: -1, y:0}, 
+        {x: -1/2, y: -Math.sqrt(3)/2}, 
+        {x: 1/2, y:-Math.sqrt(3)/2}];
+        var points = [];
+        var SCALE = 2;
+        for (var i = 0; i < Mpoints.length; i++) {
+            var vec = new Box2D.Common.Math.b2Vec2();
+            vec.Set(SCALE*Mpoints[i].x, SCALE*Mpoints[i].y);
+            points[i] = vec;
+        }
+        fixDef.shape = new Box2D.Collision.Shapes.b2PolygonShape();
+        fixDef.shape.SetAsArray(points, points.length);
+        
         this._blocks.push( this._world.CreateBody(bodyDef));
         this._blocks[0].CreateFixture(fixDef);
 
@@ -151,9 +178,11 @@ var mazePositioningTask = _.extend({}, baseTask, {
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = 'green';
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
-
+                    //drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
+                    drawutils.drawPolygon(30*pos.x, 30*pos.y,30*2,6,angle,color);
                 } else {
+                    //http://calebevans.me/projects/jcanvas/docs/polygons/
+
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;

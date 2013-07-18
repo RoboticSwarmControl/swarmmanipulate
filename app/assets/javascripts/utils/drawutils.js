@@ -18,6 +18,7 @@ var drawutils = (function(){
         context.arc(x,y,radius,0,2*Math.PI);
         context.stroke();
     };
+
     
    var drawRobot = function (x,y,theta,radius,colorFill,colorEdge) {
 	    context.strokeStyle = colorEdge; 
@@ -26,6 +27,18 @@ var drawutils = (function(){
         context.arc(x,y,radius,0,2*Math.PI);
         context.fill();
         context.stroke();
+    };
+
+    var drawPolygon = function( x,y,radius,sides,rotate,color) {
+        //default value for rotate if needed
+        rotate = typeof rotate !== 'undefined' ? rotate : 0;
+        $canvas.drawPolygon({
+            fillStyle: color,
+            x: x, y: y,
+            radius: radius,
+            sides: sides,
+            rotate: rotate
+        });
     };
 
     var drawRect = function (x,y,w,h,color,angle) {
@@ -60,6 +73,7 @@ var drawutils = (function(){
     };
     
     return { drawCircle : drawCircle,
+             drawPolygon : drawPolygon,
              drawRect : drawRect,
              drawEmptyRect : drawEmptyRect,
              drawRobot: drawRobot,

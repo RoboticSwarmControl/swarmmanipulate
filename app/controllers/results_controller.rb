@@ -8,7 +8,11 @@ class ResultsController < ApplicationController
 
     def create
         #@result = Result.new( :task=>params[:task], :participant=>params[:participant], :runtime=>params[:runtime] )
-        @result = Result.new( :task=>params[:task], :participant=>Digest::MD5.hexdigest(request.remote_ip), :runtime=>params[:runtime], :robot_count=>params[:numrobots] )
+        @result = Result.new( :task=>params[:task],
+                              :mode=>params[:mode],
+                              :participant=>Digest::MD5.hexdigest(request.remote_ip),
+                              :runtime=>params[:runtime],
+                              :robot_count=>params[:numrobots] )
         @result.save
 
         redirect_to :action=>'show'
@@ -21,9 +25,9 @@ class ResultsController < ApplicationController
         # wrapped up in the model somehow, or monkeypatch the array
         # class to support a to_csv method.
         @resultscsv = CSV.generate do |csv|
-            csv << [ "Task", "Participant", "Run time", "Created at", "Robot count" ]
+            csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count" ]
             @results.each do |r|
-                csv << [ "#{r.task}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}" ]
+                csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}" ]
             end
         end
 

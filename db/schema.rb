@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605032813) do
+ActiveRecord::Schema.define(:version => 20130718214603) do
 
   create_table "results", :force => true do |t|
     t.string   "task"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130605032813) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "robot_count"
+    t.string   "mode"
   end
 
 end

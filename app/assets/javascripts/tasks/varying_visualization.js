@@ -1,8 +1,8 @@
-var mazePositioningTask = _.extend({}, baseTask, {
-    taskName: "maze_positioning",
-    instructions: " move an object (green) to the goal area (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+var varyingVisualizationTask = _.extend({}, baseTask, {
+    taskName: "varying_visualization",
+    instructions: "Try out different visualization methods for controlling a swarm.",
 
-    _numrobots: Math.floor((Math.random()*500)+1),                                           // number of robots
+    _numrobots: Math.floor((Math.random()*500)+1),           // number of robots
     _robotRadius: 0.5,
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing workpieces
@@ -218,11 +218,11 @@ that._impulseV.y *=  forceScaler;
 });
 
 // this makes sure that the "this" context is properly set
-for (var m in mazePositioningTask) {
-    if (typeof mazePositioningTask[m] == "function") {
-        mazePositioningTask[m] = _.bind( mazePositioningTask[m], mazePositioningTask );
+for (var m in varyingVisualizationTask) {
+    if (typeof varyingVisualizationTask[m] == "function") {
+        varyingVisualizationTask[m] = _.bind( varyingVisualizationTask[m], varyingVisualizationTask );
     }
 }
 
 // register our task with the application
-app.registerTask( mazePositioningTask );
+app.registerTask( varyingVisualizationTask );

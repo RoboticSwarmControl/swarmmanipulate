@@ -3,26 +3,34 @@
     <h1>Massive Manipulation</h1>
     <hr>
 
-    <h2>Swarm positioning</h2>
+    <h2>Tests</h2>
+    <ul>
+        <li>
+        <%= link_to "/task/maze_positioning" do %>
+            Varying numbers of robots
+        <% end %>
+        </li>
+        <li>
+        <%= link_to "/task/varying_control" do %>
+            Varying control schemes
+        <% end %>
+        </li>
+        <li>
+        <%= link_to "/task/varying_visualization" do %>
+            Varying visualization schemes
+        <% end %>
+        </li>
+    </ul>
+
+
+    <h2>Fun</h2>
+
     <ul>
         <li>
         <%= link_to "/task/robot_positioning" do %>
             Robot positioning
         <% end %>
         </li>
-    </ul>
-
-    <h2>Maze navigation</h2>
-    <ul>
-        <li>
-        <%= link_to "/task/maze_positioning" do %>
-            Maze positioning
-        <% end %>
-        </li>
-    </ul>
-
-    <h2>Construction</h2>
-    <ul>
         <li>
         <%= link_to "/task/pyramid_building" do %>
             Pyramid building

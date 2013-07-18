@@ -19,6 +19,7 @@ class ResultsController < ApplicationController
     end
 
     def show
+        gon.results = Result.find(:all)
         @results = Result.find(:all)
 
         # thie is hacky as hell--you should have this logic neatly

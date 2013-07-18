@@ -14,12 +14,4 @@
         <img src="<%= imgurl %>">
         </img>
     <% end %>
-
-    <ul>
-        <% @results.each do |r| %>
-            <li>
-            <%= r.task %> | <%= r.mode %> | <%= r.participant %> | <%= r.runtime %> | <%= r.robot_count %>
-            </li>
-        <% end %>
-    </ul>
 </div>

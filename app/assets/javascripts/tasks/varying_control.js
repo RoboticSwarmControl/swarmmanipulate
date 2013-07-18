@@ -1,5 +1,6 @@
 var varyingControlTask = _.extend({}, baseTask, {
     taskName: "varying_control",
+    taskMode: "default",
     instructions: "Try different ways of controlling the robots.",
 
     _numrobots: 8,                                          // number of robots

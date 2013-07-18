@@ -3,7 +3,9 @@
 
 
 var positionRobotsTask = _.extend({}, baseTask, {
- taskName: "robot_positioning",
+    taskName: "robot_positioning",
+    taskMode: "default",
+
     instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
     video: "http://www.youtube.com/watch?v=5p_XIad5-Cw",
 

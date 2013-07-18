@@ -1,6 +1,6 @@
 /*
  * baseTask.js -- Base task class for the ensemble manipulation app.
- * Copyright 2013 Chris Ertel
+ * Copyright 2013 Chris Ertel, Aaron Becker
  *
  * NOTES:
  * This is the base class from which all other tasks are descended.
@@ -22,6 +22,8 @@ var baseTask = {
     taskName: "base task",
     shownNotice: false,
     instructions: "Default instructions.",
+    taskMode: "",
+
     firstKeyPressed : false,
     isTaskComplete : false,
     keyL: null,
@@ -152,7 +154,6 @@ var baseTask = {
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
-	    // TODO: don't use a dialog box.  Instead, halt the program and overlay a "Task Complete"
             $.ajax( { type: "POST",
                       url: "/result",
                       dataType: "json",
@@ -171,7 +172,6 @@ var baseTask = {
               x: 300, y: 200,
               text: "Task completed in "+ (this._runtime).toFixed(2) +" seconds!"
             });
-        //    alert("Task complete. Time to finish was "+ this._runtime +" seconds.  Reload to start again.");
             // at this point, we do not reschedule, and the task ends.
             return;
         } else {

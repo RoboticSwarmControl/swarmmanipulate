@@ -1,5 +1,6 @@
 var mazePositioningTask = _.extend({}, baseTask, {
     taskName: "maze_positioning",
+    taskMode: "default",
     instructions: " move an object (green) to the goal area (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
     _numrobots: Math.floor((Math.random()*500)+1),                                           // number of robots

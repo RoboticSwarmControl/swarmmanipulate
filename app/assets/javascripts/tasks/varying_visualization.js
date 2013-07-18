@@ -1,5 +1,6 @@
 var varyingVisualizationTask = _.extend({}, baseTask, {
     taskName: "varying_visualization",
+    taskMode: "default",
     instructions: "Try out different visualization methods for controlling a swarm.",
 
     _numrobots: Math.floor((Math.random()*500)+1),           // number of robots

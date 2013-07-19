@@ -16,3 +16,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+#ignore DStore
+.DS_Store
+
+vendor/.DS_Store
+
+test/.DS_Store

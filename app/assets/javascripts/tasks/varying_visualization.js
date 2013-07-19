@@ -1,9 +1,14 @@
 var varyingVisualizationTask = _.extend({}, baseTask, {
     taskName: "varying_visualization",
     taskMode: "default",
-    instructions: "Try out different visualization methods for controlling a swarm.",
+    instructions: "try out different visualization methods for controlling a swarm.",
+    //full-state (visualize all robots)
+    //convex hull of robots
+    //mean & standard deviation of group
+    //only mean of group
 
-    _numrobots: Math.floor((Math.random()*500)+1),           // number of robots
+
+    _numrobots: 100, //Math.floor((Math.random()*500)+1),           // number of robots
     _robotRadius: 0.5,
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing workpieces
@@ -14,6 +19,12 @@ var varyingVisualizationTask = _.extend({}, baseTask, {
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
 
     setupTask: function( options ) {
+        var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
+
+        // randomly assign mode
+        taskMode = taskModes[Math.floor(Math.random()*taskModes.length)];
+
+
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
         fixDef.density = 10.0;
@@ -96,7 +107,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
+        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the " + taskMode + ".";
     	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	    var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
@@ -160,10 +171,10 @@ var varyingVisualizationTask = _.extend({}, baseTask, {
                     continue; // we drew the goal earlier
                 }
                 if (b.GetUserData() == 'robot') {
-                    // draw the robots
-                    var radius = f.GetShape().GetRadius();
-                    var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    continue; // we draw the robots elsewhere
+                    //var radius = f.GetShape().GetRadius();
+                    //var pos = b.GetPosition();
+                    //drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the pushable object
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -188,7 +199,76 @@ var varyingVisualizationTask = _.extend({}, baseTask, {
             }
         }
 
+        switch (taskMode) {
+            //var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
+            case "full-state":
+
+                 for(var i = 0; i < this._numrobots; ++i) {
+                    var radius = this._robots[i].m_fixtureList.m_shape.m_radius;
+                    var pos = this._robots[i].GetPosition();
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                }
+                break;
+            
+            case "convex-hull":
+                var points = [];
+                for(var i = 0; i < this._numrobots; ++i) {
+                    var pos = this._robots[i].GetPosition();
+                    points.push([30*pos.x,30*pos.y]);
+                }
+                var cHull = drawutils.getConvexHull(points);
+                var cHullPts = [];
+                for(var i = 0; i < cHull.length; ++i) {
+                    cHullPts.push([cHull[i][0][0],cHull[i][0][1]]);
+                }
+
+                drawutils.drawClosedLine(cHullPts,"lightblue");
+                break;
+            case "mean & variance":
+            // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
+            // t95% confidence ellipse
+                var meanx = 0;
+                var meany = 0;
+                var varx = 0;
+                var vary = 0;
+                var covxy = 0;
+                for(var i = 0; i < this._numrobots; ++i) {
+                    var pos = this._robots[i].GetPosition();
+                     meanx = meanx + pos.x/this._numrobots;
+                     meany = meany + pos.y/this._numrobots;
+                }
+                for(var i = 0; i < this._numrobots; ++i) {
+                    var pos = this._robots[i].GetPosition();
+                     varx =  varx + (pos.x-meanx)*(pos.x-meanx)/this._numrobots;
+                     vary =  vary + (pos.y-meany)*(pos.y-meany)/this._numrobots;
+                     covxy=  covxy+ (pos.x-meanx)*(pos.y-meany)/this._numrobots;
+                }
+                var diffeq = Math.sqrt( (varx-vary)*(varx-vary)/4 + covxy*covxy);
+                var varxp = (varx+vary)/2 + diffeq;
+                var varyp = (varx+vary)/2 - diffeq;
+                var angle = 180/Math.PI*1/2*Math.atan2( 2*covxy, varx-vary);
+
+
+                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
+                drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"red" );
+
+            break;
+            case "mean":
+                var meanx = 0;
+                var meany = 0;
+                 for(var i = 0; i < this._numrobots; ++i) {
+                    var pos = this._robots[i].GetPosition();
+                     meanx = meanx + pos.x/this._numrobots;
+                     meany = meany + pos.y/this._numrobots;
+                }
+                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
+            break;
+        }
+        
+        
+
     },
+
 
     // update function run every frame to update our robots
     update: function() {

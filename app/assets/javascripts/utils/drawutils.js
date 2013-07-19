@@ -19,6 +19,16 @@ var drawutils = (function(){
         context.stroke();
     };
 
+    var drawEllipse = function (x,y,width,height,rotate,color) {
+        $canvas.drawEllipse({
+          strokeStyle: color,
+          strokeWidth: 1,
+          x: x, y: y,
+          width: width, height: height,
+          rotate: rotate
+        });
+    };
+
     
    var drawRobot = function (x,y,theta,radius,colorFill,colorEdge) {
 	    context.strokeStyle = colorEdge; 
@@ -52,8 +62,8 @@ var drawutils = (function(){
     };
 
     var drawEmptyRect = function (x,y,w,h,color) {
-	//default value for angle if needed
-	angle = typeof angle !== 'undefined' ? angle : 0;
+	   //default value for angle if needed
+	   angle = typeof angle !== 'undefined' ? angle : 0;
         $canvas.drawRect({
             strokeStyle:color,
             x: x, y: y,
@@ -61,6 +71,94 @@ var drawutils = (function(){
         });
     };
 
+    var drawClosedLine = function (pts,color){
+        var obj = {
+            strokeStyle:color,
+            strokeWidth: 4,
+            rounded: false,
+            closed: true
+        };
+        // Add the points from the array to the object
+        for (var p=0; p<pts.length; p+=1) {
+          obj['x'+(p+1)] = pts[p][0];
+          obj['y'+(p+1)] = pts[p][1];
+        }
+
+        // Draw the line
+        $canvas.drawLine(obj);
+    };
+
+    //http://en.literateprograms.org/Quickhull_(Javascript)
+    function getDistant(cpt, bl) {
+        var Vy = bl[1][0] - bl[0][0];
+        var Vx = bl[0][1] - bl[1][1];
+        return (Vx * (cpt[0] - bl[0][0]) + Vy * (cpt[1] -bl[0][1]))
+    };
+
+
+    function findMostDistantPointFromBaseLine(baseLine, points) {
+        var maxD = 0;
+        var maxPt = new Array();
+        var newPoints = new Array();
+        for (var idx in points) {
+            var pt = points[idx];
+            var d = getDistant(pt, baseLine);
+            
+            if ( d > 0) {
+                newPoints.push(pt);
+            } else {
+                continue;
+            }
+            
+            if ( d > maxD ) {
+                maxD = d;
+                maxPt = pt;
+            }
+        
+        } 
+        return {'maxPoint':maxPt, 'newPoints':newPoints}
+    };
+
+    var allBaseLines = new Array();
+    function buildConvexHull(baseLine, points) {
+        
+        allBaseLines.push(baseLine)
+        var convexHullBaseLines = new Array();
+        var t = findMostDistantPointFromBaseLine(baseLine, points);
+        if (t.maxPoint.length) { // if there is still a point "outside" the base line
+            convexHullBaseLines = 
+                convexHullBaseLines.concat( 
+                    buildConvexHull( [baseLine[0],t.maxPoint], t.newPoints) 
+                );
+            convexHullBaseLines = 
+                convexHullBaseLines.concat( 
+                    buildConvexHull( [t.maxPoint,baseLine[1]], t.newPoints) 
+                );
+            return convexHullBaseLines;
+        } else {  // if there is no more point "outside" the base line, the current base line is part of the convex hull
+            return [baseLine];
+        }    
+    };
+
+    var getConvexHull = function(points) {
+        //find first baseline
+        var maxX, minX;
+        var maxPt, minPt;
+        for (var idx in points) {
+            var pt = points[idx];
+            if (pt[0] > maxX || !maxX) {
+                maxPt = pt;
+                maxX = pt[0];
+            }
+            if (pt[0] < minX || !minX) {
+                minPt = pt;
+                minX = pt[0];
+            }
+        }
+        var ch = [].concat(buildConvexHull([minPt, maxPt], points),
+                           buildConvexHull([maxPt, minPt], points))
+        return ch;
+    };
 
 
     var init = function () {
@@ -72,7 +170,10 @@ var drawutils = (function(){
         $canvas.clearCanvas();
     };
     
-    return { drawCircle : drawCircle,
+    return { drawClosedLine : drawClosedLine,
+             getConvexHull : getConvexHull,
+             drawCircle : drawCircle,
+             drawEllipse : drawEllipse,
              drawPolygon : drawPolygon,
              drawRect : drawRect,
              drawEmptyRect : drawEmptyRect,

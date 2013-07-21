@@ -13,7 +13,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing workpieces
     _goals: [],                                             // array of goals where blocks should go
-    _impulse: 20,                                            // impulse to move robots by
+    _impulse: 40,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
@@ -27,7 +27,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
-        fixDef.density = 10.0;
+        fixDef.density = 1.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
 
@@ -94,7 +94,10 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         fixDef.shape.SetAsArray(points, points.length);
         
         this._blocks.push( this._world.CreateBody(bodyDef));
+        fixDef.density = 1.0;
         this._blocks[0].CreateFixture(fixDef);
+        this._blocks[0].m_angularDamping = 5;
+        this._blocks[0].m_linearDamping = 5;
 
         // create the goal
         bodyDef.type = phys.body.b2_dynamicBody;
@@ -121,8 +124,12 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         fixDef.isSensor = false;
         fixDef.shape = new phys.circleShape( this._robotRadius ); // radius .5 robots
         for(var i = 0; i < this._numrobots; ++i) {
-            bodyDef.position.x = (i%rowLength)*2.1*this._robotRadius + xoffset;
-            bodyDef.position.y = Math.floor(i/rowLength)*2.1*this._robotRadius + yoffset;
+            //random position
+            bodyDef.position.x = xoffset + 7*Math.random();
+            bodyDef.position.y = yoffset +5*Math.random();
+            //place robots in orderly lines
+            //bodyDef.position.x = (i%rowLength)*2.1*this._robotRadius + xoffset;
+            //bodyDef.position.y = Math.floor(i/rowLength)*2.1*this._robotRadius + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 10;
@@ -273,22 +280,35 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     // update function run every frame to update our robots
     update: function() {
         var that = this;
-	var maxImpTime = 2.0; //seconds to maximum impulse
+        var maxImpTime = 2.0; //seconds to maximum impulse
         that._impulseV.x = 0;
         that._impulseV.y = 0;
-	var dateNow = new Date().getTime();
+        var dateNow = new Date().getTime();
+ 
+        if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
+        if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
+        if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(1, .001*(dateNow-that.keyU)/maxImpTime);} 
+        if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(1, .001*(dateNow-that.keyD)/maxImpTime);} 
 
-	if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyL)/1000.0);} 
-	if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(maxImpTime, (dateNow-that.keyR)/1000.0);} 
-	if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyU)/1000.0);} 
-	if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(maxImpTime, (dateNow-that.keyD)/1000.0);} 
 
-        var forceScaler = (that._robotRadius*that._robotRadius)/0.25;   
-that._impulseV.x *=  forceScaler;    
-that._impulseV.y *=  forceScaler;   
+        // moving at diagonal is no faster than moving sideways or up/down
+        var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
+        var forceScaler = normalizer*(that._robotRadius*that._robotRadius)/0.25;   //scale by robot size
+        that._impulseV.x *=  forceScaler;    
+        that._impulseV.y *=  forceScaler;   
         // apply the user force to all the robots
+        var brownianImpulse = new phys.vec2(0,0); 
+        var mag = 0;
+        var ang = 0;
         _.each( that._robots, function(r) { 
-            r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
+            //apply Brownian noise
+            mag = 5*Math.random();
+            ang = 2*Math.PI*Math.random();
+            brownianImpulse.x = mag*Math.cos(ang) + that._impulseV.x ;
+            brownianImpulse.y = mag*Math.sin(ang) + that._impulseV.y ;
+            r.ApplyForce( brownianImpulse, r.GetWorldPoint( that._zeroReferencePoint ) );
+            // no noise
+            //r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
         } );
 
         // step the world, and then remove all pending forces

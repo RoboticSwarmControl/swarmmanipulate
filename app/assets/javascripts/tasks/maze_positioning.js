@@ -83,7 +83,10 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         fixDef.shape.SetAsArray(points, points.length);
         
         this._blocks.push( this._world.CreateBody(bodyDef));
+        fixDef.density = 1.0;
         this._blocks[0].CreateFixture(fixDef);
+        this._blocks[0].m_angularDamping = 5;
+        this._blocks[0].m_linearDamping = 5;
 
         // create the goal
         bodyDef.type = phys.body.b2_dynamicBody;
@@ -198,14 +201,16 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         that._impulseV.y = 0;
     	var dateNow = new Date().getTime();
 
-	if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
-	if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
-	if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(1, .001*(dateNow-that.keyU)/maxImpTime);} 
-	if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(1, .001*(dateNow-that.keyD)/maxImpTime);} 
+        if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
+        if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
+        if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(1, .001*(dateNow-that.keyU)/maxImpTime);} 
+        if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(1, .001*(dateNow-that.keyD)/maxImpTime);} 
 
-        var forceScaler = (that._robotRadius*that._robotRadius)/0.25;   
-that._impulseV.x *=  forceScaler;    
-that._impulseV.y *=  forceScaler;   
+        // moving at diagonal is no faster than moving sideways or up/down
+        var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
+        var forceScaler = normalizer*(that._robotRadius*that._robotRadius)/0.25;   //scale by robot size
+        that._impulseV.x *=  forceScaler;    
+        that._impulseV.y *=  forceScaler;  
         // apply the user force to all the robots
         _.each( that._robots, function(r) { 
             r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );

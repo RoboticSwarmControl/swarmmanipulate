@@ -188,16 +188,20 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     // update function run every frame to update our robots
     update: function() {
         var that = this;
-        var maxImpTime = 1.0; //seconds to maximum impulse
+        var maxImpTime = 1.0; //seconds to maximum impulse (without it, you can overshoot the goal position)
         that._impulseV.x = 0;
         that._impulseV.y = 0;
         var dateNow = new Date().getTime();
 
-        if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyL)/1000.0);} 
-        if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(maxImpTime, (dateNow-that.keyR)/1000.0);} 
-        if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(maxImpTime, (dateNow-that.keyU)/1000.0);} 
-        if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(maxImpTime, (dateNow-that.keyD)/1000.0);} 
+        if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
+        if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
+        if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(1, .001*(dateNow-that.keyU)/maxImpTime);} 
+        if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(1, .001*(dateNow-that.keyD)/maxImpTime);} 
 
+        // moving at diagonal is no faster than moving sideways or up/down
+        var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
+        that._impulseV.x *=  normalizer;    
+        that._impulseV.y *=  normalizer;   
 
         // apply the user force to all the robots
         _.each( that._robots, function(r) { 

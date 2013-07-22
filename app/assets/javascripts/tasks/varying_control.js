@@ -1,4 +1,4 @@
-var varyingControlTask = _.extend({}, baseTask, {
+var varyingControlTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_control",
     taskMode: "default",
     instructions: "Try different ways of controlling the robots.",

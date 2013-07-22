@@ -1,4 +1,4 @@
-var pyramidBuildingTask = _.extend({}, baseTask, {
+var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     taskName: "pyramid_building",
     taskMode: "default",
     instructions: "use the robots (blue) to move the blocks (green) to the goal positions (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",

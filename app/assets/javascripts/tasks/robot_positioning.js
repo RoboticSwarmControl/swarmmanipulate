@@ -2,7 +2,7 @@
 // TODO:  change color of robots at goal
 
 
-var positionRobotsTask = _.extend({}, baseTask, {
+var positionRobotsTask = _.extend({}, baseTask, baseController, {
     taskName: "robot_positioning",
     taskMode: "default",
 

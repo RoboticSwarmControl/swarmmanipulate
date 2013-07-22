@@ -1,4 +1,4 @@
-var varyingVisualizationTask = _.extend({}, baseTask, {
+var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_visualization",
     taskMode: "default",
     instructions: "try out different visualization methods for controlling a swarm.",

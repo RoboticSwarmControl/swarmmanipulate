@@ -1,4 +1,4 @@
-var mazePositioningTask = _.extend({}, baseTask, {
+var mazePositioningTask = _.extend({}, baseTask, baseController, {
     taskName: "maze_positioning",
     taskMode: "default",
     instructions: " move an object (green) to the goal area (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",

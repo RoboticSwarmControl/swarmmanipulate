@@ -1,5 +1,5 @@
 /*
- * baseTask.js -- Base task class for the ensemble manipulation app.
+ * baseTask.js -- Base task class for the SwarmControl manipulation app.
  * Copyright 2013 Chris Ertel, Aaron Becker
  *
  * NOTES:

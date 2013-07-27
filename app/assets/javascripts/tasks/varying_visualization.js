@@ -1,7 +1,7 @@
 var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_visualization",
     taskMode: "default",
-    instructions: "try out different visualization methods for controlling a swarm.",
+    instructions: "try out four different visualization methods for controlling a swarm.",
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group

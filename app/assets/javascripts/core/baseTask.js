@@ -127,7 +127,7 @@ var baseTask = {
               strokeStyle: "green",
               scale: 2,
               strokeWidth: 0,
-              x: 300, y: 200,
+              x: 300, y: 250,
               text: "Task completed in "+ (this._runtime).toFixed(2) +" seconds!"
             });
             // at this point, we do not reschedule, and the task ends.

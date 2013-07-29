@@ -7,11 +7,23 @@
     </span>
 </h1>
 
-    <br>
+<br>
 
-    <% @charts.each do |taskname, imgurl| %>
-        <h2><%=taskname%></h2>
-        <img src="<%= imgurl %>">
-        </img>
-    <% end %>
+<script>
+    $(document).ready( function () {
+        swarmcontrol.results.init( $(".-charts"), gon.results);
+    });
+
+</script>
+
+    <div class="results-page">
+        <div class="-charts">
+        </div>
+
+        <% @charts.each do |taskname, imgurl| %>
+            <h2><%=taskname%></h2>
+            <div class="results-chart -chart-<%=taskname%>">
+            </div>
+        <% end %>
+    </div>
 </div>

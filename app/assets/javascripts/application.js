@@ -14,8 +14,12 @@
 //= require jquery_ujs
 //= require colorbox-rails
 //= require underscore
+//= require_self
 //= require_tree ./lib
 //= require_tree ./utils
 //= require_tree ./core
 //= require massive_manipulation
 //= require_tree ./tasks
+var swarmcontrol = {
+    results: {}
+};

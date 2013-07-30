@@ -1,7 +1,7 @@
 var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     taskName: "pyramid_building",
     taskMode: "default",
-    instructions: "use the robots (blue) to move the blocks (green) to the goal positions (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: "Use the robots (blue) to move the blocks (green) to the goal positions (orange) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -13,6 +13,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application    
 
     setupTask: function( options ) {
+        taskMode = (10*Math.random()).toFixed(1);  //add some noise
+        this.instructions = this.instructions + "<p> Be careful! Brownian noise of " + taskMode + " pN is perturbing your robots.";
+
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
         fixDef.density = 20.0;
@@ -223,10 +226,19 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     update: function() {
         var that = this;
         // apply the user force to all the robots
+        var brownianImpulse = new phys.vec2(0,0); 
+        var mag = 0;
+        var ang = 0;
         _.each( that._robots, function(r) { 
-            r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
+            //apply Brownian noise
+            mag = taskMode*10*Math.random();
+            ang = 2*Math.PI*Math.random();
+            brownianImpulse.x = mag*Math.cos(ang) + that._impulseV.x ;
+            brownianImpulse.y = mag*Math.sin(ang) + that._impulseV.y ;
+            r.ApplyForce( brownianImpulse, r.GetWorldPoint( that._zeroReferencePoint ) );
+            // no noise
+            //r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
         } );
-
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);
         this._world.ClearForces();

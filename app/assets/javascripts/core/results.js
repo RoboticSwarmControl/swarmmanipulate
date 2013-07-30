@@ -35,6 +35,7 @@ swarmcontrol.results = (function () {
             modes = _.groupBy( res, function (m) { return m.mode;} );
             if (_.keys(modes) != "null") //(modes.keys(obj).length > 1)  // if there are several modes, use modes as x-axis
             {
+                // two options A.) the modes are strings, B.) the modes are numbers.  If numbers, we do a normal xy graph. 
                            // ...and add the data points for the graph...
                 var points = [];
                 var tmax=Number.MIN_VALUE, tmin=Number.MAX_VALUE, xmax=Number.MIN_VALUE, xmin=Number.MAX_VALUE;

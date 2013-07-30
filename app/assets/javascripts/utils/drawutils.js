@@ -51,11 +51,13 @@ var drawutils = (function(){
         });
     };
 
-    var drawRect = function (x,y,w,h,color,angle) {
+    var drawRect = function (x,y,w,h,color,angle,colorEdge) {
 	//default value for angle if needed
 	angle = typeof angle !== 'undefined' ? angle : 0;
+    colorEdge = typeof colorEdge !== 'undefined' ? colorEdge : color;
         $canvas.drawRect({
             fillStyle:color,
+            strokeStyle:colorEdge,
             x: x, y: y,
             width: w, height: h, cornerRadius: 0, rotate: angle
         });

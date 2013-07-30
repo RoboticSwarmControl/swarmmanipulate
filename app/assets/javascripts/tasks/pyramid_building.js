@@ -73,6 +73,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
             this._blocks[i].CreateFixture(fixDef);
             this._blocks[i].m_angularDamping = 1;
             this._blocks[i].m_linearDamping = 1;
+            this._blocks[i].atGoal = false;
         }
 
         // create some robots
@@ -174,7 +175,12 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         drawutils.clearCanvas();
         var that = this;
         var colorGoal;
+        var countBlocksAtGoal =[];
 
+        //initialize robots to not be at goal
+        _.each( that._blocks, function(b) {
+                b.atGoal = false;
+                });
         // draw goal zone
         _.each(that._goals, function (g) { 
                     var f = g.GetFixtureList();
@@ -184,6 +190,15 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     var pos = g.GetPosition();
                     var color = 'orange';
                     drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+                    _.each(that._blocks, function (b) {
+                        var blockAABB = b.GetFixtureList().GetAABB();
+                        
+                            ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
+                            if (ret) {
+                                b.atGoal = true;
+                            }
+                    });
+                    
         });
 
         //draw robots and obstacles
@@ -205,7 +220,14 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = 'green';
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
+                    var colorEdge = 'green';
+                    if (b.atGoal == true)
+                    {
+                        color = 'lightgreen';
+                    }
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,colorEdge);
+
+
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

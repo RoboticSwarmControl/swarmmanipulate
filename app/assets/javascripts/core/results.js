@@ -3,9 +3,9 @@ swarmcontrol.results = (function () {
     var init = function ( $container, taskResults) {
         // TODO:
         // * add axis-labels (DONE, ATB)
-        // * add legend
-        // * plot tasks with modes with the modes along the x-axis
-        // * add a trendline
+        // * add legend (Done, ATB)
+        // * plot tasks with modes with the modes along the x-axis 
+        // * add a trendline (DONE, ATB)
         // * color points from the user in red, give user a trend line  (participant)
         // * allow user to switch between candle and scatter plots
         // * add a delete key so user can assign all user's data to an anonymous value
@@ -31,9 +31,9 @@ swarmcontrol.results = (function () {
             var $task = $(".-chart-"+k);
             res = results[k];
 
-            //are there multiple modes?
-            modes = _.groupBy( results, function (res) { return res.mode;} );
-            if (modes.keys(obj).length > 1)
+ /*           //are there multiple modes?
+            modes = _.groupBy( res, function (m) { return m.mode;} );
+            if (_.keys(modes) != "null") //(modes.keys(obj).length > 1)  // if there are several modes, use modes as x-axis
             {
                            // ...and add the data points for the graph...
                 var points = [];
@@ -52,13 +52,13 @@ swarmcontrol.results = (function () {
                 // ...and then append the graph.             
                 Flotr.draw( $task[0],
                             [
-                                {data: points, label: 'labals!', points: {show:true}}
+                                {data: points, label: 'labels!', points: {show:true}}
                             ],
                             {
                                 xaxis: { min: .9*xmin, max: 1.1*xmax,title: 'Mode'},
                                 yaxis: { min: .9*tmin, max: 1.1*tmax, title: "Time (s)"}
                             });
-            }else
+            }else*/
             {
                 // ...and add the data points for the graph...
                 var points = [];
@@ -66,13 +66,13 @@ swarmcontrol.results = (function () {
 
                 n = 0;
                 _.each( res, function (r) {
-                    y = r.runtime;
+                    y = parseFloat(r.runtime);
                     x = r.robot_count;
                     
-                    ymax = ymax < y ? y : tmax;
-                    ymin = ymin > y ? y : tmax;
-                    xmax = xmax < x ? x : rmax;
-                    xmin = xmin > x ? x : rmin;
+                    ymax = ymax < y ? y : ymax;
+                    ymin = ymin > y ? y : ymax;
+                    xmax = xmax < x ? x : xmax;
+                    xmin = xmin > x ? x : xmin;
 
                     points.push( [x, y] );
 
@@ -85,26 +85,25 @@ swarmcontrol.results = (function () {
 
                 });
 
-                  xmean = sx/n;
-                  ymean = sy/n;
-                  beta  = ((n*sxy) - (sx*sy))/((n*sxsq)-(Math.pow(sx,2)));
-                  alpha = ymean - (beta * xmean);
-                  
-                  // Compute the regression line.
-                  d2.push([xmin, alpha + beta*xmin]);
-                  d2.push([xmax, alpha + beta*xmax]);
+                xmean = sx/n;
+                ymean = sy/n;
+                beta  = ((n*sxy) - (sx*sy))/((n*sxsq)-(Math.pow(sx,2)));
+                alpha = ymean - (beta * xmean);
+
+                // Compute the regression line.
+                d2.push([xmin, alpha + beta*xmin]);
+                d2.push([xmax, alpha + beta*xmax]);
 
                 // ...and then append the graph.             
                 Flotr.draw( $task[0],
-                            [
-                                {data: points, label: 'datapoints', points: {show:true}},
-                                {data: d2, label : 'trendline' }  // Regression
-
-                            ],
-                            {
-                                xaxis: { min: .9*xmin, max: 1.1*xmax,title: 'Number of robots'},
-                                yaxis: { min: .9*ymin, max: 1.1*ymax, title: "Time (s)"}
-                            });
+                    [
+                        {data: d2, label : 'trendline' },  // Regression
+                        {data: points, label: 'datapoints', points: {show:true}}
+                    ],
+                    {
+                        xaxis: { min: .9*xmin, max: 1.1*xmax,title: 'Number of robots'},
+                        yaxis: { min: .9*ymin, max: 1.1*ymax, title: "Time (s)"}
+                    });
             }
 
         });

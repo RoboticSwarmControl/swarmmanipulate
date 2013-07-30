@@ -6,7 +6,7 @@ swarmcontrol.results = (function () {
         // * add legend
         // * plot tasks with modes with the modes along the x-axis
         // * add a trendline
-        // * color points from the user in red, give user a trend line
+        // * color points from the user in red, give user a trend line  (participant)
         // * allow user to switch between candle and scatter plots
         // * add a delete key so user can assign all user's data to an anonymous value
 
@@ -32,7 +32,7 @@ swarmcontrol.results = (function () {
             res = results[k];
 
             //are there multiple modes?
-            modes = _.groupBy( results, function (res) { return res.modes;} );
+            modes = _.groupBy( results, function (res) { return res.mode;} );
             if (modes.keys(obj).length > 1)
             {
                            // ...and add the data points for the graph...

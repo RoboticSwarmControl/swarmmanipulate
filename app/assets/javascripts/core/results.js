@@ -36,6 +36,7 @@ swarmcontrol.results = (function () {
             if (_.keys(modes) != "null") //(modes.keys(obj).length > 1)  // if there are several modes, use modes as x-axis
             {
                 // two options A.) the modes are strings, B.) the modes are numbers.  If numbers, we do a normal xy graph. 
+                // If the string argument cannot be parsed as a decimal number, the result will be NaN (not-a-number value).
                            // ...and add the data points for the graph...
                 var points = [];
                 var tmax=Number.MIN_VALUE, tmin=Number.MAX_VALUE, xmax=Number.MIN_VALUE, xmin=Number.MAX_VALUE;
@@ -102,8 +103,10 @@ swarmcontrol.results = (function () {
                         {data: points, label: 'datapoints', points: {show:true}}
                     ],
                     {
-                        xaxis: { min: .9*xmin, max: 1.1*xmax,title: 'Number of robots'},
-                        yaxis: { min: .9*ymin, max: 1.1*ymax, title: "Time (s)"}
+                        var xrange = xmax-xmin;
+                        var yrange = ymax-ymin;
+                        xaxis: { min: xmin - 0.05*xrange, max: xmax + 0.05*xrange,title: 'Number of robots'},
+                        yaxis: { min: ymin - 0.05*yrange, max: ymax + 0.05*yrange, title: "Time (s)"}
                     });
             }
 

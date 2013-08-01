@@ -24,7 +24,6 @@ swarmcontrol.results = (function () {
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
 
-
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            
@@ -95,6 +94,8 @@ swarmcontrol.results = (function () {
                 // Compute the regression line.
                 d2.push([xmin, alpha + beta*xmin]);
                 d2.push([xmax, alpha + beta*xmax]);
+                var xrange = xmax-xmin;
+                var yrange = ymax-ymin;
 
                 // ...and then append the graph.             
                 Flotr.draw( $task[0],
@@ -103,8 +104,6 @@ swarmcontrol.results = (function () {
                         {data: points, label: 'datapoints', points: {show:true}}
                     ],
                     {
-                        var xrange = xmax-xmin;
-                        var yrange = ymax-ymin;
                         xaxis: { min: xmin - 0.05*xrange, max: xmax + 0.05*xrange,title: 'Number of robots'},
                         yaxis: { min: ymin - 0.05*yrange, max: ymax + 0.05*yrange, title: "Time (s)"}
                     });

@@ -56,6 +56,9 @@ module Ensemble
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # http://stackoverflow.com/questions/10067359/heroku-were-sorry-but-something-went-wrong-due-to-javascript-include-tag
+    config.assets.initialize_on_precompile = false
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end

@@ -174,8 +174,6 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     draw: function() {
         drawutils.clearCanvas();
         var that = this;
-        var colorGoal;
-        var countBlocksAtGoal =[];
 
         //initialize robots to not be at goal
         _.each( that._blocks, function(b) {
@@ -192,13 +190,11 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                     _.each(that._blocks, function (b) {
                         var blockAABB = b.GetFixtureList().GetAABB();
-                        
                             ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
                             if (ret) {
                                 b.atGoal = true;
                             }
-                    });
-                    
+                    });          
         });
 
         //draw robots and obstacles
@@ -220,14 +216,10 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = 'green';
-                    var colorEdge = 'green';
+                    var colorEdge = 'darkgreen';
                     if (b.atGoal == true)
-                    {
-                        color = 'lightgreen';
-                    }
+                    {color = 'lightgreen';}
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,colorEdge);
-
-
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

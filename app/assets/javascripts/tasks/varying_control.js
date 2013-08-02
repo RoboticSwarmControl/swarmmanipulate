@@ -1,7 +1,7 @@
 var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveController, globalController, {
     taskName: "varying_control",
     taskMode: "default",
-    instructions: "Try different ways of controlling the robots.",
+    instructions: "Try different ways of controlling the robots. Use the robots (blue) to move the blocks (green) to the goal positions (orange) with your cursor.",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -16,6 +16,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _attracting: false,
     _repulsing: false,
 
+
     setupTask: function( options ) {        
         //var taskModes = [ "attractive", "repulsive", "global" ]
         var taskModes = ["attractive", "repulsive"];
@@ -25,6 +26,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             case "repulsive": this.update = this.repulsiveUpdate; break;
             default: break;
         }
+        this.instructions = this.instructions + "<p> You are using <strong>" + this.taskMode + "</strong> control. Press mouse button to engage.";
+
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -156,7 +159,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     draw: function() {
         drawutils.clearCanvas();
         var that = this;
-        var colorGoal;
+
+        //initialize robots to not be at goal
+        _.each( that._blocks, function(b) {
+                b.atGoal = false;
+                });
+    
 
         // draw goal zone
         _.each(that._goals, function (g) { 
@@ -167,6 +175,13 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var pos = g.GetPosition();
                     var color = 'orange';
                     drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+                    _.each(that._blocks, function (b) {
+                        var blockAABB = b.GetFixtureList().GetAABB();
+                            ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
+                            if (ret) {
+                                b.atGoal = true;
+                            }
+                    });  
         });
 
 
@@ -189,7 +204,10 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = 'green';
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
+                    var colorEdge = 'darkgreen';
+                    if (b.atGoal == true)
+                    {color = 'lightgreen';}
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,colorEdge);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -205,7 +223,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         }
         
         // draw controller position
-        drawutils.drawRect(this._mX, this._mY, 3, 3, 'yellow');
+        drawutils.drawRect(30*this._mX, 30*this._mY, 3, 3, 'yellow');
 
     },
 
@@ -225,6 +243,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }
+        if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
+            { 
+            that.firstKeyPressed  = true;
+            that._startTime = new Date();
+            that._runtime = 0.0;
+            }
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);

@@ -84,42 +84,6 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
         }
     },
 
-   /* setupController: function ( options ) {
-        var that = this;
-        // setup key listeners 
-        document.addEventListener( "keydown", function(e){
-            switch (e.keyCode) {
-                case 37 : that._impulseV.x = -that._impulse; break;
-                case 39 : that._impulseV.x = that._impulse; break;
-                case 38 : that._impulseV.y = -that._impulse; break;
-                case 40 : that._impulseV.y = that._impulse; break;
-                case 65 : that._impulseV.x = -that._impulse; break;
-                case 68 : that._impulseV.x = that._impulse; break;
-                case 87 : that._impulseV.y = -that._impulse; break;
-                case 83 : that._impulseV.y = that._impulse; break;
-            }
-        //check if this is the first keypress -- TODO:  this should be shared code.
-	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
-            { 
-            that.firstKeyPressed  = true;
-            that._startTime = new Date();
-            that._runtime = 0.0;
-            }
-	} , false );
-
-        document.addEventListener( "keyup", function(e){
-            switch (e.keyCode) {
-                case 37 : that._impulseV.x = 0; break;
-                case 39 : that._impulseV.x = 0; break;
-                case 38 : that._impulseV.y = 0; break;
-                case 40 : that._impulseV.y = 0; break;
-                case 65 : that._impulseV.x = 0; break;
-                case 68 : that._impulseV.x = 0; break;
-                case 87 : that._impulseV.y = 0; break;
-                case 83 : that._impulseV.y = 0; break;
-            }} , false );
-    },*/
-
     evaluateCompletion: function( options ) {
         var robotsAtGoal = this._countRobots();
         var neededRobots = this._numrobots;

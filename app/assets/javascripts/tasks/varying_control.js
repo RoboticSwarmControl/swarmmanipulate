@@ -9,12 +9,22 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _goals: [],                                             // array of goals of form {x,y,w,h}
     _impulse: 50,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
-    _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
+    _world: new phys.world( new phys.vec2(0, 0), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application    
+    _mX: 0,
+    _mY: 0,
+    _attracting: false,
+    _repulsing: false,
 
     setupTask: function( options ) {        
-        var taskModes = [ "attractive", "repulsive", "global" ]
+        //var taskModes = [ "attractive", "repulsive", "global" ]
+        var taskModes = ["attractive", "repulsive"];
         this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
+        switch (this.taskMode) {
+            case "attractive": this.update = this.attractiveUpdate; break;
+            case "repulsive": this.update = this.repulsiveUpdate; break;
+            default: break;
+        }
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -159,6 +169,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
         });
 
+
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())
         {
@@ -192,16 +203,28 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 }
             }
         }
+        
+        // draw controller position
+        drawutils.drawRect(this._mX, this._mY, 3, 3, 'yellow');
 
     },
 
-    // update function run every frame to update our robots
+    // update function run every frame to update our robots    
     update: function() {
         var that = this;
         // apply the user force to all the robots
-        _.each( that._robots, function(r) { 
-            r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
-        } );
+        if (that._attracting) {
+            _.each( that._robots, function(r) { 
+                var rpos = r.GetPosition();             
+                var dx = that._mX - rpos.x;
+                var dy = that._mY - rpos.y;
+                var mag = Math.sqrt(dx*dx + dy*dy);
+
+                that._impulseV.x = 10*dx/mag || 0;
+                that._impulseV.y = 10*dy/mag || 0;
+                r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
+            } );
+        }
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);

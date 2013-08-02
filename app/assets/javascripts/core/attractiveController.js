@@ -6,6 +6,14 @@ var attractiveController = (function(){
      */
     var setupController = function ( options ) {
         var that = this;
+      
+        /* setup mouse listener */
+        $("#canvas").on( "mousemove", function(e){
+
+            console.log(e.clientX + " " + e.clientY);
+
+        } , false );        
+
     };
 
     return { setupAttractiveController : setupController };

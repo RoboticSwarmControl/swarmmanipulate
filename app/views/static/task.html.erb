@@ -1,8 +1,3 @@
-
- 
-
-
-
 <% content_for :sidebar do %>
     <script>
         $(function() { app.init( '<%= @task_name%>' ); });
@@ -21,34 +16,22 @@
     <br>
     <div id="taskFeedback">
     </div>
-   
 
     <div id="task-instructions" class="well">
     </div>
-        <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()"> Restart</button>
+    <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()"> Restart</button>
     <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'"> Show Results</button>
     <br>
     
      <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw">Video showing automated solution</a>
 
      <br>
-
-     
      <br>
 
     <button id="-delete_record-button" class="btn btn-success" onClick="window.location.reload()"> Delete My Records</button>
-
 <% end %>
 
 <% content_for :workspace do %>
-
-
-
     <canvas id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
     </canvas>
-
-
-
-    
-
 <% end %>

@@ -52,7 +52,6 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    gchartrb (0.8)
     gon (4.1.1)
       actionpack (>= 2.3.0)
       json
@@ -127,7 +126,6 @@ DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 3.2.1)
   colorbox-rails
-  gchartrb
   gon
   jquery-rails
   pg

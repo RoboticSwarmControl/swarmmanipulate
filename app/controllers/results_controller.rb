@@ -1,5 +1,4 @@
 require 'csv'
-require 'google_chart'
 require 'digest/md5'
 
 class ResultsController < ApplicationController
@@ -35,28 +34,14 @@ class ResultsController < ApplicationController
         respond_to do |format|
             format.html do
                 @charts = {}
-                @tasknames = @results.map( &:task ).uniq
-                @tasknames.each do |taskname|
-                    GoogleChart::ScatterChart.new("520x400","Task: #{taskname}") do |sc|
-                        dataset = Result.where("task=?",taskname)
-                        rt = dataset.map( &:runtime ).map! { |t| t.to_f }
-                        tmax = rt.max
-                        rc = dataset.map( &:robot_count)
-                        cmax = rc.max
-
-                        sc.data "Scatter Set", rc.zip(rt)
-                        sc.max_value [cmax,tmax]
-                        sc.axis :x, :range=>[0,cmax], :title=>"# of robots"
-                        sc.axis :y, :range=>[0,tmax], :title=>"Time to completion (sec)"
-                        @charts[taskname] = sc.to_url
-                    end
+                @results.map( &:task ).uniq.each do |taskname|
+                    @charts[taskname] = taskname
                 end
 
                 render "show_results", :locals=>{:results=>@results, :charts=>@charts}
             end
 
             format.csv { send_data @resultscsv }
-
             format.json { send_data ({"results"=>@results}.to_json) }
         end
     end

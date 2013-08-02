@@ -271,9 +271,6 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                 drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
             break;
         }
-        
-        
-
     },
 
 

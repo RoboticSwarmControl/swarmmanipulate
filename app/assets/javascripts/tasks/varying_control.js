@@ -244,12 +244,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }
-        if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
-            { 
-            that.firstKeyPressed  = true;
-            that._startTime = new Date();
-            that._runtime = 0.0;
-            }
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);

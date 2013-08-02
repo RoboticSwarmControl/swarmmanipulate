@@ -6,6 +6,8 @@ var attractiveController = (function(){
      */
     var setupController = function ( options ) {
         var that = this;
+
+        
       
         /* setup mouse listener */
         $("#canvas").mousemove( function(e){
@@ -24,6 +26,12 @@ var attractiveController = (function(){
 
         $("#canvas").mousedown( function(e) {
             that._attracting = true;
+            //check if this is the first valid keypress, if so, starts the timer
+            if( that._startTime == null )
+            { 
+                that._startTime = new Date().getTime();
+                that._runtime = 0.0;
+            }
         });
 
         $("#canvas").mouseup( function (e) {

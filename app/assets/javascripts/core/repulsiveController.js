@@ -24,6 +24,11 @@ var repulsiveController = (function(){
 
         $("#canvas").mousedown( function(e) {
             that._repulsing = true;
+            if( that._startTime == null )
+            { 
+                that._startTime = new Date().getTime();
+                that._runtime = 0.0;
+            }
         });
 
         $("#canvas").mouseup( function (e) {

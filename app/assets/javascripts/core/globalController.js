@@ -41,14 +41,13 @@ var globalController = (function(){
         var that = this;
         // apply the user force to all the robots
         if (that._forcing) {
+        	var angle = Math.atan2(that._mY - 10, that._mX-10);
+        	var forcex = Math.cos(angle);
+        	var forcey = Math.sin(angle);
             _.each( that._robots, function(r) { 
-                var rpos = r.GetPosition();             
-                var dx = that._mX - rpos.x;
-                var dy = that._mY - rpos.y;
-                var mag = Math.sqrt(dx*dx + dy*dy);
-
-                that._impulseV.x = 10*dx/mag || 0;
-                that._impulseV.y = 10*dy/mag || 0;
+                
+                that._impulseV.x = 20*forcex;
+                that._impulseV.y = 20*forcey;
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }

@@ -45,9 +45,12 @@ var repulsiveController = (function(){
                 var dx = that._mX - rpos.x;
                 var dy = that._mY - rpos.y;
                 var mag = Math.sqrt(dx*dx + dy*dy);
+                // Coulomb's law  mag = k_e* |q_1 q_2|/ r^2
+                // Coulomb's law isn't 'fun' for the game.  Could we combine a viscous damping term?.
+                // we also need to limit the maximum attraction, or things fly past the screen.
 
-                that._impulseV.x = -10*dx/mag || 0;
-                that._impulseV.y = -10*dy/mag || 0;
+                that._impulseV.x = -20*dx/Math.pow(mag,1) || 0;
+                that._impulseV.y = -20*dy/Math.pow(mag,1) || 0;
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }

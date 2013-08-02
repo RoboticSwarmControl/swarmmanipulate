@@ -3,7 +3,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     taskMode: "default",
     instructions: "Try different ways of controlling the robots. Use the robots (blue) to move the blocks (green) to the goal positions (orange) with your cursor.",
 
-    _numrobots: 8,                                          // number of robots
+    _numrobots: 16,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
     _blocks: [],                                            // array of bodies representing blocks
     _goals: [],                                             // array of goals of form {x,y,w,h}
@@ -16,14 +16,14 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _attracting: false,
     _repulsing: false,
 
-
     setupTask: function( options ) {        
-        //var taskModes = [ "attractive", "repulsive", "global" ]
-        var taskModes = ["attractive", "repulsive"];
+        var taskModes = [ "attractive", "repulsive", "global" ]
+        //var taskModes = ["attractive"];
         this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;
             case "repulsive": this.update = this.repulsiveUpdate; break;
+            case "global": this.update = this.globalUpdate; break;
             default: break;
         }
         this.instructions = this.instructions + "<p> You are using <strong>" + this.taskMode + "</strong> control. Press mouse button to engage.";
@@ -109,8 +109,10 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
         // create goals
         var goalPositions = [ //{x:10.0, y:7.2},
-                              {x:9.5, y:8.2}, // {x:10.5, y:8.2},
-                              {x:9, y:9.2}, {x:10.0,y:9.2}, //{x:11,y:9.2}
+                              //{x:9.5, y:8.2},  {x:10.5, y:8.2},
+                              //{x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}
+                              {x:10, y:8.2}, 
+                              {x:9.5, y:9.2}, {x:10.5,y:9.2}
                               ];
         fixDef.isSensor = true;
         fixDef.shape = new phys.polyShape;
@@ -225,6 +227,19 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         
         // draw controller position
         drawutils.drawRect(30*this._mX, 30*this._mY, 3, 3, 'yellow');
+        if( that.taskMode == "global")
+        {
+            //draw arrow
+            var ArrX = [-1,-1,0,0,1,0,0,-1,-1];
+            var ArrY = [0,1/4,1/4,1/2,0,-1/2,-1/4,-1/4,0];
+            // Add the points from the array to the object
+            var angle = Math.atan2(that._mY - 10, that._mX-10);
+            var pts = [];
+            for (var p=0; p<ArrX.length; p+=1) {
+              pts.push([30*(10+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(10+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
+            }
+            drawutils.drawClosedLine(pts,'lightgreen');
+        }
 
     },
 

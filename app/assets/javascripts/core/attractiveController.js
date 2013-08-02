@@ -6,8 +6,6 @@ var attractiveController = (function(){
      */
     var setupController = function ( options ) {
         var that = this;
-
-        
       
         /* setup mouse listener */
         $("#canvas").mousemove( function(e){
@@ -49,8 +47,8 @@ var attractiveController = (function(){
                 var dy = that._mY - rpos.y;
                 var mag = Math.sqrt(dx*dx + dy*dy);
 
-                that._impulseV.x = 10*dx/mag || 0;
-                that._impulseV.y = 10*dy/mag || 0;
+                that._impulseV.x = 20*dx/Math.pow(mag,1) || 0;
+                that._impulseV.y = 20*dy/Math.pow(mag,1) || 0;
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }

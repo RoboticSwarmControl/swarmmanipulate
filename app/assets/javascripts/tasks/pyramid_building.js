@@ -239,6 +239,12 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     // update function run every frame to update our robots
     update: function() {
         var that = this;
+
+
+        // moving at diagonal is no faster than moving sideways or up/down
+        var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
+        that._impulseV.x *=  normalizer;    
+        that._impulseV.y *=  normalizer; 
         // apply the user force to all the robots
         var brownianImpulse = new phys.vec2(0,0); 
         var mag = 0;

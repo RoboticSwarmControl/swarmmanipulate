@@ -108,9 +108,10 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         }
 
         // create goals
-        var goalPositions = [ {x:10.0, y:7.2},
-                              {x:9.5, y:8.2}, {x:10.5, y:8.2},
-                              {x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}];
+        var goalPositions = [ //{x:10.0, y:7.2},
+                              {x:9.5, y:8.2}, // {x:10.5, y:8.2},
+                              {x:9, y:9.2}, {x:10.0,y:9.2}, //{x:11,y:9.2}
+                              ];
         fixDef.isSensor = true;
         fixDef.shape = new phys.polyShape;
         fixDef.shape.SetAsBox(.2,.2);

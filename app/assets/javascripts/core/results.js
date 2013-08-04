@@ -1,6 +1,7 @@
 swarmcontrol.results = (function () {
 
     var init = function ( $container, taskResults) {
+        // uses flotr2 at http://www.humblesoftware.com/flotr2/#!basic-axis
         // TODO:
         // * add axis-labels (DONE, ATB)
         // * add legend (Done, ATB)
@@ -73,7 +74,7 @@ swarmcontrol.results = (function () {
                     x = r.robot_count;
                     
                     ymax = ymax < y ? y : ymax;
-                    ymin = ymin > y ? y : ymax;
+                    ymin = ymin > y ? y : ymin;
                     xmax = xmax < x ? x : xmax;
                     xmin = xmin > x ? x : xmin;
 
@@ -99,15 +100,21 @@ swarmcontrol.results = (function () {
                 var xrange = xmax-xmin;
                 var yrange = ymax-ymin;
 
-                // ...and then append the graph.             
+modes = _.groupBy( res, function (m) { return m.mode;} );
+robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
+var mtitle = "There are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + "different # of robots."
+
+                // ...and then append the graph. 
+                var margins = 0.05;            
                 Flotr.draw( $task[0],
                     [
                         {data: d2, label : 'trendline' },  // Regression
                         {data: points, label: 'datapoints', points: {show:true}}
                     ],
                     {
-                        xaxis: { min: xmin - 0.05*xrange, max: xmax + 0.05*xrange,title: 'Number of robots'},
-                        yaxis: { min: ymin - 0.05*yrange, max: ymax + 0.05*yrange, title: "Time (s)"}
+                        xaxis: { min: xmin - margins*xrange, max: xmax + margins*xrange,title: 'Number of robots'},
+                        yaxis: { min: ymin - margins*yrange, max: ymax + margins*yrange, title: "Time (s)"},
+                        title :mtitle
                     });
             }
 

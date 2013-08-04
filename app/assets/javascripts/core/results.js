@@ -10,16 +10,7 @@ swarmcontrol.results = (function () {
         // * allow user to switch between candle and scatter plots
         // * add a delete key so user can assign all user's data to an anonymous value
 
-        var d2    = [], // A regression line for the scatterplot. 
-            sx    = 0,
-            sy    = 0,
-            sxy   = 0,
-            sxsq  = 0,
-            xmean,
-            ymean,
-            alpha,
-            beta,x,y,
-            n;
+ 
 
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
@@ -29,6 +20,17 @@ swarmcontrol.results = (function () {
             // ...init the graph it'll go into...            
             var $task = $(".-chart-"+k);
             res = results[k];
+
+            var d2    = [], // A regression line for the scatterplot. 
+            sx    = 0,
+            sy    = 0,
+            sxy   = 0,
+            sxsq  = 0,
+            xmean,
+            ymean,
+            alpha,
+            beta,x,y,
+            n;
 
  /*           //are there multiple modes?
             modes = _.groupBy( res, function (m) { return m.mode;} );

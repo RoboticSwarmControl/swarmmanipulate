@@ -22,7 +22,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
 
         // randomly assign mode
-        taskMode = taskModes[Math.floor(Math.random()*taskModes.length)];
+        this.taskMode = taskModes[Math.floor(Math.random()*taskModes.length)];
 
 
         // fixture definition for obstacles

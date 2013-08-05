@@ -50,6 +50,7 @@ swarmcontrol.results = (function () {
 
                 _.each( res, function (r) {
                     y = parseFloat(r.runtime);
+                    if (y > 60*60){t = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's rediculous
                     
                     if (r.task == "maze_positioning" || r.task == "robot_positioning"){
                         xAxisLabel = 'Number of robots';

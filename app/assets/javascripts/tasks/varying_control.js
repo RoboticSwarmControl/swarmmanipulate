@@ -17,8 +17,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _repulsing: false,
 
     setupTask: function( options ) {        
-        var taskModes = [ "attractive", "repulsive", "global" ]
-        //var taskModes = ["global"];
+        //var taskModes = [ "attractive", "repulsive", "global" ]
+        var taskModes = ["global"];
         this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;
@@ -207,19 +207,19 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     if (that.taskMode == 'repulsive' )
                     {drawutils.drawClosedLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue'); //vertical
                     }
-                    if (that.taskMode == 'global' ) 
-                    {
-                        //draw arrow
-                        var ArrX = [-0.3,0.3,0.0,0.3,0.0,0.3];
-                        var ArrY = [0,0,0.2,0,-0.2,0];
-                        // Add the points from the array to the object
-                        var angle = Math.atan2(that._mY - 10, that._mX-10);
-                        var pts = [];
-                        for (var p=0; p<ArrX.length; p+=1) {
-                          pts.push([30*(pos.x+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(pos.y+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
-                        }
-                        drawutils.drawClosedLine(pts,'darkblue'); //vertical
-                    }
+                    // if (that.taskMode == 'global' )  //Rico said the arrows were confusing
+                    // {
+                    //     //draw arrow
+                    //     var ArrX = [-0.3,0.3,0.0,0.3,0.0,0.3];
+                    //     var ArrY = [0,0,0.2,0,-0.2,0];
+                    //     // Add the points from the array to the object
+                    //     var angle = Math.atan2(that._mY - 10, that._mX-10);
+                    //     var pts = [];
+                    //     for (var p=0; p<ArrX.length; p+=1) {
+                    //       pts.push([30*(pos.x+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(pos.y+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
+                    //     }
+                    //     drawutils.drawClosedLine(pts,'darkblue'); //vertical
+                    // }
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -249,7 +249,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         if( that.taskMode == "global")
         {
             //draw arrow
-            var ArrX = [-1,-1,0,0,1,0,0,-1,-1];
+            var ArrX = [-1,-1,0.2,0.2,1,0.2,0.2,-1,-1];
             var ArrY = [0,1/4,1/4,1/2,0,-1/2,-1/4,-1/4,0];
             // Add the points from the array to the object
             var angle = Math.atan2(that._mY - 10, that._mX-10);
@@ -257,7 +257,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             for (var p=0; p<ArrX.length; p+=1) {
               pts.push([30*(10+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(10+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
             }
-            drawutils.drawClosedLine(pts,'lightgreen');
+            drawutils.drawClosedLine(pts,"rgba(0, 0, 153, 0.5)",18);
         }
 
     },

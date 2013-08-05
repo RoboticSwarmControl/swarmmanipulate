@@ -73,10 +73,11 @@ var drawutils = (function(){
         });
     };
 
-    var drawClosedLine = function (pts,color){
+    var drawClosedLine = function (pts,color,strokeWidth){
+        strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
         var obj = {
             strokeStyle:color,
-            strokeWidth: 4,
+            strokeWidth: strokeWidth,
             rounded: false,
             closed: true
         };
@@ -89,6 +90,7 @@ var drawutils = (function(){
         // Draw the line
         $canvas.drawLine(obj);
     };
+
 
     //http://en.literateprograms.org/Quickhull_(Javascript)
     function getDistant(cpt, bl) {

@@ -33,37 +33,8 @@ swarmcontrol.results = (function () {
             beta,x,y,
             n;
 
- /*           //are there multiple modes?
-            modes = _.groupBy( res, function (m) { return m.mode;} );
-            if (_.keys(modes) != "null") //(modes.keys(obj).length > 1)  // if there are several modes, use modes as x-axis
-            {
-                // two options A.) the modes are strings, B.) the modes are numbers.  If numbers, we do a normal xy graph. 
-                // If the string argument cannot be parsed as a decimal number, the result will be NaN (not-a-number value).
-                           // ...and add the data points for the graph...
-                var points = [];
-                var tmax=Number.MIN_VALUE, tmin=Number.MAX_VALUE, xmax=Number.MIN_VALUE, xmin=Number.MAX_VALUE;
 
-                _.each( res, function (r) {
-                    
-                    tmax = tmax < r.runtime ? r.runtime : tmax;
-                    tmin = tmin > r.runtime ? r.runtime : tmax;
-                    xmax = xmax < r.robot_count ? r.robot_count : xmax;
-                    xmin = xmin > r.robot_count ? r.robot_count : xmin;
 
-                    points.push( [r.robot_count, r.runtime] );
-                });
-
-                // ...and then append the graph.             
-                Flotr.draw( $task[0],
-                            [
-                                {data: points, label: 'labels!', points: {show:true}}
-                            ],
-                            {
-                                xaxis: { min: .9*xmin, max: 1.1*xmax,title: 'Mode'},
-                                yaxis: { min: .9*tmin, max: 1.1*tmax, title: "Time (s)"}
-                            });
-            }else*/
-            {
 
                  // two tasks where the number of robots is varied: maze_positioning, robot_positioning 
                  // varying_control, varying_visualization  x-axis is the mode (string) (these are bar charts?)
@@ -71,12 +42,32 @@ swarmcontrol.results = (function () {
                 // ...and add the data points for the graph...
                 var points = [];
                 var ymax=Number.MIN_VALUE, ymin=Number.MAX_VALUE, xmax=Number.MIN_VALUE, xmin=Number.MAX_VALUE;
+                var xAxisLabel = '';
 
                 n = 0;
+                modes = _.groupBy( res, function (m) { return m.mode;} );
+                var modekeys = _.keys(modes);
+
                 _.each( res, function (r) {
                     y = parseFloat(r.runtime);
-                    x = r.robot_count;
                     
+                    if (r.task == "maze_positioning" || r.task == "robot_positioning"){
+                        xAxisLabel = 'Number of robots';
+                        x = r.robot_count;
+                    }else if (r.task == "varying_control" ){
+                        xAxisLabel = 'Control type';
+                        x = _.indexOf(modekeys, r.mode);
+                    }else if(r.task == "varying_visualization"){
+                        xAxisLabel = 'Visualization Method';
+                        x = _.indexOf(modekeys, r.mode);
+                    }else if(r.task == "pyramid_building"){
+                        xAxisLabel = 'Noise';
+                        x = parseFloat(r.mode);
+                    }else{
+                        xAxisLabel = 'Unknown';
+                        x = r.robot_count;
+                    }
+
                     ymax = ymax < y ? y : ymax;
                     ymin = ymin > y ? y : ymin;
                     xmax = xmax < x ? x : xmax;
@@ -104,23 +95,33 @@ swarmcontrol.results = (function () {
                 var xrange = xmax-xmin;
                 var yrange = ymax-ymin;
 
-modes = _.groupBy( res, function (m) { return m.mode;} );
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
-var mtitle = "There are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + "different # of robots."
+var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots."
 
                 // ...and then append the graph. 
-                var margins = 0.05;            
+                var margins = 0.05;   
+                var myTicks = null;
+                if(res[0].task == "varying_control"){
+                    myTicks = [];
+                    for( var i = 0; i<modekeys.length; i++)
+                    {myTicks.push([i, modekeys[i] ]);}    
+                }
                 Flotr.draw( $task[0],
                     [
                         {data: d2, label : 'trendline' },  // Regression
                         {data: points, label: 'datapoints', points: {show:true}}
                     ],
-                    {
-                        xaxis: { min: xmin - margins*xrange, max: xmax + margins*xrange,title: 'Number of robots'},
+                    {  
+                        xaxis: { min: xmin - margins*xrange, 
+                                max: xmax + margins*xrange, 
+                                title: xAxisLabel,
+                                ticks: myTicks,
+                                labelsAngle: 45
+                            },
                         yaxis: { min: ymin - margins*yrange, max: ymax + margins*yrange, title: "Time (s)"},
                         title :mtitle
                     });
-            }
+
 
         });
     };

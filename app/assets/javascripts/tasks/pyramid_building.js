@@ -251,7 +251,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         var ang = 0;
         _.each( that._robots, function(r) { 
             //apply Brownian noise
-            mag = this.taskMode*10*Math.random();
+            mag = that.taskMode*10*Math.random();
             ang = 2*Math.PI*Math.random();
             brownianImpulse.x = mag*Math.cos(ang) + that._impulseV.x ;
             brownianImpulse.y = mag*Math.sin(ang) + that._impulseV.y ;

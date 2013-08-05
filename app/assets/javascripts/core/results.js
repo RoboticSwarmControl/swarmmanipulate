@@ -101,7 +101,7 @@ var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.ke
                 // ...and then append the graph. 
                 var margins = 0.05;   
                 var myTicks = null;
-                if(res[0].task == "varying_control"){
+                if(res[0].task == "varying_control" || res[0].task == "varying_visualization"){
                     myTicks = [];
                     for( var i = 0; i<modekeys.length; i++)
                     {myTicks.push([i, modekeys[i] ]);}    

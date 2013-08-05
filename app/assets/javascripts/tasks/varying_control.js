@@ -201,6 +201,25 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    if (that.taskMode == 'attractive' || that.taskMode == 'repulsive')
+                    {drawutils.drawClosedLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue'); // minus
+                    }
+                    if (that.taskMode == 'repulsive' )
+                    {drawutils.drawClosedLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue'); //vertical
+                    }
+                    if (that.taskMode == 'global' ) 
+                    {
+                        //draw arrow
+                        var ArrX = [-0.3,0.3,0.0,0.3,0.0,0.3];
+                        var ArrY = [0,0,0.2,0,-0.2,0];
+                        // Add the points from the array to the object
+                        var angle = Math.atan2(that._mY - 10, that._mX-10);
+                        var pts = [];
+                        for (var p=0; p<ArrX.length; p+=1) {
+                          pts.push([30*(pos.x+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(pos.y+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
+                        }
+                        drawutils.drawClosedLine(pts,'darkblue'); //vertical
+                    }
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -210,7 +229,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var colorEdge = 'darkgreen';
                     if (b.atGoal == true)
                     {color = 'lightgreen';}
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,colorEdge);
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,colorEdge);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

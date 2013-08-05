@@ -64,6 +64,10 @@ swarmcontrol.results = (function () {
                             });
             }else*/
             {
+
+                 // two tasks where the number of robots is varied: maze_positioning, robot_positioning 
+                 // varying_control, varying_visualization  x-axis is the mode (string) (these are bar charts?)
+                 //  pyramid_building  is a function of the noise, saves as the mode
                 // ...and add the data points for the graph...
                 var points = [];
                 var ymax=Number.MIN_VALUE, ymin=Number.MAX_VALUE, xmax=Number.MIN_VALUE, xmin=Number.MAX_VALUE;

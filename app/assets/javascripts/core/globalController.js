@@ -46,8 +46,8 @@ var globalController = (function(){
         	var forcey = Math.sin(angle);
             _.each( that._robots, function(r) { 
                 
-                that._impulseV.x = 20*forcex;
-                that._impulseV.y = 20*forcey;
+                that._impulseV.x = 40*forcex;
+                that._impulseV.y = 40*forcey;
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }

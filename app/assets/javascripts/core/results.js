@@ -10,15 +10,18 @@ swarmcontrol.results = (function () {
             ymean,
             alpha,
             beta,n;
-            n = pts.length;
-            for( var i = 0; i<n; i++){
-            // Computations used for regression line
+            n = 0;
+            for( var i = 0; i<pts.length; i++){
+                // Computations used for regression line
                 x = pts[i][0];
                 y = pts[i][1];
-                sx += x;
-                sy += y;
-                sxy += x*y;
-                sxsq += Math.pow(x,2);
+                if( ~isNaN(x) && ~isNaN(y)){
+                    sx += x;
+                    sy += y;
+                    sxy += x*y;
+                    sxsq += Math.pow(x,2);
+                    n=n+1;
+                }
             }
             xmean = sx/n;
             ymean = sy/n;

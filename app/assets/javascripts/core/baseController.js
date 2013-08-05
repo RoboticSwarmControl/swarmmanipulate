@@ -20,10 +20,10 @@ var baseController = (function(){
             }
             //check if this is the first valid keypress, if so, starts the timer
             if( that._startTime == null && ( that.keyL != null || that.keyR != null || that.keyU != null || that.keyD != null))
-        { 
-            that._startTime = new Date().getTime();
-            that._runtime = 0.0;
-        }
+            { 
+                that._startTime = new Date().getTime();
+                that._runtime = 0.0;
+            }
         } , false );
 
         document.addEventListener( "keyup", function(e){

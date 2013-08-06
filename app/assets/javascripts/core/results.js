@@ -30,14 +30,21 @@ swarmcontrol.results = (function () {
             return [alpha,beta];
     }
 
+    var parseTime = function( input){  //convert time to number, do some error checking
+        y = parseFloat(input);
+        if (y > 60*60){y = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's rediculous
+                    
+        return y
+    }
+
     var init = function ( $container, taskResults) {
         // uses flotr2 at http://www.humblesoftware.com/flotr2/#!basic-axis
         // TODO:
         // * add axis-labels (DONE, ATB)
         // * add legend (Done, ATB)
-        // * plot tasks with modes with the modes along the x-axis 
+        // * plot tasks with modes with the modes along the x-axis (DONE, ATB)
         // * add a trendline (DONE, ATB)
-        // * color points from the user in red, give user a trend line  (participant)
+        // * color points from the user in red, give user a trend line  (participant) (in progress)
         // * allow user to switch between candle and scatter plots
         // * add a delete key so user can assign all user's data to an anonymous value
 
@@ -68,9 +75,8 @@ swarmcontrol.results = (function () {
                 var modekeys = _.keys(modes);
 
                 _.each( res, function (r) {
-                    y = parseFloat(r.runtime);
-                    if (y > 60*60){y = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's rediculous
-                    
+                    y = parseTime(r.runtime);
+                                        
                     if (r.task == "maze_positioning" || r.task == "robot_positioning"){
                         xAxisLabel = 'Number of robots';
                         x = r.robot_count;
@@ -96,7 +102,6 @@ swarmcontrol.results = (function () {
                     points.push( [x, y] );
                     if( r.participant ==myParticipant)
                     {  mypoints.push( [x, y] );}
-
                 });
 
                 // Compute the regression line.
@@ -117,8 +122,25 @@ var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.ke
                 var myTicks = null;
                 if(res[0].task == "varying_control" || res[0].task == "varying_visualization"){
                     myTicks = [];
+                    var xCounts = [];
+                    var yMeans = [];
+                    for( var i = 0; i<modekeys.length; i++){
+                        myTicks.push([i, modekeys[i] ]);
+                        xCounts.push[0];
+                        yMeans.push[0];
+                    }    
+                    _.each( res, function (r) {
+                        var ind = _.indexOf(modekeys, r.mode);
+                        var yVal = parseTime(r.runtime);
+                        if( ~isNaN(yVal) ){
+                            xCounts[ind] = xCounts[ind]+1;
+                            yMeans[ind] = yMeans[ind] + yVal;
+                         }
+                    });
+                    dme.length = 0; // clear the array, and fill with new data
                     for( var i = 0; i<modekeys.length; i++)
-                    {myTicks.push([i, modekeys[i] ]);}    
+                    { dme.push([i, yMeans[i]/xCounts[i] ]); }
+
                 }
                 Flotr.draw( $task[0],
                     [

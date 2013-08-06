@@ -145,6 +145,9 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                     { d2.push([i, yMeans[i]/xCounts[i] ]);}
 
                 }
+                var legendPos = 'nw';//default legend position in nw
+                if( dataTrendline[1] <0 )
+                   { legendPos = 'sw';}
                 Flotr.draw( $task[0],
                     [
                         {data: d2, label : 'trend (all)', color:'blue' },  // Regression
@@ -161,7 +164,11 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                             },
                         yaxis: { min: ymin - margins*yrange, max: ymax + margins*yrange, title: "Time (s)"},
                         title :mtitle,
-                        subtitle : msubtitle
+                        subtitle : msubtitle,
+                        legend:{
+                            position: legendPos
+                         }
+
                     });
 
 

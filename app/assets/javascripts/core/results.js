@@ -1,8 +1,7 @@
 swarmcontrol.results = (function () {
 
     var trendline = function ( pts){
-        var d2    = [], // A regression line for the scatterplot. 
-            sx    = 0,
+        var sx    = 0,
             sy    = 0,
             sxy   = 0,
             sxsq  = 0,
@@ -15,7 +14,7 @@ swarmcontrol.results = (function () {
                 // Computations used for regression line
                 x = pts[i][0];
                 y = pts[i][1];
-                if( ~isNaN(x) && ~isNaN(y)){
+                if( ~isNaN(x) && ~isNaN(y) ){
                     sx += x;
                     sy += y;
                     sxy += x*y;
@@ -57,9 +56,9 @@ swarmcontrol.results = (function () {
             var $task = $(".-chart-"+k);
             res = results[k];
 
-            var d2    = [], // A regression line for the scatterplot. 
-            dme = [], //regression line of my data
-            x,y;
+            var d2 = [], // A regression line for the scatterplot. 
+                dme = [], //regression line of my data
+                x,y;
 
                  // two tasks where the number of robots is varied: maze_positioning, robot_positioning 
                  // varying_control, varying_visualization  x-axis is the mode (string) (these are bar charts?)
@@ -100,11 +99,9 @@ swarmcontrol.results = (function () {
                     xmin = xmin > x ? x : xmin;
 
                     points.push( [x, y] );
-                    if( r.participant ==myParticipant)
+                    if( r.participant == myParticipant)
                     {  mypoints.push( [x, y] );}
                 });
-
-
 
                 // Compute the regression line.
                 var dataTrendline = trendline(points);
@@ -116,9 +113,10 @@ swarmcontrol.results = (function () {
                 var xrange = xmax-xmin;
                 var yrange = ymax-ymin;
 
-                robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
-var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots. "+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax;
-
+robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
+var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots. "+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
+for( var i = 0;i<d2.length; i++)
+{mtitle=mtitle+ " " + d2[i][0] +","+d2[i][1];}
 
                 // ...and then append the graph. 
                 var margins = 0.05;   

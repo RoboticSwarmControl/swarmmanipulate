@@ -115,9 +115,10 @@ swarmcontrol.results = (function () {
                 var yrange = ymax-ymin;
 
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
-var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots. "+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
-for( var i = 0;i<points.length; i++)
-{mtitle=mtitle+ " " + points[i][0] +","+points[i][1];}
+var mtitle = res[0].task;
+var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots.";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
+//for( var i = 0;i<points.length; i++)
+//{mtitle=mtitle+ " " + points[i][0] +","+points[i][1];}
 
                 // ...and then append the graph. 
                 var margins = 0.05;   
@@ -159,7 +160,8 @@ for( var i = 0;i<points.length; i++)
                                 labelsAngle: 45
                             },
                         yaxis: { min: ymin - margins*yrange, max: ymax + margins*yrange, title: "Time (s)"},
-                        title :mtitle
+                        title :mtitle,
+                        subtitle : msubtitle
                     });
 
 

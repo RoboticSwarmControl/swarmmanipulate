@@ -13,7 +13,7 @@ swarmcontrol.results = (function () {
                 // Computations used for regression line
                 x = pts[i][0];
                 y = pts[i][1];
-                if( ~isNaN(x) && ~isNaN(y) ){
+                if( !isNaN(x) && !isNaN(y) ){
                     sx += x;
                     sy += y;
                     sxy += x*y;
@@ -92,7 +92,7 @@ swarmcontrol.results = (function () {
                         x = r.robot_count;
                     }
 
-                    if( ~isNaN(x) && ~isNaN(y) ){
+                    if( !isNaN(x) && !isNaN(y) ){
                         ymax = ymax < y ? y : ymax;
                         ymin = ymin > y ? y : ymin;
                         xmax = xmax < x ? x : xmax;
@@ -134,7 +134,7 @@ for( var i = 0;i<points.length; i++)
                     _.each( res, function (r) {
                         var ind = _.indexOf(modekeys, r.mode);
                         var yVal = parseTime(r.runtime);
-                        if( ~isNaN(yVal) ){
+                        if( !isNaN(yVal) ){
                             xCounts[ind] = xCounts[ind]+1;
                             yMeans[ind] = yMeans[ind] + yVal;
                          }

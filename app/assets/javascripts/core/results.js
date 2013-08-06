@@ -147,10 +147,10 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                 }
                 Flotr.draw( $task[0],
                     [
-                        {data: d2, label : 'trendline', color:'blue' },  // Regression
-                        {data: points, label: 'all results', points: {show:true}, color:'darkblue' },
-                        {data: dme, label : 'my trendline', color:'red' },  // Regression
-                        {data: mypoints, label: 'my results', points: {show:true}, color:'darkred' }
+                        {data: d2, label : 'trend (all)', color:'blue' },  // Regression
+                        {data: points, label: 'results (all)', points: {show:true}, color:'darkblue' },
+                        {data: dme, label : 'trend (me)', color:'red' },  // Regression
+                        {data: mypoints, label: 'results (me)', points: {show:true}, color:'darkred' }
                     ],
                     {  
                         xaxis: { min: xmin - margins*xrange, 

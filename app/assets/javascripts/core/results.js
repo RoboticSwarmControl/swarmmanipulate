@@ -126,8 +126,8 @@ var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.ke
                     var yMeans = [];
                     for( var i = 0; i<modekeys.length; i++){
                         myTicks.push([i, modekeys[i] ]);
-                        xCounts.push[0];
-                        yMeans.push[0];
+                        xCounts.push(0);
+                        yMeans.push(0);
                     }    
                     _.each( res, function (r) {
                         var ind = _.indexOf(modekeys, r.mode);
@@ -137,9 +137,9 @@ var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.ke
                             yMeans[ind] = yMeans[ind] + yVal;
                          }
                     });
-                    dme.length = 0; // clear the array, and fill with new data
+                    d2.length = 0; // clear the array, and fill with new data
                     for( var i = 0; i<modekeys.length; i++)
-                    { dme.push([i, yMeans[i]/xCounts[i] ]); }
+                    { d2.push([i, yMeans[i]/xCounts[i] ]);}
 
                 }
                 Flotr.draw( $task[0],

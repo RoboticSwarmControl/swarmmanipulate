@@ -1,12 +1,14 @@
 <div class="navbar navbar-inverse navbar-fixed-top center">
     <div class="navbar-inner ds-navbar">
         <div class="container">
+            <ul class="nav pull-left">
+                <li> <%= link_to "Tasks", "/", {:class=>""} %> </li>
+                <li> <%= link_to "Results", "/show_results", {:class=>""} %></li>
+            </ul>
+            <ul class="nav pull-right">
             <a href="http://mrsl.rice.edu" class="brand">
                 <%= image_tag "mrsl_logo.png" %>
             </a>
-            <ul class="nav pull-right">
-                <li> <%= link_to "Tasks", "/", {:class=>""} %> </li>
-                <li> <%= link_to "Results", "/show_results", {:class=>""} %></li>
             </ul>
         </div>
     </div>

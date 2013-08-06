@@ -104,6 +104,8 @@ swarmcontrol.results = (function () {
                     {  mypoints.push( [x, y] );}
                 });
 
+
+
                 // Compute the regression line.
                 var dataTrendline = trendline(points);
                 d2.push([xmin, dataTrendline[0] + dataTrendline[1]*xmin]);
@@ -114,8 +116,9 @@ swarmcontrol.results = (function () {
                 var xrange = xmax-xmin;
                 var yrange = ymax-ymin;
 
-robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
-var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots."
+                robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
+var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots. "+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax;
+
 
                 // ...and then append the graph. 
                 var margins = 0.05;   

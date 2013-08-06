@@ -8,8 +8,7 @@ swarmcontrol.results = (function () {
             xmean,x,y,
             ymean,
             alpha,
-            beta,n;
-            n = 0;
+            beta,n = 0;
             for( var i = 0; i<pts.length; i++){
                 // Computations used for regression line
                 x = pts[i][0];
@@ -93,14 +92,16 @@ swarmcontrol.results = (function () {
                         x = r.robot_count;
                     }
 
-                    ymax = ymax < y ? y : ymax;
-                    ymin = ymin > y ? y : ymin;
-                    xmax = xmax < x ? x : xmax;
-                    xmin = xmin > x ? x : xmin;
+                    if( ~isNaN(x) && ~isNaN(y) ){
+                        ymax = ymax < y ? y : ymax;
+                        ymin = ymin > y ? y : ymin;
+                        xmax = xmax < x ? x : xmax;
+                        xmin = xmin > x ? x : xmin;
 
-                    points.push( [x, y] );
-                    if( r.participant == myParticipant)
-                    {  mypoints.push( [x, y] );}
+                        points.push( [x, y] );
+                        if( r.participant == myParticipant)
+                        {  mypoints.push( [x, y] );}
+                    }
                 });
 
                 // Compute the regression line.

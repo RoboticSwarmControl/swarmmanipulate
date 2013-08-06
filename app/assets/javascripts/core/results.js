@@ -49,7 +49,7 @@ swarmcontrol.results = (function () {
 
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
-        var myParticipant = 0xa72e548361948817be52ff2495ebcb31; //Digest::MD5.hexdigest(request.remote_ip);
+        var myParticipant = "a72e548361948817be52ff2495ebcb31"; //Digest::MD5.hexdigest(request.remote_ip);
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            
@@ -115,8 +115,8 @@ swarmcontrol.results = (function () {
 
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
 var mtitle = res[0].task + ' with ' + res.length + " results, there are " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots. "+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
-for( var i = 0;i<d2.length; i++)
-{mtitle=mtitle+ " " + d2[i][0] +","+d2[i][1];}
+for( var i = 0;i<points.length; i++)
+{mtitle=mtitle+ " " + points[i][0] +","+points[i][1];}
 
                 // ...and then append the graph. 
                 var margins = 0.05;   

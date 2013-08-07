@@ -17,7 +17,9 @@
 
     <div class="results-page">
         <% @charts.each do |taskname| %>
-            <div class="results-chart -chart-<%=taskname%>">
+            <div class="results-chart-container">
+                <div class="results-chart -chart-<%=taskname%>">
+                </div>
             </div>
         <% end %>
     </div>

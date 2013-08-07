@@ -18,7 +18,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
     setupTask: function( options ) {        
         var taskModes = [ "attractive", "repulsive", "global" ]
-        //var taskModes = ["global"];
         this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;

@@ -90,6 +90,10 @@ var baseTask = {
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
+        // add the task mode
+        $("#taskMode").empty();
+        $("#taskMode").append( $( "<strong>Mode: </strong><em>" + this.taskMode + "</em>") );
+
         // do the loop
         requestAnimFrame( this._update );
     },
@@ -107,8 +111,10 @@ var baseTask = {
         // draw the simulation
         this.draw( this._options );
 
+        // render the task time
     	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
         $('#taskFeedback').html(string);
+
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.

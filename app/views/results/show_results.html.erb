@@ -13,16 +13,11 @@
     $(document).ready( function () {
         swarmcontrol.results.init( $(".-charts"), gon.results);
     });
-
 </script>
 
     <div class="results-page">
-        <div class="-charts">
-        </div>
-
-        <% @charts.each do |taskname, imgurl| %>
-            <h2><%=taskname%></h2>
-            <div class="results-chart -chart-<%=taskname%>"> <!-- TODO: show multiple charts per line. -->
+        <% @charts.each do |taskname| %>
+            <div class="results-chart -chart-<%=taskname%>">
             </div>
         <% end %>
     </div>

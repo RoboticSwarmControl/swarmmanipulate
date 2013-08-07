@@ -32,7 +32,7 @@ swarmcontrol.results = (function () {
         y = parseFloat(input);
         if (y > 60*60){y = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's rediculous
                     
-        return y
+        return y;
     }
 
     var init = function ( $container, taskResults) {
@@ -99,8 +99,9 @@ swarmcontrol.results = (function () {
                         xmin = xmin > x ? x : xmin;
 
                         points.push( [x, y] );
-                        if( r.participant == myParticipant)
-                        {  mypoints.push( [x, y] );}
+                        if( r.participant == myParticipant) {
+                            mypoints.push( [x, y] );
+                        }
                     }
                 });
 
@@ -174,7 +175,8 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
 
         });
     };
-    return { init: init
+    return { 
+        init: init
     };
 })();
 

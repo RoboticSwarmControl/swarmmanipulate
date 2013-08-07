@@ -92,7 +92,7 @@ var baseTask = {
 
         // add the task mode
         $("#taskMode").empty();
-        $("#taskMode").append( $( "<strong>Mode: </strong><em>" + this.taskMode + "</em>") );
+        $("#taskMode").append( $( "<strong>Mode: </strong><span>" + this.taskMode + "</span>") );
 
         // do the loop
         requestAnimFrame( this._update );

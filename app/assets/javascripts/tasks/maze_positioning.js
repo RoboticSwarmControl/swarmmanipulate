@@ -2,6 +2,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
     taskName: "maze_positioning",
     taskMode: "default",
     instructions: " move an object (green) to the goal area (orange) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    theScience: 'Transport of goods and materials between points is at the heart of all engineering and construction in real-world systems.  This experiment varies the number of robots used to transport an object. We keep the total area, maximum robot speed, and sum force the swarm can produce constant. See <a href="http://www.youtube.com/watch?v=px5RdSvGD2Q"> our video of robots pushing a model piano</a>, or <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.',
 
     _numrobots: Math.floor((Math.random()*500)+1),                                           // number of robots
     _robotRadius: 0.5,

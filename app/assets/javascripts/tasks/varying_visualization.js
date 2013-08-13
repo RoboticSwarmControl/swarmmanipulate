@@ -2,6 +2,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_visualization",
     taskMode: "default",
     instructions: "try out four different visualization methods for controlling a swarm.",
+    theScience: 'Sensing is expensive, especially on the nanoscale.  To see nanocars, scientist fasten molecules that floresce light when activated by a strong lamp of a particular color.  Unfortunately, multiple exposures can destroy these molecules, a process called <a href="http://en.wikipedia.org/wiki/Photobleaching">photobleaching</a>.  What happens if we use less power for the exposure?  This experiment varyies the amount of sensing information given to explore the impact on manipulation.  Full-state sensing is the most information, because it tells the position of all the robots (200 numbers for 100 robots).  The bounding box draws a line around the outermost robots. Mean tells where the average position (just 2 numbers for all 100 robots), and knowing the variance adds 3 additional numbers.',
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group
@@ -110,7 +111,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play until you have completed all " +taskModes.length+ " visualization modes.";
+        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +taskModes.length+ " visualization modes.";
     	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	    var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;

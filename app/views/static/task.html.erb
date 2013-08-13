@@ -4,34 +4,35 @@
     </script>
   
 
-    <h1> Massive Manipulation</h1>
-    <%= link_to "/" do %>
-        Return to task selection...
-    <% end %>
-
-    <hr>
-
+    <h1> Massive Manipulation:</h1>
     <div id="taskName">
-        <strong> Task: </strong>
-        <span> <%= @task_name_pretty %> </span>
+    <h3><%= @task_name_pretty %> </h3>
     </div>
-   
-    <div id="taskMode">
-    </div>
+    <!-- <%= link_to "/" do %>
+        Return to task selection...
+    <% end %> -->
 
-    <div id="taskFeedback">
-    </div>
+    <!-- <div id="taskMode">
+    </div> -->
+  
 
     <div id="task-instructions" class="well">
     </div>
-    <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()"> Restart</button>
-    <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'"> Show Results</button>
+    <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Restart</button>
+    <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
+    <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
+
+    <div id="task-theScience" class="well">
+    </div>
+
     <br>
     
 
 <% end %>
 
 <% content_for :workspace do %>
-    <canvas id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
+    <div class="pull-right" id="taskFeedback"> 
+    </div>
+    <canvas class="pull-right" id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
     </canvas>
 <% end %>

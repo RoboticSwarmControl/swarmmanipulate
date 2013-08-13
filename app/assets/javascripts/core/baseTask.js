@@ -23,6 +23,7 @@ var baseTask = {
     taskMode: "",
     shownNotice: false,
     instructions: "Default instructions.",
+    theScience: "Default Science.",
 
     firstKeyPressed : false,
     isTaskComplete : false,
@@ -90,10 +91,15 @@ var baseTask = {
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
-        // add the task mode
-        $("#taskMode").empty();
-        $("#taskMode").append( $( "<strong>Mode: </strong><span>" + this.taskMode + "</span>") );
+        // add sciencce to the page
+        $("#task-theScience").empty();
+        $("#task-theScience").append( $( "<h4>The Science</h4><p>" + this.theScience + "<p>") );
 
+        // add the task mode
+        if( this.taskMode != "default"){
+            $("#taskMode").empty();
+            $("#taskMode").append( $( "<strong>Mode: </strong><span>" + this.taskMode + "</span>") );
+        }
         // do the loop
         requestAnimFrame( this._update );
     },
@@ -135,6 +141,7 @@ var baseTask = {
               strokeWidth: 0,
               x: 300, y: 250,
               text: "Task completed in "+ (this._runtime).toFixed(2) +" seconds!"
+              //TODO: display buttons for restart and show results
             });
             // at this point, we do not reschedule, and the task ends.
             return;

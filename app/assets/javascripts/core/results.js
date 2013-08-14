@@ -48,7 +48,7 @@ swarmcontrol.results = (function () {
 
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
-        var myParticipant = "a72e548361948817be52ff2495ebcb31"; //Digest::MD5.hexdigest(request.remote_ip);
+        var myParticipant = "461f888afa11842de0c344054943dd2f"; //Digest::MD5.hexdigest(request.remote_ip);
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            

@@ -112,7 +112,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
             body = that._world.CreateBody(bodyDef);
             body.CreateFixture(fixDef);
             that._goals.push(body);
-            console.log(body);
+            //console.log(body);
         });
     },
 

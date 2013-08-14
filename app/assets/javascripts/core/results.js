@@ -30,7 +30,7 @@ swarmcontrol.results = (function () {
 
     var parseTime = function( input){  //convert time to number, do some error checking
         y = parseFloat(input);
-        if (y > 60*60){y = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's rediculous
+        if (y > 60*60){y = NaN;}  //remove egregious outliers -- if a task takes more than an hour, that's ridiculous
                     
         return y;
     }
@@ -71,9 +71,13 @@ swarmcontrol.results = (function () {
                 n = 0;
                 modes = _.groupBy( res, function (m) { return m.mode;} );
                 var modekeys = _.keys(modes);
+                var mostRecentTime = null;
+                var mostRecentx = NaN;
+                var mostRecenty = NaN;
 
                 _.each( res, function (r) {
                     y = parseTime(r.runtime);
+                    //console.log(r.created_at);
                                         
                     if (r.task == "maze_positioning" || r.task == "robot_positioning"){
                         xAxisLabel = 'Number of robots';
@@ -101,6 +105,11 @@ swarmcontrol.results = (function () {
                         points.push( [x, y] );
                         if( r.participant == myParticipant) {
                             mypoints.push( [x, y] );
+                        }
+                        if( mostRecentTime == null || r.created_at > mostRecentTime){
+                            mostRecentTime = r.created_at;
+                            mostRecentx = x;
+                            mostRecenty = y;
                         }
                     }
                 });
@@ -151,10 +160,12 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                    { legendPos = 'sw';}
                 Flotr.draw( $task[0],
                     [
-                        {data: d2, label : 'trend (all)', color:'blue' },  // Regression
+                        {data: d2, label : 'trend (all)', color:'blue' },  // Regression, all data
                         {data: points, label: 'results (all)', points: {show:true}, color:'darkblue' },
                         {data: dme, label : 'trend (me)', color:'red' },  // Regression
-                        {data: mypoints, label: 'results (me)', points: {show:true}, color:'darkred' }
+                        {data: mypoints, label: 'results (me)', points: {show:true}, color:'darkred' },
+                        {data: [[mostRecentx,mostRecenty]], points: {show:true, radius: 5,fillColor: 'red'}, color:'red' }, //most recent result
+                        {data: mypoints, points: {show:true}, color:'darkred' },  
                     ],
                     {  
                         xaxis: { min: xmin - margins*xrange, 

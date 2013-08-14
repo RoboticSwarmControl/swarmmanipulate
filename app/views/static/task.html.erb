@@ -22,7 +22,19 @@
     <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
     <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
 
-    <div id="task-theScience" class="well">
+    <script type="text/javascript">
+      $(document).ready(function() {
+      // Hide the "view" div.
+      $('div.view').hide();
+      // Watch for clicks on the "slide" link.
+      $('div.slide').click(function() {
+      // When clicked, toggle the "view" div.
+      $('div.view').slideToggle(400);
+      return false;
+    });
+    });
+    </script>
+    <div id="task-theScience" class="well" class="slide">
     </div>
 
     <br>

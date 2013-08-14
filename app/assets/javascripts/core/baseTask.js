@@ -17,6 +17,19 @@
  *
  */
 
+ function open_close(){
+    var txt = $("button.open_one").text();
+    if(txt === "read more"){                  
+        $("p.less").removeClass("less").addClass("more");
+        $("button.open_one").text("close");                            
+    }
+    else
+    {
+        $("p.more").removeClass("more").addClass("less");
+        $("button.open_one").text("read more");
+    }  
+  }
+
 
 var baseTask = {
     taskName: "base task",
@@ -94,7 +107,7 @@ var baseTask = {
         // add science to the page
 
         $("#task-theScience").empty();
-        $("#task-theScience").append( $( "<h4>The Science</h4><p>" + this.theScience + "<p>") );
+        $("#task-theScience").append( $( "<h4>The Science</h4><p>" + this.theScience + '<p> <div class="slide" style="cursor: pointer; text-align:center"><a href>More/Less</a></div>') );
 
         // add the task mode
         if( this.taskMode != "default"){

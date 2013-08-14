@@ -91,7 +91,8 @@ var baseTask = {
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
-        // add sciencce to the page
+        // add science to the page
+
         $("#task-theScience").empty();
         $("#task-theScience").append( $( "<h4>The Science</h4><p>" + this.theScience + "<p>") );
 

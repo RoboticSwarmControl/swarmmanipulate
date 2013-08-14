@@ -244,8 +244,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             }
         }
         
-        // draw controller position
-        drawutils.drawRect(30*this._mX, 30*this._mY, 3, 3, 'yellow');
+        // draw controller position.  James Asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
+        //drawutils.drawClosedLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue'); // minus
+        //drawutils.drawClosedLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue'); //vertical
+                  
+
+
         if( that.taskMode == "global")
         {
             //draw arrow

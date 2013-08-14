@@ -127,8 +127,6 @@ swarmcontrol.results = (function () {
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
 var mtitle = res[0].task;
 var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots.";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
-//for( var i = 0;i<points.length; i++)
-//{mtitle=mtitle+ " " + points[i][0] +","+points[i][1];}
 
                 // ...and then append the graph. 
                 var margins = 0.05;   
@@ -137,10 +135,14 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                     myTicks = [];
                     var xCounts = [];
                     var yMeans = [];
+                    var myxCounts = [];
+                    var myyMeans = [];
                     for( var i = 0; i<modekeys.length; i++){
                         myTicks.push([i, modekeys[i] ]);
                         xCounts.push(0);
                         yMeans.push(0);
+                        myxCounts.push(0);
+                        myyMeans.push(0);
                     }    
                     _.each( res, function (r) {
                         var ind = _.indexOf(modekeys, r.mode);
@@ -148,11 +150,19 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                         if( !isNaN(yVal) ){
                             xCounts[ind] = xCounts[ind]+1;
                             yMeans[ind] = yMeans[ind] + yVal;
+                            if( r.participant == myParticipant) {
+                                myxCounts[ind] = myxCounts[ind]+1;
+                                myyMeans[ind] = myyMeans[ind] + yVal;
+                            }
                          }
                     });
-                    d2.length = 0; // clear the array, and fill with new data
+                    d2.length = 0; // clear the array, and fill with new 
+                    dme.length = 0; // clear the array, and fill with new data
                     for( var i = 0; i<modekeys.length; i++)
-                    { d2.push([i, yMeans[i]/xCounts[i] ]);}
+                    { 
+                        d2.push([i, yMeans[i]/xCounts[i] ]);
+                        dme.push([i, myyMeans[i]/myxCounts[i] ]);
+                    }
 
                 }
                 var legendPos = 'nw';//default legend position in nw

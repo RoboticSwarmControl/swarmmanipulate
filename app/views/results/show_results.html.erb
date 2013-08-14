@@ -17,7 +17,6 @@
     <div class="results-page">
         <% @charts.each do |taskname| %>
             <div class="results-chart-container">
-                <% taskname = "robot_positioning" %>
                 <div class="results-chart -chart-<%=taskname%>">
                 </div>
                     <button id="-play-again-button" class="btn btn-success" onClick="parent.location='../task/<%=taskname%>'">Play <%=taskname%></button>

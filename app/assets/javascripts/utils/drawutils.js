@@ -173,6 +173,19 @@ var drawutils = (function(){
     var clearCanvas = function() {
         $canvas.clearCanvas();
     };
+
+    var drawText = function(x,y,text, scale, colorEdge, colorFill) {
+    $canvas.drawText({
+              fillStyle: colorEdge,
+              fontSize: "40pts",
+              strokeStyle: colorFill,
+              scale: scale,
+              strokeWidth: 1,
+              x: x, y: y,
+              text: text
+              //TODO: display buttons for restart and show results
+            });
+    };
     
     return { drawClosedLine : drawClosedLine,
              getConvexHull : getConvexHull,
@@ -183,6 +196,7 @@ var drawutils = (function(){
              drawEmptyRect : drawEmptyRect,
              drawRobot: drawRobot,
              clearCanvas : clearCanvas,
+             drawText : drawText,
              init : init
     };
 })();

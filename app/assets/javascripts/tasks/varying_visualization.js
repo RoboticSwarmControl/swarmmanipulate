@@ -272,6 +272,35 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                 drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
             break;
         }
+        // draw text before game starts
+        if(that._startTime == null){
+            var color = 'white';
+            // draw goal zone
+            _.each(that._goals, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'orange';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
+            });
+            _.each(that._blocks, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'white';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+            });
+
+            var meanx = 0;
+            var meany = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                 meanx = meanx + pos.x/this._numrobots;
+                 meany = meany + pos.y/this._numrobots;
+            }
+            var color = 'blue';
+            drawutils.drawRect(30*meanx,30*(meany+1), 80,30, "rgba(240, 240, 240, 0.8)");
+            drawutils.drawText(30*meanx,30*(meany+1),"Robots", 1.5, color, color)
+        }
+
+
+
     },
 
 

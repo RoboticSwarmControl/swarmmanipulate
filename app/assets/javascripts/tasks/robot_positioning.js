@@ -111,7 +111,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             _.each( that._robots, function(r) {
                 var roboPosition = r.GetPosition();
                 if( mathutils.lineDistance( that._myGoalsX[i],that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    colorGoal = "rgb(255, 0, 0)"; 
+                    colorGoal = "lightblue"; 
                     r.atGoal = true;
                     countRobotsAtGoal++;
                 }
@@ -146,6 +146,37 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 }
             }
+        }
+
+        // draw text before game starts
+        if(that._startTime == null){
+            var color = 'white';
+            // draw goal zone
+            _.each(that._goals, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'orange';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 2, color, color)
+            });
+            _.each(that._blocks, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'white';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+            });
+
+            var meanx = 0;
+            var miny =  Number.MAX_VALUE;
+            var meany = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                 meanx = meanx + pos.x/this._numrobots;
+                 meany = meany + pos.y/this._numrobots;
+                 if( pos.y < miny)
+                    {miny = pos.y;}
+            }
+            color = 'blue';
+            drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
+            color = 'green'
+            drawutils.drawText(30*(that._myGoalsX[0]),30*(that._myGoalsY[0]-1),"Goals", 1.5, color, color);
         }
         
     },

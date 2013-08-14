@@ -147,16 +147,9 @@ var baseTask = {
             this.isTaskComplete = true;
                     // draw seethrough grey box
             drawutils.drawRect(300,300, 590,590, "rgba(200, 200, 200, 0.8)");
-            $("canvas").drawText({
-              fillStyle: "green",
-              fontSize: "50pt",
-              strokeStyle: "green",
-              scale: 2,
-              strokeWidth: 0,
-              x: 300, y: 250,
-              text: "Task completed in "+ (this._runtime).toFixed(2) +" seconds!"
+            var color = "green";
+            drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
               //TODO: display buttons for restart and show results
-            });
             // at this point, we do not reschedule, and the task ends.
             return;
         } else {

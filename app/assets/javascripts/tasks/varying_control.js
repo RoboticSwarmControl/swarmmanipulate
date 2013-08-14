@@ -264,6 +264,54 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             drawutils.drawClosedLine(pts,"rgba(0, 0, 153, 0.5)",18);
         }
 
+        // draw text before game starts
+        if(that._startTime == null){
+            var color = 'white';
+            var meanx = 0;
+            var miny =  Number.MAX_VALUE;
+            var maxx =  Number.MIN_VALUE;
+            var meany = 0;
+            // draw goal zone
+            _.each(that._goals, function (g) { 
+                var pos = g.GetPosition();
+                if( pos.x >maxx)
+                {maxx = pos.x;}
+                meanx = meanx + pos.x/that._goals.length;
+                meany = meany + pos.y/that._goals.length;      
+            });
+            color = 'orange';
+            drawutils.drawText(30*(maxx+2),30*meany,"Goals", 1.5, color, color);
+
+
+            var meanx = 0;
+            var miny =  Number.MAX_VALUE;
+            var maxx =  Number.MIN_VALUE;
+            var meany = 0;
+            _.each(that._blocks, function (g) { 
+                var pos = g.GetPosition();
+                if( pos.y < miny)
+                    {miny = pos.y;} 
+                meanx = meanx + pos.x/that._blocks.length;
+                meany = meany + pos.y/that._blocks.length;   
+            });
+            color = 'green';
+            drawutils.drawText(30*(meanx),30*(miny-1),"Blocks", 1.5, color, color)
+
+
+            var meanx = 0;
+            var miny =  Number.MAX_VALUE;
+            var meany = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                 meanx = meanx + pos.x/this._numrobots;
+                 meany = meany + pos.y/this._numrobots;
+                 if( pos.y < miny)
+                    {miny = pos.y;}
+            }
+            color = 'blue';
+            drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
+        }
+
     },
 
     // update function run every frame to update our robots    

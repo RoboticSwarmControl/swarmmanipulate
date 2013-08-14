@@ -178,7 +178,6 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
                     drawutils.drawPolygon(30*pos.x, 30*pos.y,30*2,6,angle,color);
                 } else {
                     //http://calebevans.me/projects/jcanvas/docs/polygons/
-
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
@@ -191,6 +190,32 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
                 }
             }
         }
+        // draw text before game starts
+        if(that._startTime == null){
+            var color = 'white';
+            // draw goal zone
+            _.each(that._goals, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'orange';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
+            });
+            _.each(that._blocks, function (g) { 
+                        var pos = g.GetPosition();
+                        color = 'white';
+                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+            });
+
+            var meanx = 0;
+            var meany = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                 meanx = meanx + pos.x/this._numrobots;
+                 meany = meany + pos.y/this._numrobots;
+            }
+            var color = 'blue';
+            drawutils.drawText(30*meanx,30*(meany+2),"Robots", 1.5, color, color)
+        }
+
 
     },
 

@@ -168,6 +168,10 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                         {data: mypoints, points: {show:true}, color:'darkred' },  
                     ],
                     {  
+                        mouse : {
+                                track : true,
+                                relative : true
+                              },
                         xaxis: { min: xmin - margins*xrange, 
                                 max: xmax + margins*xrange, 
                                 title: xAxisLabel,

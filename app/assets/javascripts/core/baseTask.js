@@ -134,7 +134,6 @@ var baseTask = {
         // render the task time
     	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
         $('#taskFeedback').html(string);
-
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.

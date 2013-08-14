@@ -126,7 +126,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             body = that._world.CreateBody(bodyDef);
             body.CreateFixture(fixDef);
             that._goals.push(body);
-            console.log(body);
+            //console.log(body);
         });
     },
 

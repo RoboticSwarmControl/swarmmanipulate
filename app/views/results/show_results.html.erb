@@ -1,6 +1,5 @@
 <div class="container">
     <h1> RESULTS
-        <br>
     <span class="btn-group">
         <%= link_to "As CSV", "/show_results.csv", :class=>"btn btn-mini btn-info"%>
         <%= link_to "As JSON", "/show_results.json", :class=>"btn btn-mini btn-info"%>
@@ -18,8 +17,10 @@
     <div class="results-page">
         <% @charts.each do |taskname| %>
             <div class="results-chart-container">
+                <% taskname = "robot_positioning" %>
                 <div class="results-chart -chart-<%=taskname%>">
                 </div>
+                    <button id="-play-again-button" class="btn btn-success" onClick="parent.location='../task/<%=taskname%>'">Play <%=taskname%></button>
             </div>
         <% end %>
     </div>

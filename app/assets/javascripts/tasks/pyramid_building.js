@@ -1,7 +1,9 @@
+//TODO: add a slider that is innitialized to a random noise level, but that users can change (but only before they start playing with the robots)
+
 var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     taskName: "pyramid_building",
     taskMode: 0,
-    instructions: "Use the robots (blue) to move the blocks (green) to the goal positions (orange) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: "Use the robots (blue) to move the blocks (green) to the goal positions (orange) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;).",
     theScience: 'Real-world microrobots are affected by turbulence caused by random collisions with molecules.  These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>.  <div class="view">This experiment varies the strength of these disturbances to study the impact of noise on human control of large swarms. One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> measure the swarm positions, and automatically calculate a new control value based on the current measurements. See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control on living one-celled organisms </a> and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.</div>',
 
     _numrobots: 8,                                          // number of robots
@@ -15,7 +17,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 
     setupTask: function( options ) {
         this.taskMode = (10*Math.random()).toFixed(1);  //add some noise
-        this.instructions = this.instructions + "<p> Be careful! Brownian noise of " + this.taskMode + " pN is perturbing your robots.";
+        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> of ' + this.taskMode + ' pN is pushing your robots.';
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;

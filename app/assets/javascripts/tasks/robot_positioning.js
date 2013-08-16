@@ -175,6 +175,8 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
             color = 'green'
             drawutils.drawText(30*(that._myGoalsX[0]),30*(that._myGoalsY[0]-1),"Goals", 1.5, color, color);
+            color = 'red';
+            drawutils.drawText(30*12.5,30*10,"←Obstacle", 1.5, color, color);
         }
         
     },

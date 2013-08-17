@@ -19,11 +19,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
 
+    _taskModes: new Array("full-state", "convex-hull", "mean & variance", "mean"),
     setupTask: function( options ) {
-        var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
 
         // randomly assign mode
-        this.taskMode = taskModes[Math.floor(Math.random()*taskModes.length)];
+        this.taskMode = this._taskModes[Math.floor(Math.random()*this._taskModes.length)];
 
 
         // fixture definition for obstacles
@@ -111,7 +111,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +taskModes.length+ " visualization modes.";
+        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +this._taskModes.length+ " visualization modes.";
     	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	    var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
@@ -207,7 +207,12 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             }
         }
 
-        switch (this.taskMode) {
+        var tempTaskMode = this.taskMode;
+        if(that._startTime == null){
+            tempTaskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
+        }
+
+        switch (tempTaskMode) {
             //var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
             case "full-state":
 
@@ -295,12 +300,12 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                  meany = meany + pos.y/this._numrobots;
             }
             var color = 'blue';
-            drawutils.drawRect(30*meanx,30*(meany+1), 80,30, "rgba(240, 240, 240, 0.8)");
+            drawutils.drawRect(30*meanx,30*(meany+1), 80,30, "rgba(240, 240, 240, 0.7)");
             drawutils.drawText(30*meanx,30*(meany+1),"Robots", 1.5, color, color)
+            var color = 'black';
+            drawutils.drawRect(30*meanx,30*(meany+2), 120,30, "rgba(240, 240, 240, 0.7)");
+            drawutils.drawText(30*meanx,30*(meany+2),tempTaskMode, 1.5, color, color)
         }
-
-
-
     },
 
 

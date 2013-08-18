@@ -5,11 +5,19 @@
 
         if (document.cookie.indexOf("tos_seen") == -1) {
 
-            $.colorbox({width:"50%", height:"50%",inline:true, href:"#terms-of-service"});
+            //TODO: how do I remove the close button?
+            $.colorbox({width:"50%", height:"50%",inline:true, href:"#terms-of-service",
+            closeButton:false, escKey:false, overlayClose:false,onLoad: function() {  //all this to remove 'close' button
+                $('#cboxClose').remove();
+            }});
+
             $("#-tos-accept-button").on("click", function () {
                 $.colorbox.remove();
                 document.cookie = "tos_seen=true";
             });
+
+
+
         }
     });
 </script>

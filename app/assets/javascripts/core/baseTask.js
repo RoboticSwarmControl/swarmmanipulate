@@ -144,12 +144,17 @@ var baseTask = {
                       data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web"}
             });
             this.isTaskComplete = true;
-                    // draw seethrough grey box
+            // draw seethrough grey box
             drawutils.drawRect(300,300, 590,590, "rgba(200, 200, 200, 0.8)");
             var color = "green";
             drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
-              //TODO: display buttons for restart and show results
+            //TODO: display buttons for restart and show results
             // at this point, we do not reschedule, and the task ends.
+
+
+
+
+
             return;
         } else {
             // if not, schedule ourselves again and update the time.

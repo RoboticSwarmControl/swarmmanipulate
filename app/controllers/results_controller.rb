@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
     def create
         @result = Result.new( :task=>params[:task],
                               :mode=>params[:mode],
-                              :participant=>Digest::MD5.hexdigest(request.remote_ip),
+                              :participant=>request.cookies["remember_token"],
                               :runtime=>params[:runtime],
                               :robot_count=>params[:numrobots] )
         @result.save
@@ -17,11 +17,16 @@ class ResultsController < ApplicationController
     end
 
     def show
-        gon.results = Result.find(:all)
-        @results = gon.results
+
+        if request[:task] 
+            @results = Result.find_all_by_task( request[:task] )
+        else
+           @results = Result.find(:all)
+        end
 
         respond_to do |format|
             format.html do
+                gon.results = @results
                 @charts = @results.map( &:task ).uniq.inject([]){ |acc,taskname| acc << taskname} 
                 render "show_results", :locals=>{:results=>@results, :charts=>@charts}
             end

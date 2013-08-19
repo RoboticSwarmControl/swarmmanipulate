@@ -48,12 +48,15 @@ swarmcontrol.results = (function () {
 
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
-        //var myParticipant =  document.cookie["remember_token"];// document.cookie.indexOf("remember_token");//461f888afa11842de0c344054943dd2f"; //Digest::MD5.hexdigest(request.remote_ip);
+        var myParticipant =  document.cookie["remember_token"];// document.cookie.indexOf("remember_token");//461f888afa11842de0c344054943dd2f"; //Digest::MD5.hexdigest(request.remote_ip);
         //console.log(document.cookie.indexOf("remember_token"));
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            
+            //var $task = $("<div style='width:500px;height:500px' class='.-chart-"+k+"'></div>");
             var $task = $(".-chart-"+k);
+            console.log($task);
+            $container.append($task);
             res = results[k];
 
             var d2 = [], // A regression line for the scatterplot. 

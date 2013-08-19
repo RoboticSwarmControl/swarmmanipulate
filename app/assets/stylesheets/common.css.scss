@@ -5,6 +5,18 @@ body, html
     background-repeat: repeat;
 }
 
+.task-info
+{
+    padding:10px;
+    height:300px;
+    overflow:auto;
+}
+
+.task-buttons
+{
+    margin:10px;
+}
+
 hr
 {
     color: #000;

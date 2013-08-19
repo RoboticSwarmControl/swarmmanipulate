@@ -158,8 +158,9 @@ var baseTask = {
             // at this point, we do not reschedule, and the task ends.
 
             $.get("/result.json?task="+this.taskName, function( data ) {
+                var data = JSON.parse(data);
                 console.log(data);
-                var c = $("#span8");
+                var c = $(".span8");
                 swarmcontrol.results.init(c,data.results);
             });
 

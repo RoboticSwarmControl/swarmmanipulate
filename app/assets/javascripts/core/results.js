@@ -48,8 +48,8 @@ swarmcontrol.results = (function () {
 
         // group results by task
         results = _.groupBy( taskResults, function (res) { return res.task;} );
-        var myParticipant =  document.cookie["remember_token"];// document.cookie.indexOf("remember_token");//461f888afa11842de0c344054943dd2f"; //Digest::MD5.hexdigest(request.remote_ip);
-        console.log(document.cookie.indexOf("remember_token"));
+        //var myParticipant =  document.cookie["remember_token"];// document.cookie.indexOf("remember_token");//461f888afa11842de0c344054943dd2f"; //Digest::MD5.hexdigest(request.remote_ip);
+        //console.log(document.cookie.indexOf("remember_token"));
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            

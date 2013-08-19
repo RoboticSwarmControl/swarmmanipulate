@@ -6,14 +6,9 @@ class ResultsController < ApplicationController
     end
 
     def create
-        if(  (request.cookies['remember_token'] == nil) || (request.cookies['remember_token'] == "") )
-                self.remember_token = SecureRandom.urlsafe_base64
-                request.cookies['remember_token'] = self.remember_token
-        end
-        #request.cookies['remember_token'] = 2
         @result = Result.new( :task=>params[:task],
                               :mode=>params[:mode],
-                              :participant=>request.cookies["remember_token"],
+                              :participant=>cookies["task_sig"],
                               :runtime=>params[:runtime],
                               :robot_count=>params[:numrobots] )
         @result.save

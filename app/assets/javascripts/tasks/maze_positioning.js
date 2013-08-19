@@ -123,7 +123,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 10;
-            this._robots[i].m_linearDamping = 10;
+            this._robots[i].m_linearDamping = 10;  //TODO: add units
         }
     },
 
@@ -248,7 +248,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);
-        this._world.ClearForces();
+        //this._world.ClearForces(); // TODO: was this a hack?
     },
 
 });

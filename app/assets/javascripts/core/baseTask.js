@@ -157,6 +157,12 @@ var baseTask = {
             //TODO: display buttons for restart and show results
             // at this point, we do not reschedule, and the task ends.
 
+            $.get("/result.json?task="+this.taskName, function( data ) {
+                console.log(data);
+                var c = $("#span8");
+                swarmcontrol.results.init(c,data.results);
+            });
+
 
 
 

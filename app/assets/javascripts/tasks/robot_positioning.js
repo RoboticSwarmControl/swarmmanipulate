@@ -13,7 +13,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' Knowing how a task scales with robot number allows us to describe how difficult it is. '
     +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    +'<iframe width="560" height="315" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
+    +'<iframe width="260" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
   
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -68,7 +68,10 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
 
         //create some robots
         this._robots = [];
-        this.instructions = "Move the " + this._numrobots + " robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
+        var strRobotGoal = " robots (blue) to the goals (green)";
+        if(this._numrobots==1)
+            { strRobotGoal = " robot (blue) to the goal (green)";}
+        this.instructions = "Move the " + this._numrobots + strRobotGoal + " using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
         fixDef.density = 1.0;
@@ -179,9 +182,15 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                     {miny = pos.y;}
             }
             color = 'blue';
-            drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
+            var strRobots = "Robots";
+            var strGoals = "Goals";
+            if(this._numrobots==1){
+                strRobots = "Robot";
+                strGoals = "Goal";
+            }
+            drawutils.drawText(30*(meanx),30*(miny-1),strRobots, 1.5, color, color);
             color = 'green'
-            drawutils.drawText(30*(that._myGoalsX[0]),30*(that._myGoalsY[0]-1),"Goals", 1.5, color, color);
+            drawutils.drawText(30*(that._myGoalsX[0]),30*(that._myGoalsY[0]-1),strGoals, 1.5, color, color);
             color = 'red';
             drawutils.drawText(30*12.5,30*10,"←Obstacle", 1.5, color, color);
         }

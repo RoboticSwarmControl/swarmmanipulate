@@ -107,7 +107,6 @@ var baseTask = {
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         // add science to the page
-        $(".youtube").colorbox({iframe:true, innerWidth:600, innerHeight:400});
 
         $("#task-theScience").empty();
         $("#task-theScience").append( $( "<h4>The Science</h4><p>" 
@@ -119,6 +118,8 @@ var baseTask = {
             $("#taskMode").empty();
             $("#taskMode").append( $( "<strong>Mode: </strong><span>" + this.taskMode + "</span>") );
         }
+
+
         // do the loop
         requestAnimFrame( this._update );
     },
@@ -155,6 +156,7 @@ var baseTask = {
             drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
             //TODO: display buttons for restart and show results
             // at this point, we do not reschedule, and the task ends.
+
 
 
 

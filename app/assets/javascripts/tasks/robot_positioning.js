@@ -6,7 +6,14 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
 
     instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
     video: "http://www.youtube.com/watch?v=5p_XIad5-Cw",
-    theScience: 'This tasks examines how task completion time <i>scales</i> with the number of robots. <p>Having trouble? <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw">See hint</a>. <div class="view"> If a task requres twice as much time as for one robot with two robots, 3x times as much with three robots, and 4x with four robots, we say the task <i>scales linearly</i>.  If a task requires 4x times the time with two robots, 9x with three robots, and 16x with four, we say the task <i>scales quadratically</i>. Knowing how a task scales with robot number allows us to describe how difficult it is.  See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a> and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.</div>',
+    theScience: 'This tasks examines how task completion time <i>scales</i> with the number of robots. '
+    +' <p>Having trouble? <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw">See hint</a>. '
+    +' <p> If a task requres twice as much time as for one robot with two robots, 3x times as much with three robots, and 4x with four robots, we say the task <i>scales linearly</i>. '
+    +'  If a task requires 4x times the time with two robots, 9x with three robots, and 16x with four, we say the task <i>scales quadratically</i>. '
+    +' Knowing how a task scales with robot number allows us to describe how difficult it is. '
+    +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
+    +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
+    +'<iframe width="560" height="315" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
   
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots

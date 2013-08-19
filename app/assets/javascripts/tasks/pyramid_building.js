@@ -4,7 +4,14 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     taskName: "pyramid_building",
     taskMode: 0,
     instructions: "Use the robots (blue) to move the blocks (green) to the goal positions (orange) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;).",
-    theScience: 'Real-world microrobots are affected by turbulence caused by random collisions with molecules.  These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>.  <div class="view">This experiment varies the strength of these disturbances to study the impact of noise on human control of large swarms. One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> measure the swarm positions, and automatically calculate a new control value based on the current measurements. See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control on living one-celled organisms </a> and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.</div>',
+    theScience: 'Real-world microrobots are affected by turbulence caused by random collisions with molecules. '
+    +' These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>. '
+    +' <p>This experiment varies the strength of these disturbances to study the impact of noise on human control of large swarms. '
+    +' One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> '
+    +' measure the swarm positions, and automatically calculate a new control value based on the current measurements. '
+    +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control on living one-celled organisms </a> '
+    +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.'
+    +'<iframe width="260" height="146" src="//www.youtube.com/embed/MLr2YvghPns" frameborder="0" allowfullscreen></iframe>',
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots

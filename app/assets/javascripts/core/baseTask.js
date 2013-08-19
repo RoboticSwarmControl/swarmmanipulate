@@ -107,7 +107,9 @@ var baseTask = {
         // add science to the page
 
         $("#task-theScience").empty();
-        $("#task-theScience").append( $( "<h4>The Science</h4><p>" + this.theScience + '<p> <div class="slide" style="cursor: pointer; text-align:center"><a href>  More &#8661; Less</a></div>') );
+        $("#task-theScience").append( $( "<h4>The Science</h4><p>" 
+            + this.theScience //+ '<p> <div class="slide" style="cursor: pointer; text-align:center"><a href>  More &#8661; Less</a></div>'
+            ) );
 
         // add the task mode
         if( this.taskMode != "default"){

@@ -100,11 +100,14 @@ var baseTask = {
         // register the handlers
         this.setupController( this._options );
 
+
+
         // add instructions to the page
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         // add science to the page
+        $(".youtube").colorbox({iframe:true, innerWidth:600, innerHeight:400});
 
         $("#task-theScience").empty();
         $("#task-theScience").append( $( "<h4>The Science</h4><p>" 

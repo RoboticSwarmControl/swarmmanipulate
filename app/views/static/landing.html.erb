@@ -63,12 +63,32 @@ There are compelling reasons for creating micro-robotics for applications rangin
             </div>
 
         </div>
-<%= link_to "/task/maze_positioning" do %><%= image_tag "VaryControl.png" %><% end %> 
-<%= link_to "/task/varying_control" do %>  <% end %>
-<%= link_to "/task/varying_visualization" do %> <% end %>
-<%= link_to "/task/robot_positioning" do %> <% end %>
-<%= link_to "/task/pyramid_building" do %>  <% end %>
+        <%= image_tag "ChooseTask.png" %>
+<!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
+.
+<div style="position: relative; left: 0; top: 0;">
+  <img src="a.jpg" style="position: relative; top: 0; left: 0;"/>
+  <img src="b.jpg" style="position: absolute; top: 30; left: 70;"/>
+</div>
 
+-->
+<%= link_to "/task/maze_positioning" do %>
+<div class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
+    <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>
+    <!-- todo: remove highlighing, color star is task is completed -->
+    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: -65px; left: 0px;"%>
+    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: -65px; left: 37px;"%>
+    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: -65px; left: 74px;"%>
+    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: -65px; left: 111px;"%>
+    
+</div><% end %> 
+<%= link_to "/task/varying_control" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_control.png" %></div><% end %>
+<%= link_to "/task/varying_visualization" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_visualization.png" %></div><% end %>
+<%= link_to "/task/robot_positioning" do %><div class ="highlightit", style="display: inline"><%= image_tag "robot_positioning.png" %></div><% end %>
+<%= link_to "/task/pyramid_building" do %><div class ="highlightit", style="display: inline"><%= image_tag "pyramid_building.png" %></div><% end %>
+
+
+</div>
 
 </div>
 

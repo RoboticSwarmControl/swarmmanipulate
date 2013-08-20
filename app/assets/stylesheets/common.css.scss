@@ -40,3 +40,16 @@ h1
         display: inline-block;
     }
 }
+
+.highlightit img{
+border: 2px solid rgba(#ccc, 0.0);
+}
+
+.highlightit:hover img{
+border: 2px solid navy;
+}
+
+.highlightit:hover{
+color: red; /* Dummy definition to overcome IE bug */
+}
+

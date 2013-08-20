@@ -226,7 +226,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     //     drawutils.drawLine(pts,'darkblue',true); //vertical
                     // }
                 } else if (b.GetUserData() == 'workpiece') {
-                    // draw the obstacles
+                    // draw the object
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();

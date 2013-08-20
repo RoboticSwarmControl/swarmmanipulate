@@ -270,7 +270,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);
-        //this._world.ClearForces(); // TODO: was this a hack?
+        this._world.ClearForces(); // TODO: was this a hack?  NO, we need it
     },
 
 });

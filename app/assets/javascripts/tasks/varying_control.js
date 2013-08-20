@@ -8,7 +8,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     +' The global controller represents using global field (formed by parallel lines of diffferently-charged conductors) to pull atoms all in the same direction. '
     +' See <a href="http://www.youtube.com/watch?v=px5RdSvGD2Q">video of a global controller</a>, or '
     +'<a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    + '<iframe width="275" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
+    + '<iframe width="270" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
 
     _numrobots: 16,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots

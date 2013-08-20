@@ -8,7 +8,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     +' The global controller represents using global field (formed by parallel lines of diffferently-charged conductors) to pull atoms all in the same direction. '
     +' See <a href="http://www.youtube.com/watch?v=px5RdSvGD2Q">video of a global controller</a>, or '
     +'<a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    + '<iframe width="260" height="195" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
+    + '<iframe width="275" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
 
     _numrobots: 16,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -248,10 +248,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             }
         }
         
-        // draw controller position.  James Asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
-        //drawutils.drawLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue',true); // minus
-        //drawutils.drawLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue',true); //vertical
-                  
+
 
 
         if( that.taskMode == "global")
@@ -266,6 +263,11 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
               pts.push([30*(10+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(10+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
             }
             drawutils.drawLine(pts,"rgba(0, 0, 153, 0.5)",true,18,false);
+        }else{
+            // draw controller position.  James Asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
+            drawutils.drawLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue',true); // minus
+            drawutils.drawLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue',true); //vertical
+                  
         }
 
         // draw text before game starts

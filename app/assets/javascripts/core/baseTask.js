@@ -162,18 +162,25 @@ var baseTask = {
             });
             this.isTaskComplete = true;
             // draw seethrough grey box
-            drawutils.drawRect(300,300, 590,590, "rgba(200, 200, 200, 0.8)");
+            drawutils.drawRect(300,300, 590,590, "white");//rgba(200, 200, 200, 0.8)");
             var color = "green";
-            drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
-            //TODO: display buttons for restart and show results
+            //drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
             // at this point, we do not reschedule, and the task ends.
 
+            //TODO: 1. display plot in a colorbox
+            //TODO: 2. display buttons for Play Again, all results, task list
+            //TODO: 3. display: "you have completed x of 4 tasks.  Play again!" <or> "Level cleared -- you may play again to increase your score"
             $.get("/result.json?task="+this.taskName, function( data ) {
                 var data = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 var c = $(".span8");
-                swarmcontrol.results.init(c,data.results);
+                swarmcontrol.results.singlePlot(c,data.results);
             });
+            //<div class="task-buttons">
+            //  <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>
+            //  <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
+            //  <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
+            //</div>
 
 
 

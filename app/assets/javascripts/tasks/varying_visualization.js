@@ -7,7 +7,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     +' What happens if we use less power for the exposure?  This experiment varyies the amount of sensing information given to explore the impact on manipulation. '
     +' Full-state sensing is the most information, because it tells the position of all the robots (200 numbers for 100 robots).  The bounding box draws a line around the outermost robots. '
     +' Mean tells where the average position (just 2 numbers for all 100 robots), and knowing the variance adds 3 additional numbers.'
-    +'<iframe width="260" height="146" src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>',
+    +'<iframe width="275" height="295"  src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>',
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group

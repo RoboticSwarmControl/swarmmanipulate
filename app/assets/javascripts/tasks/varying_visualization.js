@@ -111,8 +111,9 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         bodyDef.position.Set(17,3.35);
         this._goals.push( this._world.CreateBody(bodyDef) );
         fixDef.isSensor = true;
-        fixDef.shape = new phys.polyShape;
-        fixDef.shape.SetAsBox(3,2.9);
+        //fixDef.shape = new phys.polyShape;
+        //fixDef.shape.SetAsBox(3,2.9);
+        fixDef.shape = new phys.circleShape(3); 
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
@@ -167,12 +168,16 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         // draw goal zone
         _.each(that._goals, function (g) { 
                     var f = g.GetFixtureList();
-                    var verts = f.GetShape().GetVertices();
-                    var X = verts[1].x - verts[0].x; 
-                    var Y = verts[2].y - verts[1].y;
+                    //var verts = f.GetShape().GetVertices();
+                    //var X = verts[1].x - verts[0].x; 
+                    //var Y = verts[2].y - verts[1].y;
+                    //var pos = g.GetPosition();
+                    //var color = that.colorGoal;
+                    //drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+
+                    var radius = f.GetShape().GetRadius();
                     var pos = g.GetPosition();
-                    var color = 'orange';
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal )
         });
 
         //draw robots and obstacles
@@ -193,7 +198,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'green';
+                    var color = that.colorObject;
                     //drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
                     drawutils.drawPolygon(30*pos.x, 30*pos.y,30*2,6,angle,color);
                 } else {
@@ -203,9 +208,9 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'orange';
+                    var color = that.colorGoal;
                     if(b.GetUserData() == 'obstacle') {
-                        color = 'red';
+                        color = that.colorObstacle;
                     }
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 }
@@ -224,7 +229,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                  for(var i = 0; i < this._numrobots; ++i) {
                     var radius = this._robots[i].m_fixtureList.m_shape.m_radius;
                     var pos = this._robots[i].GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
                 }
                 break;
             
@@ -240,7 +245,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                     cHullPts.push([cHull[i][0][0],cHull[i][0][1]]);
                 }
 
-                drawutils.drawClosedLine(cHullPts,"lightblue");
+                drawutils.drawLine(cHullPts,"lightblue",true);
                 break;
             case "mean & variance":
             // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
@@ -267,7 +272,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                 var angle = 180/Math.PI*1/2*Math.atan2( 2*covxy, varx-vary);
 
 
-                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
+                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
                 drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"red" );
 
             break;
@@ -279,18 +284,29 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                      meanx = meanx + pos.x/this._numrobots;
                      meany = meany + pos.y/this._numrobots;
                 }
-                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue","blue");
+                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
             break;
         }
+        // draw goal zone
+            _.each(that._goals, function (g) { 
+                        var pos = g.GetPosition();
+                        color = that.colorGoal;
+                        drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
+            });
         // draw text before game starts
         if(that._startTime == null){
             var color = 'white';
-            // draw goal zone
-            _.each(that._goals, function (g) { 
-                        var pos = g.GetPosition();
-                        color = 'orange';
-                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
-            });
+
+            //draw arrow from object to goal
+            var pGoalArrow = [[400,495],[525,495],[525,300],[80,300],[80,100],[400,100]];
+            drawutils.drawLine(pGoalArrow,that.colorGoal,false,50,true);
+            var aY = 20;
+            var aX = 50;
+            var pGoalArrow = [[400-aX,100+aY],[400,100],[400-aX,100-aY]];
+            drawutils.drawLine(pGoalArrow,that.colorGoal,false,50,false);
+            // (←,↑,↓,→)
+            drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
+
             _.each(that._blocks, function (g) { 
                         var pos = g.GetPosition();
                         color = 'white';
@@ -304,9 +320,9 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                  meanx = meanx + pos.x/this._numrobots;
                  meany = meany + pos.y/this._numrobots;
             }
-            var color = 'blue';
-            drawutils.drawRect(30*meanx,30*(meany+1), 80,30, "rgba(240, 240, 240, 0.7)");
-            drawutils.drawText(30*meanx,30*(meany+1),"Robots", 1.5, color, color)
+            var color = that.colorRobot;
+            drawutils.drawRect(30*meanx,30*(meany+1), 120,30, "rgba(240, 240, 240, 0.7)");
+            drawutils.drawText(30*meanx,30*(meany+1),this._numrobots+" Robots", 1.5, color, color)
             var color = 'black';
             drawutils.drawRect(30*meanx,30*(meany+2), 120,30, "rgba(240, 240, 240, 0.7)");
             drawutils.drawText(30*meanx,30*(meany+2),tempTaskMode, 1.5, color, color)

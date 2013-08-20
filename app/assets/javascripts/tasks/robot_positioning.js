@@ -68,10 +68,10 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
 
         //create some robots
         this._robots = [];
-        var strRobotGoal = " robots (blue) to the goals (green)";
+        var strRobotGoal = this._numrobots + " robots (blue) to the goals (outlined)";
         if(this._numrobots==1)
-            { strRobotGoal = " robot (blue) to the goal (green)";}
-        this.instructions = "Move the " + this._numrobots + strRobotGoal + " using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
+            { strRobotGoal = " robot (blue) to the goal (outlined)";}
+        this.instructions = "Move the " + strRobotGoal + " using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
         fixDef.density = 1.0;
@@ -119,7 +119,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             _.each( that._robots, function(r) {
                 var roboPosition = r.GetPosition();
                 if( mathutils.lineDistance( that._myGoalsX[i],that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    colorGoal = "lightblue"; 
+                    colorGoal = that.colorRobotAtGoal; 
                     r.atGoal = true;
                     countRobotsAtGoal++;
                 }
@@ -139,17 +139,17 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
                     if (b.atGoal == true )
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "lightblue","blue"); }
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobot); }
                     else
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); }
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); }
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'orange';
+                    var color = that.colorGoal;
                     if(b.GetUserData() == 'obstacle') {
-                        color = 'red';
+                        color = that.colorObstacle;
                     }
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 }
@@ -162,7 +162,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             // draw goal zone
             _.each(that._goals, function (g) { 
                         var pos = g.GetPosition();
-                        color = 'orange';
+                        color = that.colorRobot;
                          drawutils.drawText(30*pos.x,30*pos.y,"Goal", 2, color, color)
             });
             _.each(that._blocks, function (g) { 
@@ -181,7 +181,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                  if( pos.y < miny)
                     {miny = pos.y;}
             }
-            color = 'blue';
+            color = that.colorRobot;
             var strRobots = "Robots";
             var strGoals = "Goals";
             if(this._numrobots==1){
@@ -189,11 +189,19 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                 strGoals = "Goal";
             }
             drawutils.drawText(30*(meanx),30*(miny-1),strRobots, 1.5, color, color);
-            color = 'green'
+            color = that.colorGoal;
             drawutils.drawText(30*(that._myGoalsX[0]),30*(that._myGoalsY[0]-1),strGoals, 1.5, color, color);
-            color = 'red';
+            color = that.colorObstacle;
             drawutils.drawText(30*12.5,30*10,"←Obstacle", 1.5, color, color);
-        }
+            color = that.colorGoal;
+            var strRobotGoal = this._numrobots + " robots (blue) to the goals (outlined)";
+            if(this._numrobots==1)
+                { strRobotGoal = "robot (blue) to the goal (outlined)";}
+                this.instructions = "Move the " + strRobotGoal;
+
+                drawutils.drawText(300,430,that.instructions, 1.5, color, color);
+                drawutils.drawText(300,460,"Using the arrow keys (←,↑,↓,→)", 1.5, color, color);
+            }
         
     },
 

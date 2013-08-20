@@ -189,22 +189,21 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         _.each( that._blocks, function(b) {
                 b.atGoal = false;
                 });
-        // draw goal zone
+         // draw goal zone
         _.each(that._goals, function (g) { 
                     var f = g.GetFixtureList();
                     var verts = f.GetShape().GetVertices();
                     var X = verts[1].x - verts[0].x; 
                     var Y = verts[2].y - verts[1].y;
                     var pos = g.GetPosition();
-                    var color = 'orange';
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal);
                     _.each(that._blocks, function (b) {
                         var blockAABB = b.GetFixtureList().GetAABB();
                             ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
                             if (ret) {
                                 b.atGoal = true;
                             }
-                    });          
+                    });  
         });
 
         //draw robots and obstacles
@@ -219,27 +218,28 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
                 } else if (b.GetUserData() == 'workpiece') {
-                    // draw the obstacles
+                    // draw the objects
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'green';
-                    var colorEdge = 'darkgreen';
+                    var color = that.colorObject;
                     if (b.atGoal == true)
-                    {color = 'lightgreen';}
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,colorEdge);
+                    {color = that.colorObjectAtGoal;}
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,that.colorObjectEdge);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'orange';
+                    var color = that.colorObject;
                     if(b.GetUserData() == 'obstacle') {
-                        color = 'red';
+                        color = that.colorObstacle;
                     }
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+
+
                 }
             }
         }
@@ -259,8 +259,8 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                 meanx = meanx + pos.x/that._goals.length;
                 meany = meany + pos.y/that._goals.length;      
             });
-            color = 'orange';
-            drawutils.drawText(30*(maxx+2),30*meany,"Goals", 1.5, color, color);
+            color = that.colorGoal;
+            drawutils.drawText(30*(maxx+2),30*meany,"←Goals", 1.5, color, color);
 
 
             var meanx = 0;
@@ -274,7 +274,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                 meanx = meanx + pos.x/that._blocks.length;
                 meany = meany + pos.y/that._blocks.length;   
             });
-            color = 'green';
+            color = that.colorObject;
             drawutils.drawText(30*(meanx),30*(miny-1),"Blocks", 1.5, color, color)
 
 
@@ -288,10 +288,13 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                  if( pos.y < miny)
                     {miny = pos.y;}
             }
-            color = 'blue';
+            color = that.colorRobot;
             drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
-        }
 
+            color = that.colorObstacle;
+            drawutils.drawText(300,500,"Move Blocks to Goals", 1.5, color, color);
+            drawutils.drawText(300,530,"using the arrow keys (←,↑,↓,→)", 1.5, color, color);
+        }
 
     },
 

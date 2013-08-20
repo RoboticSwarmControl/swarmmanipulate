@@ -44,6 +44,17 @@ var baseTask = {
     keyR: null,
     keyU: null,
     keyD: null,
+    // check for colorblind issues: http://colorfilter.wickline.org/
+    // http://staff.rice.edu/Template_RiceBrand.aspx?id=4718
+    colorRobot: "blue",
+    colorRobotGoal: "blue", //"rgb(0,36,106)" Rice Blue is too dark "blue",
+    colorRobotAtGoal: "lightblue",
+    colorObstacle: "rgb(95,96,98)",// Rice Gray. //"black", //"red", //red = 255,0,0
+    colorGoal: "green", //"rgb(88,178,88)",  // color of unclocked button (middle) "green",
+    colorObject: "green", //  "rgb(80,163,80)",  // color of clicked button,  "green" = 0,128,0,
+    colorObjectEdge: "darkgreen", //"rgb(60,123,60)",  // color of clicked button border "darkgreen",
+    colorObjectAtGoal: "lightgreen", //"rgb(97,197,97)",  //"lightgreen",
+
 
     /*
      * Function to setup the task.

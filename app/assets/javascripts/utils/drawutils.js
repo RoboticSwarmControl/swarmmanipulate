@@ -12,6 +12,7 @@ var drawutils = (function(){
     var context = null;
     var $canvas = null;
 
+
     var drawCircle = function (x,y,radius,color) {
 	    context.strokeStyle = color; 
 	    context.beginPath();
@@ -63,23 +64,26 @@ var drawutils = (function(){
         });
     };
 
-    var drawEmptyRect = function (x,y,w,h,color) {
+    var drawEmptyRect = function (x,y,w,h,color,angle) {
 	   //default value for angle if needed
 	   angle = typeof angle !== 'undefined' ? angle : 0;
         $canvas.drawRect({
             strokeStyle:color,
             x: x, y: y,
+            strokeWidth: 2,
             width: w, height: h, cornerRadius: 0, rotate: angle
         });
     };
 
-    var drawClosedLine = function (pts,color,strokeWidth){
+    var drawLine = function (pts,color,closed, strokeWidth,rounded){
+        closed = typeof closed !== 'undefined' ? closed : false;
         strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
+        rounded = typeof rounded !== 'undefined' ? rounded : false;
         var obj = {
             strokeStyle:color,
             strokeWidth: strokeWidth,
-            rounded: false,
-            closed: true
+            rounded: rounded,
+            closed: closed
         };
         // Add the points from the array to the object
         for (var p=0; p<pts.length; p+=1) {
@@ -174,20 +178,23 @@ var drawutils = (function(){
         $canvas.clearCanvas();
     };
 
-    var drawText = function(x,y,text, scale, colorEdge, colorFill) {
-    $canvas.drawText({
+    var drawText = function(x,y,text, scale, colorEdge, colorFill,angle) {
+
+        angle = typeof angle !== 'undefined' ? angle : 0;
+        $canvas.drawText({
               fillStyle: colorEdge,
               fontSize: "40pts",
               strokeStyle: colorFill,
               scale: scale,
               strokeWidth: 1,
               x: x, y: y,
-              text: text
+              text: text,
+              rotate: angle,
               //TODO: display buttons for restart and show results
             });
     };
     
-    return { drawClosedLine : drawClosedLine,
+    return { drawLine : drawLine,
              getConvexHull : getConvexHull,
              drawCircle : drawCircle,
              drawEllipse : drawEllipse,

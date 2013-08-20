@@ -182,8 +182,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var X = verts[1].x - verts[0].x; 
                     var Y = verts[2].y - verts[1].y;
                     var pos = g.GetPosition();
-                    var color = 'orange';
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal);
                     _.each(that._blocks, function (b) {
                         var blockAABB = b.GetFixtureList().GetAABB();
                             ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
@@ -206,12 +205,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
                     if (that.taskMode == 'attractive' || that.taskMode == 'repulsive')
-                    {drawutils.drawClosedLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue'); // minus
+                    {drawutils.drawLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue',true); // minus
                     }
                     if (that.taskMode == 'repulsive' )
-                    {drawutils.drawClosedLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue'); //vertical
+                    {drawutils.drawLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue',true); //vertical
                     }
                     // if (that.taskMode == 'global' )  //Rico said the arrows were confusing
                     // {
@@ -224,26 +223,25 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     //     for (var p=0; p<ArrX.length; p+=1) {
                     //       pts.push([30*(pos.x+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(pos.y+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
                     //     }
-                    //     drawutils.drawClosedLine(pts,'darkblue'); //vertical
+                    //     drawutils.drawLine(pts,'darkblue',true); //vertical
                     // }
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'green';
-                    var colorEdge = 'darkgreen';
+                    var color = that.colorObject;
                     if (b.atGoal == true)
-                    {color = 'lightgreen';}
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,colorEdge);
+                    {color = that.colorObjectAtGoal;}
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,that.colorObjectEdge);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
-                    var color = 'orange';
+                    var color = that.colorGoal;
                     if(b.GetUserData() == 'obstacle') {
-                        color = 'red';
+                        color = that.colorObstacle;
                     }
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                 }
@@ -251,8 +249,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         }
         
         // draw controller position.  James Asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
-        //drawutils.drawClosedLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue'); // minus
-        //drawutils.drawClosedLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue'); //vertical
+        //drawutils.drawLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue',true); // minus
+        //drawutils.drawLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue',true); //vertical
                   
 
 
@@ -267,7 +265,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             for (var p=0; p<ArrX.length; p+=1) {
               pts.push([30*(10+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(10+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
             }
-            drawutils.drawClosedLine(pts,"rgba(0, 0, 153, 0.5)",18);
+            drawutils.drawLine(pts,"rgba(0, 0, 153, 0.5)",true,18,false);
         }
 
         // draw text before game starts
@@ -285,8 +283,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 meanx = meanx + pos.x/that._goals.length;
                 meany = meany + pos.y/that._goals.length;      
             });
-            color = 'orange';
-            drawutils.drawText(30*(maxx+2),30*meany,"Goals", 1.5, color, color);
+            color = that.colorGoal;
+            drawutils.drawText(30*(maxx+2),30*meany,"←Goals", 1.5, color, color);
 
 
             var meanx = 0;
@@ -300,9 +298,17 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 meanx = meanx + pos.x/that._blocks.length;
                 meany = meany + pos.y/that._blocks.length;   
             });
-            color = 'green';
+            color = that.colorObject;
             drawutils.drawText(30*(meanx),30*(miny-1),"Blocks", 1.5, color, color)
 
+            drawutils.drawText(300,525,"Move Blocks to Goals using your mouse", 1.5, color, color)
+            var strInstruction = "";
+            switch( that.taskMode ) {
+                case "attractive": strInstruction ="Robots are attracted to the mouse click"; break;
+                case "repulsive" : strInstruction ="Robots are repulsed from the mouse click";break;
+                case "global" : strInstruction ="Robots move in direction of mouse click";break;
+            }
+            drawutils.drawText(300,555,strInstruction, 1.5, color, color)
 
             var meanx = 0;
             var miny =  Number.MAX_VALUE;
@@ -314,7 +320,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                  if( pos.y < miny)
                     {miny = pos.y;}
             }
-            color = 'blue';
+            color = that.colorRobot;
             drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
         }
 

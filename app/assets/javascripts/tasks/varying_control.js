@@ -205,7 +205,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
                     if (that.taskMode == 'attractive' || that.taskMode == 'repulsive')
                     {drawutils.drawLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue',true,that.strokeWidthThick); // minus
                     }

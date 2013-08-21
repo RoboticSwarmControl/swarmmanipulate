@@ -47,6 +47,7 @@ var baseTask = {
     // check for colorblind issues: http://colorfilter.wickline.org/
     // http://staff.rice.edu/Template_RiceBrand.aspx?id=4718
     colorRobot: "blue",
+    colorRobotEdge: "rgb(50,50,255)", //"blue" == rgb(0,0,255)
     colorRobotGoal: "blue", //"rgb(0,36,106)" Rice Blue is too dark "blue",
     colorRobotAtGoal: "lightblue",
     colorObstacle: "rgb(95,96,98)",// Rice Gray. //"black", //"red", //red = 255,0,0

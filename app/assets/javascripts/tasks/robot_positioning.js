@@ -139,9 +139,9 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
                     if (b.atGoal == true )
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobot); }
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobotEdge); }
                     else
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); }
+                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); }
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

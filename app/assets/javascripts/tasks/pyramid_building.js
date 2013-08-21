@@ -219,7 +219,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     // draw the robots
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the objects
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 

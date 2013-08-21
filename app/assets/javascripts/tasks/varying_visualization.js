@@ -234,7 +234,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                  for(var i = 0; i < this._numrobots; ++i) {
                     var radius = this._robots[i].m_fixtureList.m_shape.m_radius;
                     var pos = this._robots[i].GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
+                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
                 }
                 break;
             

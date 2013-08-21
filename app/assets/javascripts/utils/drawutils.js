@@ -20,10 +20,11 @@ var drawutils = (function(){
         context.stroke();
     };
 
-    var drawEllipse = function (x,y,width,height,rotate,color) {
+    var drawEllipse = function (x,y,width,height,rotate,color,strokeWidth) {
+        strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
         $canvas.drawEllipse({
           strokeStyle: color,
-          strokeWidth: 1,
+          strokeWidth: strokeWidth,
           x: x, y: y,
           width: width, height: height,
           rotate: rotate

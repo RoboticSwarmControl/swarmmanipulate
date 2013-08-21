@@ -2,11 +2,11 @@
 
 
 <div class="container">
-    <h1>Massive Manipulation</h1>    
+    <h1>SwarmControl: Massive Manipulation</h1>    
                 <hr>
 
 <div class="row-fluid">
-            <div class="span3">
+          <!--  <div class="span3">
                 
               
 
@@ -45,8 +45,8 @@
                     </li>
                 </ul> 
 
-            </div>
-            <div class="span9">
+            </div> -->
+            <div class="span12">
 
 <!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
 
@@ -57,7 +57,7 @@
 There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
  The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish.
 
-<p><br>
+<h2>Play them all</h2>
 
 
             </div>
@@ -80,14 +80,18 @@ There are compelling reasons for creating micro-robotics for applications rangin
     <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 37px;"%>
     <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 74px;"%>
     <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 111px;"%>-->
-
 </div><% end %> 
 <%= link_to "/task/varying_control" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_control.png" %></div><% end %>
 <%= link_to "/task/varying_visualization" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_visualization.png" %></div><% end %>
 <%= link_to "/task/robot_positioning" do %><div class ="highlightit", style="display: inline"><%= image_tag "robot_positioning.png" %></div><% end %>
 <%= link_to "/task/pyramid_building" do %><div class ="highlightit", style="display: inline"><%= image_tag "pyramid_building.png" %></div><% end %>
-
-
+<br>
+<!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
+<%= link_to "/task/maze_positioning" do %>(1 of 5) Vary number<% end %>
+<%= link_to "/task/varying_control" do %>(2 of 5)Vary control<% end %>
+<%= link_to "/task/varying_visualization" do %>(3 of 5)Vary visualization<% end %>
+<%= link_to "/task/robot_positioning" do %>(4 of 5)Control position<% end %>
+<%= link_to "/task/pyramid_building" do %>(5 of 5)Vary noise<% end %>
 </div>
 
 </div>

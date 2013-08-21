@@ -7,7 +7,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     +' What happens if we use less power for the exposure?  This experiment varyies the amount of sensing information given to explore the impact on manipulation. '
     +' Full-state sensing is the most information, because it tells the position of all the robots (200 numbers for 100 robots).  The bounding box draws a line around the outermost robots. '
     +' Mean tells where the average position (just 2 numbers for all 100 robots), and knowing the variance adds 3 additional numbers.'
-    +'<iframe width="275" height="295"  src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>',
+    +'<iframe width="270" height="295"  src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>',
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group
@@ -245,7 +245,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                     cHullPts.push([cHull[i][0][0],cHull[i][0][1]]);
                 }
 
-                drawutils.drawLine(cHullPts,"lightblue",true);
+                drawutils.drawLine(cHullPts,"lightblue",true,4,false);
                 break;
             case "mean & variance":
             // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
@@ -273,7 +273,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
 
                 drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
-                drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"red" );
+                drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"lightblue",4 );
 
             break;
             case "mean":
@@ -299,11 +299,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
             //draw arrow from object to goal
             var pGoalArrow = [[400,495],[525,495],[525,300],[80,300],[80,100],[400,100]];
-            drawutils.drawLine(pGoalArrow,that.colorGoal,false,50,true);
+            drawutils.drawLine(pGoalArrow,that.colorGoalArrow,false,50,true);
             var aY = 20;
             var aX = 50;
             var pGoalArrow = [[400-aX,100+aY],[400,100],[400-aX,100-aY]];
-            drawutils.drawLine(pGoalArrow,that.colorGoal,false,50,false);
+            drawutils.drawLine(pGoalArrow,that.colorGoalArrow,false,50,false);
             // (←,↑,↓,→)
             drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
 

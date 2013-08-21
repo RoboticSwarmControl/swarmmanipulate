@@ -21,5 +21,12 @@
 //= require massive_manipulation
 //= require_tree ./tasks
 var swarmcontrol = {
-    results: {}
+    results: {},
+    prettyTaskNames: { "varying_visualization" : "Varying visualization",
+                       "varying_control" : "Varying control",
+                       "maze_positioning" : "Varying number",
+                       "robot_positioning" : "Robot positioning",
+                       "pyramid_building" : "Pyramid building"
+    }
+
 };

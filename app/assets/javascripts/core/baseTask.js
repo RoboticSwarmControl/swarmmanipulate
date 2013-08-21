@@ -212,8 +212,7 @@ var baseTask = {
                 swarmcontrol.results.singlePlot(c,data.results);
             });
             //Problem: button shows up above the plot.  Why?
-            $("#canvasID").empty();
-            $("#canvasID").append( $( '<button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>') );
+            //$("#canvasID").append( $( '<button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>') );
             //<div class="task-buttons">
             //  <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>
             //  <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>

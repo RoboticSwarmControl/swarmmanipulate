@@ -72,6 +72,32 @@ There are compelling reasons for creating micro-robotics for applications rangin
 </div>
 
 -->
+<!-- 
+<script> 
+    var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+    myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+    console.log(myParticipant);
+    var numPres = 0;
+    $.get("/result.json?task="+"maze_positioning", function( data ) {
+        data = JSON.parse(data);
+        console.log(data.results);
+        for( var i = 0; i<data.results.length; i++){
+           if( data.results[i].participant == myParticipant) {
+                numPres = numPres+1;
+            } 
+        }
+        console.log(numPres);
+    });
+    var element=document.getElementById("div1");
+
+    for( var i = 0; i<4; i++){
+        var strImage = "soft_edge_empty_star.png";
+        if( numPres >=i) {strImage = "soft_edge_yellow_star.png";}
+        var xPos = " "+i*37+"px";
+    }
+</script>-->
+
+
 <%= link_to "/task/maze_positioning" do %>
 <div id="div1", class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
     <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>

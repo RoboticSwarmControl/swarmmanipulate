@@ -74,7 +74,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         bodyDef.userData = 'workpiece';
         fixDef.shape = new phys.polyShape();
         fixDef.shape.SetAsBox( .5,.5);
-        fixDef.density = 10.0;
+        fixDef.density = 5.0;
         fixDef.friction = 0.5;
         fixDef.restitution = 0.2;  //bouncing value
         for(var i = 0; i < 6; ++i) {
@@ -82,8 +82,8 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
             bodyDef.position.y = 15;
             this._blocks[i] = this._world.CreateBody(bodyDef);
             this._blocks[i].CreateFixture(fixDef);
-            this._blocks[i].m_angularDamping = 1;
-            this._blocks[i].m_linearDamping = 1;
+            this._blocks[i].m_angularDamping = 5;
+            this._blocks[i].m_linearDamping = 5;
             this._blocks[i].atGoal = false;
         }
 

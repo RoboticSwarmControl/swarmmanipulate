@@ -101,7 +101,6 @@ swarmcontrol.results = (function () {
 
             _.each( res, function (r) {
                 y = parseTime(r.runtime);
-                //console.log(r.created_at);
                                     
                 if (r.task == "maze_positioning" || r.task == "robot_positioning"){
                     xAxisLabel = 'Number of robots';
@@ -149,7 +148,7 @@ swarmcontrol.results = (function () {
         var yrange = ymax-ymin;
 
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
-var mtitle = res[0].task;
+var mtitle = swarmcontrol.prettyTaskNames[res[0].task];
 var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots.";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
 
         // ...and then append the graph. 

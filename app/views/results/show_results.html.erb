@@ -18,7 +18,7 @@
         <% @charts.each do |taskname| %>
             <div class="results-chart-container">
                 <div class="results-chart -chart-<%=taskname%>"></div>
-                <button id="-play-again-button" class="btn btn-success" onClick="parent.location='../task/<%=taskname%>'">Play <%=taskname%></button>
+                <button id="-play-again-button" class="btn btn-success" onClick="parent.location='../task/<%=taskname%>'">Play <%=Task::get_pretty_task_name taskname%></button>
             </div>
         <% end %>
     </div>

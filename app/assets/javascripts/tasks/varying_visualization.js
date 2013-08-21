@@ -25,8 +25,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
 
     _taskModes: new Array("full-state", "convex-hull", "mean & variance", "mean"),
-    setupTask: function( options ) {
-
+    setupTask: function( options ) {  
         // randomly assign mode
         this.taskMode = this._taskModes[Math.floor(Math.random()*this._taskModes.length)];
 
@@ -46,15 +45,29 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         fixDef.shape = new phys.polyShape;
 
         // reshape fixture def to be horizontal bar
-        fixDef.shape.SetAsBox(20, .22);
-
+        fixDef.shape.SetAsBox(10, this.obsThick);
+        
         // create bottom wall
-        bodyDef.position.Set(10, 20);
+        bodyDef.position.Set(10, 20-this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create top wall
-        bodyDef.position.Set(10, 0);
+        bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+ 
+        // reshape fixture def to be vertical bar
+        fixDef.shape.SetAsBox(this.obsThick, 10);
+        
+        // create left wall
+        bodyDef.position.Set(this.obsThick, 10);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create right wall
+        bodyDef.position.Set(20-this.obsThick, 10);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // reshape fixture def to be horizontal bar
+        fixDef.shape.SetAsBox(20, this.obsThick);
 
         // create mid lower wall
         bodyDef.position.Set(25, 6.66);
@@ -62,17 +75,6 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         
         // create mid upper wall
         bodyDef.position.Set(-5, 13.33);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
-        // reshape fixture def to be vertical bar
-        fixDef.shape.SetAsBox(.2, 14);
-        
-        // create left wall
-        bodyDef.position.Set(0, 13);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        // create right wall
-        bodyDef.position.Set(20, 13);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create block
@@ -177,7 +179,8 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
                     var radius = f.GetShape().GetRadius();
                     var pos = g.GetPosition();
-                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal )
+                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth);
+                   // drawCircle = function (x,y,radius,color,strokeWidth) 
         });
 
         //draw robots and obstacles

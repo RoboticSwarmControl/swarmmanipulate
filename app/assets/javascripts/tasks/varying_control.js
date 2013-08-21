@@ -23,7 +23,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _attracting: false,
     _repulsing: false,
 
-    setupTask: function( options ) {        
+    setupTask: function( options ) {    
         var taskModes = [ "attractive", "repulsive", "global" ]
         this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
         switch (this.taskMode) {
@@ -50,30 +50,30 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         fixDef.shape = new phys.polyShape;
 
         // reshape fixture def to be horizontal bar
-        fixDef.shape.SetAsBox(20, .22);
-
+        fixDef.shape.SetAsBox(10, this.obsThick);
+        
         // create bottom wall
-        bodyDef.position.Set(10, 20);
+        bodyDef.position.Set(10, 20-this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create top wall
-        bodyDef.position.Set(10, 0);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        // create middle wall
-        fixDef.shape.SetAsBox( 4, .2);
-        bodyDef.position.Set(10, 10);
+        bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
  
         // reshape fixture def to be vertical bar
-        fixDef.shape.SetAsBox(.2, 14);
+        fixDef.shape.SetAsBox(this.obsThick, 10);
         
         // create left wall
-        bodyDef.position.Set(0, 13);
+        bodyDef.position.Set(this.obsThick, 10);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create right wall
-        bodyDef.position.Set(20, 13);
+        bodyDef.position.Set(20-this.obsThick, 10);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create short middle wall
+        fixDef.shape.SetAsBox( 4, this.obsThick);
+        bodyDef.position.Set(10, 10);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create pyramid blocks
@@ -182,7 +182,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var X = verts[1].x - verts[0].x; 
                     var Y = verts[2].y - verts[1].y;
                     var pos = g.GetPosition();
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal);
+                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal,0,that.strokeWidth);
                     _.each(that._blocks, function (b) {
                         var blockAABB = b.GetFixtureList().GetAABB();
                             ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
@@ -207,10 +207,10 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var pos = b.GetPosition();
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobot); 
                     if (that.taskMode == 'attractive' || that.taskMode == 'repulsive')
-                    {drawutils.drawLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue',true); // minus
+                    {drawutils.drawLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue',true,that.strokeWidthThick); // minus
                     }
                     if (that.taskMode == 'repulsive' )
-                    {drawutils.drawLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue',true); //vertical
+                    {drawutils.drawLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue',true,that.strokeWidthThick); //vertical
                     }
                     // if (that.taskMode == 'global' )  //Rico said the arrows were confusing
                     // {
@@ -233,7 +233,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var color = that.colorObject;
                     if (b.atGoal == true)
                     {color = that.colorObjectAtGoal;}
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,that.colorObjectEdge);
+                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,that.colorObjectEdge,that.strokeWidth);
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -264,7 +264,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             }
             drawutils.drawLine(pts,"rgba(0, 0, 153, 0.5)",true,18,false);
         }else{
-            // draw controller position.  James Asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
+            // draw controller position.  James asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
             drawutils.drawLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue',true); // minus
             drawutils.drawLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue',true); //vertical
                   

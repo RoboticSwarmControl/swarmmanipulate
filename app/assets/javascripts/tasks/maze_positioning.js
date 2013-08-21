@@ -6,7 +6,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
     +' This experiment varies the number of robots used to transport an object. <p> We keep the total area, maximum robot speed, and sum force the swarm can produce constant.'
     +' See <a href="http://www.youtube.com/watch?v=px5RdSvGD2Q"> our video of robots pushing a model piano</a>, or '
     +' <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    + '<iframe width="275" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
+    + '<iframe width="270" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> ',
 
     _numrobots: Math.floor((Math.random()*500)+1),                                           // number of robots
     _robotRadius: 0.5,
@@ -34,15 +34,29 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         fixDef.shape = new phys.polyShape;
 
         // reshape fixture def to be horizontal bar
-        fixDef.shape.SetAsBox(20, .22);
-
+        fixDef.shape.SetAsBox(10, this.obsThick);
+        
         // create bottom wall
-        bodyDef.position.Set(10, 20);
+        bodyDef.position.Set(10, 20-this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create top wall
-        bodyDef.position.Set(10, 0);
+        bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+ 
+        // reshape fixture def to be vertical bar
+        fixDef.shape.SetAsBox(this.obsThick, 10);
+        
+        // create left wall
+        bodyDef.position.Set(this.obsThick, 10);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create right wall
+        bodyDef.position.Set(20-this.obsThick, 10);
+        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // reshape fixture def to be horizontal bar
+        fixDef.shape.SetAsBox(20, this.obsThick);
 
         // create mid lower wall
         bodyDef.position.Set(25, 6.66);
@@ -51,17 +65,8 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         // create mid upper wall
         bodyDef.position.Set(-5, 13.33);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
-        // reshape fixture def to be vertical bar
-        fixDef.shape.SetAsBox(.2, 14);
         
-        // create left wall
-        bodyDef.position.Set(0, 13);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-        // create right wall
-        bodyDef.position.Set(20, 13);
-        this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create block
         // This defines a hexagon in CCW order.
@@ -160,7 +165,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
                     //drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
                     var radius = f.GetShape().GetRadius();
                     var pos = g.GetPosition();
-                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal )
+                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth );
         });
 
         //draw robots and obstacles

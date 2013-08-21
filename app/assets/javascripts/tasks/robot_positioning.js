@@ -13,7 +13,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' Knowing how a task scales with robot number allows us to describe how difficult it is. '
     +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    +'<iframe width="275" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
+    +'<iframe width="270" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
   
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
@@ -40,25 +40,25 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
         fixDef.shape = new phys.polyShape;
 
         // reshape fixture def to be horizontal bar
-        fixDef.shape.SetAsBox(20, 2);
-
+        fixDef.shape.SetAsBox(10, this.obsThick);
+        
         // create bottom wall
-        bodyDef.position.Set(10, 600 / 30 + 1.8);
+        bodyDef.position.Set(10, 20-this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create top wall
-        bodyDef.position.Set(10, -1.8);
+        bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
  
         // reshape fixture def to be vertical bar
-        fixDef.shape.SetAsBox(2, 14);
+        fixDef.shape.SetAsBox(this.obsThick, 10);
         
         // create left wall
-        bodyDef.position.Set(-1.8, 13);
+        bodyDef.position.Set(this.obsThick, 10);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create right wall
-        bodyDef.position.Set(21.8, 13); // right side
+        bodyDef.position.Set(20-this.obsThick, 10);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
 
         // create shaping block
@@ -115,18 +115,18 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
 
         // draw goals 
         for (var i =0; i< this._numrobots; i++) { //this._myGoalsX.length
-            colorGoal = "rgb(0, 255, 0)"; 			
+            colorGoal = that.colorGoal; 			
             _.each( that._robots, function(r) {
                 var roboPosition = r.GetPosition();
                 if( mathutils.lineDistance( that._myGoalsX[i],that._myGoalsY[i],roboPosition.x,roboPosition.y) < 0.5) {
-                    colorGoal = that.colorRobotAtGoal; 
+                    colorGoal = that.colorObjectAtGoal; 
                     r.atGoal = true;
                     countRobotsAtGoal++;
                 }
             });
             // draw the goal positions
             // the 30s we see scattered through here are canvas scaling factor -- crertel
-            drawutils.drawCircle(30*this._myGoalsX[i],30*this._myGoalsY[i],30*0.5,colorGoal);
+            drawutils.drawCircle(30*this._myGoalsX[i],30*this._myGoalsY[i],30*0.5,colorGoal,that.strokeWidth);
         }
 
         //draw robots and obstacles

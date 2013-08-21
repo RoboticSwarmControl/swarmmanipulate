@@ -13,11 +13,14 @@ var drawutils = (function(){
     var $canvas = null;
 
 
-    var drawCircle = function (x,y,radius,color) {
-	    context.strokeStyle = color; 
-	    context.beginPath();
-        context.arc(x,y,radius,0,2*Math.PI);
-        context.stroke();
+    var drawCircle = function (x,y,radius,color,strokeWidth) {
+        strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
+        $canvas.drawArc({
+          strokeStyle: color,
+          strokeWidth: strokeWidth,
+          x: x, y: y,
+          radius: radius,
+        });
     };
 
     var drawEllipse = function (x,y,width,height,rotate,color,strokeWidth) {
@@ -33,12 +36,13 @@ var drawutils = (function(){
 
     
    var drawRobot = function (x,y,theta,radius,colorFill,colorEdge) {
-	    context.strokeStyle = colorEdge; 
-        context.fillStyle = colorFill;
-	    context.beginPath();
-        context.arc(x,y,radius,0,2*Math.PI);
-        context.fill();
-        context.stroke();
+        $canvas.drawArc({
+          fillStyle: colorFill,
+          strokeStyle: colorEdge,
+          x: x, y: y,
+          strokeWidth : 2,
+          radius: radius
+        });
     };
 
     var drawPolygon = function( x,y,radius,sides,rotate,color) {
@@ -53,23 +57,27 @@ var drawutils = (function(){
         });
     };
 
-    var drawRect = function (x,y,w,h,color,angle,colorEdge) {
+    var drawRect = function (x,y,w,h,color,angle,colorEdge,strokeWidth) {
 	//default value for angle if needed
 	angle = typeof angle !== 'undefined' ? angle : 0;
+    strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
     colorEdge = typeof colorEdge !== 'undefined' ? colorEdge : color;
         $canvas.drawRect({
             fillStyle:color,
+            strokeWidth: strokeWidth,
             strokeStyle:colorEdge,
             x: x, y: y,
             width: w, height: h, cornerRadius: 0, rotate: angle
         });
     };
 
-    var drawEmptyRect = function (x,y,w,h,color,angle) {
+    var drawEmptyRect = function (x,y,w,h,color,angle,strokeWidth) {
 	   //default value for angle if needed
 	   angle = typeof angle !== 'undefined' ? angle : 0;
+       strokeWidth = typeof strokeWidth !== 'undefined' ? strokeWidth : 4;
         $canvas.drawRect({
             strokeStyle:color,
+            strokeWidth: strokeWidth,
             x: x, y: y,
             strokeWidth: 2,
             width: w, height: h, cornerRadius: 0, rotate: angle

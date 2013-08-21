@@ -8,8 +8,8 @@
  * This provides the basic run, update, and draw loop, and defers to
  * subclass methods to actually implement behavior.
  *
- * To make a new task, you extend this via _.extend() and override the
- * setupGoals, setupRobots, setupProps, and evaluateCompletion functions.
+ * To make a new task, you extend this via  * setupGoals, setupRobots, setupProps, and evaluateCompletion functions.
+_.extend() and override the
  *
  * USAGE:
  * var mytask = new myTask(); // assume myTask extends baseTask
@@ -55,7 +55,9 @@ var baseTask = {
     colorObject: "green", //  "rgb(80,163,80)",  // color of clicked button,  "green" = 0,128,0,
     colorObjectEdge: "darkgreen", //"rgb(60,123,60)",  // color of clicked button border "darkgreen",
     colorObjectAtGoal: "lightgreen", //"rgb(97,197,97)",  //"lightgreen",
-    strokeWidth: 2, 
+    strokeWidth: 2,
+    strokeWidthThick: 4,  
+    obsThick: 1/5, //thickness of obstacles at edges and internally
 
     /*
      * Function to setup the task.
@@ -64,6 +66,34 @@ var baseTask = {
      */
     setupTask: function( options ) {
     },
+
+    /*
+     * Function to setup the boundary walls
+     
+    setupBoundary: function( options, bodyDef, fixDef,that){
+      console.log("in setupBoundary");
+        // reshape fixture def to be horizontal bar
+        fixDef.shape.SetAsBox(10, that.obsThick);
+
+        // create bottom wall
+        bodyDef.position.Set(10, 20-that.obsThick);
+        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create top wall
+        bodyDef.position.Set(10, that.obsThick);
+        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
+ 
+        // reshape fixture def to be vertical bar
+        fixDef.shape.SetAsBox(that.obsThick, 10);
+        
+        // create left wall
+        bodyDef.position.Set(that.obsThick, 10);
+        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+        // create right wall
+        bodyDef.position.Set(20-that.obsThick, 10);
+        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
+    },*/
 
     /*
      * Function to evaluate whether or not a task has been completed.
@@ -182,10 +212,6 @@ var baseTask = {
             //  <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
             //  <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
             //</div>
-
-
-
-
 
 
             return;

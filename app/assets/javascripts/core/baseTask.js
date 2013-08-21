@@ -8,8 +8,7 @@
  * This provides the basic run, update, and draw loop, and defers to
  * subclass methods to actually implement behavior.
  *
- * To make a new task, you extend this via  * setupGoals, setupRobots, setupProps, and evaluateCompletion functions.
-_.extend() and override the
+ * To make a new task, you extend this via  _.extend() and override the setupGoals, setupRobots, setupProps, and evaluateCompletion functions.
  *
  * USAGE:
  * var mytask = new myTask(); // assume myTask extends baseTask
@@ -210,6 +209,7 @@ var baseTask = {
                 //console.log(data);
                 var c = $(".canvas");
                 swarmcontrol.results.singlePlot(c,data.results);
+                c.append('<button class="btn btn-success play-again-button" onclick="location.reload(true);">Play again!</button>');
             });
             //Problem: button shows up above the plot.  Why?
             //$("#canvasID").append( $( '<button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>') );
@@ -218,8 +218,6 @@ var baseTask = {
             //  <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
             //  <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
             //</div>
-
-
             return;
         } else {
             // if not, schedule ourselves again and update the time.

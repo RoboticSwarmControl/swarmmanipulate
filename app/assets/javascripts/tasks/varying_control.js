@@ -1,7 +1,7 @@
 var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveController, globalController, {
     taskName: "varying_control",
     taskMode: "default",
-    instructions: "Try different ways of controlling the robots. Use the robots (blue) to move the blocks (green) to the goal positions (orange) with your cursor.",
+    instructions: "Try different ways of controlling the robots. Use the robots (blue) to move the blocks (green) to the goal positions (outlined) with the mouse.",
     theScience: 'We want to use swarms of robots to build micro devices.  This experiment compares different controllers, modelled after real-world devices. '
     +' <p> Scientists are using scanning tunneling microscopes (STM) to arrange atoms and make small assemblies. '
     +' A very tiny microscope tip is charged with electrical potential, and this charge can be used to repulse like-charged atoms or attract differently-charged atoms. '

@@ -147,9 +147,9 @@ var baseTask = {
         // add instructions to the page
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        //$("#task-instructions").append(  this.instructions  );
 
         // add science to the page
-
         $("#task-theScience").empty();
         $("#task-theScience").append( $( "<h4>The Science</h4><p>" 
             + this.theScience //+ '<p> <div class="slide" style="cursor: pointer; text-align:center"><a href>  More &#8661; Less</a></div>'

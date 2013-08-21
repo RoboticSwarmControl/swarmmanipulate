@@ -119,7 +119,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +this._taskModes.length+ " visualization modes.";
+        this.instructions = "Using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +this._taskModes.length+ " visualization modes.";
     	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	    var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;

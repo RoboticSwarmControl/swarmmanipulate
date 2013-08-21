@@ -4,7 +4,7 @@
     </script>
   
 
-    <h1> Massive Manipulation:</h1>
+    <h2>Massive Manipulation:</h2>
     <div id="taskName">
     <h3><%= @task_name_pretty %> </h3>
     </div>
@@ -14,15 +14,11 @@
 
     <!-- <div id="taskMode">
     </div> -->
-    <div class="task-buttons">
-  <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Restart</button>
-    <button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>
-    <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Tasks</button>
-  </div>
+
 
     <div class="well task-info">
-      <div id="task-instructions">
-      </div>
+        <div id="task-instructions"></div>
+    
       <div id="task-theScience" >
       </div>
     </div>
@@ -37,8 +33,17 @@
 
 
 <% content_for :workspace do %>
-    <div class="pull-right" id="taskFeedback"> 
-    </div>
+    
     <canvas class="pull-right" id="canvas" width="600" height="600" style="background-color:#EEEEEE;" >
     </canvas>
+    <div class="float" >
+        
+        <div class="task-buttons, pull-right">
+            <button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Restart</button>
+            <!--<button id="-show_results-button" class="btn btn-success" onClick="parent.location='../show_results'">Show Results</button>-->
+            <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">Main Menu</button>
+        </div>
+        <div class="center" id="taskFeedback"> </div>
+      
+  </div>
 <% end %>

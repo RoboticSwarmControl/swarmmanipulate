@@ -1,123 +1,112 @@
-
-
-
 <div class="container">
     <h1>SwarmControl: Massive Manipulation</h1>    
-                <hr>
-
-<div class="row-fluid">
-          <!--  <div class="span3">
-                
-              
-
-                <h2>Tests</h2>
-                <ul>
-                    <li>
-                    <%= link_to "/task/maze_positioning" do %>
-                        Varying numbers of robots
-                    <% end %>
-                    </li>
-                    <li>
-                    <%= link_to "/task/varying_control" do %>
-                        Varying control schemes
-                    <% end %>
-                    </li>
-                    <li>
-                    <%= link_to "/task/varying_visualization" do %>
-                        Varying visualization schemes
-                    <% end %>
-                    </li>
-                </ul>
+    <hr>
 
 
-                <h2>Fun</h2>
+        <!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
 
-                <ul>
-                    <li>
-                    <%= link_to "/task/robot_positioning" do %>
-                        Robot positioning
-                    <% end %>
-                    </li>
-                    <li>
-                    <%= link_to "/task/pyramid_building" do %>
-                        Pyramid building
-                    <% end %>
-                    </li>
-                </ul> 
+        <h2>About SwarmControl</h2>
+        The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project continuously gathers and analyzes data.  
 
-            </div> -->
-            <div class="span12">
+        <h2>Why we care</h2>
+        There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
+        The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish.
 
-<!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
+        <h2>Play them all</h2>
 
-<h2>About SwarmControl</h2>
-   The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project continuously gathers and analyzes data.  
-
-<h2>Why we care</h2>
-There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
- The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish.
-
-<h2>Play them all</h2>
-
-
+        <div class="row">
+            <div class="span2">
+                <%= image_tag "ChooseTask.png" %>
             </div>
-
+            <div class="span2">
+                <%= link_to "/task/maze_positioning" do %>
+                    <div id="div1", class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
+                        <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>
+                        <!--
+                        <%= image_tag "soft_edge_yellow_star.png", style: "position: absolute; top:85px; left: 0px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 37px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 74px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 111px;"%>
+                        -->
+                        <br>
+                        (1 of 5) Vary number
+                    </div>
+                <% end %> 
+            </div>
+            <div class="span2">
+                <%= link_to "/task/varying_control" do %>
+                    <div class ="highlightit", style="display: inline">
+                        <%= image_tag "varying_control.png" %>
+                        <br>
+                        (2 of 5) Vary control sheme
+                    </div>
+                <% end %>
+            </div>
+            <div class="span2">
+                <%= link_to "/task/varying_visualization" do %>
+                    <div class ="highlightit", style="display: inline">
+                        <%= image_tag "varying_visualization.png" %>
+                        <br>
+                        (3 of 5) Varying visualization
+                    </div>
+                <% end %>
+            </div>
+            <div class="span2">
+                <%= link_to "/task/robot_positioning" do %>
+                    <div class ="highlightit", style="display: inline">
+                        <%= image_tag "robot_positioning.png" %>
+                        <br>
+                        (4 of 5) Robot positioning
+                    </div>
+                <% end %>
+            </div>
+            <div class="span2">
+                <%= link_to "/task/pyramid_building" do %>
+                    <div class ="highlightit", style="display: inline">
+                        <%= image_tag "pyramid_building.png" %>
+                        <br>
+                        (5 of 5) Pyramid building
+                    </div>
+                <% end %>
+            </div>
         </div>
-        <%= image_tag "ChooseTask.png" %>
-<!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
-.
-<div style="position: relative; left: 0; top: 0;">
-  <img src="a.jpg" style="position: relative; top: 0; left: 0;"/>
-  <img src="b.jpg" style="position: absolute; top: 30; left: 70;"/>
-</div>
 
--->
-<!-- 
-<script> 
-    var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-    myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-    console.log(myParticipant);
-    var numPres = 0;
-    $.get("/result.json?task="+"maze_positioning", function( data ) {
+    <br>
+    <!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
+    <!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
+    .
+    <div style="position: relative; left: 0; top: 0;">
+        <img src="a.jpg" style="position: relative; top: 0; left: 0;"/>
+        <img src="b.jpg" style="position: absolute; top: 30; left: 70;"/>
+    </div>
+
+    -->
+    <!-- 
+    <script> 
+        var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+        myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+        console.log(myParticipant);
+        var numPres = 0;
+        $.get("/result.json?task="+"maze_positioning", function( data ) {
         data = JSON.parse(data);
         console.log(data.results);
         for( var i = 0; i<data.results.length; i++){
-           if( data.results[i].participant == myParticipant) {
-                numPres = numPres+1;
-            } 
+        if( data.results[i].participant == myParticipant) {
+        numPres = numPres+1;
+        } 
         }
         console.log(numPres);
-    });
-    var element=document.getElementById("div1");
+        });
+        var element=document.getElementById("div1");
 
-    for( var i = 0; i<4; i++){
+        for( var i = 0; i<4; i++){
         var strImage = "soft_edge_empty_star.png";
         if( numPres >=i) {strImage = "soft_edge_yellow_star.png";}
         var xPos = " "+i*37+"px";
-    }
-</script>-->
+        }
+    </script>-->
 
 
-<%= link_to "/task/maze_positioning" do %>
-<div id="div1", class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
-    <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>
-    <!-- todo: remove highlighing, color as many stars as tasks completed by this participant
-    <%= image_tag "soft_edge_yellow_star.png", style: "position: absolute; top:85px; left: 0px;"%>
-    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 37px;"%>
-    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 74px;"%>
-    <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 111px;"%>-->
-</div><% end %> 
-<%= link_to "/task/varying_control" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_control.png" %></div><% end %>
-<%= link_to "/task/varying_visualization" do %><div class ="highlightit", style="display: inline"><%= image_tag "varying_visualization.png" %></div><% end %>
-<%= link_to "/task/robot_positioning" do %><div class ="highlightit", style="display: inline"><%= image_tag "robot_positioning.png" %></div><% end %>
-<%= link_to "/task/pyramid_building" do %><div class ="highlightit", style="display: inline"><%= image_tag "pyramid_building.png" %></div><% end %>
-<br>
-<!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
-<%= link_to "/task/maze_positioning" do %>(1 of 5) Vary number<% end %>
-<%= link_to "/task/varying_control" do %>(2 of 5) Vary control<% end %>
-<%= link_to "/task/varying_visualization" do %>(3 of 5) Vary visualization<% end %>
-<%= link_to "/task/robot_positioning" do %>(4 of 5) Control position<% end %>
-<%= link_to "/task/pyramid_building" do %>(5 of 5) Vary noise<% end %>
 </div>
 
 </div>

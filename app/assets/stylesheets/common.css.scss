@@ -5,6 +5,11 @@ body, html
     background-repeat: repeat;
 }
 
+a:hover
+{
+    text-decoration: none;
+}
+
 .task-info
 {
     padding:10px;
@@ -51,7 +56,7 @@ border: 2px solid rgb(70,0,255);
 }
 
 .highlightit:hover{
-color: red; /* Dummy definition to overcome IE bug */
+    color: red; /* Dummy definition to overcome IE bug */
 }
 
 

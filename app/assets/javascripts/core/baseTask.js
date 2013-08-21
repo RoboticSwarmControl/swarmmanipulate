@@ -58,6 +58,9 @@ var baseTask = {
     strokeWidth: 2,
     strokeWidthThick: 4,  
     obsThick: 1/5, //thickness of obstacles at edges and internally
+    TaskTotalNum: 5, //how many tasks?
+    TaskNum: 0, //this tasks' number
+
 
     /*
      * Function to setup the task.

@@ -119,8 +119,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + this._numrobots + " robots (blue), " + this.instructions + " Current mode displays the <strong>" + this.taskMode + "</strong>.  Please play all " +this._taskModes.length+ " visualization modes.";
-    	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
+        this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
 	    var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
         var yoffset = 14+this._robotRadius;
@@ -220,12 +219,15 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             }
         }
 
-        var tempTaskMode = this.taskMode;
+        //var tempTaskMode = this.taskMode;
         if(that._startTime == null){
-            tempTaskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
+            this.taskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
         }
+        this.instructions = "Using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + this._numrobots + " robots (blue), try out four different visualization methods for controlling a swarm. Current mode displays the <br><strong>" + this.taskMode + "</strong>.<br>  Please play all " +this._taskModes.length+ " visualization modes.";
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
-        switch (tempTaskMode) {
+        switch (this.taskMode) {
             //var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
             case "full-state":
 
@@ -328,7 +330,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             drawutils.drawText(30*meanx,30*(meany+1),this._numrobots+" Robots", 1.5, color, color)
             var color = 'black';
             drawutils.drawRect(30*meanx,30*(meany+2), 120,30, "rgba(240, 240, 240, 0.7)");
-            drawutils.drawText(30*meanx,30*(meany+2),tempTaskMode, 1.5, color, color)
+            drawutils.drawText(30*meanx,30*(meany+2),this.taskMode, 1.5, color, color)
         }
     },
 

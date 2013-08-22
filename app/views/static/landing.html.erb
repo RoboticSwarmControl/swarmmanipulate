@@ -14,48 +14,47 @@
 
         <h2>Play them all</h2>
 
+<script> 
+    var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+    myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+    console.log(myParticipant);
+
+    function drawMeritBadges(divname,taskname){
+        var numPres = 0;
+        $.get("/result.json?task="+taskname, function( data ) {
+            data = JSON.parse(data);
+            console.log(data.results);
+            for( var i = 0; i<data.results.length; i++){
+                if( data.results[i].participant == myParticipant) {
+                    numPres = numPres+1;
+                } 
+            }
+            console.log("You've done this task");
+            console.log(numPres);
+            var element=  document.getElementById(divname);
+            for( var i = 0; i<5; i++){
+                var strImage = "/assets/soft_edge_empty_star.png";
+                if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
+                    var img = document.createElement("img");
+                    img.src = strImage;
+                    img.width = 25;
+                    img.height = 25;
+                    element.appendChild(img);  
+                }
+        }); 
+    } 
+</script>
+
+
         <div class="row">
             <div class="span2">
                 <%= image_tag "ChooseTask.png" %>
             </div>
             <div class="span2">
                 <%= link_to "/task/maze_positioning" do %>
-                    <div id="div1", class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
-                        <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>
-                        <script> 
-                            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-                            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-                            console.log(myParticipant);
-                            var numPres = 0;
-                            $.get("/result.json?task="+"robot_positioning", function( data ) {
-                                data = JSON.parse(data);
-                                console.log(data.results);
-                                for( var i = 0; i<data.results.length; i++){
-                                    if( data.results[i].participant == myParticipant) {
-                                        numPres = numPres+1;
-                                    } 
-                                }
-                                console.log("You've done this task");
-                                console.log(numPres);
-                                var element=document.getElementById("div1");
-                                for( var i = 0; i<5; i++){
-                                    var strImage = "/assets/soft_edge_empty_star.png";
-                                    if( numPres >=i) {strImage = "/assets/soft_edge_yellow_star.png";}
-                                        var img = document.createElement("img");
-                                        img.src = strImage;
-                                        img.width = 25;
-                                        img.height = 25;
-                                        element.appendChild(img);  
-                                    }
-                            });  
-                        </script>
-                        
-                        <!--
-                        <%= image_tag "soft_edge_yellow_star.png", style: "position: absolute; top:125px; left: 0px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 37px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 74px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 111px;"%>
-                        -->
+                    <div id="div1", class ="highlightit", style="display: inline;">
+                        <%= image_tag "maze_positioning.png"%>
+                        <script>drawMeritBadges("div1","maze_positioning");</script>
                         <div align="center">
                             Vary number<br>(1 of 5)
                         </div>
@@ -64,8 +63,9 @@
             </div>
             <div class="span2">
                 <%= link_to "/task/varying_control" do %>
-                    <div class ="highlightit", style="display: inline">
+                    <div id="div2",class ="highlightit", style="display: inline">
                         <%= image_tag "varying_control.png" %>
+                        <script>drawMeritBadges("div2","varying_control");</script>
                         <div align="center">
                             Vary control scheme<br>(2 of 5)
                         </div>
@@ -74,8 +74,9 @@
             </div>
             <div class="span2">
                 <%= link_to "/task/varying_visualization" do %>
-                    <div class ="highlightit", style="display: inline">
+                    <div id="div3",class ="highlightit", style="display: inline">
                         <%= image_tag "varying_visualization.png" %>
+                        <script>drawMeritBadges("div3","varying_visualization");</script>
                         <div align="center">
                             Vary visualization<br>(3 of 5)
                         </div>
@@ -84,8 +85,9 @@
             </div>
             <div class="span2">
                 <%= link_to "/task/robot_positioning" do %>
-                    <div class ="highlightit", style="display: inline">
+                    <div id="div4",class ="highlightit", style="display: inline">
                         <%= image_tag "robot_positioning.png" %>
+                        <script>drawMeritBadges("div4","robot_positioning");</script>
                         <div align="center">
                             Robot positioning<br>(4 of 5)
                         </div>
@@ -94,8 +96,9 @@
             </div>
             <div class="span2">
                 <%= link_to "/task/pyramid_building" do %>
-                    <div class ="highlightit", style="display: inline">
+                    <div id="div5",class ="highlightit", style="display: inline">
                         <%= image_tag "pyramid_building.png" %>
+                        <script>drawMeritBadges("div5","pyramid_building");</script>
                         <div align="center">
                             Pyramid building<br>(5 of 5)
                         </div>

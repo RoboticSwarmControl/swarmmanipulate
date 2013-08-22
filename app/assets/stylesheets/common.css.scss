@@ -55,12 +55,14 @@ h1
 border: 2px solid rgba(#ccc, 0.0);
 }
 
+.highlightit { text-align: center }
+
 .highlightit:hover img{
 border: 2px solid rgb(70,0,255);
 }
 
 .highlightit:hover{
-    color: red; /* Dummy definition to overcome IE bug */
+    color: rgb(70,0,255); /* Dummy definition to overcome IE bug */
 }
 
 

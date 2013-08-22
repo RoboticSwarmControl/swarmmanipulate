@@ -15,7 +15,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
     +'<iframe width="270" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>',
   
-    _numrobots: 1,//Math.floor((Math.random()*10)+1),          // number of robots
+    _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
     _impulse: 50,                                            // impulse to move robots by
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots

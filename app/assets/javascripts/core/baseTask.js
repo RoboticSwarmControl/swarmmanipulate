@@ -229,13 +229,15 @@ var baseTask = {
                     //console.log("You've done this task "+taskname + " " + numPres + " times");
                     var element=  document.getElementById(divname);
                     var maxstars = 5;
+                    var imgsize = "25";
                     if(numPres>5){ maxstars = 10;}
                     if(numPres>10){ maxstars = 25;}
+                    if(numPres>25){ maxstars = numPres; imgsize = 15;}
                     for( var i = 0; i<maxstars; i++){
                         var strImage = "/assets/soft_edge_empty_star.png";
                         if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
 
-                        $(".span8").append('<img src= '+strImage+' width="25" height="25" style="position: relative; left: 110px; top: -110px;">');
+                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 110px; top: -110px;">');
                     
                         }
                 }); 

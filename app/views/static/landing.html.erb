@@ -6,7 +6,7 @@
         <!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
 
         <h2>About SwarmControl</h2>
-        The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project continuously gathers and analyzes data.  
+        The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project gathers and analyzes data.  
 
         <h2>Why we care</h2>
         There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
@@ -31,13 +31,13 @@
             }
             //console.log("You've done this task "+taskname + " " + numPres + " times");
             var element=  document.getElementById(divname);
-            for( var i = 0; i<5; i++){
+            for( var i = 0; i<Math.max(5, numPres); i++){
                 var strImage = "/assets/soft_edge_empty_star.png";
                 if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
                     var img = document.createElement("img");
                     img.src = strImage;
-                    img.width = 25;
-                    img.height = 25;
+                    img.width = 24;
+                    img.height = 24;
                     element.appendChild(img);  
                 }
         }); 

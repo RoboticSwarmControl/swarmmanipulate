@@ -22,18 +22,17 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _mY: 0,
     _attracting: false,
     _repulsing: false,
+    _taskModes: new Array("attractive", "repulsive", "global"),
 
     setupTask: function( options ) {    
-        var taskModes = [ "attractive", "repulsive", "global" ]
-        this.taskMode = taskModes[ Math.floor(Math.random()*taskModes.length) ];
+        this.taskMode = this._taskModes[ Math.floor(Math.random()*this._taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;
             case "repulsive": this.update = this.repulsiveUpdate; break;
             case "global": this.update = this.globalUpdate; break;
             default: break;
         }
-        this.instructions = this.instructions + "<p> You are using <strong>" + this.taskMode + "</strong> control. Press mouse button to engage.";
-
+        
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -191,6 +190,17 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                             }
                     });  
         });
+
+        //var tempTaskMode = this.taskMode;
+        if(that._startTime == null){
+            this.taskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
+        }
+        this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
+        + " Play all "+this._taskModes.length+"!"
+        + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+
 
 
         //draw robots and obstacles

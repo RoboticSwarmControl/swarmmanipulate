@@ -204,12 +204,46 @@ var baseTask = {
             //TODO: 1. display plot in a colorbox
             //TODO: 2. display buttons for Play Again, all results, task list
             //TODO: 3. display: "you have completed x of 4 tasks.  Play again!" <or> "Level cleared -- you may play again to increase your score"
+            var currTaskName = this.taskName;
+
             var c = $(".canvas");
-            $.get("/result.json?task="+this.taskName, function( data ) {
+            $.get("/result.json?task="+currTaskName, function( data ) {
                 var data = JSON.parse(data);
                 //console.log(data);
                 swarmcontrol.results.singlePlot(c,data.results);
                 $(".span8").append('<button class="btn btn-success play-again-button" style="position: relative; left: 100px; top: -110px;" onclick="location.reload(true);"><h3>Play again!</h3></button>');
+            
+
+var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+    myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+    console.log(myParticipant);
+
+    function drawMeritBadges(divname,taskname){
+        var numPres = 0;
+        $.get("/result.json?task="+taskname, function( data ) {
+            data = JSON.parse(data);
+            //console.log(data.results);
+            for( var i = 0; i<data.results.length; i++){
+                if( data.results[i].participant == myParticipant) {
+                    numPres = numPres+1;
+                } 
+            }
+            console.log("You've done this task "+taskname + " " + numPres + " times");
+            //console.log(numPres);
+            var element=  document.getElementById(divname);
+            for( var i = 0; i<5; i++){
+                var strImage = "/assets/soft_edge_empty_star.png";
+                if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
+
+                $(".span8").append('<img src= '+strImage+' width="25" height="25" style="position: relative; left: 110px; top: -110px;">');
+            
+                }
+        }); 
+    } 
+
+drawMeritBadges("canvasID",currTaskName);
+
+
             });
             //Problem: button shows up above the plot.  Why?
             //$("#canvasID").append( $( '<button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>') );

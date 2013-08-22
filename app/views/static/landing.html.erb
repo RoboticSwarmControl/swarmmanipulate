@@ -22,11 +22,39 @@
                 <%= link_to "/task/maze_positioning" do %>
                     <div id="div1", class ="highlightit", style="display: inline;position: relative; left: 0; top: 0;">
                         <%= image_tag "maze_positioning.png", style: "position: relative; top: 0; left: 0;"%>
+                        <script> 
+                            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+                            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+                            console.log(myParticipant);
+                            var numPres = 0;
+                            $.get("/result.json?task="+"robot_positioning", function( data ) {
+                                data = JSON.parse(data);
+                                console.log(data.results);
+                                for( var i = 0; i<data.results.length; i++){
+                                    if( data.results[i].participant == myParticipant) {
+                                        numPres = numPres+1;
+                                    } 
+                                }
+                                console.log("You've done this task");
+                                console.log(numPres);
+                                var element=document.getElementById("div1");
+                                for( var i = 0; i<5; i++){
+                                    var strImage = "/assets/soft_edge_empty_star.png";
+                                    if( numPres >=i) {strImage = "/assets/soft_edge_yellow_star.png";}
+                                        var img = document.createElement("img");
+                                        img.src = strImage;
+                                        img.width = 25;
+                                        img.height = 25;
+                                        element.appendChild(img);  
+                                    }
+                            });  
+                        </script>
+                        
                         <!--
-                        <%= image_tag "soft_edge_yellow_star.png", style: "position: absolute; top:85px; left: 0px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 37px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 74px;"%>
-                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 85px; left: 111px;"%>
+                        <%= image_tag "soft_edge_yellow_star.png", style: "position: absolute; top:125px; left: 0px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 37px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 74px;"%>
+                        <%= image_tag "soft_edge_empty_star.png", style: "position: absolute; top: 125px; left: 111px;"%>
                         -->
                         <div align="center">
                             Vary number<br>(1 of 5)
@@ -79,12 +107,6 @@
     <br>
     <!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
     <!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
-    .
-    <div style="position: relative; left: 0; top: 0;">
-        <img src="a.jpg" style="position: relative; top: 0; left: 0;"/>
-        <img src="b.jpg" style="position: absolute; top: 30; left: 70;"/>
-    </div>
-
     -->
     <!-- 
     <script> 

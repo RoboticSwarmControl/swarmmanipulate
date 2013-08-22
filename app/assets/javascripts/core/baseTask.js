@@ -204,12 +204,12 @@ var baseTask = {
             //TODO: 1. display plot in a colorbox
             //TODO: 2. display buttons for Play Again, all results, task list
             //TODO: 3. display: "you have completed x of 4 tasks.  Play again!" <or> "Level cleared -- you may play again to increase your score"
+            var c = $(".canvas");
             $.get("/result.json?task="+this.taskName, function( data ) {
                 var data = JSON.parse(data);
                 //console.log(data);
-                var c = $(".canvas");
                 swarmcontrol.results.singlePlot(c,data.results);
-                c.append('<button class="btn btn-success play-again-button" onclick="location.reload(true);">Play again!</button>');
+                $(".span8").append('<button class="btn btn-success play-again-button" style="position: relative; left: 100px; top: -110px;" onclick="location.reload(true);"><h3>Play again!</h3></button>');
             });
             //Problem: button shows up above the plot.  Why?
             //$("#canvasID").append( $( '<button id="-play-again-button" class="btn btn-success" onClick="window.location.reload()">Play Again</button>') );

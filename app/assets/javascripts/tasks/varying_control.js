@@ -194,7 +194,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     });  
         });
 
-        /*
+       
         if(that._startTime == null){
             that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
             that.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
@@ -208,9 +208,11 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 case "global": that.update = that.globalUpdate; break;
                 default: break;
             }
-            console.log("Setting taskmode update to "+that.taskMode+" update = "+that.update);
+            //console.log("Setting taskmode update to "+that.taskMode+" update = "+that.update);
+            //console.log(that.update);
+            that.setupController(that._options);
         }
-        */
+        
         
 
         //draw robots and obstacles

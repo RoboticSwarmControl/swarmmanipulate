@@ -258,7 +258,8 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
                  meany = meany + pos.y/this._numrobots;
             }
             var color = that.colorRobot;
-            drawutils.drawText(30*meanx,30*(meany+2),that._numrobots+" Robots", 1.5, color, color)
+            drawutils.drawRect(30*meanx,30*(meany+2), 120,30, "rgba(240, 240, 240, 0.7)");
+            drawutils.drawText(30*meanx,30*(meany+2),this._numrobots+" Robots", 1.5, color, color);
         }
 
 

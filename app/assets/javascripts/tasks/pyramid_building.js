@@ -24,8 +24,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 
     setupTask: function( options ) {
         this.taskMode = (10*Math.random()).toFixed(1);  //add some noise
-        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> of ' + this.taskMode + ' pN is pushing your robots.';
-
+        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> of ' + this.taskMode + ' aN is pushing your robots.';
+        //atto meters:  1 nanocar wheel weighs 720 g/mol = 7.2*10^-23 g, assume nanocar is 6 times that = 4.2*10&-22
+        // dragster moves 0.014 mm/hr
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
         fixDef.density = 20.0;

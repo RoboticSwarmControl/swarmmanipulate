@@ -23,11 +23,14 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application    
 
     setupTask: function( options ) {
-        this.taskMode = (10*Math.random()).toFixed(1);  //add some noise
-        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> of ' + this.taskMode + ' aN is pushing your robots.';
+        this.taskMode = (10*Math.random()).toFixed(1);  //add some noise: 0.0 to 10.0
+        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> ' + this.taskMode*20 + '% of control power is pushing your robots.';
+        // better: take number * 200% of control power
         //atto meters:  1 nanocar wheel weighs 720 g/mol = 7.2*10^-23 g, assume nanocar is 6 times that = 4.2*10&-22
         // dragster moves 0.014 mm/hr
         // fixture definition for obstacles
+        //http://arxiv.org/pdf/cond-mat/0506038.pdf
+        //http://research.chem.ucr.edu/groups/bartels/publications/prl79p697.pdf  (talks about pushing & pulling)
         var fixDef = new phys.fixtureDef;
         fixDef.density = 20.0;
         fixDef.friction = 0.5;
@@ -314,7 +317,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         var mag = 0;
         var ang = 0;
         _.each( that._robots, function(r) { 
-            //apply Brownian noise
+            //apply Brownian noise:  0-100, maximum force we can apply is 50, so take #*200%
             mag = that.taskMode*10*Math.random();
             ang = 2*Math.PI*Math.random();
             brownianImpulse.x = mag*Math.cos(ang) + that._impulseV.x ;

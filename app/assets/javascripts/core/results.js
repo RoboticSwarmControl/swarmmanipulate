@@ -112,8 +112,8 @@ swarmcontrol.results = (function () {
                     xAxisLabel = 'Visualization Method';
                     x = _.indexOf(modekeys, r.mode);
                 }else if(r.task == "pyramid_building"){
-                    xAxisLabel = 'Noise';
-                    x = parseFloat(r.mode);
+                    xAxisLabel = 'Noise (% control power)';
+                    x = 20*parseFloat(r.mode);
                 }else{
                     xAxisLabel = 'Unknown';
                     x = r.robot_count;
@@ -149,7 +149,7 @@ swarmcontrol.results = (function () {
 
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
 var mtitle = swarmcontrol.prettyTaskNames[res[0].task];
-var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots.";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
+var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
 
         // ...and then append the graph. 
         var margins = 0.05;   

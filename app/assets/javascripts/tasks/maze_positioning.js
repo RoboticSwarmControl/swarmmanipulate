@@ -17,7 +17,12 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
-
+// 500 = 7
+// 300 = 3s
+// 200 = 2.5
+// 100 = 2s
+// 50 = 2s
+// 5 = 6  (they hit the target)
     setupTask: function( options ) {
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -128,8 +133,17 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
             bodyDef.position.y = Math.floor(i/rowLength)*2.1*this._robotRadius + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
-            this._robots[i].m_angularDamping = 10;
-            this._robots[i].m_linearDamping = 10;  //TODO: add units
+            this._robots[i].m_angularDamping = 10;//125 r, 7s to cross screen (furthest right robot to right)
+                                                    //301 robots, 12.5 seconds
+                                                    //35 6 seconds
+                                                    //114 7s
+                                                    // 27 5 s
+                                                    //258, 11s
+                                                    //477r, 20s
+                                                    //500, 23
+                                                    //with damping = 10/this._numrobots; the speed is maintained, but the robots keep moving
+            this._robots[i].m_linearDamping = 10;  //should these be proportional to robot mass?
+            //TODO: add units
         }
     },
 
@@ -265,7 +279,9 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
 
         // moving at diagonal is no faster than moving sideways or up/down
         var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
-        var forceScaler = normalizer*(that._robotRadius*that._robotRadius)/0.25;   //scale by robot size
+        var forceScaler = normalizer*(that._robotRadius*0.5)/0.25;   
+        //console.log(that._robotRadius);
+        //scale by robot size -- now scale by robot diameter (500 robots was SLOW).  These means we hose the first 26 results (bummer)
         that._impulseV.x *=  forceScaler;    
         that._impulseV.y *=  forceScaler;  
         // apply the user force to all the robots

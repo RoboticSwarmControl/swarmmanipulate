@@ -14,4 +14,7 @@ class StaticController < ApplicationController
     def videos
     end
 
+    def subscribe
+    end
+
 end

@@ -4,6 +4,7 @@ Ensemble::Application.routes.draw do
 
   match "/index.html" => "static#landing"
   match "/videos" => "static#videos"
+  match "/subscribe" => "static#subscribe"
   match "/task/:task_name" => "static#task"
 
   match "/show_results" => 'results#show'

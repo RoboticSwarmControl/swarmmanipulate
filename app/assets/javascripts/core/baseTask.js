@@ -223,10 +223,6 @@ var baseTask = {
                 //console.log(data);
                 swarmcontrol.results.singlePlot(c,data.results);
                 $(".span8").append('<button class="btn btn-success play-again-button" style="position: relative; left: 100px; top: -110px;" onclick="location.reload(true);"><h3>Play again!</h3></button>');
-
-            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-            //console.log(myParticipant);
             function drawMeritBadges(divname,taskname){
                 var numPres = 0;
                 $.get("/result.json?task="+taskname, function( data ) {
@@ -241,19 +237,35 @@ var baseTask = {
                     var element=  document.getElementById(divname);
                     var maxstars = 5;
                     var imgsize = "25";
-                    if(numPres>5){ maxstars = 10;}
-                    if(numPres>10){ maxstars = 25;}
-                    if(numPres>25){ maxstars = numPres; imgsize = 15;}
+                    if(numPres>5){ 
+                        strImage = "/assets/soft_edge_yellow_star.png"
+                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 0px; top: -110px;"><h3 style="position: relative; left: 80px; top: -175px;">x'+numPres+'</h3>');
+                    
+                    }else{
+                    //if(numPres>10){ maxstars = 25;}
+                    //if(numPres>25){ maxstars = numPres; imgsize = 15;}
                     for( var i = 0; i<maxstars; i++){
                         var strImage = "/assets/soft_edge_empty_star.png";
                         if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
 
-                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 110px; top: -110px;">');
+                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 0px; top: -110px;">');
                     
                         }
+                    }
                 }); 
             } 
             drawMeritBadges("canvasID",currTaskName);
+            var k =_.keys(swarmcontrol.prettyTaskNames);
+            var nextTask = k.indexOf(currTaskName) + 1;
+            if(nextTask >= k.length){nextTask = 0;}
+            newTaskPath = "parent.location='./" + k[nextTask] + "'";
+            console.log(newTaskPath);
+
+            $(".span8").append('<button class="btn btn-success next-Task-button" style="position: relative; left: 250px; top: -110px;" onclick='+newTaskPath+'>► Next Task</button>');
+            //<!-- <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">►</button> -->
+            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+            //console.log(myParticipant);
             });
 
             return;

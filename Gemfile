@@ -9,6 +9,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'bootstrap-sass'
 gem 'underscore-rails'
 gem 'colorbox-rails'
+    gem 'airbrake'
 
 # In development we'd like better errors
 group :development do

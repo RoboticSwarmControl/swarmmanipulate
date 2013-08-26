@@ -10,12 +10,11 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' <p>Having trouble? <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"><strong>See hint</strong></a>. '
     +' <p> If a task requres twice as much time as for one robot with two robots, 3x times as much with three robots, and 4x with four robots, we say the task <i>scales linearly</i>. '
     +'  If a task requires 4x times the time with two robots, 9x with three robots, and 16x with four, we say the task <i>scales quadratically</i>. '
-    +' Knowing how a task scales with robot number allows us to describe how difficult it is. '
+    +' Knowing how a task scales with robot number lets us describe task difficulty. '
     +'<iframe width="270" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>'
     +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
-    +"</p>"
-    ,
+    +"</p>",
   
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots

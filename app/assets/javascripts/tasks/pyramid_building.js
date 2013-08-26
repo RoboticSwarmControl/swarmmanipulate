@@ -7,11 +7,12 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     theScience: 'Real-world microrobots are affected by turbulence caused by random collisions with molecules. '
     +' These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>. '
     +' <p>This experiment varies the strength of these disturbances to study the impact of noise on human control of large swarms. '
+     +'<iframe width="270" height="295" src="//www.youtube.com/embed/MLr2YvghPns" frameborder="0" allowfullscreen></iframe>'
+    +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control on living one-celled organisms </a> '
     +' One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> '
     +' measure the swarm positions, and automatically calculate a new control value based on the current measurements. '
-    +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control on living one-celled organisms </a> '
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.'
-    +'<iframe width="270" height="295" src="//www.youtube.com/embed/MLr2YvghPns" frameborder="0" allowfullscreen></iframe>',
+    +"</p>",
 
     _numrobots: 8,                                          // number of robots
     _robots: [],                                            // array of bodies representing the robots

@@ -4,10 +4,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     instructions: "try out four different visualization methods for controlling a swarm.",
     theScience: 'Sensing is expensive, especially on the nanoscale.  To see nanocars, scientist fasten molecules that fluoresce light when activated by a strong lamp of a particular color.' 
     +' Unfortunately, multiple exposures can destroy these molecules, a process called <a href="http://en.wikipedia.org/wiki/Photobleaching">photobleaching</a>.'
-    +' What happens if we use less power for the exposure?  This experiment varyies the amount of sensing information given to explore the impact on manipulation. '
-    +' Full-state sensing is the most information, because it tells the position of all the robots (200 numbers for 100 robots).  The bounding box draws a line around the outermost robots. '
+    +' What happens if we use less power for the exposure?  This experiment varies the amount of sensing information to explore the impact on manipulation. '
+    +'<iframe width="270" height="295"  src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>'
+    +' Full-state sensing provides the most information, because it tells the position of all the robots (200 numbers for 100 robots).  The bounding box draws a line around the outermost robots. '
     +' Mean tells where the average position (just 2 numbers for all 100 robots), and knowing the variance adds 3 additional numbers.'
-    +'<iframe width="270" height="295"  src="//www.youtube.com/embed/qIW6hPgqCRE" frameborder="0" allowfullscreen></iframe>',
+    +'</p>',
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group

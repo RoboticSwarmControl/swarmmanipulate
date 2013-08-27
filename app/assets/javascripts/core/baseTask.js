@@ -50,6 +50,7 @@ var baseTask = {
 
     firstKeyPressed : false,
     isTaskComplete : false,
+    lastUserInteraction : null,
     keyL: null,
     keyR: null,
     keyU: null,
@@ -185,6 +186,8 @@ var baseTask = {
      * This generally SHOULD NOT be overridden.
      */
     _update: function( ) {
+
+
         // step the simulation
         // TODO: Have the update run multiple times if the delay incurred by 
         // requestAnimFrame is greater than 60hz.
@@ -192,10 +195,34 @@ var baseTask = {
 
         // draw the simulation
         this.draw( this._options );
+    
 
         // render the task time
     	string = "<strong>Time:</strong> " + (this._runtime).toFixed(2) + "s";
         $('#taskFeedback').html(string);
+
+        //see if user walked away
+        var sSinceLastUserInteration = ( new Date().getTime() - this.lastUserInteraction )/1000.0;
+        if (this._startTime != null &&  sSinceLastUserInteration > 4){
+            drawutils.drawRect(300,300, 590,590, 'rgba(200, 200, 200, 0.5)');
+            var color = "green";
+            drawutils.drawText(300,250, "Are you still there?  ", 2, color, color);
+            var sToRestart = ( 8 - sSinceLastUserInteration).toFixed(0);
+            drawutils.drawText(300,290, "Restarting in "+ sToRestart +" seconds.", 2, color, color);
+            if (sToRestart <= 0)
+            { 
+                drawutils.drawText(300,330, "Reloading.", 2, color, color);
+                //window.location.replace(window.location.pathname); //doesn't work
+                //window.location.href = window.location.pathname; //doesn't work
+                document.location.reload(true); //doesn't work
+                //location.reload(true);//doesn't work
+                //document.location = './'+this.taskName;
+                //location = './'+this.taskName;
+                //parent.location = './'+this.taskName;
+                //parent.location = '../';
+            }
+        }
+
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
             // if so, post our results to the server.
@@ -254,6 +281,9 @@ var baseTask = {
                     }
                 }); 
             } 
+            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+            
             drawMeritBadges("canvasID",currTaskName);
             var k =_.keys(swarmcontrol.prettyTaskNames);
             var nextTask = k.indexOf(currTaskName) + 1;
@@ -263,8 +293,6 @@ var baseTask = {
 
             $(".span8").append('<button class="btn btn-success next-Task-button" style="position: relative; left: 250px; top: -110px;" onclick='+newTaskPath+'>► Next Task</button>');
             //<!-- <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">►</button> -->
-            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
             //console.log(myParticipant);
             });
 

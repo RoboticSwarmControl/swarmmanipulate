@@ -26,12 +26,14 @@ var repulsiveController = (function(){
             that._repulsing = true;
             if( that._startTime == null )
             { 
-                that._startTime = new Date().getTime();
+                that.lastUserInteraction = new Date().getTime();
+                that._startTime = that.lastUserInteraction;
                 that._runtime = 0.0;
             }
         });
 
         $("#canvas").mouseup( function (e) {
+            that.lastUserInteraction = new Date().getTime();
             that._repulsing = false;
         });
     };

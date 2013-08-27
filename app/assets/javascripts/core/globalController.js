@@ -27,12 +27,14 @@ var globalController = (function(){
             //check if this is the first valid keypress, if so, starts the timer
             if( that._startTime == null )
             { 
-                that._startTime = new Date().getTime();
+                that.lastUserInteraction = new Date().getTime();
+                that._startTime = that.lastUserInteraction;
                 that._runtime = 0.0;
             }
         });
 
         $("#canvas").mouseup( function (e) {
+            that.lastUserInteraction = new Date().getTime();
             that._forcing = false;
         });
     };

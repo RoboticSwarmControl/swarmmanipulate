@@ -42,6 +42,7 @@ var repulsiveController = (function(){
         var that = this;
         // apply the user force to all the robots
         if (that._repulsing) {
+            that.lastUserInteraction = new Date().getTime();
             _.each( that._robots, function(r) { 
                 var rpos = r.GetPosition();             
                 var dx = that._mX - rpos.x;

@@ -204,26 +204,20 @@ var baseTask = {
 
         //see if user walked away
         var sSinceLastUserInteration = ( new Date().getTime() - this.lastUserInteraction )/1000.0;
-        if (this._startTime != null &&  sSinceLastUserInteration > 4){
+        if (this._startTime != null &&  sSinceLastUserInteration > 10){
             drawutils.drawRect(300,300, 590,590, 'rgba(200, 200, 200, 0.5)');
             var color = "green";
             drawutils.drawText(300,250, "Are you still there?  ", 2, color, color);
-            var sToRestart = ( 8 - sSinceLastUserInteration).toFixed(0);
+            var sToRestart = ( 15 - sSinceLastUserInteration).toFixed(0);
             drawutils.drawText(300,290, "Restarting in "+ sToRestart +" seconds.", 2, color, color);
             if (sToRestart <= 0)
             { 
-                drawutils.drawText(300,330, "Reloading.", 2, color, color);
-                //window.location.replace(window.location.pathname); //doesn't work
-                //window.location.href = window.location.pathname; //doesn't work
+                drawutils.drawText(300,330, "Reloading...", 2, color, color);
                 if (! this._doingRestart) {
                 location.reload(true); //doesn't work
                 this._doingRestart = true;
                 }
-                //location.reload(true);//doesn't work
-                //document.location = './'+this.taskName;
-                //location = './'+this.taskName;
-                //parent.location = './'+this.taskName;
-                //parent.location = '../';
+             
             }
         }
 

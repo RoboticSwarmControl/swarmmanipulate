@@ -135,6 +135,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         var that = this;
         /* setup key listeners */
         document.addEventListener( "keydown", function(e){
+            that.lastUserInteraction = new Date().getTime();
             switch (e.keyCode) {
                 case 37 : that._impulseV.x = -that._impulse; break;
                 case 39 : that._impulseV.x = that._impulse; break;
@@ -155,6 +156,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 	} , false );
 
         document.addEventListener( "keyup", function(e){
+            that.lastUserInteraction = new Date().getTime();
             switch (e.keyCode) {
                 case 37 : that._impulseV.x = 0; break;
                 case 39 : that._impulseV.x = 0; break;

@@ -43,6 +43,7 @@ var globalController = (function(){
         var that = this;
         // apply the user force to all the robots
         if (that._forcing) {
+            that.lastUserInteraction = new Date().getTime();
         	var angle = Math.atan2(that._mY - 10, that._mX-10);
         	var forcex = Math.cos(angle);
         	var forcey = Math.sin(angle);

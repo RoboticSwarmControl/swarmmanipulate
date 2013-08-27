@@ -333,10 +333,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 case "repulsive" : strInstruction ="Robots are repulsed from the mouse click";break;
                 case "global" : strInstruction ="Robots move in direction of mouse click";break;
             }
-            drawutils.drawText(300,555,strInstruction, 1.5, color, color)
+            drawutils.drawText(300,80,strInstruction, 1.5, color, color)
+            drawutils.drawText(300,50,that.taskMode+" control:", 1.5, 'black', 'black')
 
             var meanx = 0;
             var miny =  Number.MAX_VALUE;
+            var minx =  Number.MAX_VALUE;
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
@@ -344,9 +346,11 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                  meany = meany + pos.y/this._numrobots;
                  if( pos.y < miny)
                     {miny = pos.y;}
+                if( pos.x < minx)
+                    {minx = pos.x;}
             }
             color = that.colorRobot;
-            drawutils.drawText(30*(meanx),30*(miny-1),"Robots", 1.5, color, color);
+            drawutils.drawText(30*(minx-2.3),30*(meany-.55),"Robots→", 1.5, color, color);
         }
 
     },

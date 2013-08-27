@@ -185,6 +185,7 @@ var baseTask = {
      * Function to run the simulation.
      * This generally SHOULD NOT be overridden.
      */
+    _doingRestart: false,
     _update: function( ) {
 
 
@@ -214,7 +215,10 @@ var baseTask = {
                 drawutils.drawText(300,330, "Reloading.", 2, color, color);
                 //window.location.replace(window.location.pathname); //doesn't work
                 //window.location.href = window.location.pathname; //doesn't work
-                document.location.reload(true); //doesn't work
+                if (! this._doingRestart) {
+                location.reload(true); //doesn't work
+                this._doingRestart = true;
+                }
                 //location.reload(true);//doesn't work
                 //document.location = './'+this.taskName;
                 //location = './'+this.taskName;

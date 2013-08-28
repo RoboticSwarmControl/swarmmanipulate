@@ -220,8 +220,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             }
         }
 
-        //var tempTaskMode = this.taskMode;
-        if(that._startTime == null){
+        if(that._startTime == null){   //rotate through task modes
             this.taskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
         }
         this.instructions = "Using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + this._numrobots + " robots (blue), try out four different visualization methods for controlling a swarm. Current mode displays the <br><strong>" + this.taskMode + "</strong>.<br>  Please play all " +this._taskModes.length+ " visualization modes.";

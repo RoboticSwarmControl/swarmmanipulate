@@ -72,17 +72,17 @@
                 <%= image_tag "ChooseTask.png" %>
             </div>
             <div class="span2">
-                <%= link_to "/task/varying_visualization" do %>
+                <%= link_to "/task/maze_positioning" do %>
                     <div id="div1" align="center">
-                        <div class ="highlightit", style="display: inline">
-                            <%= image_tag "varying_visualization.png" %>
+                        <div class ="highlightit", style="display: inline;">
+                            <%= image_tag "maze_positioning.png"%>
                         </div>
                         <div align="center">
-                            Vary visualization<br>(1 of 5)
+                            Vary number<br>(1 of 5)
                         </div>
-                        <script>drawMeritBadges("div1","varying_visualization");</script>
+                        <script>drawMeritBadges("div1","maze_positioning");</script>
                     </div>
-                <% end %>
+                <% end %> 
             </div>
             <div class="span2">
                 <%= link_to "/task/varying_control" do %>
@@ -98,17 +98,17 @@
                 <% end %>
             </div>
             <div class="span2">
-                <%= link_to "/task/maze_positioning" do %>
+                <%= link_to "/task/varying_visualization" do %>
                     <div id="div3" align="center">
-                        <div class ="highlightit", style="display: inline;">
-                            <%= image_tag "maze_positioning.png"%>
+                        <div class ="highlightit", style="display: inline">
+                            <%= image_tag "varying_visualization.png" %>
                         </div>
                         <div align="center">
-                            Vary number<br>(3 of 5)
+                            Vary visualization<br>(3 of 5)
                         </div>
-                        <script>drawMeritBadges("div3","maze_positioning");</script>
+                        <script>drawMeritBadges("div3","varying_visualization");</script>
                     </div>
-                <% end %> 
+                <% end %>
             </div>
             <div class="span2">
                 <%= link_to "/task/robot_positioning" do %>

@@ -10,7 +10,8 @@ class ResultsController < ApplicationController
                               :mode=>params[:mode],
                               :participant=>cookies["task_sig"],
                               :runtime=>params[:runtime],
-                              :robot_count=>params[:numrobots] )
+                              :robot_count=>params[:numrobots],
+                              :agent => params[:agent])
         @result.save
 
         redirect_to :action=>'show'
@@ -38,7 +39,7 @@ class ResultsController < ApplicationController
                 @resultscsv = CSV.generate do |csv|
                     csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count" ]
                     @results.each do |r|
-                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}" ]
+                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}" ]
                     end
                 end
                 send_data @resultscsv

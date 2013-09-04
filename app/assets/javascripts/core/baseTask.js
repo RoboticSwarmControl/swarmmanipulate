@@ -228,7 +228,7 @@ var baseTask = {
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web"}
+                      data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web", agent: navigator.userAgent}
             });
             this.isTaskComplete = true;
             // draw seethrough grey box

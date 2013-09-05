@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'underscore-rails'
 gem 'colorbox-rails'
 gem 'airbrake'
+gem 'font-awesome-rails'
 
 # In development we'd like better errors
 group :development do

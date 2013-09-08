@@ -187,8 +187,6 @@ var baseTask = {
      */
     _doingRestart: false,
     _update: function( ) {
-
-
         // step the simulation
         // TODO: Have the update run multiple times if the delay incurred by 
         // requestAnimFrame is greater than 60hz.
@@ -227,9 +225,11 @@ var baseTask = {
             drawutils.drawRect(300,300, 590,590, 'rgba(200, 200, 200, 0.5)');
             var color = "green";
             drawutils.drawText(300,250, "You finished in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
-            drawutils.drawText(300,350, "See how your scores compare...", 2, color, color)
+            drawutils.drawText(300,350, "Loading results page...", 2, color, color)
             //TODO: FORCE A REDRAW HERE
-            $('canvas').drawLayers();
+            // $('canvas').drawLayer(0); // still a lot of lag, but we saw the screen underneath
+
+            //$('canvas').drawLayers(); //didn't seem to work -- erased background
  
             // next, post our results to the server.
             $.ajax( { type: "POST",

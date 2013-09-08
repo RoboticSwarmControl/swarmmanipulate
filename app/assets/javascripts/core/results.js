@@ -204,19 +204,19 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                 {data: d2, label : 'trend (all)', color:'darkblue' },  // Regression, all data
                 {data: points, label: 'results (all)', points: {show:true}, color:'blue' },
             ];
-        if( mypoints.length > 2){
+        if( mypoints.length >= 2){
             data.push( {data:dme, label : 'trend (me)', color:'darkred' });  // Regression
         }
-        if( mypoints.length > 1){
+        if( mypoints.length >= 1){
             data.push({ data:mypoints, label: 'results (me)', points: {show:true}, color:'red' });
         }
         var mostRecentFillColor = 'lightgreen';
         var mostRecentLineColor = 'green';
         if( mostRecentIsParticipant){
-            mostRecentFillColor = 'lightred';
+            mostRecentFillColor = 'red';
             mostRecentLineColor = 'red';
         }
-        data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: 5,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
+        data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: 6,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
 
 
         Flotr.draw( $task[0],

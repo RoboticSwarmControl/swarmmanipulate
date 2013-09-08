@@ -212,11 +212,13 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         }
         var mostRecentFillColor = 'lightgreen';
         var mostRecentLineColor = 'green';
+        var mostRecentSize = 5;
         if( mostRecentIsParticipant){
-            mostRecentFillColor = 'red';
+            mostRecentFillColor = 'pink';
             mostRecentLineColor = 'red';
+            mostRecentSize = 8;
         }
-        data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: 6,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
+        data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: mostRecentSize,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
 
 
         Flotr.draw( $task[0],

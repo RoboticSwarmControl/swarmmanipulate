@@ -57,18 +57,22 @@ swarmcontrol.results = (function () {
         });
     };
     var singlePlot = function ( $container, taskResults) {
+        // makes a plot for the task 'taskResults'
+        // returns the number of times participant has played
         results = _.groupBy( taskResults, function (res) { return res.task;} );
-
+        numParticipantResults = 0;
         // for each task...
         _.each( _.keys(results), function (k) {
             // ...init the graph it'll go into...            
             var $task = $("<div style='width:500px;height:500px' class='.-chart-"+k+"'></div>");
             //var $task = $(".-chart-"+k);
-            plotTask($container,$task,k,results);
+            numParticipantResults = plotTask($container,$task,k,results);
         });
+        return numParticipantResults;
     };
 
     var plotTask = function($container,$task,k, results){
+        // plots one task, returns the number of times participant played.
         var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
         myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
         //console.log(myParticipant);
@@ -98,6 +102,7 @@ swarmcontrol.results = (function () {
         var mostRecentTime = null;
         var mostRecentx = NaN;
         var mostRecenty = NaN;
+        var mostRecentIsParticipant = false;
 
             _.each( res, function (r) {
                 y = parseTime(r.runtime);
@@ -133,6 +138,7 @@ swarmcontrol.results = (function () {
                         mostRecentTime = r.created_at;
                         mostRecentx = x;
                         mostRecenty = y;
+                        mostRecentIsParticipant = ( r.participant == myParticipant);
                     }
                 }
             });
@@ -149,6 +155,9 @@ swarmcontrol.results = (function () {
 
 robotCounts = _.groupBy( res, function (m) { return m.robot_count;} );
 var mtitle = swarmcontrol.prettyTaskNames[res[0].task];
+if( mypoints.length == 1){
+    mtitle = mtitle + " -- Play again to get a trendline!";
+}
 var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " modes, and " + _.keys(robotCounts).length + " different # of robots";//+ xmin + "," + dataTrendline[0] + "," + dataTrendline[1] + "," +xmax + ".";
 
         // ...and then append the graph. 
@@ -191,14 +200,27 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         var legendPos = 'nw';//default legend position in nw
         if( dataTrendline[1] <0 )
            { legendPos = 'sw';}
-        Flotr.draw( $task[0],
-            [
+        data = [
                 {data: d2, label : 'trend (all)', color:'darkblue' },  // Regression, all data
                 {data: points, label: 'results (all)', points: {show:true}, color:'blue' },
-                {data: dme, label : 'trend (me)', color:'darkred' },  // Regression
-                {data: mypoints, label: 'results (me)', points: {show:true}, color:'red' },
-                {data: [[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: 5,fillColor: 'lightgreen'}, color:'green' }, //most recent result
-            ],
+            ];
+        if( mypoints.length > 2){
+            data.push( {data:dme, label : 'trend (me)', color:'darkred' });  // Regression
+        }
+        if( mypoints.length > 1){
+            data.push({ data:mypoints, label: 'results (me)', points: {show:true}, color:'red' });
+        }
+        var mostRecentFillColor = 'lightgreen';
+        var mostRecentLineColor = 'green';
+        if( mostRecentIsParticipant){
+            mostRecentFillColor = 'lightred';
+            mostRecentLineColor = 'red';
+        }
+        data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: 5,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
+
+
+        Flotr.draw( $task[0],
+            data,
             {  
                 mouse : {
                         track : true,
@@ -218,6 +240,7 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                  }
 
         });
+        return mypoints.length;
     }
 
 

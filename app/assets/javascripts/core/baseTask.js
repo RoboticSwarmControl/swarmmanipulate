@@ -223,7 +223,13 @@ var baseTask = {
 
         // check to see if we've reached completion.
         if ( this.isTaskComplete == false && this.evaluateCompletion( this._options ) ) {
-            // if so, post our results to the server.
+            //congratulate
+            drawutils.drawRect(300,300, 590,590, 'rgba(200, 200, 200, 0.5)');
+            var color = "green";
+            drawutils.drawText(300,250, "You finished in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
+            drawutils.drawText(300,350, "See how your scores compare...", 2, color, color)
+ 
+            // next, post our results to the server.
             $.ajax( { type: "POST",
                       url: "/result",
                       dataType: "json",
@@ -231,40 +237,40 @@ var baseTask = {
                       data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web", agent: navigator.userAgent}
             });
             this.isTaskComplete = true;
-            // draw seethrough grey box
-            drawutils.drawRect(300,300, 590,590, "white");//rgba(200, 200, 200, 0.8)");
-            var color = "green";
-            //drawutils.drawText(300,250, "Task completed in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
-            // at this point, we do not reschedule, and the task ends.
-
-            //TODO: 1. display plot in a colorbox
-            //TODO: 2. display buttons for Play Again, all results, task list
-            //TODO: 3. display: "you have completed x of 4 tasks.  Play again!" <or> "Level cleared -- you may play again to increase your score"
+            
+            // 1. display plot in a colorbox
+            // 2. display buttons for Play Again, all results, task list
+            // 3. display: "you have completed x of 4 tasks.  Play again!" <or> "Level cleared -- you may play again to increase your score"
             var currTaskName = this.taskName;
 
             var c = $(".canvas");
             $.get("/result.json?task="+currTaskName, function( data ) {
                 var data = JSON.parse(data);
                 //console.log(data);
-                swarmcontrol.results.singlePlot(c,data.results);
+                // draw white  box to to give a background for plot
+                drawutils.drawRect(300,300, 590,590, "white");//rgba(200, 200, 200, 0.8)");
+                // at this point, we do not reschedule, and the task ends.
+
+                numMyResults = swarmcontrol.results.singlePlot(c,data.results);
                 $(".span8").append('<button class="btn btn-success play-again-button" style="position: relative; left: 100px; top: -110px;" onclick="location.reload(true);"><h3>Play again!</h3></button>');
-            function drawMeritBadges(divname,taskname){
+            function drawMeritBadges(divname,numMyResults){
                 var numPres = 0;
-                $.get("/result.json?task="+taskname, function( data ) {
-                    data = JSON.parse(data);
-                    //console.log(data.results);
-                    for( var i = 0; i<data.results.length; i++){
-                        if( data.results[i].participant == myParticipant) {
-                            numPres = numPres+1;
-                        } 
-                    }
+                numPres = numMyResults;
+                // $.get("/result.json?task="+taskname, function( data ) {
+                //     data = JSON.parse(data);
+                //     //console.log(data.results);
+                //     for( var i = 0; i<data.results.length; i++){
+                //         if( data.results[i].participant == myParticipant) {
+                //             numPres = numPres+1;
+                //         } 
+                //     }
                     //console.log("You've done this task "+taskname + " " + numPres + " times");
                     var element=  document.getElementById(divname);
                     var maxstars = 5;
                     var imgsize = "25";
                     if(numPres>5){ 
                         strImage = "/assets/soft_edge_yellow_star.png"
-                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 0px; top: -110px;"><h3 style="position: relative; left: 80px; top: -175px;">x'+numPres+'</h3>');
+                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 120px; top: -110px;"><h3 style="position: relative; left: 145px; top: -175px;">x'+numPres+'</h3>');
                     
                     }else{
                     //if(numPres>10){ maxstars = 25;}
@@ -273,23 +279,23 @@ var baseTask = {
                         var strImage = "/assets/soft_edge_empty_star.png";
                         if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
 
-                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 0px; top: -110px;">');
+                        $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 120px; top: -110px;">');
                     
                         }
                     }
-                }); 
+                 
             } 
-            var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-            myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
+            //var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
+            //myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
             
-            drawMeritBadges("canvasID",currTaskName);
+            drawMeritBadges("canvasID",numMyResults);
             var k =_.keys(swarmcontrol.prettyTaskNames);
             var nextTask = k.indexOf(currTaskName) + 1;
             if(nextTask >= k.length){nextTask = 0;}
             newTaskPath = "parent.location='./" + k[nextTask] + "'";
             console.log(newTaskPath);
 
-            $(".span8").append('<button class="btn btn-success next-Task-button" style="position: relative; left: 250px; top: -110px;" onclick='+newTaskPath+'>► Next Task</button>');
+            $(".span8").append('<button class="btn btn-success next-Task-button" style="position: relative; left: 140px; top: -110px;" onclick='+newTaskPath+'>► Next Task</button>');
             //<!-- <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">►</button> -->
             //console.log(myParticipant);
             });

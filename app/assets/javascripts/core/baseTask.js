@@ -228,6 +228,8 @@ var baseTask = {
             var color = "green";
             drawutils.drawText(300,250, "You finished in "+ (this._runtime).toFixed(2) +" seconds!", 2, color, color)
             drawutils.drawText(300,350, "See how your scores compare...", 2, color, color)
+            //TODO: FORCE A REDRAW HERE
+            $('canvas').drawLayer(0);
  
             // next, post our results to the server.
             $.ajax( { type: "POST",

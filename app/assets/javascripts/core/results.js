@@ -201,21 +201,21 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         if( dataTrendline[1] <0 )
            { legendPos = 'sw';}
         data = [
-                {data: d2, label : 'trend (all)', color:'darkblue' },  // Regression, all data
+                {data: d2, label : 'trend (all)', color:'darkblue', lines : { fill : true , lineWidth : 4}  },  // Regression, all data
                 {data: points, label: 'results (all)', points: {show:true}, color:'blue' },
             ];
         if( mypoints.length >= 2){
-            data.push( {data:dme, label : 'trend (me)', color:'darkred' });  // Regression
+            data.push( {data:dme, label : 'trend (me)', color:'darkred', lines : { fill : true }  });  // Regression
         }
         if( mypoints.length >= 1){
-            data.push({ data:mypoints, label: 'results (me)', points: {show:true}, color:'red' });
+            data.push({ data:mypoints, label: 'results (me)', points: {show:true, lineWidth : 4}, color:'red' });
         }
         var mostRecentFillColor = 'lightgreen';
         var mostRecentLineColor = 'green';
         var mostRecentSize = 5;
         if( mostRecentIsParticipant){
             mostRecentFillColor = 'pink';
-            mostRecentLineColor = 'red';
+            mostRecentLineColor = 'darkred';
             mostRecentSize = 8;
         }
         data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: mostRecentSize,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
@@ -226,7 +226,8 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
             {  
                 mouse : {
                         track : true,
-                        relative : true
+                        relative : true,
+                        radius : 12,
                       },
                 xaxis: { min: xmin - margins*xrange, 
                         max: xmax + margins*xrange, 

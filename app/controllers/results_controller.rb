@@ -14,7 +14,11 @@ class ResultsController < ApplicationController
                               :agent => params[:agent])
         @result.save
 
-#        redirect_to :action=>'show'
+        respond_to do |format|
+            format.json do
+                send_data @result.to_json, :status=>201
+            end
+        end
     end
 
     def show

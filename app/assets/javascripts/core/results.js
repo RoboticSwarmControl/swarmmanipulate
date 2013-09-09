@@ -205,10 +205,10 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
                 {data: points, label: 'results (all)', points: {show:true}, color:'blue' },
             ];
         if( mypoints.length >= 2){
-            data.push( {data:dme, label : 'trend (me)', color:'darkred', lines : { fill : true }  });  // Regression
+            data.push( {data:dme, label : 'trend (me)', color:'darkred', lines : { lineWidth : 4 }  });  // Regression
         }
         if( mypoints.length >= 1){
-            data.push({ data:mypoints, label: 'results (me)', points: {show:true, lineWidth : 4}, color:'red' });
+            data.push({ data:mypoints, label: 'results (me)', points: {show:true}, color:'red' });
         }
         var mostRecentFillColor = 'lightgreen';
         var mostRecentLineColor = 'green';

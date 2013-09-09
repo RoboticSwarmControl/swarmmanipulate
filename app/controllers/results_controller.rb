@@ -14,7 +14,7 @@ class ResultsController < ApplicationController
                               :agent => params[:agent])
         @result.save
 
-        redirect_to :action=>'show'
+#        redirect_to :action=>'show'
     end
 
     def show

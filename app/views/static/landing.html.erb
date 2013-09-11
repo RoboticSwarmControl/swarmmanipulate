@@ -70,7 +70,7 @@
                 element.appendChild(img);  
             }
             // ICRA goal: 1000 results
-            //element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
+            element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
         }); 
     } 
 </script>
@@ -81,43 +81,43 @@
                 <%= image_tag "ChooseTask.png" %>
             </div>
             <div class="span2">
-                <%= link_to "/task/maze_positioning" do %>
-                    <div id="div1" align="center">
-                        <div class ="highlightit", style="display: inline;">
-                            <%= image_tag "maze_positioning.png"%>
-                        </div>
-                        <div align="center">
-                            Vary number<br>(1 of 5)
-                        </div>
-                        <script>drawMeritBadges("div1","maze_positioning",3);</script>
-                    </div>
-                <% end %> 
-            </div>
-            <div class="span2">
                 <%= link_to "/task/varying_control" do %>
-                    <div id="div2" align="center">
+                    <div id="div1" align="center">
                         <div class ="highlightit", style="display: inline">
                             <%= image_tag "varying_control.png" %>
                         </div>
                         <div align="center">
-                            Vary control scheme<br>(2 of 5)
+                            Vary control scheme<br>(1 of 5)
                         </div>
-                        <script>drawMeritBadges("div2","varying_control",3);</script>
+                        <script>drawMeritBadges("div1","varying_control",3);</script>
                     </div>
                 <% end %>
             </div>
             <div class="span2">
                 <%= link_to "/task/varying_visualization" do %>
-                    <div id="div3" align="center">
+                    <div id="div2" align="center">
                         <div class ="highlightit", style="display: inline">
                             <%= image_tag "varying_visualization.png" %>
                         </div>
                         <div align="center">
-                            Vary visualization<br>(3 of 5)
+                            Vary visualization<br>(2 of 5)
                         </div>
-                        <script>drawMeritBadges("div3","varying_visualization",4);</script>
+                        <script>drawMeritBadges("div2","varying_visualization",4);</script>
                     </div>
                 <% end %>
+            </div>
+            <div class="span2">
+                <%= link_to "/task/maze_positioning" do %>
+                    <div id="div3" align="center">
+                        <div class ="highlightit", style="display: inline;">
+                            <%= image_tag "maze_positioning.png"%>
+                        </div>
+                        <div align="center">
+                            Vary number<br>(3 of 5)
+                        </div>
+                        <script>drawMeritBadges("div3","maze_positioning",3);</script>
+                    </div>
+                <% end %> 
             </div>
             <div class="span2">
                 <%= link_to "/task/robot_positioning" do %>

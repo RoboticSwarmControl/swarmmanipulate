@@ -29,14 +29,15 @@
         <!-- <h2>About</h2> -->
         The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project gathers and analyzes data.  
 
-        <h2>Why we care <div class="pull-right">
+        <h2>Why we care 
+            <!--<div class="pull-right">
     <script type="text/javascript">
   reddit_url = "http://www.swarmcontrol.net/";
   reddit_title = "Control Robotic Swarm";
   reddit_newwindow='1';
   reddit_bordercolor = "#C1C1C1";
 </script>
-<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div> </h2>
+<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div> --></h2>
         There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
         The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish. <%= link_to "/subscribe" do %> Request the research paper! <% end %>
 
@@ -69,8 +70,8 @@
                 img.height = 24;
                 element.appendChild(img);  
             }
-            // ICRA goal: 1000 results
-            element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
+            // ICRA goal: 1000 results  -- looks horrible in IE, also is flashing == annoying
+            //element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
         }); 
     } 
 </script>

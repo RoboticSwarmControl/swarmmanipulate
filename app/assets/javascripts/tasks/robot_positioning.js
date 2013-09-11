@@ -8,7 +8,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     video: "http://www.youtube.com/watch?v=5p_XIad5-Cw",
     theScience: 'This tasks examines how task completion time <i>scales</i> with the number of robots. '
     +' <p>Having trouble? <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"><strong>See hint</strong></a>. '
-    +' <p> If a task requres twice as much time as for one robot with two robots, 3x times as much with three robots, and 4x with four robots, we say the task <i>scales linearly</i>. '
+    +' <p> If a task requires twice as much time as for one robot with two robots, 3x times as much with three robots, and 4x with four robots, we say the task <i>scales linearly</i>. '
     +'  If a task requires 4x times the time with two robots, 9x with three robots, and 16x with four, we say the task <i>scales quadratically</i>. '
     +' Knowing how a task scales with robot number lets us describe task difficulty. '
     +'<iframe width="270" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>'

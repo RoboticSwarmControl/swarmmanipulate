@@ -59,17 +59,18 @@
                     numPres = numPres+1;
                 } 
             }
-            //console.log("You've done this task "+taskname + " " + numPres + " times");
             var element=  document.getElementById(divname);
             for( var i = 0; i<Math.max(numstars, numPres); i++){
                 var strImage = "/assets/soft_edge_empty_star.png";
                 if( numPres >i) {strImage = "/assets/soft_edge_yellow_star.png";}
-                    var img = document.createElement("img");
-                    img.src = strImage;
-                    img.width = 24;
-                    img.height = 24;
-                    element.appendChild(img);  
-                }
+                var img = document.createElement("img");
+                img.src = strImage;
+                img.width = 24;
+                img.height = 24;
+                element.appendChild(img);  
+            }
+            // ICRA goal: 1000 results
+            //element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
         }); 
     } 
 </script>

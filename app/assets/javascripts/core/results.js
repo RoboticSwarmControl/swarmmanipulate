@@ -104,44 +104,44 @@ swarmcontrol.results = (function () {
         var mostRecenty = NaN;
         var mostRecentIsParticipant = false;
 
-            _.each( res, function (r) {
-                y = parseTime(r.runtime);
-                                    
-                if (r.task == "maze_positioning" || r.task == "robot_positioning"){
-                    xAxisLabel = 'Number of robots';
-                    x = r.robot_count;
-                }else if (r.task == "varying_control" ){
-                    xAxisLabel = 'Control type';
-                    x = _.indexOf(modekeys, r.mode);
-                }else if(r.task == "varying_visualization"){
-                    xAxisLabel = 'Visualization Method';
-                    x = _.indexOf(modekeys, r.mode);
-                }else if(r.task == "pyramid_building"){
-                    xAxisLabel = 'Noise (% control power)';
-                    x = 20*parseFloat(r.mode);
-                }else{
-                    xAxisLabel = 'Unknown';
-                    x = r.robot_count;
-                }
+        _.each( res, function (r) {
+            y = parseTime(r.runtime);
+                                
+            if (r.task == "maze_positioning" || r.task == "robot_positioning"){
+                xAxisLabel = 'Number of robots';
+                x = r.robot_count;
+            }else if (r.task == "varying_control" ){
+                xAxisLabel = 'Control type';
+                x = _.indexOf(modekeys, r.mode);
+            }else if(r.task == "varying_visualization"){
+                xAxisLabel = 'Visualization Method';
+                x = _.indexOf(modekeys, r.mode);
+            }else if(r.task == "pyramid_building"){
+                xAxisLabel = 'Noise (% control power)';
+                x = 20*parseFloat(r.mode);
+            }else{
+                xAxisLabel = 'Unknown';
+                x = r.robot_count;
+            }
 
-                if( !isNaN(x) && !isNaN(y) ){
-                    ymax = ymax < y ? y : ymax;
-                    ymin = ymin > y ? y : ymin;
-                    xmax = xmax < x ? x : xmax;
-                    xmin = xmin > x ? x : xmin;
+            if( !isNaN(x) && !isNaN(y) ){
+                ymax = ymax < y ? y : ymax;
+                ymin = ymin > y ? y : ymin;
+                xmax = xmax < x ? x : xmax;
+                xmin = xmin > x ? x : xmin;
 
-                    points.push( [x, y] );
-                    if( r.participant == myParticipant) {
-                        mypoints.push( [x, y] );
-                    }
-                    if( mostRecentTime == null || r.created_at > mostRecentTime){
-                        mostRecentTime = r.created_at;
-                        mostRecentx = x;
-                        mostRecenty = y;
-                        mostRecentIsParticipant = ( r.participant == myParticipant);
-                    }
+                points.push( [x, y] );
+                if( r.participant == myParticipant) {
+                    mypoints.push( [x, y] );
                 }
-            });
+                if( mostRecentTime == null || r.created_at > mostRecentTime){
+                    mostRecentTime = r.created_at;
+                    mostRecentx = x;
+                    mostRecenty = y;
+                    mostRecentIsParticipant = ( r.participant == myParticipant);
+                }
+            }
+        });
 
         // Compute the regression line.
         var dataTrendline = trendline(points);
@@ -201,11 +201,11 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         if( dataTrendline[1] <0 )
            { legendPos = 'sw';}
         data = [
-                {data: d2, label : 'trend (all)', color:'darkblue' },  // Regression, all data
+                {data: d2, label : 'trend (all)', color:'darkblue', lines : { fill : true , lineWidth : 4}  },  // Regression, all data
                 {data: points, label: 'results (all)', points: {show:true}, color:'blue' },
             ];
         if( mypoints.length >= 2){
-            data.push( {data:dme, label : 'trend (me)', color:'darkred' });  // Regression
+            data.push( {data:dme, label : 'trend (me)', color:'darkred', lines : { lineWidth : 4 }  });  // Regression
         }
         if( mypoints.length >= 1){
             data.push({ data:mypoints, label: 'results (me)', points: {show:true}, color:'red' });
@@ -215,7 +215,7 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         var mostRecentSize = 5;
         if( mostRecentIsParticipant){
             mostRecentFillColor = 'pink';
-            mostRecentLineColor = 'red';
+            mostRecentLineColor = 'darkred';
             mostRecentSize = 8;
         }
         data.push({ data:[[mostRecentx,mostRecenty]], label: 'newest result', points: {show:true, radius: mostRecentSize,fillColor: mostRecentFillColor}, color:mostRecentLineColor}); //most recent result
@@ -226,7 +226,8 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
             {  
                 mouse : {
                         track : true,
-                        relative : true
+                        relative : true,
+                        radius : 12,
                       },
                 xaxis: { min: xmin - margins*xrange, 
                         max: xmax + margins*xrange, 

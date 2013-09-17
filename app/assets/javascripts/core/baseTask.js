@@ -176,6 +176,15 @@ var baseTask = {
             $("#taskMode").append( $( "<strong>Mode: </strong><span>" + this.taskMode + "</span>") );
         }
 
+        // catch users leaving
+        $(window).on("unload", function (e) {
+            $.ajax( { type: "POST",
+                      url: "/result",
+                      dataType: "json",
+                      async: false,
+                      data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web", agent: navigator.userAgent, aborted:true}
+            });
+        });
 
         // do the loop
         requestAnimFrame( this._update );
@@ -236,7 +245,7 @@ var baseTask = {
                       url: "/result",
                       dataType: "json",
                       async: false,
-                      data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web", agent: navigator.userAgent}
+                      data: { task:this.taskName, mode:this.taskMode, runtime:this._runtime, numrobots:this._numrobots, participant:"web", agent: navigator.userAgent, aborted:false}
             });
             this.isTaskComplete = true;
             

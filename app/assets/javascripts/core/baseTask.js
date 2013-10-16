@@ -32,8 +32,6 @@ var ar=new Array(33,34,35,36,37,38,39,40);
 
 $(document).keydown(function(e) {
      var key = e.which;
-      //console.log(key);
-      //if(key==35 || key == 36 || key == 37 || key == 39)
       if($.inArray(key,ar) > -1) {
           e.preventDefault();
           return false;
@@ -82,33 +80,6 @@ var baseTask = {
     setupTask: function( options ) {
     },
 
-    /*
-     * Function to setup the boundary walls
-     
-    setupBoundary: function( options, bodyDef, fixDef,that){
-      console.log("in setupBoundary");
-        // reshape fixture def to be horizontal bar
-        fixDef.shape.SetAsBox(10, that.obsThick);
-
-        // create bottom wall
-        bodyDef.position.Set(10, 20-that.obsThick);
-        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        // create top wall
-        bodyDef.position.Set(10, that.obsThick);
-        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
-        // reshape fixture def to be vertical bar
-        fixDef.shape.SetAsBox(that.obsThick, 10);
-        
-        // create left wall
-        bodyDef.position.Set(that.obsThick, 10);
-        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
-
-        // create right wall
-        bodyDef.position.Set(20-that.obsThick, 10);
-        that._world.CreateBody(bodyDef).CreateFixture(fixDef);
-    },*/
 
     /*
      * Function to evaluate whether or not a task has been completed.
@@ -162,7 +133,6 @@ var baseTask = {
         // add instructions to the page
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
-        //$("#task-instructions").append(  this.instructions  );
 
         // add science to the page
         $("#task-theScience").empty();
@@ -259,15 +229,7 @@ var baseTask = {
             function drawMeritBadges(divname,numMyResults){
                 var numPres = 0;
                 numPres = numMyResults;
-                // $.get("/result.json?task="+taskname, function( data ) {
-                //     data = JSON.parse(data);
-                //     //console.log(data.results);
-                //     for( var i = 0; i<data.results.length; i++){
-                //         if( data.results[i].participant == myParticipant) {
-                //             numPres = numPres+1;
-                //         } 
-                //     }
-                    //console.log("You've done this task "+taskname + " " + numPres + " times");
+
                     var element=  document.getElementById(divname);
                     var maxstars = 5;
                     var imgsize = "25";
@@ -285,12 +247,9 @@ var baseTask = {
                         $(".span8").append('<img src= '+strImage+' width='+imgsize+' height='+imgsize+' style="position: relative; left: 120px; top: -110px;">');
                     
                         }
-                    }
-                 
+                    }      
             } 
-            //var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-            //myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-            
+        
             drawMeritBadges("canvasID",numMyResults);
             var k =_.keys(swarmcontrol.prettyTaskNames);
             var nextTask = k.indexOf(currTaskName) + 1;
@@ -299,8 +258,7 @@ var baseTask = {
             console.log(newTaskPath);
 
             $(".span8").append('<button class="btn btn-success next-Task-button" style="position: relative; left: 140px; top: -110px;" onclick='+newTaskPath+'>► Next Task</button>');
-            //<!-- <button id="-tasks-button" class="btn btn-success" onClick="parent.location='../'">►</button> -->
-            //console.log(myParticipant);
+
             });
 
             return;

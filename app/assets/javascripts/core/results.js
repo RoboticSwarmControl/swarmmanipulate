@@ -75,10 +75,6 @@ swarmcontrol.results = (function () {
         // plots one task, returns the number of times participant played.
         var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
         myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-        //console.log(myParticipant);
-        //console.log(document.cookie);
-        //console.log($task);
-        //$container.append("<h3>Task Completed!</h3>");  //appends after the canvas area.
 
         $container.append($task);
         res = results[k];
@@ -120,8 +116,10 @@ swarmcontrol.results = (function () {
                 xAxisLabel = 'Noise (% control power)';
                 x = 20*parseFloat(r.mode);
             }else{
-                xAxisLabel = 'Unknown';
-                x = r.robot_count;
+                // error in database
+                return;
+                //xAxisLabel = 'Unknown';
+                //x = r.robot_count;
             }
 
             if( !isNaN(x) && !isNaN(y) ){

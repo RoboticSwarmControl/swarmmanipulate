@@ -7,10 +7,10 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     theScience: 'Real-world microrobots and nanorobots are affected by turbulence caused by random collisions with molecules. '
     +' These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>. '
     +' <p>This experiment varies the strength of these disturbances to study how noise affects human control of large swarms. '
-     +'<iframe width="270" height="295" src="//www.youtube.com/embed/MLr2YvghPns" frameborder="0" allowfullscreen></iframe>'
+    +'<iframe width="270" height="295" src="//www.youtube.com/embed/MLr2YvghPns" frameborder="0" allowfullscreen></iframe>'
     +' One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> '
     +' measure the swarm positions, and automatically calculate a new control value based on the current measurements. '
-        +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control of living one-celled organisms</a> '
+    +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control of living one-celled organisms</a> '
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.'
     +"</p>",
 
@@ -56,7 +56,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
         // create top wall
         bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
+        
         // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(this.obsThick, 10);
         
@@ -113,8 +113,8 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 
         // create goals
         var goalPositions = [ {x:10.0, y:7.2},
-                              {x:9.5, y:8.2}, {x:10.5, y:8.2},
-                              {x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}];
+        {x:9.5, y:8.2}, {x:10.5, y:8.2},
+        {x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}];
         fixDef.isSensor = true;
         fixDef.shape = new phys.polyShape;
         fixDef.shape.SetAsBox(.2,.2);
@@ -147,30 +147,30 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                 case 83 : that._impulseV.y = that._impulse; break;
             }
         //check if this is the first keypress -- TODO:  this should be shared code.
-	if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
-            { 
+        if( that.firstKeyPressed == false && Math.abs(that._impulseV.x) + Math.abs(that._impulseV.y) > 0)
+        { 
             that.firstKeyPressed  = true;
             that._startTime = new Date();
             that._runtime = 0.0;
-            }
-	} , false );
+        }
+    } , false );
 
-        document.addEventListener( "keyup", function(e){
-            that.lastUserInteraction = new Date().getTime();
-            switch (e.keyCode) {
-                case 37 : that._impulseV.x = 0; break;
-                case 39 : that._impulseV.x = 0; break;
-                case 38 : that._impulseV.y = 0; break;
-                case 40 : that._impulseV.y = 0; break;
-                case 65 : that._impulseV.x = 0; break;
-                case 68 : that._impulseV.x = 0; break;
-                case 87 : that._impulseV.y = 0; break;
-                case 83 : that._impulseV.y = 0; break;
-            }} , false );
-    },
+document.addEventListener( "keyup", function(e){
+    that.lastUserInteraction = new Date().getTime();
+    switch (e.keyCode) {
+        case 37 : that._impulseV.x = 0; break;
+        case 39 : that._impulseV.x = 0; break;
+        case 38 : that._impulseV.y = 0; break;
+        case 40 : that._impulseV.y = 0; break;
+        case 65 : that._impulseV.x = 0; break;
+        case 68 : that._impulseV.x = 0; break;
+        case 87 : that._impulseV.y = 0; break;
+        case 83 : that._impulseV.y = 0; break;
+    }} , false );
+},
 
-    evaluateCompletion: function( options ) {
-        var ret = true;
+evaluateCompletion: function( options ) {
+    var ret = true;
         // need to check if object has been moved into the goal zone
         var that = this;
         var blockupied = 0;
@@ -185,7 +185,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                 return !ret;
             });
         });
-       
+        
         return blockupied == this._goals.length;
     },
 
@@ -195,23 +195,23 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 
         //initialize robots to not be at goal
         _.each( that._blocks, function(b) {
-                b.atGoal = false;
-                });
+            b.atGoal = false;
+        });
          // draw goal zone
-        _.each(that._goals, function (g) { 
-                    var f = g.GetFixtureList();
-                    var verts = f.GetShape().GetVertices();
-                    var X = verts[1].x - verts[0].x; 
-                    var Y = verts[2].y - verts[1].y;
-                    var pos = g.GetPosition();
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal,0,that.strokeWidth);
-                    _.each(that._blocks, function (b) {
-                        var blockAABB = b.GetFixtureList().GetAABB();
-                            ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
-                            if (ret) {
-                                b.atGoal = true;
-                            }
-                    });  
+         _.each(that._goals, function (g) { 
+            var f = g.GetFixtureList();
+            var verts = f.GetShape().GetVertices();
+            var X = verts[1].x - verts[0].x; 
+            var Y = verts[2].y - verts[1].y;
+            var pos = g.GetPosition();
+            drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal,0,that.strokeWidth);
+            _.each(that._blocks, function (b) {
+                var blockAABB = b.GetFixtureList().GetAABB();
+                ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
+                if (ret) {
+                    b.atGoal = true;
+                }
+            });  
         });
 
         //draw robots and obstacles
@@ -234,7 +234,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
                     var pos = b.GetPosition();
                     var color = that.colorObject;
                     if (b.atGoal == true)
-                    {color = that.colorObjectAtGoal;}
+                        {color = that.colorObjectAtGoal;}
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle,that.colorObjectEdge,0,that.strokeWidth);
                 } else {
                     // draw the obstacles
@@ -263,7 +263,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
             _.each(that._goals, function (g) { 
                 var pos = g.GetPosition();
                 if( pos.x >maxx)
-                {maxx = pos.x;}
+                    {maxx = pos.x;}
                 meanx = meanx + pos.x/that._goals.length;
                 meany = meany + pos.y/that._goals.length;      
             });
@@ -291,9 +291,9 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
-                 meanx = meanx + pos.x/this._numrobots;
-                 meany = meany + pos.y/this._numrobots;
-                 if( pos.y < miny)
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
+                if( pos.y < miny)
                     {miny = pos.y;}
             }
             color = that.colorRobot;

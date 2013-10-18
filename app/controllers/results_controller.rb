@@ -23,10 +23,9 @@ class ResultsController < ApplicationController
     end
 
     def show
-
         # add filters here to sort by more params 
-        criteria = [:task, :participant]
-        @results = Result.where( params.select { |k,v| criteria.include? k }).all
+        criteria = ["task", "participant"]
+        @results = Result.where( params.select { |k,v| criteria.include? k}).all
 
         respond_to do |format|
             format.html do

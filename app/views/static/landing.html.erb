@@ -52,7 +52,7 @@
     function drawMeritBadges(divname,taskname,numstars){
         numstars = typeof numstars !== 'undefined' ? numstars : 3;
         var numPres = 0;
-        $.get("/result.json?task="+taskname, function( data ) {
+        $.get("/result.json?task="+taskname+"?participant="+myParticipant, function( data ) {
             data = JSON.parse(data);
             //console.log(data.results);
             for( var i = 0; i<data.results.length; i++){

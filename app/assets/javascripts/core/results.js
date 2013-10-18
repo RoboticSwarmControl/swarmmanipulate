@@ -117,9 +117,8 @@ swarmcontrol.results = (function () {
                 x = 20*parseFloat(r.mode);
             }else{
                 // error in database
-                return;
-                //xAxisLabel = 'Unknown';
-                //x = r.robot_count;
+                xAxisLabel = 'Unknown';
+                x = r.robot_count;
             }
 
             if( !isNaN(x) && !isNaN(y) ){

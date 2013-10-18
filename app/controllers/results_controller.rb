@@ -11,7 +11,8 @@ class ResultsController < ApplicationController
                               :participant=>cookies["task_sig"],
                               :runtime=>params[:runtime],
                               :robot_count=>params[:numrobots],
-                              :agent => params[:agent])
+                              :agent => params[:agent],
+                              :aborted => params[:aborted])
         @result.save
 
         respond_to do |format|
@@ -23,11 +24,9 @@ class ResultsController < ApplicationController
 
     def show
 
-        if request[:task] 
-            @results = Result.find_all_by_task( request[:task] )
-        else
-           @results = Result.find(:all)
-        end
+        # add filters here to sort by more params 
+        criteria = [:task, :participant]
+        @results = Result.where( request.select { |k,v| criteria.include? k }).all
 
         respond_to do |format|
             format.html do
@@ -41,9 +40,9 @@ class ResultsController < ApplicationController
                 # wrapped up in the model somehow, or monkeypatch the array
                 # class to support a to_csv method.
                 @resultscsv = CSV.generate do |csv|
-                    csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count" ]
+                    csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count", "Aborted" ]
                     @results.each do |r|
-                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}" ]
+                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}", "#{r.aborted || 'false'}"]
                     end
                 end
                 send_data @resultscsv

@@ -19,12 +19,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
     _impulseV: new phys.vec2(0,0),                          // global impulse to control all robots
     _world: new phys.world( new phys.vec2(0, 00), true ),   // physics world to contain sim
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
-// 500 = 7
-// 300 = 3s
-// 200 = 2.5
-// 100 = 2s
-// 50 = 2s
-// 5 = 6  (they hit the target)
+
     setupTask: function( options ) {
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -50,7 +45,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         // create top wall
         bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
+
         // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(this.obsThick, 10);
         
@@ -118,8 +113,8 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
 
         // create some robots
         this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
-    	this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
-	    var rowLength = Math.floor(7/(2*this._robotRadius));
+        this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
+        var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
         var yoffset = 14+this._robotRadius;
         this._robots = [];
@@ -135,15 +130,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
             bodyDef.position.y = Math.floor(i/rowLength)*2.1*this._robotRadius + yoffset;
             this._robots[i] = this._world.CreateBody(bodyDef);
             this._robots[i].CreateFixture(fixDef);
-            this._robots[i].m_angularDamping = 10;//125 r, 7s to cross screen (furthest right robot to right)
-                                                    //301 robots, 12.5 seconds
-                                                    //35 6 seconds
-                                                    //114 7s
-                                                    // 27 5 s
-                                                    //258, 11s
-                                                    //477r, 20s
-                                                    //500, 23
-                                                    //with damping = 10/this._numrobots; the speed is maintained, but the robots keep moving
+            this._robots[i].m_angularDamping = 10;
             this._robots[i].m_linearDamping = 10;  //should these be proportional to robot mass?
             //TODO: add units
         }
@@ -172,16 +159,10 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
 
         // draw goal zone
         _.each(that._goals, function (g) { 
-                    var f = g.GetFixtureList();
-                    //var verts = f.GetShape().GetVertices();
-                    //var X = verts[1].x - verts[0].x; 
-                    //var Y = verts[2].y - verts[1].y;
-                    //var pos = g.GetPosition();
-                    //var color = that.colorGoal;
-                    //drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
-                    var radius = f.GetShape().GetRadius();
-                    var pos = g.GetPosition();
-                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth );
+            var f = g.GetFixtureList();
+            var radius = f.GetShape().GetRadius();
+            var pos = g.GetPosition();
+            drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth );
         });
 
         //draw robots and obstacles
@@ -221,11 +202,11 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         }
 
         // draw goal zone
-            _.each(that._goals, function (g) { 
-                        var pos = g.GetPosition();
-                        color = that.colorGoal;
-                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
-            });
+        _.each(that._goals, function (g) { 
+            var pos = g.GetPosition();
+            color = that.colorGoal;
+            drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
+        });
         // draw text before game starts
         if(that._startTime == null){
             var color = 'white';
@@ -241,23 +222,23 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
             drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
 
             _.each(that._blocks, function (g) { 
-                        var pos = g.GetPosition();
-                        color = 'white';
-                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+                var pos = g.GetPosition();
+                color = 'white';
+                drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
             });
 
             _.each(that._blocks, function (g) { 
-                        var pos = g.GetPosition();
-                        color = 'white';
-                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+                var pos = g.GetPosition();
+                color = 'white';
+                drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
             });
 
             var meanx = 0;
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
-                 meanx = meanx + pos.x/this._numrobots;
-                 meany = meany + pos.y/this._numrobots;
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
             }
             var color = that.colorRobot;
             drawutils.drawRect(30*meanx,30*(meany+2), 120,30, "rgba(240, 240, 240, 0.7)");
@@ -273,7 +254,7 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
     	var maxImpTime = .2; //seconds to maximum impulse
         that._impulseV.x = 0;
         that._impulseV.y = 0;
-    	var dateNow = new Date().getTime();
+        var dateNow = new Date().getTime();
 
         if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
         if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
@@ -283,7 +264,6 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         // moving at diagonal is no faster than moving sideways or up/down
         var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));
         var forceScaler = normalizer*(that._robotRadius*0.5)/0.25;   
-        //console.log(that._robotRadius);
         //scale by robot size -- now scale by robot diameter (500 robots was SLOW).  These means we hose the first 26 results (bummer)
         that._impulseV.x *=  forceScaler;    
         that._impulseV.y *=  forceScaler;  
@@ -291,12 +271,10 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         _.each( that._robots, function(r) { 
             r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
         } );
-
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);
         this._world.ClearForces(); // TODO: was this a hack?  NO, we need it
     },
-
 });
 
 // this makes sure that the "this" context is properly set

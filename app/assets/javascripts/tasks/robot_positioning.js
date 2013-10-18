@@ -15,7 +15,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
     +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
     +"</p>",
-  
+    
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots
     _robots: [],                                            // array of bodies representing the robots
     _impulse: 50,                                            // impulse to move robots by
@@ -50,7 +50,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
         // create top wall
         bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
+        
         // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(this.obsThick, 10);
         
@@ -111,8 +111,8 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
         
         //initialize robots to not be at goal
         _.each( that._robots, function(r) {
-                r.atGoal = false;
-                });
+            r.atGoal = false;
+        });
 
         // draw goals 
         for (var i =0; i< this._numrobots; i++) { //this._myGoalsX.length
@@ -140,9 +140,9 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
                     if (b.atGoal == true )
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobotEdge); }
+                        {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobotEdge); }
                     else
-                    {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); }
+                        {drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); }
                 } else {
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -162,14 +162,14 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             var color = 'white';
             // draw goal zone
             _.each(that._goals, function (g) { 
-                        var pos = g.GetPosition();
-                        color = that.colorRobot;
-                         drawutils.drawText(30*pos.x,30*pos.y,"Goal", 2, color, color)
+                var pos = g.GetPosition();
+                color = that.colorRobot;
+                drawutils.drawText(30*pos.x,30*pos.y,"Goal", 2, color, color)
             });
             _.each(that._blocks, function (g) { 
-                        var pos = g.GetPosition();
-                        color = 'white';
-                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+                var pos = g.GetPosition();
+                color = 'white';
+                drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
             });
 
             var meanx = 0;
@@ -177,9 +177,9 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
-                 meanx = meanx + pos.x/this._numrobots;
-                 meany = meany + pos.y/this._numrobots;
-                 if( pos.y < miny)
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
+                if( pos.y < miny)
                     {miny = pos.y;}
             }
             color = that.colorRobot;
@@ -198,11 +198,11 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             var strRobotGoal = this._numrobots + " robots (blue) to the goals (outlined)";
             if(this._numrobots==1)
                 { strRobotGoal = "robot (blue) to the goal (outlined)";}
-                this.instructions = "Move the " + strRobotGoal;
+            this.instructions = "Move the " + strRobotGoal;
 
-                drawutils.drawText(300,430,that.instructions, 1.5, color, color);
-                drawutils.drawText(300,460,"Using the arrow keys (←,↑,↓,→)", 1.5, color, color);
-            }
+            drawutils.drawText(300,430,that.instructions, 1.5, color, color);
+            drawutils.drawText(300,460,"Using the arrow keys (←,↑,↓,→)", 1.5, color, color);
+        }
         
     },
 
@@ -228,8 +228,6 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
         _.each( that._robots, function(r) { 
             r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
         } );
-
-
 
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);

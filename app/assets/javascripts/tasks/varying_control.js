@@ -3,7 +3,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     taskMode: "default",
     instructions: "Try different ways of controlling the robots. Use the robots (blue) to move the blocks (green) to the goal positions (outlined) with the mouse.",
     theScience: 'We want to use swarms of robots to build micro devices.  This experiment compares different controllers, modeled after real-world devices. '
-        + '<iframe width="270" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> '
+    +'<iframe width="270" height="295" src="//www.youtube.com/embed/px5RdSvGD2Q" frameborder="0" allowfullscreen></iframe> '
     +' <p> Scientists are using scanning tunneling microscopes (STM) to arrange atoms and make small assemblies. '
     +' A very tiny sub-microscopic tip is charged with electrical potential, and this charge can be used to repulse like-charged molecules or attract differently-charged molecules. '
     +' The global controller represents using global field (formed by parallel lines of differently-charged conductors) to pull molecules all in the same direction. '
@@ -34,8 +34,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             default: break;
         }
         this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
-            + " Play all "+this._taskModes.length+"!"
-            + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";   
+        + " Play all "+this._taskModes.length+"!"
+        + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";   
         
 
         // fixture definition for obstacles
@@ -62,7 +62,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         // create top wall
         bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
+
         // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(this.obsThick, 10);
         
@@ -117,39 +117,38 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         }
 
         // create goals
-        var goalPositions = [ //{x:10.0, y:7.2},
+        var goalPositions = [ //{x:10.0, y:7.2},  //6 goals was frustrating for users
                               //{x:9.5, y:8.2},  {x:10.5, y:8.2},
                               //{x:9, y:9.2}, {x:10.0,y:9.2}, {x:11,y:9.2}
                               {x:10, y:8.2}, 
                               {x:9.5, y:9.2}, {x:10.5,y:9.2}
                               ];
-        fixDef.isSensor = true;
-        fixDef.shape = new phys.polyShape;
-        fixDef.shape.SetAsBox(.2,.2);
-        bodyDef.type = phys.body.b2_dynamicBody;
-        bodyDef.userData = "goal";
-        var that = this;
-        _.each(goalPositions, function (gp) {
-            var body;
-            bodyDef.position.Set(gp.x,gp.y);
-            body = that._world.CreateBody(bodyDef);
-            body.CreateFixture(fixDef);
-            that._goals.push(body);
-            //console.log(body);
-        });
-    },
+                              fixDef.isSensor = true;
+                              fixDef.shape = new phys.polyShape;
+                              fixDef.shape.SetAsBox(.2,.2);
+                              bodyDef.type = phys.body.b2_dynamicBody;
+                              bodyDef.userData = "goal";
+                              var that = this;
+                              _.each(goalPositions, function (gp) {
+                                var body;
+                                bodyDef.position.Set(gp.x,gp.y);
+                                body = that._world.CreateBody(bodyDef);
+                                body.CreateFixture(fixDef);
+                                that._goals.push(body);
+                            });
+                          },
 
-    setupController: function ( options ) {
-        var that = this;
-        switch( that.taskMode ) {
-            case "attractive": that.setupAttractiveController(options); break;
-            case "repulsive" : that.setupRepulsiveController(options);break;
-            case "global" : that.setupGlobalController(options);break;
-        }
-    },
+                          setupController: function ( options ) {
+                            var that = this;
+                            switch( that.taskMode ) {
+                                case "attractive": that.setupAttractiveController(options); break;
+                                case "repulsive" : that.setupRepulsiveController(options);break;
+                                case "global" : that.setupGlobalController(options);break;
+                            }
+                        },
 
-    evaluateCompletion: function( options ) {
-        var ret = true;
+                        evaluateCompletion: function( options ) {
+                            var ret = true;
         // need to check if object has been moved into the goal zone
         var that = this;
         var blockupied = 0;
@@ -164,7 +163,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 return !ret;
             });
         });
-       
+
         return blockupied == this._goals.length;
     },
 
@@ -174,28 +173,28 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
         //initialize robots to not be at goal
         _.each( that._blocks, function(b) {
-                b.atGoal = false;
-                });
-    
+            b.atGoal = false;
+        });
+
 
         // draw goal zone
         _.each(that._goals, function (g) { 
-                    var f = g.GetFixtureList();
-                    var verts = f.GetShape().GetVertices();
-                    var X = verts[1].x - verts[0].x; 
-                    var Y = verts[2].y - verts[1].y;
-                    var pos = g.GetPosition();
-                    drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal,0,that.strokeWidth);
-                    _.each(that._blocks, function (b) {
-                        var blockAABB = b.GetFixtureList().GetAABB();
-                            ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
-                            if (ret) {
-                                b.atGoal = true;
-                            }
-                    });  
+            var f = g.GetFixtureList();
+            var verts = f.GetShape().GetVertices();
+            var X = verts[1].x - verts[0].x; 
+            var Y = verts[2].y - verts[1].y;
+            var pos = g.GetPosition();
+            drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X*2.2, 30 * Y*2.2, that.colorGoal,0,that.strokeWidth);
+            _.each(that._blocks, function (b) {
+                var blockAABB = b.GetFixtureList().GetAABB();
+                ret = blockAABB.Contains( g.GetFixtureList().GetAABB() );
+                if (ret) {
+                    b.atGoal = true;
+                }
+            });  
         });
 
-       
+
         if(that._startTime == null){
             that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
             that.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
@@ -209,13 +208,9 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 case "global": that.update = that.globalUpdate; break;
                 default: break;
             }
-            //console.log("Setting taskmode update to "+that.taskMode+" update = "+that.update);
-            //console.log(that.update);
             that.setupController(that._options);
         }
         
-        
-
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())
         {
@@ -231,23 +226,10 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
                     if (that.taskMode == 'attractive' || that.taskMode == 'repulsive')
                     {drawutils.drawLine([[30*(-0.2+pos.x), 30*pos.y],[30*(0.2+pos.x), 30*pos.y]],'darkblue',true,that.strokeWidthThick); // minus
-                    }
-                    if (that.taskMode == 'repulsive' )
+            }
+            if (that.taskMode == 'repulsive' )
                     {drawutils.drawLine([[30*(pos.x), 30*(-0.2+pos.y)],[30*(pos.x), 30*(0.2+pos.y)]],'darkblue',true,that.strokeWidthThick); //vertical
-                    }
-                    // if (that.taskMode == 'global' )  //Rico said the arrows were confusing
-                    // {
-                    //     //draw arrow
-                    //     var ArrX = [-0.3,0.3,0.0,0.3,0.0,0.3];
-                    //     var ArrY = [0,0,0.2,0,-0.2,0];
-                    //     // Add the points from the array to the object
-                    //     var angle = Math.atan2(that._mY - 10, that._mX-10);
-                    //     var pts = [];
-                    //     for (var p=0; p<ArrX.length; p+=1) {
-                    //       pts.push([30*(pos.x+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(pos.y+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
-                    //     }
-                    //     drawutils.drawLine(pts,'darkblue',true); //vertical
-                    // }
+            }
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the object
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
@@ -255,7 +237,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                     var pos = b.GetPosition();
                     var color = that.colorObject;
                     if (b.atGoal == true)
-                    {color = that.colorObjectAtGoal;}
+                        {color = that.colorObjectAtGoal;}
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,that.colorObjectEdge,that.strokeWidth);
                 } else {
                     // draw the obstacles
@@ -271,9 +253,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             }
         }
         
-
-
-
         if( that.taskMode == "global")
         {
             //draw arrow
@@ -284,13 +263,12 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             var pts = [];
             for (var p=0; p<ArrX.length; p+=1) {
               pts.push([30*(10+Math.cos(angle)*ArrX[p]-Math.sin(angle)*ArrY[p]),30*(10+Math.sin(angle)*ArrX[p]+Math.cos(angle)*ArrY[p])]);
-            }
-            drawutils.drawLine(pts,"rgba(0, 0, 153, 0.5)",true,18,false);
-        }else{
+          }
+          drawutils.drawLine(pts,"rgba(0, 0, 153, 0.5)",true,18,false);
+      }else{
             // draw controller position.  James asked for this, but the lag behind the cursor position is very noticeable, so I commented it out.
             drawutils.drawLine([[30*(-0.2+this._mX), 30*this._mY],[30*(0.2+this._mX), 30*this._mY]],'darkblue',true); // minus
             drawutils.drawLine([[30*(this._mX), 30*(-0.2+this._mY)],[30*(this._mX), 30*(0.2+this._mY)]],'darkblue',true); //vertical
-                  
         }
 
         // draw text before game starts
@@ -304,7 +282,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             _.each(that._goals, function (g) { 
                 var pos = g.GetPosition();
                 if( pos.x >maxx)
-                {maxx = pos.x;}
+                    {maxx = pos.x;}
                 meanx = meanx + pos.x/that._goals.length;
                 meany = meany + pos.y/that._goals.length;      
             });
@@ -342,9 +320,9 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
-                 meanx = meanx + pos.x/this._numrobots;
-                 meany = meany + pos.y/this._numrobots;
-                 if( pos.y < miny)
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
+                if( pos.y < miny)
                     {miny = pos.y;}
                 if( pos.x < minx)
                     {minx = pos.x;}
@@ -376,7 +354,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         this._world.Step(1 / 60, 10, 10);
         this._world.ClearForces();
     },
-
 });
 
 // this makes sure that the "this" context is properly set

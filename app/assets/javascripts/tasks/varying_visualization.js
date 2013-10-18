@@ -9,6 +9,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     +' <strong>Full-state</strong> sensing provides the most information, because it tells the position of all robots (200 numbers for 100 robots).  The <strong>convex-hull</strong> draws a line around the outermost robots. '
     +' <strong>Mean</strong> tells where the average position (just 2 numbers for all 100 robots), and knowing the <strong>variance</strong> adds only 3 additional numbers.'
     +'</p>',
+    // Four modes:
     //full-state (visualize all robots)
     //convex hull of robots
     //mean & standard deviation of group
@@ -29,7 +30,6 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     setupTask: function( options ) {  
         // randomly assign mode
         this.taskMode = this._taskModes[Math.floor(Math.random()*this._taskModes.length)];
-
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -55,7 +55,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         // create top wall
         bodyDef.position.Set(10, this.obsThick);
         this._world.CreateBody(bodyDef).CreateFixture(fixDef);
- 
+
         // reshape fixture def to be vertical bar
         fixDef.shape.SetAsBox(this.obsThick, 10);
         
@@ -121,7 +121,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
         // create some robots
         this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
-	    var rowLength = Math.floor(7/(2*this._robotRadius));
+        var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
         var yoffset = 14+this._robotRadius;
         this._robots = [];
@@ -145,7 +145,6 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             this._robots[i].m_linearDamping = 10;
         }
     },
-
     
     evaluateCompletion: function( options ) {
         var ret = true;
@@ -157,8 +156,7 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                 ret = g.GetFixtureList().GetAABB().Contains( b.GetFixtureList().GetAABB() );
                 return !ret;
             });
-        });
-        
+        }); 
         return ret;
     },
 
@@ -169,18 +167,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
         // draw goal zone
         _.each(that._goals, function (g) { 
-                    var f = g.GetFixtureList();
-                    //var verts = f.GetShape().GetVertices();
-                    //var X = verts[1].x - verts[0].x; 
-                    //var Y = verts[2].y - verts[1].y;
-                    //var pos = g.GetPosition();
-                    //var color = that.colorGoal;
-                    //drawutils.drawEmptyRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color);
+            var f = g.GetFixtureList();
 
-                    var radius = f.GetShape().GetRadius();
-                    var pos = g.GetPosition();
-                    drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth);
-                   // drawCircle = function (x,y,radius,color,strokeWidth) 
+            var radius = f.GetShape().GetRadius();
+            var pos = g.GetPosition();
+            drawutils.drawCircle( 30*pos.x, 30*pos.y,30*radius, that.colorGoal, that.strokeWidth); 
         });
 
         //draw robots and obstacles
@@ -193,20 +184,15 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
                 }
                 if (b.GetUserData() == 'robot') {
                     continue; // we draw the robots elsewhere
-                    //var radius = f.GetShape().GetRadius();
-                    //var pos = b.GetPosition();
-                    //drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, "blue","blue"); 
                 } else if (b.GetUserData() == 'workpiece') {
                     // draw the pushable object
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
                     var pos = b.GetPosition();
                     var color = that.colorObject;
-                    //drawutils.drawRect(30*pos.x, 30*pos.y, 30* X, 30 * Y, color,angle);
                     drawutils.drawPolygon(30*pos.x, 30*pos.y,30*2,6,angle,color);
                 } else {
                     //http://calebevans.me/projects/jcanvas/docs/polygons/
-
                     // draw the obstacles
                     var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
                     var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
@@ -228,76 +214,73 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         switch (this.taskMode) {
-            //var taskModes=new Array("full-state", "convex-hull", "mean & variance", "mean");
             case "full-state":
-
-                 for(var i = 0; i < this._numrobots; ++i) {
-                    var radius = this._robots[i].m_fixtureList.m_shape.m_radius;
-                    var pos = this._robots[i].GetPosition();
-                    drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
-                }
-                break;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var radius = this._robots[i].m_fixtureList.m_shape.m_radius;
+                var pos = this._robots[i].GetPosition();
+                drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobot,that.colorRobotEdge); 
+            }
+            break;
             
             case "convex-hull":
-                var points = [];
-                for(var i = 0; i < this._numrobots; ++i) {
-                    var pos = this._robots[i].GetPosition();
-                    points.push([30*pos.x,30*pos.y]);
-                }
-                var cHull = drawutils.getConvexHull(points);
-                var cHullPts = [];
-                for(var i = 0; i < cHull.length; ++i) {
-                    cHullPts.push([cHull[i][0][0],cHull[i][0][1]]);
-                }
+            var points = [];
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                points.push([30*pos.x,30*pos.y]);
+            }
+            var cHull = drawutils.getConvexHull(points);
+            var cHullPts = [];
+            for(var i = 0; i < cHull.length; ++i) {
+                cHullPts.push([cHull[i][0][0],cHull[i][0][1]]);
+            }
 
-                drawutils.drawLine(cHullPts,"lightblue",true,4,false);
-                break;
+            drawutils.drawLine(cHullPts,"lightblue",true,4,false);
+            break;
             case "mean & variance":
             // http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
             // t95% confidence ellipse
-                var meanx = 0;
-                var meany = 0;
-                var varx = 0;
-                var vary = 0;
-                var covxy = 0;
-                for(var i = 0; i < this._numrobots; ++i) {
-                    var pos = this._robots[i].GetPosition();
-                     meanx = meanx + pos.x/this._numrobots;
-                     meany = meany + pos.y/this._numrobots;
-                }
-                for(var i = 0; i < this._numrobots; ++i) {
-                    var pos = this._robots[i].GetPosition();
-                     varx =  varx + (pos.x-meanx)*(pos.x-meanx)/this._numrobots;
-                     vary =  vary + (pos.y-meany)*(pos.y-meany)/this._numrobots;
-                     covxy=  covxy+ (pos.x-meanx)*(pos.y-meany)/this._numrobots;
-                }
-                var diffeq = Math.sqrt( (varx-vary)*(varx-vary)/4 + covxy*covxy);
-                var varxp = (varx+vary)/2 + diffeq;
-                var varyp = (varx+vary)/2 - diffeq;
-                var angle = 180/Math.PI*1/2*Math.atan2( 2*covxy, varx-vary);
+            var meanx = 0;
+            var meany = 0;
+            var varx = 0;
+            var vary = 0;
+            var covxy = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
+            }
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                varx =  varx + (pos.x-meanx)*(pos.x-meanx)/this._numrobots;
+                vary =  vary + (pos.y-meany)*(pos.y-meany)/this._numrobots;
+                covxy=  covxy+ (pos.x-meanx)*(pos.y-meany)/this._numrobots;
+            }
+            var diffeq = Math.sqrt( (varx-vary)*(varx-vary)/4 + covxy*covxy);
+            var varxp = (varx+vary)/2 + diffeq;
+            var varyp = (varx+vary)/2 - diffeq;
+            var angle = 180/Math.PI*1/2*Math.atan2( 2*covxy, varx-vary);
 
-
-                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
-                drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"lightblue",4 );
+            drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
+            drawutils.drawEllipse( 30*meanx, 30*meany,2.4*30*Math.sqrt(varxp), 2.4*30*Math.sqrt(varyp),angle,"lightblue",4 );
 
             break;
             case "mean":
-                var meanx = 0;
-                var meany = 0;
-                 for(var i = 0; i < this._numrobots; ++i) {
-                    var pos = this._robots[i].GetPosition();
-                     meanx = meanx + pos.x/this._numrobots;
-                     meany = meany + pos.y/this._numrobots;
-                }
-                drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
+            var meanx = 0;
+            var meany = 0;
+            for(var i = 0; i < this._numrobots; ++i) {
+                var pos = this._robots[i].GetPosition();
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
+            }
+            drawutils.drawRobot( 30*meanx, 30*meany,0, 15, "lightblue",that.colorRobot);
             break;
         }
         // draw goal zone
-            _.each(that._goals, function (g) { 
-                        var pos = g.GetPosition();
-                        color = that.colorGoal;
-                        drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
-            });
+        _.each(that._goals, function (g) { 
+            var pos = g.GetPosition();
+            color = that.colorGoal;
+            drawutils.drawText(30*pos.x,30*pos.y,"Goal", 1.5, color, color)
+        });
         // draw text before game starts
         if(that._startTime == null){
             var color = 'white';
@@ -313,17 +296,17 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
 
             _.each(that._blocks, function (g) { 
-                        var pos = g.GetPosition();
-                        color = 'white';
-                         drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
+                var pos = g.GetPosition();
+                color = 'white';
+                drawutils.drawText(30*pos.x,30*pos.y,"Object", 1.5, color, color)
             });
 
             var meanx = 0;
             var meany = 0;
             for(var i = 0; i < this._numrobots; ++i) {
                 var pos = this._robots[i].GetPosition();
-                 meanx = meanx + pos.x/this._numrobots;
-                 meany = meany + pos.y/this._numrobots;
+                meanx = meanx + pos.x/this._numrobots;
+                meany = meany + pos.y/this._numrobots;
             }
             var color = that.colorRobot;
             drawutils.drawRect(30*meanx,30*(meany+1), 120,30, "rgba(240, 240, 240, 0.7)");
@@ -334,7 +317,6 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         }
     },
 
-
     // update function run every frame to update our robots
     update: function() {
         var that = this;
@@ -342,12 +324,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
         that._impulseV.x = 0;
         that._impulseV.y = 0;
         var dateNow = new Date().getTime();
- 
+
         if(that.keyL!=null){that._impulseV.x -= that._impulse*Math.min(1, .001*(dateNow-that.keyL)/maxImpTime);} 
         if(that.keyR!=null){that._impulseV.x += that._impulse*Math.min(1, .001*(dateNow-that.keyR)/maxImpTime);} 
         if(that.keyU!=null){that._impulseV.y -= that._impulse*Math.min(1, .001*(dateNow-that.keyU)/maxImpTime);} 
         if(that.keyD!=null){that._impulseV.y += that._impulse*Math.min(1, .001*(dateNow-that.keyD)/maxImpTime);} 
-
 
         // moving at diagonal is no faster than moving sideways or up/down
         var normalizer = Math.min(1,that._impulse/Math.sqrt(that._impulseV.x*that._impulseV.x + that._impulseV.y*that._impulseV.y));

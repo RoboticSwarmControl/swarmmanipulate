@@ -1,5 +1,5 @@
  <div id="fb-root"></div>
-<script>(function(d, s, id) {
+ <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -8,46 +8,36 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="container">
-    <h1>SwarmControl: Massive Manipulation <!-- Place this tag where you want the +1 button to render. -->
-<div class="pull-right">
-<div class="g-plusone" data-size="medium" data-href="http://www.swarmcontrol.net/"></div>
-    <div class="fb-like" data-href="http://www.swarmcontrol.net" data-width="50" data-layout="button_count" data-show-faces="true" data-send="true"></div>
-<!-- Place this tag after the last +1 button tag. -->
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-</div></h1>    
-    <hr>
+    <h1>SwarmControl: Massive Manipulation 
+        <!-- Place this tag where you want the +1 button to render. -->
+        <div class="pull-right">
+            <div class="g-plusone" data-size="medium" data-href="http://www.swarmcontrol.net/"></div>
+            <div class="fb-like" data-href="http://www.swarmcontrol.net" data-width="50" data-layout="button_count" data-show-faces="true" data-send="true"></div>
+            <!-- Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+            (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+            </script>
+        </div></h1>  
+        We want to understand how humans can best control robotic swarms. To achieve this, we gather and analyze game-play data.   
+        <hr>
 
 
-        <!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
 
-        <!-- <h2>About</h2> -->
-        The SwarmControl project aims to understand the best ways to control a swarm of robots by a human.  The project achieves this through a community of game-developed experts.  The project is continuously changed to promote the creation of experts and to become the most effective exploration tool. To achieve this, the project gathers and analyzes data.  
-
-        <h2>Why we care 
-            <!--<div class="pull-right">
-    <script type="text/javascript">
-  reddit_url = "http://www.swarmcontrol.net/";
-  reddit_title = "Control Robotic Swarm";
-  reddit_newwindow='1';
-  reddit_bordercolor = "#C1C1C1";
-</script>
-<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div> --></h2>
-        There are compelling reasons for creating micro-robotics for applications ranging from targeted drug delivery to minimally invasive surgery.
-        The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish. <%= link_to "/subscribe" do %> Request the research paper! <% end %>
+        <h2>Why we care </h2>
+Compelling applications for creating micro-robotic swarms range from <a href="http://en.wikipedia.org/wiki/Targeted_drug_delivery">targeted drug delivery</a> to <a href="http://en.wikipedia.org/wiki/Invasiveness_of_surgical_procedures#Minimally_invasive_procedure">minimally invasive surgery</a>.
+The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish. 
+<%= link_to "/subscribe" do %> Request the research paper! <% end %>
 
 
-        <h2>Play them all</h2>
+<h2>Play them all</h2>
 
 <script> 
     var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
     myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-    //console.log(myParticipant);
 
     function drawMeritBadges(divname,taskname,numstars){
         numstars = typeof numstars !== 'undefined' ? numstars : 3;
@@ -70,115 +60,81 @@
                 img.height = 24;
                 element.appendChild(img);  
             }
-            // ICRA goal: 1000 results  -- looks horrible in IE, also is flashing == annoying
-            //element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
         }); 
-    } 
+} 
 </script>
 
 
-        <div class="row">
-            <div class="span2">
-                <%= image_tag "ChooseTask.png" %>
+<div class="row">
+    <div class="span2">
+        <%= image_tag "ChooseTask.png" %>
+    </div>
+    <div class="span2">
+        <%= link_to "/task/varying_control" do %>
+        <div id="div1" align="center">
+            <div class ="highlightit", style="display: inline">
+                <%= image_tag "varying_control.png" %>
             </div>
-            <div class="span2">
-                <%= link_to "/task/varying_control" do %>
-                    <div id="div1" align="center">
-                        <div class ="highlightit", style="display: inline">
-                            <%= image_tag "varying_control.png" %>
-                        </div>
-                        <div align="center">
-                            Vary control scheme<br>(1 of 5)
-                        </div>
-                        <script>drawMeritBadges("div1","varying_control",3);</script>
-                    </div>
-                <% end %>
+            <div align="center">
+                Vary control scheme<br>(1 of 5)
             </div>
-            <div class="span2">
-                <%= link_to "/task/varying_visualization" do %>
-                    <div id="div2" align="center">
-                        <div class ="highlightit", style="display: inline">
-                            <%= image_tag "varying_visualization.png" %>
-                        </div>
-                        <div align="center">
-                            Vary visualization<br>(2 of 5)
-                        </div>
-                        <script>drawMeritBadges("div2","varying_visualization",4);</script>
-                    </div>
-                <% end %>
-            </div>
-            <div class="span2">
-                <%= link_to "/task/maze_positioning" do %>
-                    <div id="div3" align="center">
-                        <div class ="highlightit", style="display: inline;">
-                            <%= image_tag "maze_positioning.png"%>
-                        </div>
-                        <div align="center">
-                            Vary number<br>(3 of 5)
-                        </div>
-                        <script>drawMeritBadges("div3","maze_positioning",3);</script>
-                    </div>
-                <% end %> 
-            </div>
-            <div class="span2">
-                <%= link_to "/task/robot_positioning" do %>
-                    <div id="div4" align="center">
-                        <div class ="highlightit", style="display: inline">
-                            <%= image_tag "robot_positioning.png" %>
-                        </div>
-                        <div align="center">
-                            Robot positioning<br>(4 of 5)
-                        </div>
-                        <script>drawMeritBadges("div4","robot_positioning",3);</script>
-                    </div>
-                <% end %>
-            </div>
-            <div class="span2">
-                <%= link_to "/task/pyramid_building" do %>
-                    <div id="div5" align="center">
-                        <div class ="highlightit", style="display: inline">
-                            <%= image_tag "pyramid_building.png" %>
-                        </div>
-                        <div align="center">
-                            Pyramid building<br>(5 of 5)
-                        </div>
-                        <script>drawMeritBadges("div5","pyramid_building",3);</script>
-                    </div>
-                <% end %>
-            </div>
+            <script>drawMeritBadges("div1","varying_control",3);</script>
         </div>
-
-    <br>
-    <!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
-    <!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
-    -->
-    <!-- 
-    <script> 
-        var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-        myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-        console.log(myParticipant);
-        var numPres = 0;
-        $.get("/result.json?task="+"maze_positioning", function( data ) {
-        data = JSON.parse(data);
-        console.log(data.results);
-        for( var i = 0; i<data.results.length; i++){
-        if( data.results[i].participant == myParticipant) {
-        numPres = numPres+1;
-        } 
-        }
-        console.log(numPres);
-        });
-        var element=document.getElementById("div1");
-
-        for( var i = 0; i<4; i++){
-        var strImage = "soft_edge_empty_star.png";
-        if( numPres >=i) {strImage = "soft_edge_yellow_star.png";}
-        var xPos = " "+i*37+"px";
-        }
-    </script>-->
-
-
+        <% end %>
+    </div>
+    <div class="span2">
+        <%= link_to "/task/varying_visualization" do %>
+        <div id="div2" align="center">
+            <div class ="highlightit", style="display: inline">
+                <%= image_tag "varying_visualization.png" %>
+            </div>
+            <div align="center">
+                Vary visualization<br>(2 of 5)
+            </div>
+            <script>drawMeritBadges("div2","varying_visualization",4);</script>
+        </div>
+        <% end %>
+    </div>
+    <div class="span2">
+        <%= link_to "/task/maze_positioning" do %>
+        <div id="div3" align="center">
+            <div class ="highlightit", style="display: inline;">
+                <%= image_tag "maze_positioning.png"%>
+            </div>
+            <div align="center">
+                Vary number<br>(3 of 5)
+            </div>
+            <script>drawMeritBadges("div3","maze_positioning",3);</script>
+        </div>
+        <% end %> 
+    </div>
+    <div class="span2">
+        <%= link_to "/task/robot_positioning" do %>
+        <div id="div4" align="center">
+            <div class ="highlightit", style="display: inline">
+                <%= image_tag "robot_positioning.png" %>
+            </div>
+            <div align="center">
+                Robot positioning<br>(4 of 5)
+            </div>
+            <script>drawMeritBadges("div4","robot_positioning",3);</script>
+        </div>
+        <% end %>
+    </div>
+    <div class="span2">
+        <%= link_to "/task/pyramid_building" do %>
+        <div id="div5" align="center">
+            <div class ="highlightit", style="display: inline">
+                <%= image_tag "pyramid_building.png" %>
+            </div>
+            <div align="center">
+                Pyramid building<br>(5 of 5)
+            </div>
+            <script>drawMeritBadges("div5","pyramid_building",3);</script>
+        </div>
+        <% end %>
+    </div>
 </div>
-
+<br>
 </div>
-
+</div>

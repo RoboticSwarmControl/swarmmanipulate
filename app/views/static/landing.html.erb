@@ -8,7 +8,8 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="container">
-    <h1>SwarmControl: Massive Manipulation <!-- Place this tag where you want the +1 button to render. -->
+    <h1>SwarmControl: Massive Manipulation 
+        <!-- Place this tag where you want the +1 button to render. -->
         <div class="pull-right">
             <div class="g-plusone" data-size="medium" data-href="http://www.swarmcontrol.net/"></div>
             <div class="fb-like" data-href="http://www.swarmcontrol.net" data-width="50" data-layout="button_count" data-show-faces="true" data-send="true"></div>
@@ -25,20 +26,8 @@
         <hr>
 
 
-        <!--  TODO: I want a column on the right that shows some pictures of tasks (Todo:  eventually, a box2d animation) and tells about the project -->
 
-        <!-- <h2>About</h2> -->
-
-
-        <h2>Why we care 
-            <!--<div class="pull-right">
-    <script type="text/javascript">
-  reddit_url = "http://www.swarmcontrol.net/";
-  reddit_title = "Control Robotic Swarm";
-  reddit_newwindow='1';
-  reddit_bordercolor = "#C1C1C1";
-</script>
-<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script></div> --></h2>
+        <h2>Why we care </h2>
 Compelling applications for creating micro-robotic swarms range from <a href="http://en.wikipedia.org/wiki/Targeted_drug_delivery">targeted drug delivery</a> to <a href="http://en.wikipedia.org/wiki/Invasiveness_of_surgical_procedures#Minimally_invasive_procedure">minimally invasive surgery</a>.
 The potential impact is broad: large populations of micro-manipulators would enable surgeons to eliminate cancer at the cellular level, let engineers develop complex MEMS assemblies, and empower biologists to simultaneously sort all the cells on a Petri dish. 
 <%= link_to "/subscribe" do %> Request the research paper! <% end %>
@@ -49,7 +38,6 @@ The potential impact is broad: large populations of micro-manipulators would ena
 <script> 
     var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
     myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-    //console.log(myParticipant);
 
     function drawMeritBadges(divname,taskname,numstars){
         numstars = typeof numstars !== 'undefined' ? numstars : 3;
@@ -72,8 +60,6 @@ The potential impact is broad: large populations of micro-manipulators would ena
                 img.height = 24;
                 element.appendChild(img);  
             }
-            // ICRA goal: 1000 results  -- looks horrible in IE, also is flashing == annoying
-            //element.innerHTML = element.innerHTML + '<progress value="'+data.results.length+'" max="1000"></progress>';
         }); 
 } 
 </script>
@@ -149,38 +135,6 @@ The potential impact is broad: large populations of micro-manipulators would ena
         <% end %>
     </div>
 </div>
-
 <br>
-<!-- these are the caption text: http://www.cs.tut.fi/~jkorpela/www/captions.html -->
-    <!-- TODO:  I want to draw stars over the images based on how many tasks are completed: http://stackoverflow.com/questions/48474/how-do-i-position-one-image-on-top-of-another-in-html 
--->
-    <!-- 
-    <script> 
-        var myParticipant =  document.cookie.slice(document.cookie.indexOf("task_sig")+("task_sig").length+1); //substring starting at task_sig 
-        myParticipant = myParticipant.substr(0,myParticipant.indexOf(";")); //trim any extra info off the string
-        console.log(myParticipant);
-        var numPres = 0;
-        $.get("/result.json?task="+"maze_positioning", function( data ) {
-        data = JSON.parse(data);
-        console.log(data.results);
-        for( var i = 0; i<data.results.length; i++){
-        if( data.results[i].participant == myParticipant) {
-        numPres = numPres+1;
-        } 
-        }
-        console.log(numPres);
-        });
-        var element=document.getElementById("div1");
-
-        for( var i = 0; i<4; i++){
-        var strImage = "soft_edge_empty_star.png";
-        if( numPres >=i) {strImage = "soft_edge_yellow_star.png";}
-        var xPos = " "+i*37+"px";
-        }
-    </script>-->
-
-
 </div>
-
 </div>
-

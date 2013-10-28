@@ -84,7 +84,7 @@ swarmcontrol.results = (function () {
             x,y;
 
         // two tasks where the number of robots is varied: maze_positioning, robot_positioning 
-        // varying_control, varying_visualization  x-axis is the mode (string) (these are bar charts?)
+        // varying_control, forage, varying_visualization  x-axis is the mode (string) (these are bar charts?)
         //  pyramid_building  is a function of the noise, saves as the mode
         // ...and add the data points for the graph...
         var points = [];  //all data points
@@ -106,7 +106,7 @@ swarmcontrol.results = (function () {
             if (r.task == "maze_positioning" || r.task == "robot_positioning"){
                 xAxisLabel = 'Number of robots';
                 x = r.robot_count;
-            }else if (r.task == "varying_control" ){
+            }else if (r.task == "varying_control" || r.task == "forage" ){
                 xAxisLabel = 'Control type';
                 x = _.indexOf(modekeys, r.mode);
             }else if(r.task == "varying_visualization"){
@@ -160,7 +160,7 @@ var msubtitle =  res.length + " results, with " + _.keys(modes).length  + " mode
         // ...and then append the graph. 
         var margins = 0.05;   
         var myTicks = null;
-        if(res[0].task == "varying_control" || res[0].task == "varying_visualization"){
+        if(res[0].task == "varying_control" || res[0].task == "forage" || res[0].task == "varying_visualization"){
             myTicks = [];
             var xCounts = [];
             var yMeans = [];

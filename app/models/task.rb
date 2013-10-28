@@ -3,7 +3,8 @@ class Task
                     "varying_control" => "Varying control",
                     "varying_visualization" => "Varying visualization",
                     "pyramid_building" => "Pyramid building",
-                    "robot_positioning" => "Robot positioning" }
+                    "robot_positioning" => "Robot positioning",
+                    "forage" => "Foraging" }
 
     class << self
         def get_pretty_task_name name

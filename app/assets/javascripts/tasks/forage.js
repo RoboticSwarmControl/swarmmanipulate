@@ -35,6 +35,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _numblocksTotal: 50,
 
     setupTask: function( options ) { 
+        
         this.taskMode = this._taskModes[ Math.floor(Math.random()*this._taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;
@@ -180,7 +181,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
         evaluateCompletion: function( options ) {
         
-        return (this._numblocksCollected/this._numblocksTotal)>0.9;
+        return (this._numblocksCollected/this._numblocksTotal)>=0.9;
     },
 
     draw: function() {
@@ -210,7 +211,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         });
 
         if(that._startTime == null){
-            that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
+           // that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
             that.instructions = "With your mouse use robots (blue) to bring at least 90% of food (green) home (outlined)."
             + " Play all "+this._taskModes.length+" control styles!"
             + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";

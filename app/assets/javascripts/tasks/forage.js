@@ -2,7 +2,6 @@
 //  make blocks disappear at home  http://blog.sethladd.com/2011/09/box2d-collision-damage-for-javascript.html
 // count the number of blocks delivered
 
-
 var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveController, globalController, {
     taskName: "forage",
     taskMode: "default",
@@ -219,8 +218,15 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         if(that._startTime == null){
            // that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
             that.instructions = "With your mouse use robots (blue) to bring at least 90% of food (green) home (outlined)."
-            + " Play all "+this._taskModes.length+" control styles!"
-            + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";
+            + " Play all "+that._taskModes.length+" control styles!"            //+ "<p> Current mode: <strong>" + that.taskMode + "</strong> control."
+            +"<div class='btn-group'>";
+            _.each(that._taskModes, function (m) {
+                if( m == that.taskMode)
+                { that.instructions += "<button type='button' class='btn btn-success' title='choose control mode' id=button"+m+">"+m+"</button>" ;}
+                else
+                { that.instructions += "<button type='button' class='btn btn-default' title='choose control mode' id=button"+m+" >"+m+"</button>" ;}
+            });
+            that.instructions += "</div>";
             $("#task-instructions").empty();
             $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
             switch (that.taskMode) {
@@ -230,7 +236,20 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 default: break;
             }
             that.setupController(that._options);
+            _.each(that._taskModes, function (m) {
+                //CHRIS -- this line doesn't work.  Can you help?
+                $('#button'+m).onClick = function(event) { 
+                    that.taskMode=m;   
+                };
+                //CHRIS -- this line didn't work either... how do I do this?
+                //$('#button'+m).object.onclick=function(){that.taskMode=m;};
+            });
+        }else{
+            _.each(that._taskModes, function (m) {
+                $('#button'+m).prop('disabled',true);
+            });
         }
+
         
         //draw robots and obstacles
         for (b = this._world.GetBodyList() ; b; b = b.GetNext())
@@ -383,7 +402,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
             } );
         }
-
         // step the world, and then remove all pending forces
         this._world.Step(1 / 60, 10, 10);
         this._world.ClearForces();

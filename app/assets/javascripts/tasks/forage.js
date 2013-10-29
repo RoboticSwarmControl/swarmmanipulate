@@ -35,7 +35,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _numblocksTotal: 50,
 
     setupTask: function( options ) { 
-        
+
         this.taskMode = this._taskModes[ Math.floor(Math.random()*this._taskModes.length) ];
         switch (this.taskMode) {
             case "attractive": this.update = this.attractiveUpdate; break;
@@ -137,6 +137,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             this._robots[i].CreateFixture(fixDef);
             this._robots[i].m_angularDamping = 10;
             this._robots[i].m_linearDamping = 10;
+            this._robots[i].foodx = -1;
+            this._robots[i].foody = -1;
         }
 
         var contactListener = new Box2D.Dynamics.b2ContactListener;
@@ -148,6 +150,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 contact.m_fixtureA.m_body.m_userData = 'contact';
                 contact.m_fixtureA.m_shape.m_radius = contact.m_fixtureA.m_shape.m_radius*1.5;
                 contact.m_fixtureB.m_body.m_userData = 'empty';
+                contact.m_fixtureA.m_body.foodx = contact.m_fixtureB.m_body.GetPosition().x;
+                contact.m_fixtureA.m_body.foody = contact.m_fixtureB.m_body.GetPosition().y;
             }
            else if( contact.m_fixtureA.m_body.m_userData == 'workpiece' &&
                  contact.m_fixtureB.m_body.m_userData == 'robot') 
@@ -155,6 +159,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             contact.m_fixtureB.m_body.m_userData = 'contact';
             contact.m_fixtureA.m_body.m_userData = 'empty';
             contact.m_fixtureB.m_shape.m_radius = contact.m_fixtureB.m_shape.m_radius*1.5;
+            contact.m_fixtureB.m_body.foodx = contact.m_fixtureA.m_body.GetPosition().x;
+            contact.m_fixtureB.m_body.foody = contact.m_fixtureA.m_body.GetPosition().y;
            }
         };
         this._world.SetContactListener(contactListener);
@@ -255,16 +261,19 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                         {color = that.colorObjectAtGoal;}
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, color,angle,that.colorObjectEdge,that.strokeWidth);
                 } else if (b.GetUserData() == 'empty') {
-                    // draw the object
-                    var X = f.GetShape().GetVertices()[1].x - f.GetShape().GetVertices()[0].x; 
-                    var Y = f.GetShape().GetVertices()[2].y - f.GetShape().GetVertices()[1].y;
-                    b.SetPosition(new Box2D.Common.Math.b2Vec2(30,30) );
-                    var pos = b.GetPosition();
-                    var color = that.colorObject;
-                    drawutils.drawRect(30*pos.x, 30*pos.y, 30*X, 30 * Y, "rgba(0, 0, 153, 0.0)",angle,that.colorObjectEdge,that.strokeWidth);
+                    that._world.DestroyBody(b);
                 }else if (b.GetUserData() == 'contact') {
                     var radius = f.GetShape().GetRadius();
                     var pos = b.GetPosition();
+                    if( b.foodx != -1  && b.foody != -1)
+                    {
+                        pos.x = (pos.x+b.foodx)/2;
+                        pos.y = (pos.y+b.foody)/2;
+                        b.SetPosition( new Box2D.Common.Math.b2Vec2(pos.x,pos.y));
+                        b.foodx = -1; 
+                        b.foody = -1;   
+                    }
+                    //draw a robot with a food particle inside
                     drawutils.drawRobot( 30*pos.x, 30*pos.y,angle, 30*radius, that.colorRobotAtGoal,that.colorRobotEdge); 
                     drawutils.drawRect(30*pos.x, 30*pos.y, 30*0.6, 30 * 0.6, that.colorObjectAtGoal,0,that.colorObjectEdge,that.strokeWidth);
                 }else {

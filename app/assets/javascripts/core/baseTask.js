@@ -80,6 +80,16 @@ var baseTask = {
     setupTask: function( options ) {
     },
 
+    /*
+     * Function to setup the instructions for the task.
+     * This should be overridden by the user as needed.
+     * @param options -- object of options that might be important
+     */
+    setupInstructions: function( options ) {
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+    },
+
 
     /*
      * Function to evaluate whether or not a task has been completed.
@@ -128,11 +138,8 @@ var baseTask = {
         // register the handlers
         this.setupController( this._options );
 
-
-
         // add instructions to the page
-        $("#task-instructions").empty();
-        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        this.setupInstructions( this._options );
 
         // add science to the page
         $("#task-theScience").empty();

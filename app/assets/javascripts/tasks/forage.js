@@ -33,6 +33,27 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _numblocksCollected: 0,
     _numblocksTotal: 50,
 
+    setupInstructions: function ( options ){
+        var that = this;
+        this.instructions = "With your mouse use robots (blue) to bring at least 90% of food (green) home (outlined)."
+        + " Play all "+that._taskModes.length+" control styles!"            //+ "<p> Current mode: <strong>" + that.taskMode + "</strong> control."
+        +"<div class='btn-group'>";
+        _.each(that._taskModes, function (m) {
+            that.instructions += "<button class='btn btn-default mode-button' title='choose control mode' id='button-"+m+"'>"+m+"</button>" ;
+        });
+        that.instructions += "</div>";
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        _.each(that._taskModes, function (m) {
+            $('#button-'+m).click(function() {
+                that.taskMode = m;
+                $(".mode-button").removeClass("btn-success");
+                $("#button-"+m).addClass("btn-success");
+            });
+        });                
+    },
+
+
     setupTask: function( options ) { 
 
         this.taskMode = this._taskModes[ Math.floor(Math.random()*this._taskModes.length) ];
@@ -42,8 +63,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             case "global": this.update = this.globalUpdate; break;
             default: break;
         }
-        this.instructions = "";   
-        
 
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
@@ -216,19 +235,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         });
 
         if(that._startTime == null){
-           // that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
-            that.instructions = "With your mouse use robots (blue) to bring at least 90% of food (green) home (outlined)."
-            + " Play all "+that._taskModes.length+" control styles!"            //+ "<p> Current mode: <strong>" + that.taskMode + "</strong> control."
-            +"<div class='btn-group'>";
-            _.each(that._taskModes, function (m) {
-                if( m == that.taskMode)
-                { that.instructions += "<button type='button' class='btn btn-success' title='choose control mode' id=button"+m+">"+m+"</button>" ;}
-                else
-                { that.instructions += "<button type='button' class='btn btn-default' title='choose control mode' id=button"+m+" >"+m+"</button>" ;}
-            });
-            that.instructions += "</div>";
-            $("#task-instructions").empty();
-            $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
             switch (that.taskMode) {
                 case "attractive": that.update = that.attractiveUpdate; break;
                 case "repulsive": that.update = that.repulsiveUpdate; break;
@@ -236,18 +242,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 default: break;
             }
             that.setupController(that._options);
-            _.each(that._taskModes, function (m) {
-                //CHRIS -- this line doesn't work.  Can you help?
-                $('#button'+m).onClick = function(event) { 
-                    that.taskMode=m;   
-                };
-                //CHRIS -- this line didn't work either... how do I do this?
-                //$('#button'+m).object.onclick=function(){that.taskMode=m;};
-            });
         }else{
-            _.each(that._taskModes, function (m) {
-                $('#button'+m).prop('disabled',true);
-            });
+            $('.mode-button').prop('disabled',true);
         }
 
         
@@ -384,29 +380,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             color = that.colorRobot;
             drawutils.drawText(30*(minx-2.3),30*(meany-.55),"Robots→", 1.5, color, color);
         }
-    },
-
-    // update function run every frame to update our robots    
-    update: function() {
-
-        // apply the user force to all the robots
-        if (that._attracting) {
-            _.each( that._robots, function(r) { 
-                var rpos = r.GetPosition();             
-                var dx = that._mX - rpos.x;
-                var dy = that._mY - rpos.y;
-                var mag = Math.sqrt(dx*dx + dy*dy);
-
-                that._impulseV.x = 10*dx/mag || 0;
-                that._impulseV.y = 10*dy/mag || 0;
-                r.ApplyForce( that._impulseV, r.GetWorldPoint( that._zeroReferencePoint ) );
-            } );
-        }
-        // step the world, and then remove all pending forces
-        this._world.Step(1 / 60, 10, 10);
-        this._world.ClearForces();
-    },
-
+    }
 });
 
 // this makes sure that the "this" context is properly set

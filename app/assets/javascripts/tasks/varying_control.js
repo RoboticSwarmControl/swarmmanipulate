@@ -25,6 +25,28 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     _repulsing: false,
     _taskModes: new Array("attractive", "repulsive", "global"),
 
+    setupInstructions: function ( options ){
+        var that = this;
+        this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
+        + " Play all "+this._taskModes.length+"!"
+        +"<div class='btn-group'>";
+        _.each(that._taskModes, function (m) {
+            that.instructions += "<button class='btn btn-default mode-button' title='choose control mode' id='button-"+m+"'>"+m+"</button>" ;
+        });
+        that.instructions += "</div>";
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        //set the inital mode
+        $("#button-"+that.taskMode).addClass("btn-success");
+        _.each(that._taskModes, function (m) {
+            $('#button-'+m).click(function() {
+                that.taskMode = m;
+                $(".mode-button").removeClass("btn-success");
+                $("#button-"+m).addClass("btn-success");
+            });
+        });                
+    },
+
     setupTask: function( options ) { 
         this.taskMode = this._taskModes[ Math.floor(Math.random()*this._taskModes.length) ];
         switch (this.taskMode) {
@@ -33,9 +55,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             case "global": this.update = this.globalUpdate; break;
             default: break;
         }
-        this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
-        + " Play all "+this._taskModes.length+"!"
-        + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";   
+ 
         
 
         // fixture definition for obstacles
@@ -196,12 +216,6 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
 
         if(that._startTime == null){
-            that.taskMode = that._taskModes[Math.round(new Date().getTime()/2500)%that._taskModes.length];
-            that.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
-            + " Play all "+this._taskModes.length+"!"
-            + "<p> Current mode: <strong>" + this.taskMode + "</strong> control.";
-            $("#task-instructions").empty();
-            $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
             switch (that.taskMode) {
                 case "attractive": that.update = that.attractiveUpdate; break;
                 case "repulsive": that.update = that.repulsiveUpdate; break;
@@ -209,6 +223,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
                 default: break;
             }
             that.setupController(that._options);
+        }else{
+            $('.mode-button').prop('disabled',true);
         }
         
         //draw robots and obstacles

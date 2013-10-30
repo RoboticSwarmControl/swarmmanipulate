@@ -1,7 +1,7 @@
 var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_visualization",
     taskMode: "default",
-    instructions: "try out four different visualization methods for controlling a swarm.",
+    instructions: "try four visualization methods for controlling a swarm.",
     theScience: 'Sensing is expensive, especially on the nanoscale.  To see nanocars, scientists fasten molecules that fluoresce light when activated by a strong lamp of a particular color.' 
     +' Unfortunately, multiple exposures can destroy these molecules, a process called <a href="http://en.wikipedia.org/wiki/Photobleaching">photobleaching</a>.'
     +' What happens if we use less power for the exposure?  This experiment explores manipulation with varying amounts of sensing information. '
@@ -27,6 +27,41 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     _zeroReferencePoint: new phys.vec2(0,0),                // cached reference point for impulse application
 
     _taskModes: new Array("full-state", "convex-hull", "mean & variance", "mean"),
+
+
+    setupInstructions: function ( options ){
+        var that = this;
+        this.instructions = "Move " + this._numrobots + " robots (blue) with arrow keys (&#8592;,&#8593;,&#8595;,&#8594;). "
+        +" Please play all " +this._taskModes.length+ " visualization methods:"
+        +"<div class='btn-group-xs'>";
+        _.each(that._taskModes, function (m) {
+            var curMode = m;
+            if( curMode == "mean & variance")
+                { curMode = "mean±var";}
+            that.instructions += "<button class='btn btn-default mode-button btn-block' title='choose visualization mode' id='button-"+curMode+"'>"+curMode+"</button>" ;
+        });
+        that.instructions += "</div>";
+        $("#task-instructions").empty();
+        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        //set the inital mode
+        var curMode = that.taskMode;
+        if( curMode == "mean & variance")
+                { curMode = "mean±var";}
+        $("#button-"+curMode).addClass("btn-success");
+        //add click functionality
+        _.each(that._taskModes, function (m) {
+            var curMode = m;
+            if( curMode == "mean & variance")
+                { curMode = "mean±var";}
+            $('#button-'+curMode).click(function() {
+                $(".mode-button").removeClass("btn-success");
+                $("#button-"+curMode).addClass("btn-success");
+                that.taskMode = m;
+            });
+        });                
+    },
+
+
     setupTask: function( options ) {  
         // randomly assign mode
         this.taskMode = this._taskModes[Math.floor(Math.random()*this._taskModes.length)];
@@ -206,12 +241,13 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             }
         }
 
-        if(that._startTime == null){   //rotate through task modes
-            this.taskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
+        //if(that._startTime == null){   //rotate through task modes
+        //    this.taskMode = this._taskModes[Math.round(new Date().getTime()/2500)%this._taskModes.length];
+        //}
+
+        if(that._startTime != null){
+            $('.mode-button').prop('disabled',true);
         }
-        this.instructions = "Using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + this._numrobots + " robots (blue), try out four different visualization methods for controlling a swarm. Current mode displays the <br><strong>" + this.taskMode + "</strong>.<br>  Please play all " +this._taskModes.length+ " visualization modes.";
-        $("#task-instructions").empty();
-        $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
 
         switch (this.taskMode) {
             case "full-state":

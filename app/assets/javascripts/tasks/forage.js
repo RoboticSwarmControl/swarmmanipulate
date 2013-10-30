@@ -44,6 +44,8 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
         that.instructions += "</div>";
         $("#task-instructions").empty();
         $("#task-instructions").append( $( "<h4>How to play</h4><p>" + this.instructions + "<p>") );
+        //set the inital mode
+        $("#button-"+that.taskMode).addClass("btn-success");
         _.each(that._taskModes, function (m) {
             $('#button-'+m).click(function() {
                 that.taskMode = m;

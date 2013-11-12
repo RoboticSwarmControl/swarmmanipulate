@@ -44,10 +44,10 @@ var attractiveController = (function(){
             var rect = this.getBoundingClientRect();
             var touch = e.touches[0];
             var left = touch.pageX - rect.left - this.clientLeft + this.scrollLeft;
-            var top = touch.pageY - rect.top - this.clientTop + this.scrollTop + 20;
+            var top = touch.pageY - rect.top - this.clientTop + this.scrollTop;
 
             that._mX = 20 * left/this.width;
-            that._mY = 20 * top/this.height;
+            that._mY = 20 * top/this.height + 20;
         },false);        
 
         $("#canvas")[0].addEventListener('touchstart', function(e) {

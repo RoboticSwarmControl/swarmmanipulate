@@ -42,29 +42,29 @@ var repulsiveController = (function(){
             e.preventDefault();
             var rect = this.getBoundingClientRect();
             var touch = e.touches[0];
-            var left = touch.pageX - rect.left - this.clientLeft + this.scrollLeft;
-            var top = touch.pageY - rect.top - this.clientTop + this.scrollTop;
+            var left = touch.pageX;// - rect.left - this.clientLeft + this.scrollLeft;
+            var top = touch.pageY;// - rect.top - this.clientTop + this.scrollTop;
 
             that._mX = 20 * left/this.width;
             that._mY = 20 * top/this.height;
         },false);        
 
         $("#canvas")[0].addEventListener('touchstart', function(e) {
-            that._forcing = true;
+            that._repulsing = true;
             //check if this is the first valid keypress, if so, starts the timer
             if( that._startTime == null )
             { 
                 that.lastUserInteraction = new Date().getTime();
                 that._startTime = that.lastUserInteraction;
-                that._repulsing = 0.0;
+                that._runtime = 0.0;
             }
         },false);
 
         $("#canvas")[0].addEventListener('touchend', function (e) {
             that.lastUserInteraction = new Date().getTime();
-            that._forcing = false;
+            that._repulsing = false;
         },false);
-        
+
     };
 
     var repulsiveUpdate = function () {

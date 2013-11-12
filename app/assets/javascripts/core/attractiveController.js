@@ -37,6 +37,34 @@ var attractiveController = (function(){
             that.lastUserInteraction = new Date().getTime();
             that._attracting = false;
         });
+
+                /* setup touch listener */
+        $("#canvas")[0].addEventListener('touchmove', function(e){
+            e.preventDefault();
+            var rect = this.getBoundingClientRect();
+            var touch = e.touches[0];
+            var left = touch.pageX - rect.left - this.clientLeft + this.scrollLeft;
+            var top = touch.pageY - rect.top - this.clientTop + this.scrollTop;
+
+            that._mX = 20 * left/this.width;
+            that._mY = 20 * top/this.height;
+        },false);        
+
+        $("#canvas")[0].addEventListener('touchstart', function(e) {
+            that._attracting = true;
+            //check if this is the first valid keypress, if so, starts the timer
+            if( that._startTime == null )
+            { 
+                that.lastUserInteraction = new Date().getTime();
+                that._startTime = that.lastUserInteraction;
+                that._runtime = 0.0;
+            }
+        },false);
+
+        $("#canvas")[0].addEventListener('touchend', function (e) {
+            that.lastUserInteraction = new Date().getTime();
+            that._attracting = false;
+        },false);
     };
 
     var attractiveUpdate = function () {

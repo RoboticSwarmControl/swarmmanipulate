@@ -43,7 +43,7 @@ var repulsiveController = (function(){
             var rect = this.getBoundingClientRect();
             var touch = e.touches[0];
             var left = touch.pageX - rect.left - this.clientLeft + this.scrollLeft;
-            var top = touch.pageY  - this.clientTop + this.scrollTop; //- rect.top
+            var top = touch.pageY - rect.top - this.clientTop + this.scrollTop + 10;
 
             that._mX = 20 * left/this.width;
             that._mY = 20 * top/this.height;

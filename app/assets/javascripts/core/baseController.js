@@ -28,6 +28,57 @@ var baseController = (function(){
             }
         } , false );
 
+        function tilt(yval, xval){
+            // simple control that maps tilt to keypad values.
+            var thres = 20;
+            that.keyL=null;
+            that.keyR=null;
+            that.keyU=null;
+            that.keyD=null;
+            that.lastUserInteraction = new Date().getTime();
+
+            if( Math.abs( yval) + Math.abs(xval) > thres)
+            {
+                if( yval > thresh )
+                {that.keyL = that.lastUserInteraction;}
+                else if ( yval < -thresh )
+                {that.keyR = that.lastUserInteraction;}
+
+                if( xval > thresh )
+                {that.keyU = that.lastUserInteraction;}
+                else if ( xval < -thresh )
+                {that.keyD = that.lastUserInteraction;}
+
+            }
+
+            //check if this is the first valid keypress, if so, starts the timer
+            if( that._startTime == null && ( that.keyL != null || that.keyR != null || that.keyU != null || that.keyD != null))
+            { 
+                that._startTime = that.lastUserInteraction;
+                that._runtime = 0.0;
+            }
+
+        }
+
+        if (document.DeviceOrientationEvent) {
+            document.addEventListener("deviceorientation", function () {
+                tilt([event.beta, event.gamma]);
+                //beta is -90 (top down) to +90  (top up), gamma is -90 (left up) to +90 (right up)
+            }, true);
+        } else if (document.DeviceMotionEvent) {
+            document.addEventListener('devicemotion', function () {
+                tilt([event.acceleration.x * 2, event.acceleration.y * 2]);
+                //https://developer.mozilla.org/en-US/docs/Web/Reference/Events/devicemotion
+            }, true);
+        } else {
+            document.addEventListener("MozOrientation", function () {
+                tilt([orientation.x * 50, orientation.y * 50]);
+                //The X axis represents the amount of right-to-left tilt. This value is 0 if the device is level along the X axis, and approaches 1 as the device is tilted toward the left, and -1 as the device is tilted toward the right.
+                //The Y axis represents the amount of front-to-back tilt. The value is 0 if the device is level along the Y axis, and approaches 1 as you tilt the device backward (away from you) and -1 as you tilt the device frontward (toward you).
+            }, true);
+        }
+
+
         document.addEventListener( "keyup", function(e){
             that.lastUserInteraction = new Date().getTime();
             switch (e.keyCode) {

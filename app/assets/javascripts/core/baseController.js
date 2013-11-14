@@ -48,12 +48,16 @@ var baseController = (function(){
                     //property may change. A value of 0 means portrait view, 
                     if( window.orientation == -90)
                     {   //-90 means a the device is landscape rotated to the right,
-                        yval = event.gamma;
+                        yval = -event.gamma;
                         xval = event.beta; 
                     }else if( window.orientation == 90)
                     {   //and 90 means the device is landscape rotated to the left.
-                        xval = event.gamma;
+                        yval = event.gamma;
                         xval =-event.beta; 
+                    }else if( window.orientation == 180)
+                    {   //and 90 means the device is landscape rotated to the left.
+                        yval = event.beta;
+                        xval = event.gamma; 
                     }
                      
                     // simple control that maps tilt to keypad values.

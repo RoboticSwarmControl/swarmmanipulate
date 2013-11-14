@@ -47,7 +47,7 @@ var attractiveController = (function(){
             var top = touch.pageY - rect.top - this.clientTop + this.scrollTop;
 
             that._mX = 20 * left/this.width;
-            that._mY = 20 * top/this.height -1; //
+            that._mY = 20 * top/this.height -2; //
         },false);        
 
         $("#canvas")[0].addEventListener('touchstart', function(e) {

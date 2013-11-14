@@ -21,14 +21,14 @@ var baseController = (function(){
             {that.useKeyboard = true;}
 
             switch (e.keyCode) {
-                case 37 : if(that.keyL==null){that.keyL = that.lastUserInteraction;} break; //left
-                case 39 : if(that.keyR==null){that.keyR = that.lastUserInteraction;}  break;  //right
-                case 38 : if(that.keyU==null){that.keyU = that.lastUserInteraction;}  break; //down
-                case 40 : if(that.keyD==null){that.keyD = that.lastUserInteraction;}  break;  //up
-                case 65 : if(that.keyL==null){that.keyL = that.lastUserInteraction;}  break;
-                case 68 : if(that.keyR==null){that.keyR = that.lastUserInteraction;}  break;
-                case 87 : if(that.keyU==null){that.keyU = that.lastUserInteraction;}  break;
-                case 83 : if(that.keyD==null){that.keyD = that.lastUserInteraction;}  break;
+                case 37 : if(that.keyL==null){that.keyL = that.lastUserInteraction; that.keyR = null;} break; //left
+                case 39 : if(that.keyR==null){that.keyR = that.lastUserInteraction; that.keyL = null;}  break;  //right
+                case 38 : if(that.keyU==null){that.keyU = that.lastUserInteraction; that.keyD = null;}  break; //down
+                case 40 : if(that.keyD==null){that.keyD = that.lastUserInteraction; that.keyU = null;}  break;  //up
+                case 65 : if(that.keyL==null){that.keyL = that.lastUserInteraction; that.keyR = null;}  break;
+                case 68 : if(that.keyR==null){that.keyR = that.lastUserInteraction; that.keyL = null;}  break;
+                case 87 : if(that.keyU==null){that.keyU = that.lastUserInteraction; that.keyD = null;}  break;
+                case 83 : if(that.keyD==null){that.keyD = that.lastUserInteraction; that.keyU = null;}  break;
             }
             //check if this is the first valid keypress, if so, starts the timer
             if( that._startTime == null && ( that.keyL != null || that.keyR != null || that.keyU != null || that.keyD != null))
@@ -61,7 +61,9 @@ var baseController = (function(){
                     }
                      
                     // simple control that maps tilt to keypad values.
-                    var thresh = 10;
+                    var thresh = 5;
+                    if(that._startTime == null)//bigger threshold to start
+                        {thresh = 15;}
                     that.lastUserInteraction = new Date().getTime();
          
                     if( yval > thresh )

@@ -46,7 +46,7 @@ var repulsiveController = (function(){
             var top = touch.pageY - rect.top - this.clientTop + this.scrollTop ;
 
             that._mX = 20 * left/this.width;
-            that._mY = 20 * top/this.height; //+10 moves it 1/3 the screen down
+            that._mY = 20 * top/this.height-1; //+10 moves it 1/3 the screen down
         },false);        
 
         $("#canvas")[0].addEventListener('touchstart', function(e) {

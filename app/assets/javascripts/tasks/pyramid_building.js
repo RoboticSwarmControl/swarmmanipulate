@@ -3,7 +3,7 @@
 var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     taskName: "pyramid_building",
     taskMode: 0,
-    instructions: "Use the robots (blue) to move the blocks (green) to the goal positions (outlined) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;).",
+    instructions: "",
     theScience: 'Real-world microrobots and nanorobots are affected by turbulence caused by random collisions with molecules. '
     +' These collisions are called <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a>. '
     +' <p>This experiment varies the strength of these disturbances to study how noise affects human control of large swarms. '
@@ -25,7 +25,12 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
 
     setupTask: function( options ) {
         this.taskMode = (10*Math.random()).toFixed(1);  //add some noise: 0.0 to 10.0
-        this.instructions = this.instructions + '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> ' + this.taskMode*20 + '% of control power is pushing your robots.';
+        this.instructions = "Use the robots (blue) to move the blocks (green) to the goal positions (outlined) with the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;).";
+        if(this.mobileUserAgent){
+            this.instructions = "Use the robots (blue) to move the blocks (green) to the goal positions (outlined) by tilting screen (&#8592;,&#8593;,&#8595;,&#8594;).";
+        }
+
+        this.instructions += '<p> Be careful! <a href="http://en.wikipedia.org/wiki/Brownian_noise">Brownian noise</a> ' + this.taskMode*20 + '% of control power is pushing your robots.';
         // better: take number * 200% of control power
         //atto meters:  1 nanocar wheel weighs 720 g/mol = 7.2*10^-23 g, assume nanocar is 6 times that = 4.2*10&-22
         // dragster moves 0.014 mm/hr
@@ -301,7 +306,9 @@ evaluateCompletion: function( options ) {
 
             color = that.colorObstacle;
             drawutils.drawText(300,500,"Move Blocks to Goals", 1.5, color, color);
-            drawutils.drawText(300,530,"using the arrow keys (←,↑,↓,→)", 1.5, color, color);
+            if(this.mobileUserAgent){
+                  drawutils.drawText(300,530,"by tilting screen (←,↑,↓,→)", 1.5, color, color);
+            }else{drawutils.drawText(300,530,"with arrow keys (←,↑,↓,→)", 1.5, color, color);}
         }
 
     },

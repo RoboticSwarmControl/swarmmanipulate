@@ -1,7 +1,7 @@
 var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
     taskName: "varying_visualization",
     taskMode: "default",
-    instructions: "try four visualization methods for controlling a swarm.",
+    instructions: "Try four visualization methods for controlling a swarm.",
     theScience: 'Sensing is expensive, especially on the nanoscale.  To see nanocars, scientists fasten molecules that fluoresce light when activated by a strong lamp of a particular color.' 
     +' Unfortunately, multiple exposures can destroy these molecules, a process called <a href="http://en.wikipedia.org/wiki/Photobleaching">photobleaching</a>.'
     +' What happens if we use less power for the exposure?  This experiment explores manipulation with varying amounts of sensing information. '
@@ -31,8 +31,11 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
 
     setupInstructions: function ( options ){
         var that = this;
-        this.instructions = "Move " + this._numrobots + " robots (blue) with arrow keys (&#8592;,&#8593;,&#8595;,&#8594;). "
-        +" Please play all " +this._taskModes.length+ " visualization methods:"
+        this.instructions = "Move " + this._numrobots + " robots (blue) to Goal with arrow keys (&#8592;,&#8593;,&#8595;,&#8594;). ";
+        if(this.mobileUserAgent){
+            this.instructions = "Tilt screen (&#8592;,&#8593;,&#8595;,&#8594;) to move " +this._numrobots + " robots (blue) to Goal.";
+        }
+        this.instructions +=" Play all " +this._taskModes.length+ " visualization methods!"
         +"<div class='btn-group-xs'>";
         _.each(that._taskModes, function (m) {
             var curMode = m;
@@ -329,7 +332,9 @@ var varyingVisualizationTask = _.extend({}, baseTask, baseController, {
             var pGoalArrow = [[400-aX,100+aY],[400,100],[400-aX,100-aY]];
             drawutils.drawLine(pGoalArrow,that.colorGoalArrow,false,50,false);
             // (←,↑,↓,→)
-            drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
+            if(this.mobileUserAgent){
+                  drawutils.drawText(300,300,"move object to goal by tilting screen", 1.5, 'white', 'white');
+            }else{drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')}
 
             _.each(that._blocks, function (g) { 
                 var pos = g.GetPosition();

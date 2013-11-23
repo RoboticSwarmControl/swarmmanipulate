@@ -1,7 +1,7 @@
 var mazePositioningTask = _.extend({}, baseTask, baseController, {
     taskName: "maze_positioning",
     taskMode: "default",
-    instructions: " move an object (green) to the goal area (outlined) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: "",
     theScience: ' Transport of goods and materials between points is at the heart of all engineering and construction in real-world systems. '
     +' This experiment varies the number of robots used to transport an object.'
     +' <p> We keep the total area, maximum robot speed, and sum force the swarm can produce constant.'
@@ -112,7 +112,10 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
         this._goals[0].CreateFixture(fixDef);
 
         // create some robots
-        this.instructions = "Using " + this._numrobots + " robots (blue), " + this.instructions;
+        this.instructions = "Using " + this._numrobots + " robots (blue), " + " move an object (green) to the goal area (outlined) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
+        if(this.mobileUserAgent){
+            this.instructions = "Using " + this._numrobots + " robots (blue), " + " move an object (green) to the goal area (outlined) by tilting your screen (&#8592;,&#8593;,&#8595;,&#8594;)";
+        }
         this._robotRadius = 0.5*4.0/Math.sqrt(this._numrobots);
         var rowLength = Math.floor(7/(2*this._robotRadius));
         var xoffset = this._robotRadius+0.5;
@@ -219,7 +222,9 @@ var mazePositioningTask = _.extend({}, baseTask, baseController, {
             var pGoalArrow = [[400-aX,100+aY],[400,100],[400-aX,100-aY]];
             drawutils.drawLine(pGoalArrow,that.colorGoal,false,50,false);
             // (←,↑,↓,→)
-            drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white')
+            if(that.mobileUserAgent){
+                  drawutils.drawText(300,300,"tilt screen to move object to goal", 1.5, 'white', 'white');
+            }else{drawutils.drawText(300,300,"move object to goal with arrow keys", 1.5, 'white', 'white');}
 
             _.each(that._blocks, function (g) { 
                 var pos = g.GetPosition();

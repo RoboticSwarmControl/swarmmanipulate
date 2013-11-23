@@ -27,9 +27,11 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
 
     setupInstructions: function ( options ){
         var that = this;
-        this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
-        + " Play all "+this._taskModes.length+"!"
-        +"<div class='btn-group'>";
+        this.instructions = "Try different ways of controlling robots. Press mouse button to engage robots (blue) to move blocks (green) toward goal positions (outlined).";
+        if( that.mobileUserAgent ){
+            this.instructions = "Try different ways of controlling robots. Touch screen to engage robots (blue) to move blocks (green) toward goal positions (outlined)."
+        }
+        this.instructions += " Play all "+this._taskModes.length+"!"+"<div class='btn-group'>";
         _.each(that._taskModes, function (m) {
             that.instructions += "<button class='btn btn-default mode-button' title='choose control mode' id='button-"+m+"'>"+m+"</button>" ;
         });
@@ -320,12 +322,17 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
             color = that.colorObject;
             drawutils.drawText(30*(meanx),30*(miny-1),"Blocks", 1.5, color, color)
 
-            drawutils.drawText(300,525,"Move Blocks to Goals using your mouse", 1.5, color, color)
+            if(that.mobileUserAgent)
+                {drawutils.drawText(300,525,"Move Blocks to Goals with touchscreen", 1.5, color, color);}
+            else{drawutils.drawText(300,525,"Move Blocks to Goals using your mouse", 1.5, color, color);}
             var strInstruction = "";
+            var strControlMode = "mouse click";
+            if(that.mobileUserAgent)
+                {strControlMode = "your touch";}
             switch( that.taskMode ) {
-                case "attractive": strInstruction ="Robots are attracted to the mouse click"; break;
-                case "repulsive" : strInstruction ="Robots are repulsed from the mouse click";break;
-                case "global" : strInstruction ="Robots move in direction of mouse click";break;
+                case "attractive": strInstruction ="Robots are attracted to "+strControlMode; break;
+                case "repulsive" : strInstruction ="Robots are repulsed from "+strControlMode;break;
+                case "global" : strInstruction ="Robots move in direction of "+strControlMode;break;
             }
             drawutils.drawText(300,80,strInstruction, 1.5, color, color)
             drawutils.drawText(300,50,that.taskMode+" control:", 1.5, 'black', 'black')

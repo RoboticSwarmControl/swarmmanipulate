@@ -45,7 +45,7 @@ var baseTask = {
     shownNotice: false,
     instructions: "Default instructions.",
     theScience: "Default Science.",
-
+    mobileUserAgent: false,
     firstKeyPressed : false,
     isTaskComplete : false,
     lastUserInteraction : null,
@@ -128,6 +128,8 @@ var baseTask = {
      */
     init: function( options ) {
         this._options = options;
+        this.mobileUserAgent =( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) );
+
 
         // setup the draw utilities
         drawutils.init();

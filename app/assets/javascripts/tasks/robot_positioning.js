@@ -4,7 +4,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     taskName: "robot_positioning",
     taskMode: "default",
 
-    instructions: "Move the robots (blue) to the goals (green) using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)",
+    instructions: "",
     video: "http://www.youtube.com/watch?v=5p_XIad5-Cw",
     theScience: 'This tasks examines how task completion time <i>scales</i> with the number of robots. '
     +' <p>Having trouble? <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"><strong>See hint</strong></a>. '
@@ -26,6 +26,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     _myGoalsY: [6,7,7,8,8,8,9,9,6,6],                                     // y-coord of goals
 
     setupTask: function( options ) {
+        
         // fixture definition for obstacles
         var fixDef = new phys.fixtureDef;
         fixDef.density = 1.0;
@@ -69,10 +70,13 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
 
         //create some robots
         this._robots = [];
-        var strRobotGoal = this._numrobots + " robots (blue) to the goals (outlined)";
+        var strRobotGoal = this._numrobots + " robots (blue) to goals (outlined).";
         if(this._numrobots==1)
             { strRobotGoal = " robot (blue) to the goal (outlined)";}
-        this.instructions = "Move the " + strRobotGoal + " using the arrow keys (&#8592;,&#8593;,&#8595;,&#8594;)";
+        this.instructions = "Use arrow keys (&#8592;,&#8593;,&#8595;,&#8594;) to move " + strRobotGoal ;
+        if(this.mobileUserAgent){
+            this.instructions = " Tilt the screen (&#8592;,&#8593;,&#8595;,&#8594;) to move " + strRobotGoal;
+        }
         bodyDef.type = phys.body.b2_dynamicBody;
         bodyDef.userData = 'robot';
         fixDef.density = 1.0;
@@ -195,13 +199,15 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
             color = that.colorObstacle;
             drawutils.drawText(30*12.5,30*10,"←Obstacle", 1.5, color, color);
             color = that.colorGoal;
-            var strRobotGoal = this._numrobots + " robots (blue) to the goals (outlined)";
+            var strRobotGoal = this._numrobots + " robots (blue) to goals (outlined)";
             if(this._numrobots==1)
-                { strRobotGoal = "robot (blue) to the goal (outlined)";}
-            this.instructions = "Move the " + strRobotGoal;
+                { strRobotGoal = "robot (blue) to goal (outlined)";}
+            this.instructions = "Move " + strRobotGoal;
 
             drawutils.drawText(300,430,that.instructions, 1.5, color, color);
-            drawutils.drawText(300,460,"Using the arrow keys (←,↑,↓,→)", 1.5, color, color);
+            if(this.mobileUserAgent){
+                  drawutils.drawText(300,460,"by tilting screen (←,↑,↓,→)", 1.5, color, color);
+            }else{drawutils.drawText(300,460,"using arrow keys (←,↑,↓,→)", 1.5, color, color);}
         }
         
     },

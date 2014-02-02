@@ -1,0 +1,18 @@
+These reviews are not helpful.
+
+I made all the changes from reviewer 13667's pdf attachment.
+
+13665: Why do authors select the task in the online game?
+Is the task important in a specific micro nano-application?
+Authors should be clear the reason.
+
+Based on a real application, the task should be selected.
+then, it should be shown that its result of the task
+contribute to the real application.
+
+We should compare our results to 
+(http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/Mass
+iveUniformManipulation_0.pdf, Fig. 7.3) 
+and
+Massive Uniform Manipulation results
+

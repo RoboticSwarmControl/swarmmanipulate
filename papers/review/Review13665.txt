@@ -1,0 +1,46 @@
+Reviewer 1 of ICRA 2014 submission 8
+
+Comments to the author
+======================
+
+Authors mention the problem of micro- nano-application in
+below.
+
+We want to use large swarms of robots to perform
+manipulation tasks; unfortunately, human-swarm interaction
+studies as conducted today are limited in sample size, are
+difficult to reproduce, and are prone to hardware failures.
+We present an alternative.
+
+For this problem in above, the authors applied a kind of
+simulation by using online game technique.
+
+This paper examines the perils, pitfalls, and possibilities
+we discovered by launching SwarmControl.net, an online game
+where players steer swarms of up to 500 robots to complete
+manipulation challenges. We record statistics from
+thousands of players, and use the game to explore aspects
+of large-population robot control.
+
+This concept is very unique and interesting.
+
+A task in micro- nano-robot is presented in online game.
+Why do authors select the task in the online game?
+Is the task important in a specific micro nano-application?
+Authors should be clear the reason.
+
+The paper mainly mentioned the careful points for user to
+join the online game easily.
+The discussion is important to obtain many participant.
+However the careful points are one of the technique with
+good online game service. This discussion is thought not to
+be the essence of the concept.
+Based on a real application, the task should be selected.
+then, it should be shown that its result of the task
+contribute to the real application.
+
+Comments on the Video Attachment
+================================
+
+it is better for understanding to show the movie of user
+interface than the animation of the result.

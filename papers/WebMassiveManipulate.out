@@ -1,0 +1,39 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Human-Swarm Interaction}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Global-control of micro- and nano-robots}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Three challenges for massive manipulation}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Control\204global inputs}{subsection.2.3}% 6
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Sensing\204large populations}{subsection.2.3}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Computation\204calculating the control law}{subsection.2.3}% 8
+\BOOKMARK [1][-]{section.3}{Experimental Methods}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Framework}{section.3}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Overview}{subsection.3.1}% 11
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Backend}{subsection.3.1}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Frontend}{subsection.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Human subjects}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Experimental costs}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Instrumentation}{section.3}% 16
+\BOOKMARK [1][-]{section.4}{Results}{}% 17
+\BOOKMARK [2][-]{subsection.4.1}{Varying Number}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.2}{Varying Control}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.3}{Varying Visualization}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.4}{Varying Noise}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.5}{Position Control}{section.4}% 22
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 23
+\BOOKMARK [2][-]{subsection.5.1}{Lessons learned: Beta-testing}{section.5}% 24
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Be accessible}{subsection.5.1}% 25
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Have a structure}{subsection.5.1}% 26
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Respect participant time}{subsection.5.1}% 27
+\BOOKMARK [3][-]{subsubsection.5.1.4}{Have simple instructions}{subsection.5.1}% 28
+\BOOKMARK [3][-]{subsubsection.5.1.5}{Test multiple displays}{subsection.5.1}% 29
+\BOOKMARK [2][-]{subsection.5.2}{Lessons learned: Live website}{section.5}% 30
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Mobile traffic}{subsection.5.2}% 31
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Browser considerations}{subsection.5.2}% 32
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Bounce rates}{subsection.5.2}% 33
+\BOOKMARK [2][-]{subsection.5.3}{Other issues}{section.5}% 34
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Poor experiment design}{subsection.5.3}% 35
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Missing participant behavior}{subsection.5.3}% 36
+\BOOKMARK [1][-]{section.6}{Conclusion and Future Work}{}% 37
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 38
+\BOOKMARK [1][-]{section*.1}{References}{}% 39

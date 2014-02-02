@@ -1,0 +1,175 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}\label{sec:RelatedWork}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Human-Swarm Interaction}
+Olson and Wood studied human \emph{fanout}, the number of robots a single human user could control~\cite{Jr2004}.  %Studied as a key aspect of human-robot interaction, 
+They postulated that the optimal number of robots was approximately  the autonomous time  divided by the interaction time required by each robot.  Their sample problem involved a multi-robot search task, where users could assign goals to robots.  Their user interaction studies with simulated planar robots  indicated a \emph{fan out plateau} of about 8 robots, after which there were diminishing returns.   They hypothesize that the location of this plateau is highly dependent on the underlying task, and our work indicated there are some tasks without plateaus. % (Lemmings is an example of this as well, for systems with autonomy
+Their research investigated robots with 3 levels of autonomy.  We use robots without autonomy, corresponding with their first-level robots.
+
+Chen, Barnes, and Harper-Sciarini published a review of supervisory control but emphasized high levels of autonomy, using the 10-level taxonomy given by \cite{Parasuraman2000}.  The direct control techniques this paper examines are the lowest level.
+
+Squire, Trafton, and Parasuraman designed experiments showing that user-interface design had a high impact on the task effectiveness and the number of robots that could be controlled simultaneously in a multi-robot task \cite{Squire:2006:HCM:1121241.1121248}.
+
+A number of user studies compare methods for controlling large swarms of simulated robots, for example \cite{bashyal2008human,kolling2012towards,de2012controllability}.  These studies provide insights but are limited by cost to small user studies, have a closed-source code base, and focus on controlling intelligent, programmable agents.  
+For instance \cite{de2012controllability} was limited to a pool of 18 participants,  \cite{bashyal2008human} 5, and \cite{kolling2012towards} 32.
+	Using an online testing environment, we conduct similar studies but with much larger sample sizes.
+
+\subsection{Global-control of micro- and nano-robots}
+More recently, robots have been constructed with physical heterogeneity so that they respond differently to a global, broadcast control signal.  Examples include \emph{scratch-drive microrobots}, actuated and controlled by a DC voltage signal from a substrate \cite{Donald2006,Donald2008};   magnetic structures  with different cross-sections that could be independently steered \cite{Floyd2011,Diller2013};   \emph{MagMite} microrobots with different resonant frequencies and a global magnetic field \cite{Frutiger2008}; and  magnetically controlled nanoscale helical screws constructed to stop movement at different cutoff frequencies of a global magnetic field
+\cite{Peyer2013}. In our previous work with robots that can be modeled as nonholonomic unicycles, we showed that an inhomogeneity in turning speed is enough to make even an infinite number of robots controllable with regard to position. All these approaches show promise, but they also require both excellent state estimation and heterogeneous robots. 
+
+%For micro- and nanorobotics, the marginal cost of producing one additional robot is astonishingly small.  While some microrobots are individually fabricated \cite{Tottori2012}, others are fabricated using MEMS techniques \cite{Donald2008}, and these dies could be tiled to produce multiple copies.  Nanocars are exemplary of this diminishing marginal cost.  Nanocars are synthetic molecules with integrated axles, rolling wheels, and light-driven motors developed by Tour et al.\cite{Chiang2011}.  These  are routinely produced in quantities that are amazing---a batch  the size of an aspirin tablet  contained$~\approx4\times 10^{19}$ nanocars.  This dwarfs the total number of birds on the planet earth---some $3\times10^{11}$\cite{Gaston1997}. 
+ %aspirin in US weighs 325 mg.
+  %or the number of automobiles produced in the history of humankind
+% http://www.virlab.virginia.edu/nanoscience_class/lecture_notes/Lecture_13_Materials/Tour%20on%20nanovehicles.pdf states:
+%	On the other hand, nanocars synthesized in our laboratory
+%	are each calculated to be approximately 3x6x4 nm in size, and
+%	can be produced on the 30 mg scale (3.26x10^18 nanocars)
+%	using small 100 ml laboratory reaction flasks, or more
+%	nanocars than the number of automobiles made in the
+%	history of the world (63 million automobiles were produced
+%	in 2005). It would take 30 nanocars, side by side, to span the
+%	90 nm width of a small line in the most advanced logic
+%	chip being made today
+% The motorized nanocar can be synthesized in 12 steps with an overall yield of 5\%,  An electrically driven one is \cite{Kudernac2011}
+%Biological agents, including the magnetically controlled ciliate protozoa studied by A. Julius~\cite{Ou2012, Ou2012a} and the magnetotactic bacteria studied by Martel~\cite{Felfoul2011}can be grown or purchased in large numbers.
+% According to a scientific study of trace elements in hair, a single strand of hair 4 1/2 inches in length weighs, on average, 0.62 milligram, with weights varying from 0.25 milligram to just under 1 milligram.
+%mosquito weight = and weight up to 2.5 milligrams
+%Read more: How much does one strand of human hair weigh? | Answerbag http://www.answerbag.com/q_view/2159502#ixzz2EUltJTAl
+ 
+
+%
+%Consider a collection of $n$ planar robots.  We  describe the configuration of the $i$-th robot by $q_i=[x_i,y_i]^\top$ and its configuration space by $\Cspace = \R^2$.  At the micro/nanoscale viscous effects dominate inertial forces~\cite{Purcell1977}, so our model ignores velocity and assumes in the absence of an external force, the robots stop moving.
+% We describe the configuration of the environment by the magnitude of the force field $f = [f_x,f_y]\in\R^2$, which is assumed constant across the workspace.  The control inputs $u = [u_x,u_y]\in\R^2$ change this force field.
+%\begin{align}
+%\dot{x}_i &= f_x,&
+%\dot{f_x} &= u_x,\nonumber \\
+%\dot{y}_i &= f_y, &
+%\dot{f_y} &= u_y. \label{eq:sysModel}
+%\end{align}
+%
+%\todo{This model is key, because if we use impulsive inputs for $u_x$ and $u_y$, there are a number of tasks we can accomplish with a single input (e.g. 2,3,5,7 in Fig.~\ref{fig:boundaryManipulators}.)}
+
+%In \cite{Becker2012} we proved that systems described by \eqref{eq:ensembleDynamics} can be approximately steered to arbitrary positions in $\R^2$.  In \cite{Becker2012k} we provided closed-loop controllers to drive $n$ robots to $n$ target positions.  For both works, the control laws apply even to an infinite robot continuum.  
+%
+%Unfortunately, in \cite{Becker2012}, we proved that the heading of the ensemble---the $\theta_i$ values---is not controllable.  The final heading of every robot in the ensemble is the scaled integration of all the turning control inputs, i.e.~ $\theta_i(T) = \theta_i(0) + \epsilon_i\int_0^T \omega(t)\,{\rm d}t$.  Instead of a full-state controller, we provided a control law that steered the position of each robot's center of rotation.  Our goal is to provide control algorithms for many robots with uniform inputs, with  application in trajectory following, manipulation, force-closure, and assembly at the micro- and nanoscale.  Regrettably, 
+% being unable to control the heading of the robots makes many tasks difficult or impossible.  For instance, manipulation and assembly work without heading control requires that the robots be able to rotate in place and be circular, since we cannot specify the incident angle of the robots. %In practice, this limits the application of our work to circular or point robots. 
+%As Lynch explained in \cite{Lynch1999}, pushing with a round object is inherently unstable.
+
+
+%  Possible applications include using molecular robots as nanoscale transporters, to break chemical bonds, or to build structures by constructing non-covalent bonds. We derive inspiration from the molecular actuators of Roth et al.~\cite{Minett2002}, the molecular elevators of Badj{\'i}c at al.~\cite{Badjic2004}, and the nanocars of Tour et al.~\cite{Vives2009}. %hydrogen bonds
+
+% From James Tour:
+%My motivation has been clear on this topic, and I have written it many times.  Here is a synopsis:
+%Transport of goods and materials between points is at the
+%heart of all engineering and construction in real-world systems.
+%Just as biological systems survive by nanometer-scale
+%transport using molecular-sized entities, as we delve into the
+%arena of the nanosized world, it beckons that we learn to
+%manipulate and transport nanometer-scale materials in a similar
+%manner. Nanoscale transporters that are truly moleculesized
+%will be required for the enzyme-like fabrication of
+%sophisticated integrated structures.
+%We want to build things from the bottom up, ex vivo, much like enzyme build in vivo???that is and has been my motivation.  I do not think that targeting these for biological applications is wise.  One would use enzyme-like structures for that, not nanocars.  These are for ex vivo. 
+
+
+
+Our previous work \cite{Becker2012,Becker2012k} focused on exploiting inhomogeneity between robots.  These control algorithms theoretically apply to any number of robots---even robotic continuums---but in practice process noise cancels the differentiating effects of inhomogeneity for more than tens of robots.  We desire control algorithms that extend to many thousands of agents.
+
+  \subsection{Three challenges for massive manipulation}
+ While it is now possible to create many micro- and nano-robots, there remain challenges in control, sensing, and computation. 
+  
+ \subsubsection{Control---global inputs}
+ Many micro- and nano-robotic systems \cite{Tottori2012,Shirai2005,Chiang2011,Donald2006,Donald2008,Takahashi2006,Floyd2011,Diller2013,Frutiger2008,Peyer2013}
+   rely on global inputs, where each robot receives an exact copy of the control signal.  Our experiments follow this global model.
+   %Two reasonable questions are ``What tasks are possible with many robots, all under uniform control inputs?'' and ``What tasks are impossible with many robots, all under uniform control inputs?'' 
+  
+ \subsubsection{Sensing---large populations}
+ Parallel control of $n$ differential-drive robots in a plane requires $3n$ state variables. Even holonomic robots require $2n$ state variables. Numerous methods exist for measuring this state in micro- and nanorobotics.  These solutions use computer vision systems to sense position and heading angle, with corresponding challenges of handling missed detections and registration of detections with corresponding robots.  These challenges are increased at the nanoscale where sensing competes with control for communication bandwidth.   We examine control when the operator has access to only the first and second moments of a population's position, or the convex-hull containing all robots of interest.
+ 
+\subsubsection{Computation---calculating the control law}
+In our previous work the controllers required at best a summation over all the robot states \cite{Becker2012k} and at worst a matrix inversion \cite{Becker2012}. 
+These operations become intractable for large populations of robots. By focusing on \emph{human} control of large robot populations, we accentuate computational difficulties because the controllers are implemented by the unaided human operator. % We present an approach that, for many tasks, bypasses these problems due to large populations by allowing the user to command the entire population as a single unit.  For position control we cannot bypass this problem, but we provide an algorithm that scales linearly in the number of robots. 
+
+
+%
+%\subsection{Nonprehensile manipulation}
+%
+%In \emph{nonprehensile manipulation}, a robot affects its environment without grasping objects by pushing and pulling \cite{Lynch1999,Goemans2006,Vose2009a}. In some ways, our problem formulation formulation is the inverse of nonprehensile manipulation. Rather than just use a robot to restructure the environment, we use the environment to restructure a population of robots.
+%
+%We can also use a large population of robots for traditional nonprehensile tasks, such as transporting objects using the flow of the robots \cite{Sugawara2012}, and manipulating an object too heavy for a single robot. Our control formulation enables efficiently controlling this kind of transport.
+%
+%%%%
+%%OLD CONTENT
+%%%%
+%
+%\subsection{Micro- and Nano-Scale Manipulators}
+%Micro/nano-manipulation and assembly are the focus of considerable micro and nano-robotics research. Sitti, Yu, and Cecil provide surveys of nano-manipulation and assembly \cite{Sitti2001,Yu2003,Cecil2007}.  Savia and Koivo focus on a survey of contact strategies for micro manipulation \cite{Savia2009}.
+% Micro/nano-manipulation refers to manipulating components at the micro- and nano-scale, while assembly describes building structures from smaller components.  The ability to control position and track trajectories enables an ensemble of micro- and nano-robots to be used as a manipulator.  One advantage of using an ensemble control method over other methods, e.g.\ an atomic force microscope tip, is that ensemble methods allows the simultaneous manipulation of  multiple components.
+%
+%We draw particular inspiration from our colleagues James Tour, Stephan Link, and their associates at Rice University, and their work with nanocars.  They have successfully synthesized a variety of molecular vehicles, or species of nanocars \cite{Vives2009,Vives2009a,Vives2009b,Sasaki2008,Sasaki2008a,Sasaki2008b,Morin2007,Shirai2006,Shirai2006a}.  At the nano-scale simply visualizing the molecules in real-time--key for closed-loop control--has required significant effort \cite{Claytor2009,Khatua2009}. 
+%Control thus far is rudimentary, designing nanocars that can either move straight \cite{Shirai2005} or turn \cite{Sasaki2008c} as a function of temperature.  More complex species incorporate a controllable motor, both thermally driven \cite{Morin2006} and light-driven  \cite{Chiang2011}.
+%  Due to the challenges and research timescales involved with fabricating and visualizing nanocars, our \href{http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file002.avi}{simulations and game models} will build on \href{http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file001.avi}{molecular dynamics models} by Kolomeisky et al.~\cite{Kimov2008,Konyukhov2010,Akimov2012}.
+%%simulation videos:  http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file001.avi and http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file002.avi
+% 
+% 
+%%\subsection{Uniform Control Inputs}
+%%Our approach \cite{Becker2012a,Becker2012k,Becker2013} is based on the application of ensemble control, which we used in previous work to derive an approximate (open-loop) steering algorithm for a nonholonomic unicycle despite model perturbation (e.g., unknown wheel size) that scales both the forward speed and turning rate by an unknown but bounded constant \cite{Becker2012}. Rather than steer one unicycle with an unknown parameter, we chose to steer an infinite collection of unicycles, each with a particular value of this parameter in some bounded set. Following the terminology introduced by \cite{Brockett1999,Khaneja2000,Li2009,Li2011}, we called this fictitious collection of unicycles an {\em ensemble} and called our approach to steering {\em ensemble control}. The idea was that if the same control inputs steered the entire ensemble from start to goal, then surely they would steer the particular unicycle of interest from start to goal, regardless of its wheel size.
+%%
+%%Here, we take advantage of this idea in a slightly different way. Rather than trying to mitigate the effects of bounded model perturbation (i.e., of inhomogeneity), we are trying to exaggerate these effects. Basic controllability results carry over from our previous work. Our main contribution in this paper is to derive a closed-loop feedback policy that guarantees exact asymptotic convergence of the ensemble to any given position. We note that, for single robots, it is possible to build a robust feedback controller that regulates position and orientation \cite{Lucibello2001}. It is not obvious that the same can be done for an infinite collection of robots.
+%
+%\subsection{Robotic Manipulation}
+%There are many challenges to conventional approaches to this problem. Classic form- and force-closure techniques require global
+%knowledge about the geometry of the component and the configuration of the robots and their actuators.
+%Robotics has derived considerable inspiration from collective transport in social insects \cite{E.-Bonabeau1999, Moffett1988, Berman2010}. 
+%Decentralized transport strategies have been developed using inspiration from social insect research or through evolutionary computation \cite{Su2008, Gross2009, Gros2006, Montemayor2005, Mellinger2010, Lindsey2010, Berman2010}. 
+%
+%
+%%\paragraph{gripping:}
+%%In this section we primarily focus on transport strategies for autonomous mobile robots that use grippers to move objects, and where collective behavior is required to move objects too heavy for a single robot.
+%%Many approaches to this task rely on centralized planners or leader-follower schemes, that require knowledge of
+%%the object geometry to optimally position robots for movement \cite{Lindsey2010, Mellinger2010, Su2008}; some decentralized versions of these schemes have also been developed \cite{Montemayor2005}. 
+%%Much of this work focuses on a slightly different task called planar manipulation, i.e. controlling object trajectory and orientation for lightweight objects. 
+%%An advantage of these control theory based methods is that they are analytically tractable and generalize to complex object shapes.
+%%A disadvantage of these strategies is that they often rely on robots knowing object geometry, position, and orientation at all times as well as position of all other team members. 
+%%This requires sophisticated robots that can estimate object geometry and track absolute object position and orientation at all times; many schemes also require global communication. 
+%%These requirements limit the applicability and scalability of the strategies.
+%%A complementary approach has been pursued by swarm robotics research, where decentralized transport strategies have been developed using inspiration from social insect research or through evolutionary computation \cite{Gross2009, Gros2006}. 
+%%These algorithms rely on simple local sensing by individual robots, with no explicit knowledge of object shape or explicit coordination between robots. 
+%%An advantage of these methods is that they rely on simple robot capabilities, and have been experimentally tested on platforms such as the Swarmbots
+%%\cite{Gross2009, Gros2006}.
+%%This research has also pursued interesting extensions, such as the ability of robots to form pulling chains to transport an object. 
+%%A disadvantage of these methods is that they have not been theoretically analyzed, and evaluation is done only in simulation or through robot experiments. 
+%%It is unclear whether the approaches generalize to more complex object geometries and how well the approaches scale for large numbers of robots. 
+%%In general, for both types of prior research, experimental verification of the transport strategy has been limited to small numbers of robots (2-6) and simple object shapes (e.g. circles, squares, ``L'' shapes).
+%
+%Non-prehensile manipulation that maneuvers a component without grasping it, see reviews in \cite{Mason1999, Peshkin1990}.  This approach can eliminate the need for specialized grippers. Two forms of non-prehensile manipulation are pushing and impulsive.
+%\paragraph{Manipulation By Pushing:} enjoys a long history, with contributions from Lynch et al.~\cite{Lynch1996,Lynch1999,Bernheisel2006}, Mason et al.~\cite{Akella1999,Akella2000,Akella2000a,Erdmann1988,Mason2001}, Spong et al. \cite{Partridge2000,Spong2001}, and Rus et al.~\cite{rus_moving_1995,donald_analyzing_1994}.  For multi-robot manipulation under uniform inputs, we cannot guarantee robots will remain in contact with the component, so this proposal will focus on other manipulation modalities.
+%
+%\paragraph{Impulsive Manipulation:} manipulation by striking an component and letting it slide.  Mason et. al~ studied \emph{the inverse sliding problem}, determining the velocities required to send an component to a desired configuration, and \emph{the impact problem}, determining how to strike the component in order to achieve those velocities \cite{Huang1995,Huang1996,Huang1998}.   Excellent reviews of the general theory of impulsive control, e.g. control of a system were at least one state variable can be changed by discrete  ``impulsive'' inputs  are found in \cite{Yang1999,Yang2001}.  % \cite{Gravagne2000}
+%In robotics, impulsive manipulation has been studied for vibratory parts feeding, where parts lying on a plate are repeatedly struck as the plate vibrates \cite{Bohringer1995,Reznik1998, Bohringer2000a, Vose2007, Vose2008a,Vose2009,Vose2009a}, and for swinging impact \cite{Mochiyama2007}.
+%
+%Our proposed contribution is to use large populations of robots to provide the impulsive inputs, under the strong constraint of uniform inputs.
+%
+%
+%\paragraph{Caging Manipulation:}
+%A conceptually simple form for manipulation is to grasp a component by encircling it with robots in such a way that the grasp can resist any external force applied to the component. 
+% Rimon and Blake introduced caging to robotics \cite{Rimon1996} for non-convex objects and two fingered gripers. Similar centralized planners include Davidson and Blake \cite{Davidson1998}, Ponce et al.~\cite{Sudsang1998,Sudsang1999,Sudsang2000,Sudsang2002}, and Wang and Kumar \cite{Wang2002}.  Kumar et al.~extended this work for decentralized control \cite{Pereira2004} and obstacle avoidance  \cite{Fink2007,Fink2008}
+%
+%Because ensemble control enables trajectory tracking, all the centralized methods \cite{Rimon1996,Davidson1998,Sudsang1998,Sudsang1999,Sudsang2000,Sudsang2002,Wang2002}
+%can be realized by robots with uniform inputs and the decentralized techniques can be emulated.  
+%However, ensemble trajectory control is slow, so our proposed contribution will introduce new techniques that exploit the large numbers of potential manipulators.
+%
+%\paragraph{Towing Manipulation:}
+% tethering multiple robots to a component avoids difficulties relating to gripping and maintaining contact with the component.  Robotic manipulation has been studied by Donald and Rus et al.~\cite{Donald2000}, Esposito~\cite{esposito_tugboat_towing_2010}, and with flying robots by Kumar et al.~\cite{Fink2011,Lenarcic2010}.
+%One drawback is that towing solutions do not allow the robots to push and pull on the component.  By substituting a spring with a non-zero resting length, our technical approach will implement both towing and pushing with the same mechanism.
+%
+%\paragraph{Compliant Manipulation:}
+% In standard robot arms, contact can be damaging with stiff actuators, even with joint torque sensors (Khatib et al.~\cite{Khatib1986} and  Luo \cite{Luo1993}).
+% On macro-scale robotics one solution is the compliant manipulator we presented in~\cite{KongEtAl-MRM-ICRA11}. % shown in Figure~\ref{fig:MRM}
+% Its series-elastic actuators (SEA)~\cite{pratt_williamson_1995} provide compliance, safe contact between components and robots, and force sensing.  We will use this setup to measure forces during hardware verification of our algorithms, and implement a miniaturized version on our r-one robots.
+%%A general framework for cobot control (Peshkin) \cite{Gillespie2001}, Khatib.

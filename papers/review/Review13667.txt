@@ -1,0 +1,49 @@
+Reviewer 2 of ICRA 2014 submission 8
+
+Comments to the author
+======================
+
+The paper introduced an open-source online testing platform
+to test several scenarios involving large-scale human-swarm
+interaction with a statistically-significant sample size.
+The results of this research suggest valuable guidelines to
+develop micro- and nano-robots and control large swarms of
+them to perform manipulation tasks. The paper also provided
+answers to two research questions regarding to the level of
+state feedback (“Varying Visualization”, Page 5 in this
+paper) in the previous research work which will be
+presented at IROS 2013. However, this was not clearly
+stated in the paper to show the research achievement of the
+research group.
+
+The data from Varying Number (Fig. 4) indicated an optimal
+number of robots, perhaps due to the the relative sizes of
+the robot, obstacles, and object. It is very intuitive that
+the results of Varying Visualization also depend on
+different
+relative sizes and shapes of the object and the robot.
+Having prior knowledge of the robot swarm (its sizes,
+number) and having been experienced with controlling a
+robot swarm in other experiments with Full-state feedback
+may improve the player’s performance. Therefore, analysis
+and discussion on this matter will provide insights for
+sensing large micro- and nano-robot population.
+
+The authors stated that the logical challenges of repeated
+experiments with over one hundred robots prevented
+large-scale tests; therefore, it is better to repeat
+experiments with some similar scenarios using the online
+testing platform. However, only one similar scenario was
+found
+(http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/Mass
+iveUniformManipulation_0.pdf, Fig. 7.3) and
+comparison/achievements/lessons learned with this similar
+scenerio were not clearly stated.
+
+Some typos were found in the manuscript (See the
+attachment)
+
+Comments on the Video Attachment
+================================
+
+Very good and attractive

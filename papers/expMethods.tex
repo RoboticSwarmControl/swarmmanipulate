@@ -20,45 +20,37 @@ We have developed a flexible testing framework for online human-swarm interactio
 %% wherein we outline the process that a user takes to participate in an experiemnt
 \subsubsection{Overview}
 
-Before describing the system in detail, it helps to understand the workflow of a participant and what data is passed back and forth when performing an experiment.
-
 A participant visits the site, initiating a communication between their browser and our server. The web server generates a unique identifier for the participant and sends it along with the landing page to the participant---this identifier is stored as a browser cookie and will be sent along with all results the participant generates. The participant's browser prompts for confirmation of the terms-of-service and offers a menu of experiments.
 
-Once the participant selects an experiment, their browser makes a new request to the server to load the experiment's webpage. The server sends a common scaffolding (some basic HTML describing the layout of the page and a script block which will start the experiment) and the experiment suite. The script instantiates and runs the experiment, and upon the completion of the experiment success criteria posts the experiment data back to the backend server. The participant is then given the option of playing again or trying a different experiment.
+Once the participant selects an experiment, their browser makes a new request to the server to load the experiment's webpage. The server sends scaffold HTML describing the layout of the page and a script block containing the experiment. The script runs the experiment, and upon completion of the experiment success criteria posts the experiment data back to the backend server. The participant is then given the option of playing again or trying a different experiment.
 
 A participant may view all of the experimental data we have gathered; this information is available as either a webpage, a JSON file, or a comma-separated value (.CSV, a common spreadsheet format) file.
 
 %% wherein we preach the good word of Ruby and describe what the backend actually does
 \subsubsection{Backend}
 
-The server backend is written in Ruby, using the Ruby-on-Rails (usually abbreviated Rails) web development framework.
+The server backend is written in Ruby, using the Ruby-on-Rails (abbreviated \emph{Rails}) web development framework. Ruby is a dynamically-typed object-oriented scripting language with a strong emphasis on programmer ergonomics and metaprogramming support. It is well-suited for the creation of domain-specific languages for a variety of tasks, as exemplified by the Rails framework. Our backend serves assets (images, scripts, stylesheets, and so forth) to participants, selects the correct script to send to perform a particular experiment, and stores results.
 
-Ruby is a dynamically-typed object-oriented scripting language with a strong emphasis on programmer ergonomics and metaprogramming support. It is well-suited for the creation of domain-specific languages for a variety of tasks, as exemplified by the Rails framework.
+Each result is a database record containing the experiment name, the participant identifier, the duration of the experiment (time to completion), the number of robots involved, the detailed mode information of the experiment, and the user agent string of the browser running the experiment (which identifies the type of browser used by the participant). Rails automates the process of creating the relevant database-object bindings, and thus we spent little time creating or modifying the result records, allowing us to rapidly adapt the server to our needs--for example, adding tracking of the user agent and experiment mode both took less than five minutes of work on the server side.
 
-%Metaprogramming is the writing of computer programs that write or manipulate other programs (or themselves) as their data, or that do part of the work at compile time that would otherwise be done at runtime. In some cases, this allows programmers to minimize the number of lines of code to express a solution (hence reducing development time), or it gives programs greater flexibility to efficiently handle new situations without recompilation.
-
-Our backend serves assets (images, scripts, stylesheets, and so forth) to participants, selects the correct script to send to perform a particular experiment, and stores results.
-
-Results are database records containing the experiment name, the participant identifier, the duration of the experiment (time to completion), the number of robots involved, the detailed mode information of the experiment, and the user agent string of the browser running the experiment. Rails automates the process of creating the relevant database-object bindings, and thus we spent little time creating or modifying the result records, allowing us to rapidly adapt the server to our needs--for example, adding tracking of the user agent and experiment mode both took less than five minutes of work on the server side.
-
-The script file to be sent to the client is selected by examining the route specified on the  uniform resource identifier (URI) for the experiment webpage; this done, the server will render the page requested by the participant and insert a script to run the selected experiment. The Rails framework has a great deal of support for optimizing and compacting (\emph{minifying}) Javascript files, one of the reasons it was used for this project.
+The experiment script file to be sent to the client is chosen with the uniform resource identifier (URI) for the experiment webpage; this done, the server will render the page requested by the participant and insert the script for the selected experiment. The Rails framework has a great deal of support for optimizing and compacting (\emph{minifying}) Javascript files.
 
 %% wherein we decry the evils of javascript and explain why we use the browser
 \subsubsection{Frontend}
 
-The client frontend which runs in the participant's browser is written in Javascript, a dynamically-typed prototype-oriented scripting language with some functional programming support.
+The client frontend which runs in the participant's browser is written in Javascript, a dynamically-typed prototype-oriented scripting language with some functional programming support. We make heavy use of the Underscore framework (a functional programming toolkit for Javascript) as well as the Javascript port of Box2D (a popular 2D physics engine with good support for rigid-body dynamics and fixed-timestep simulation). Our frontend also includes helper libraries for drawing robots, handling user input, and drawing graphs.
 
-We make heavy use of the Underscore framework (a functional programming toolkit for Javascript) as well as the Javascript port of Box2D (a popular 2D physics engine with good support for rigid-body dynamics and fixed-timestep simulation). Our frontend additionally includes helper libraries for things like drawing robots, handling user input, and drawing graphs.
+Our swarm control framework uses a base task to represent the lifecycle of an experiment---{\bf  instantiation, simulation, evaluation}, and {\bf submission}. A particular experiment inherits from this prototype but overrides particular methods and adds its own variables for bookkeeping; this allows new or modified tasks to be created rapidly with minimal boilerplate code.
 
-Our framework uses a base task to represent the lifecycle of an experiment---{\bf  instantiation, simulation, evaluation}, and {\bf submission}. A particular experiment inherits from this prototype but overrides particular methods and adds its own variables for bookkeeping; in this way, new or modified tasks may be created rapidly without worrying about boilerplate code.
+During the {\bf instantiation} phase, an experiment sets up the web page elements with help text and other information, and creates the obstacles, robots, and workpieces that will be present during the experiment. It will also randomly select which mode to run in, if applicable.
 
-During the {\bf instantiation} phase, an experiment sets up the web page elements with help text and other information, and also creates the obstacles, robots, and workpieces that will be present during the experiment. It will also randomly select which mode to run in, if applicable.
-
-The {\bf simulation} phase is the time at which all of the robots are moved according to user input and given a chance to interact with each other and the environment. As user input is handled in a callback at some time not controlled by the experiment, a proxy variable is updated by the user input handling routines and evaluated during the simulation phase. Finally, the simulation phase draws the current state of the experiment to the canvas of the webpage.
+The {\bf simulation} phase is the time at which all of the robots are moved according to user input and given a chance to interact with each other and the environment. The simulation phase then draws the current state of the experiment to the canvas of the webpage.
 
 The {\bf evaluation} phase is when the experiment's completion criteria are applied to the current experiment state: are the robots in the goal zone, are the workpieces in the correct place, and so forth. If the criteria are not met, the experiment loops back into the simulation phase; if they are met, then the experiment proceeds to result submission.
 
-The {\bf submission} phase is when the results of the experiment are combined with other user data, such as the browser user agent string, and submitted to the server for collection. As a means of encouraging user interaction, the results of other runs of the experiment are shown to the participant after submission along with merit badges displaying the number of experiments completed.
+The {\bf submission} phase is when the results of the experiment are combined with other user data, such as the browser user agent string, and submitted to the server for collection.
+
+%As a means of encouraging user interaction, the results of other runs of the experiment are shown to the participant after submission along with merit badges displaying the number of experiments completed.
 
 %% wherein we justify hours spent on facebook and hacker news  -- ha!  I'd like us to place links in the .tex for future reference
 \subsection{Human subjects}
@@ -80,15 +72,13 @@ Cumulative time played for completed tests.
 \end{figure}
 
 
-Concurrently, we contacted our university's \emph{News and Media Relations Team}. They sent a writer and photographer to our lab, worked with us to draft a \href{http://news.rice.edu/2013/09/09/a-swarm-on-every-desktop-robotics-experts-learn-from-public/ }{press release}, and publicized with news outlets and alumni. Most universities have a media team, and this is a valuable no-cost venue to gain publicity.
+Concurrently, we contacted our university's \emph{News and Media Relations Team}. They sent a writer and photographer to our lab, worked with us to draft a \href{http://news.rice.edu/2013/09/09/a-swarm-on-every-desktop-robotics-experts-learn-from-public/ }{press release}, and publicized with news outlets and alumni. Most universities have a media team, and this is a valuable no-cost resource to gain publicity.
  
 %% wherein we show just how cheap we are 
 \subsection{Experimental costs}
 
-We've spent approximately one hundred dollars USD provisioning and running this experiment.
-
-Hosting is provided by \href{Heroku.com}{Heroku}, using a single web instance costing around \$40/month, with additional monitoring services bringing that up to \$50/month. In the event of increased demand/participant traffic, we can trivially provision another server to take up the load.
-We purchased our domain name from \href{Namecheap.com}{Namecheap.com} for \$11.66 a year, giving our site a short, easy to pronounce handle that was 10 characters shorter than the free name. 
+We've spent approximately one hundred dollars USD provisioning and running this experiment. Hosting is provided by \href{Heroku.com}{Heroku}, using a single web instance costing around \$40/month, with additional monitoring services bringing that up to \$50/month. In the event of increased demand/participant traffic, we can provision another server to take up the load.
+We purchased our domain name from \href{Namecheap.com}{Namecheap.com} for \$11.66 a year, giving our site a short, easy to pronounce handle.
 %SwarmControl.net %16 char
 %SwarmControl.herokuapp.com %26 char
 
@@ -99,16 +89,6 @@ Given the large number of experiment sessions run (over 4700 at the time of this
 %% wherein we describe how we monitor the progress of the experimental setup
 \subsection{Instrumentation}
 
-When conducting an online experiment, it is very helpful to gather additional data about both the experiment infrastructure and the participants.
-
-For the backend, we use a service called Airbrake to monitor the `health' of the Rails server, getting emails in the events of any errors occurring or suspicious activity. We also use another service called New Relic to provide monitoring and analytics on the server traffic, giving coarse statistics about site visitation, page load time, and other indicators of how our backend is performing.
+When conducting an online experiment, it is very helpful to gather data about both the experiment infrastructure and the participants. For the backend, we use a service called Airbrake to monitor the `health' of the Rails server, getting emails in the events of any errors occurring or suspicious activity. We also use another service called New Relic to provide monitoring and analytics on the server traffic, giving coarse statistics about site visitation, page load time, and other indicators of how our backend is performing.
 
 For the frontend, we use Google Analytics to track user behavior. This tool allows us to see country of origin for users, time spent on the site, relative percent of people who look past the landing page (`bounce rate'), and user agent information (type of browser, type of device, etc.).
-
-
-
-
-
-
-
-

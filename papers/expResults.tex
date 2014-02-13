@@ -3,7 +3,7 @@
 \section{Results}\label{sec:expResults}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We designed five experiments to investigate human control of large robotic swarms for manipulation tasks.  Screenshots of each experiment are shown in Fig.~\ref{fig:5experiments}.  Each experiment examined the effects of varying a single parameter: 1 to 500 robots for manipulation, four levels of visual feedback, three control architectures, 200 levels of Brownian noise, and position control with 1 to 10 robots. The users could choose which experiment to try, but our architecture randomly assigned a particular parameter value for each trial.  We recorded the completion time and the participant ID for each successful trial.  As Fig.~\ref{fig:Learning} shows, one-third of all participants played only a single game.  Still, many played multiple games, and their decreasing completion times demonstrates their skills improved.
+We designed five experiments to investigate human control of large robotic swarms for manipulation tasks.  Screenshots of each experiment are shown in Fig.~\ref{fig:5experiments}.  Each experiment examined the effects of varying a single parameter: population of robots for manipulation, four levels of visual feedback, three control architectures, different levels of Brownian noise, and position control with 1 to 10 robots. The users could choose which experiment to try, and then our architecture randomly assigned a particular parameter value for each trial.  We recorded the completion time and the participant ID for each successful trial.  As Fig.~\ref{fig:Learning} shows, one-third of all participants played only a single game.  Still, many played multiple games, and their decreasing completion times demonstrates their skills improved.
 
 \begin{figure}
 \begin{overpic}[width = 0.48\columnwidth]{gamesPerPlayer.pdf}\end{overpic}
@@ -13,12 +13,6 @@ We designed five experiments to investigate human control of large robotic swarm
 (Left) The total number of games played per player drops off exponentially. (Right) We are able to show that players skill improves as they retry tests using data from \emph{Varying Number}
 }
 \end{figure}
-
-%\paragraph{Model}
-Our robots are disc-shaped, non-holonomic, and confined to the 2D plane.  The control input $u$ consists of a single bounded force vector that is applied to each robot, $|u|\le u_{max}$.  We include a linear ramp for this force value that starts at zero and increases to the maximum value in one second; this allows participants to do fine control of the robots by tapping the arrow keys.
-\begin{align}\label{eq:sysmodel}
-\dot{x}_i = u_x,  \qquad  \dot{y}_i = u_y.
- \end{align}
 
 % RESULTS
 %% For each task, list the hypothesis, then give plot
@@ -43,7 +37,7 @@ Data from \emph{Varying Number} using robots to push an object through a maze to
 }
 \end{figure}
 
-Transport of goods and materials between points is at the heart of all engineering and construction in real-world systems. This experiment varied from 1 to 500 the number of robots used to transport an object. We kept the total area, maximum robot speed, and sum force the swarm could produce constant. The robots pushed a large hexagonal object through an `S'-shaped maze. Our hypothesis was that participants would complete the task faster with more robots. The results, shown in Fig.~\ref{fig:ResVaryNu}, do not support our hypothesis, indicating rather that there is a local minima around 130 robots.
+Transport of goods and materials between points is at the heart of all engineering and construction in real-world systems. This experiment varied from 1 to 500 the population of robots used to transport an object. We kept the total area, maximum robot speed, and total net force the swarm could produce constant. The robots pushed a large hexagonal object through an `S'-shaped maze. Our hypothesis was that participants would complete the task faster with more robots. The results, shown in Fig.~\ref{fig:ResVaryNu}, do not support our hypothesis, indicating rather that there is a local minima around 130 robots.
 
 
 \subsection{Varying Control}
@@ -76,7 +70,7 @@ Attractive control resulted in the shortest completion time and repulsive the lo
 
 \subsection{Varying Visualization}
 
-Sensing is expensive, especially on the nanoscale. To see nanocars~\cite{Chiang2011}, scientists fasten molecules that fluoresce light when activated by a strong light source. Unfortunately, multiple exposures can destroy these molecules, a process called photobleaching. Photobleaching can be minimized by lowering the excitation light intensity, but this increases the probability of missed detections~\cite{Cazes2001}.  This experiment explores manipulation with varying amounts of sensing information: {\bf full-state} sensing provides the most information by showing the position of all robots; {\bf convex-hull} draws a line around the outermost robots; {\bf mean} provides the average position; and {\bf mean + variance} adds a confidence ellipse. Fig.~\ref{fig:Visualization} shows screenshots of the same robot swarm with each type of visual feedback. Full-state requires $2n$ data points for $n$ robots. Convex-hull requires at worst $2n$, but usually a smaller number.  Mean requires two, and variance three, data points.  Mean and mean + variance are convenient even with millions of robots. Our hypothesis predicted a steady decay in performance as the amount of visual feedback decreased.
+Sensing is expensive, especially on the nanoscale. To see nanocars~\cite{Chiang2011}, scientists fasten molecules that fluoresce light when activated by a strong light source. Unfortunately, multiple exposures can destroy these molecules, a process called photobleaching. Photobleaching can be minimized by lowering the excitation light intensity, but this increases the probability of missed detections~\cite{Cazes2001}.  This experiment explores manipulation with varying amounts of sensing information: {\bf full-state} sensing provides the most information by showing the position of all robots; {\bf convex-hull} draws a convex hull around the outermost robots; {\bf mean} provides the average position of the population; and {\bf mean + variance} adds a confidence ellipse. Fig.~\ref{fig:Visualization} shows screenshots of the same robot swarm with each type of visual feedback. Full-state requires $2n$ data points for $n$ robots. Convex-hull requires at worst $2n$, but usually a smaller number.  Mean requires two, and variance three, data points.  Mean and mean + variance are convenient even with millions of robots. Our hypothesis predicted a steady decay in performance as the amount of visual feedback decreased.
 
 % Additionally, as population characteristics, they are available even if only a percentage of the robots are detected each control cycle.
 %Photobleaching: http://www.piercenet.com/browse.cfm?fldID=4DD9D52E-5056-8A76-4E6E-E217FAD0D86B

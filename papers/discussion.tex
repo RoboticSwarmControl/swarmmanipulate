@@ -20,12 +20,10 @@ To signal completion of a task and to show participants how they had performed w
 
 Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines.
 
-To explain why the experiment matters, we added  \emph{The Science} sections on each page.
+To explain why the experiment matters, we added  \emph{The Science} sections on each page. These sections gave practical context to the experiment being performed, showing its utility in real-world situations.
 
 \subsubsection{Respect participant time}
-Our beta testers were frustrated by slow robots; in contrast, when we have conducted in-person tests with hardware robots in the lab, people have been more patient. To fix this problem we sped up our simulated robots by a factor of five.
-
-For experiments conducted online, it is important to waste as little of a participant's time as possible: you are in direct competition with a thousand other distractions.
+For experiments conducted online, it is important to waste as little of a participant's time as possible: you are in direct competition with a thousand other distractions. Our beta testers were frustrated by slow robots; in contrast, when we have conducted in-person tests with hardware robots in the lab, people have been more patient. To fix this problem we sped up our simulated robots by a factor of five.
 
 \subsubsection{Have simple instructions}
 
@@ -85,9 +83,7 @@ There are ways we can improve the quality of our experimentation.
 
 \subsubsection{Poor experiment design}
 
-We tried to design each experiment to measure the effect one parameter; we did not always succeed.
-
-In particular, the \emph{Position Control} experiment uses varying numbers of robots---however, there is no difference in input required to solve certain configurations. Identical input sequences solve $n=1$ and $n=2$, a problem also seen with $n=3$ and $n=4$.
+We tried to design each experiment to measure the effect one parameter; we did not always succeed. In particular, the \emph{Position Control} experiment uses varying numbers of robots---however, there is no difference in input required to solve certain configurations. Identical input sequences solve $n=1$ and $n=2$, a problem also seen with $n=3$ and $n=4$.
 
 Additionally, there is a qualitative difference in difficulty when arranging the robots into a solid versus hollow shape; this is currently not controlled for. A possible solution would require goal states for all values of $n$ to be either solid or hollow.
 

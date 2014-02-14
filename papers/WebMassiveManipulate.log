@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 15:46
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 16:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1049,21 +1049,22 @@ File: ./pictures/pdf/ScreenShotBeforePlay.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ScreenShotBeforePlay.pdf>
 Package pdftex.def Info: ./pictures/pdf/ScreenShotBeforePlay.pdf used on input 
-line 29.
+line 18.
 (pdftex.def)             Requested size: 245.71811pt x 181.5199pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--33
+Underfull \hbox (badness 10000) in paragraph at lines 18--22
 [][]
  []
 
-<./pictures/pdf/Browsers.pdf, id=426, 682.19026pt x 307.96446pt>
-File: ./pictures/pdf/Browsers.pdf Graphic file (type pdf)
+<./pictures/pdf/ScreenShotSuccess.pdf, id=427, 998.73125pt x 747.79375pt>
+File: ./pictures/pdf/ScreenShotSuccess.pdf Graphic file (type pdf)
 
-<use ./pictures/pdf/Browsers.pdf>
-Package pdftex.def Info: ./pictures/pdf/Browsers.pdf used on input line 43.
-(pdftex.def)             Requested size: 245.71811pt x 110.92351pt.
+<use ./pictures/pdf/ScreenShotSuccess.pdf>
+Package pdftex.def Info: ./pictures/pdf/ScreenShotSuccess.pdf used on input lin
+e 33.
+(pdftex.def)             Requested size: 245.71811pt x 183.98126pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--47
+Underfull \hbox (badness 10000) in paragraph at lines 33--37
 [][]
  []
 
@@ -1072,22 +1073,40 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.58 
+l.44 
      pdfTeX warning (ext4): destination with the same identifier (name{figure.9
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.58 
+l.44 
      pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 0}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.58 
+l.44 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.44 
       <./pictures/pdf/ResVaryNoise.pdf> <./pictures/pdf/ResPositioning.pdf> <./
-pictures/pdf/ScreenShotBeforePlay.pdf>]) (./conclusion.tex
-<./pictures/pdf/Worldbrowsing.pdf, id=480, 638.518pt x 422.41585pt>
+pictures/pdf/ScreenShotBeforePlay.pdf> <./pictures/pdf/ScreenShotSuccess.pdf>]
+<./pictures/pdf/Browsers.pdf, id=486, 682.19026pt x 307.96446pt>
+File: ./pictures/pdf/Browsers.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/Browsers.pdf>
+Package pdftex.def Info: ./pictures/pdf/Browsers.pdf used on input line 55.
+(pdftex.def)             Requested size: 245.71811pt x 110.92351pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--59
+[][]
+ []
+
+) (./conclusion.tex
+<./pictures/pdf/Worldbrowsing.pdf, id=493, 638.518pt x 422.41585pt>
 File: ./pictures/pdf/Worldbrowsing.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/Worldbrowsing.pdf>
@@ -1095,26 +1114,26 @@ Package pdftex.def Info: ./pictures/pdf/Worldbrowsing.pdf used on input line 8.
 
 (pdftex.def)             Requested size: 117.94363pt x 78.02324pt.
 
-<./pictures/pdf/USbrowsing.pdf, id=481, 603.8814pt x 371.21385pt>
+<./pictures/pdf/USbrowsing.pdf, id=494, 603.8814pt x 371.21385pt>
 File: ./pictures/pdf/USbrowsing.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/USbrowsing.pdf>
 Package pdftex.def Info: ./pictures/pdf/USbrowsing.pdf used on input line 9.
 (pdftex.def)             Requested size: 117.94363pt x 72.49686pt.
-) (./WebMassiveManipulate.bbl [7pdfTeX warning (ext4): destination with the sam
-e identifier (name{figure.11}) has been already used, duplicate ignored
+ [7pdfTeX warning (ext4): destination with the same identifier (name{figure.12}
+) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2 \begin{thebibliography}{10}
-                               pdfTeX warning (ext4): destination with the same
- identifier (name{figure.12}) has been already used, duplicate ignored
+l.24 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2 \begin{thebibliography}{10}
-                                <./pictures/pdf/Browsers.pdf> <./pictures/pdf/W
-orldbrowsing.pdf> <./pictures/pdf/USbrowsing.pdf>])
+l.24 
+      <./pictures/pdf/Browsers.pdf> <./pictures/pdf/Worldbrowsing.pdf> <./pictu
+res/pdf/USbrowsing.pdf>]) (./WebMassiveManipulate.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1132,19 +1151,25 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./WebMassiveManipulate.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
-Package rerunfilecheck Info: File `WebMassiveManipulate.out' has not changed.
-(rerunfilecheck)             Checksum: 3A82B6D8EB1033B980583E2B8AA1B93E;2725.
 
+
+Package rerunfilecheck Warning: File `WebMassiveManipulate.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `WebMassiveManipulate.out':
+(rerunfilecheck)             Before: 3A82B6D8EB1033B980583E2B8AA1B93E;2725
+(rerunfilecheck)             After:  CCE19E747C6023DF0E06CAA8E3B214F8;2735.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
  ) 
 Here is how much of TeX's memory you used:
- 14109 strings out of 493488
- 222724 string characters out of 3141326
- 308848 words of memory out of 3000000
- 17069 multiletter control sequences out of 15000+200000
+ 14116 strings out of 493488
+ 222940 string characters out of 3141326
+ 312108 words of memory out of 3000000
+ 17074 multiletter control sequences out of 15000+200000
  42678 words of font info for 90 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,10n,46p,1300b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1160,10 +1185,10 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate.pdf (8 pages, 1889522 bytes).
+Output written on WebMassiveManipulate.pdf (8 pages, 2058688 bytes).
 PDF statistics:
- 625 PDF objects out of 1000 (max. 8388607)
- 523 compressed objects within 6 object streams
- 93 named destinations out of 1000 (max. 500000)
- 418 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 638 PDF objects out of 1000 (max. 8388607)
+ 532 compressed objects within 6 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 423 words of extra memory for PDF output out of 10000 (max. 10000000)
 

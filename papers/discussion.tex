@@ -10,17 +10,6 @@ While waiting on our IRB approval, we tested our experiment suite.  This gave us
 
 Our original color scheme made heavy use of bright red, green, and blue colors. We tested for colorblind accessibility, and changed our color scheme. \href{http://colorfilter.wickline.org/}{http://colorfilter.wickline.org/} is an online service which displays a website as it appears to a colorblind user.
 
-\subsubsection{Have a structure}
-
-Beta-testers desired a more structured experience; initially we had only shown screenshots of the five experiments and each experiment had a replay button. Participants told us that they had no idea when they had finished, how they had performed, or why the experiment mattered.
-
-To signal completion of a task and to show participants how they had performed we added a results screen to the end of each experiment. When a user completes an experiment trial, they are congratulated, shown their completion time, and shown how their results compare with everyone else. Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines.
-
-To explain why the experiment matters, we added  \emph{The Science} sections on each page. These sections gave practical context to the experiment being performed, showing its utility in real-world situations.
-
-\subsubsection{Respect participant time}
-For experiments conducted online, it is important to waste as little of a participant's time as possible: you are in direct competition with a thousand other distractions. Our beta testers were frustrated by slow robots; in contrast, when we have conducted in-person tests with hardware robots in the lab, people have been more patient. To fix this problem we sped up our simulated robots by a factor of five.
-
 \subsubsection{Have simple instructions}
 
 Beta-testers never looked at the instructions in the side-panel. To fix this, we overlaid simple, mostly pictorial instructions on the experiment canvas before play, as shown in Fig.~\ref{fig:ScreenShotBeforePlay}.
@@ -32,6 +21,29 @@ Beta-testers never looked at the instructions in the side-panel. To fix this, we
 \vspace{-2em}
 }
 \end{figure}
+
+
+\subsubsection{Make the structure obvious}
+
+Beta-testers desired a more structured experience; initially we had only shown screenshots of the five experiments and each experiment had a replay button. Participants told us that they had no idea when they had finished, how they had performed, or why the experiment mattered.
+
+To signal completion of a task and to show participants how they had performed we added a results screen to the end of each experiment. When a user completes an experiment trial, they are congratulated, shown their completion time, and shown how their results compare with everyone else. Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines. These additions are shown in Fig.~\ref{fig:ScreenShotSuccess}.
+
+\begin{figure}
+\begin{overpic}[width = \columnwidth]{ScreenShotSuccess.pdf}\end{overpic}
+\vspace{-2em}
+\caption{\label{fig:ScreenShotSuccess}Screenshot showing the \emph{Varying Visualization} experiment after a successful completion. Merit badges, feedback with comparison to other players, and a large \emph{Play again!} button contribute to encourage multiple experiments.
+\vspace{-2em}
+}
+\end{figure}
+
+To explain why the experiment matters, we added  \emph{The Science} sections on each page. These sections gave practical context to the experiment being performed, showing its utility in real-world situations.
+
+\subsubsection{Respect participant time}
+For experiments conducted online, it is important to waste as little of a participant's time as possible: you are in direct competition with a thousand other distractions. Our beta testers were frustrated by slow robots; in contrast, when we have conducted in-person tests with hardware robots in the lab, people have been more patient. To fix this problem we sped up our simulated robots by a factor of five.
+
+
+
 
 \subsubsection{Test multiple displays}
 

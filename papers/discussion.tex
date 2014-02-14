@@ -12,13 +12,9 @@ Our original color scheme made heavy use of bright red, green, and blue colors. 
 
 \subsubsection{Have a structure}
 
-Beta-testers desired a more structured experience; initially we had only shown screenshots of the five experiments and each experiment had a replay button.
+Beta-testers desired a more structured experience; initially we had only shown screenshots of the five experiments and each experiment had a replay button. Participants told us that they had no idea when they had finished, how they had performed, or why the experiment mattered.
 
-Participants told us that they had no idea when they had finished, how they had performed, why the experiment mattered, or how to get to the next experiment.
-
-To signal completion of a task and to show participants how they had performed we added a results screen to the end of each experiment. When a user completes an experiment trial, they are congratulated, shown their completion time, and shown how their results compare with everyone else.
-
-Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines.
+To signal completion of a task and to show participants how they had performed we added a results screen to the end of each experiment. When a user completes an experiment trial, they are congratulated, shown their completion time, and shown how their results compare with everyone else. Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines.
 
 To explain why the experiment matters, we added  \emph{The Science} sections on each page. These sections gave practical context to the experiment being performed, showing its utility in real-world situations.
 
@@ -31,9 +27,9 @@ Beta-testers never looked at the instructions in the side-panel. To fix this, we
 
 \begin{figure}
 \begin{overpic}[width = \columnwidth]{ScreenShotBeforePlay.pdf}\end{overpic}
-\caption{
-\label{fig:ScreenShotBeforePlay} 
-Screenshot showing the \emph{Varying Number} experiment before gameplay.  At left are instructions and educational material, including a video. At right is the experiment canvas. Large instructions and bold arrows demonstrate the desired task---participants do not bother to read small print. 
+\vspace{-2em}
+\caption{\label{fig:ScreenShotBeforePlay}Screenshot showing the \emph{Varying Number} experiment before gameplay.  At left are instructions and educational material, including a video. At right is the experiment canvas. Large instructions and bold arrows demonstrate the desired task---participants do not bother to read small print. 
+\vspace{-2em}
 }
 \end{figure}
 
@@ -45,18 +41,16 @@ Finally, many participants used laptop screens---displays much smaller than the 
 
 \begin{figure}
 \begin{overpic}[width = \columnwidth]{Browsers.pdf}\end{overpic}
-\caption{
-\label{fig:Browsers}
-Overview of the browsers used by game players, provided by Google Analytics. 
+\vspace{-2em}
+\caption{\label{fig:Browsers}Overview of the browsers used by game players, provided by Google Analytics. 
+\vspace{-2em}
 }
 \end{figure}
 
 After beta-testing, we launched the website and monitored our traffic using saved results and tracking by Google Analytics. This information was helpful in finding several usage trends.
 
 \subsubsection{Mobile traffic}
- Looking at this data, we found that visitors using a smartphone or tablet leave within 17 seconds on average. These participants are 10\% of our first-time visitors, and leave because our experiments require the use of a mouse and keyboard.
-
-To capture these participants, we plan to make a mobile-friendly version of our experiments.
+ Looking at this data, we found that visitors using a smartphone or tablet leave within 17 seconds on average. These participants are 10\% of our first-time visitors, and leave because our experiments require the use of a mouse and keyboard. To capture these participants, we plan to make a mobile-friendly version of our experiments.
 
 \subsubsection{Browser considerations}
 Browser information for our experiments is shown in Fig.~\ref{fig:Browsers}.
@@ -64,9 +58,7 @@ For an online experiment, the experimenter cannot control the participant's brow
 
 A large screen and a small screen---unless designed for---may show content differently, leading to inconsistent results. We optimized for a small laptop screen.
 
-Additionally, certain browser/computer combinations will exhibit abysmal performance as the number of robots increases. Performance may suffer because of other processes the participant is running.
-
-Two ways to compensate for variance in performance are to conduct large numbers of experiments or to record performance data concurrently with experiment data. We attempted both: after one week of testing we began recording the user-agent string of participants' browsers. A better setup would benchmark a participant's browser before running an experiment.
+Additionally, certain browser/computer combinations will exhibit abysmal performance as the number of robots increases. Performance may suffer because of other processes the participant is running. Two ways to compensate for variance in performance are to conduct large numbers of experiments or to record performance data concurrently with experiment data. We attempted both: after one week of testing we began recording the user-agent string of participants' browsers. A better setup would benchmark a participant's browser before running an experiment.
 
 %current website optimized for research, not for education.
 
@@ -79,11 +71,11 @@ We originally planned on a participant sign-up process, but omitted it to let pa
 
 \subsection{Other issues}
 
-There are ways we can improve the quality of our experimentation.
+There are ways to improve the quality of our experimentation.
 
 \subsubsection{Poor experiment design}
 
-We tried to design each experiment to measure the effect one parameter; we did not always succeed. In particular, the \emph{Position Control} experiment uses varying numbers of robots---however, there is no difference in input required to solve certain configurations. Identical input sequences solve $n=1$ and $n=2$, a problem also seen with $n=3$ and $n=4$.
+We tried to design each experiment to measure the effect one parameter; we did not always succeed. In particular, the \emph{Position Control} experiment uses varying numbers of robots---however, there is no difference in input required to solve certain configurations. Identical input sequences solve $n$=1 and $n$=2, a problem also seen with $n$=3 and $n$=4.
 
 Additionally, there is a qualitative difference in difficulty when arranging the robots into a solid versus hollow shape; this is currently not controlled for. A possible solution would require goal states for all values of $n$ to be either solid or hollow.
 

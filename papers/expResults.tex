@@ -30,10 +30,11 @@ We designed five experiments to investigate human control of large robotic swarm
 
 \subsection{Varying Number}
 \begin{figure}
+\centering
 \begin{overpic}[width = \columnwidth]{ResVaryNum.pdf}\end{overpic}
-\caption{
-\label{fig:ResVaryNu} 
-Data from \emph{Varying Number} using robots to push an object through a maze to a goal location.  The data indicates that this task has an optimal number of robots, perhaps due to the relative sizes of the robots, obstacles, and object. Best-fit linear and quadratic lines are overlaid for comparison. 
+\vspace{-1em}
+\caption{\label{fig:ResVaryNu}Data from \emph{Varying Number} using robots to push an object through a maze to a goal location.  The data indicates that this task has an optimal number of robots, perhaps due to the relative sizes of the robots, obstacles, and object. Best-fit linear and quadratic lines are overlaid for comparison. 
+%\vspace{-1em}
 }
 \end{figure}
 
@@ -48,7 +49,7 @@ The experiment challenged players to assemble a three-block pyramid with a swarm
 
 %\todo{describe controller model here, use an equation}
 
-The results were conclusive, as shown in Fig.~\ref{fig:ResVaryControl}:  for our assembly task attractive control was the fastest, followed by global control, with repulsive control a distant last.  The median time using repulsive control was four times longer than with attractive control.
+The results were conclusive, as shown in Fig.~\ref{fig:ResVaryControl}: attractive control was the fastest, followed by global control, with repulsive control a distant last.  The median time using repulsive control was four times longer than with attractive control.
 
 %%\begin{figure}
 %%\begin{overpic}[width = 0.39\columnwidth]{attractiveForce.pdf}\end{overpic}
@@ -62,9 +63,9 @@ The results were conclusive, as shown in Fig.~\ref{fig:ResVaryControl}:  for our
 \begin{figure}
 \centering
 \begin{overpic}[width = \columnwidth]{ResVaryControl.pdf}\end{overpic}
-\caption{
-\label{fig:ResVaryControl} 
-Attractive control resulted in the shortest completion time and repulsive the longest for building a three-block pyramid.
+\vspace{-1em}
+\caption{\label{fig:ResVaryControl}Attractive control resulted in the shortest completion time and repulsive the longest for building a three-block pyramid.
+% \vspace{-1em}
 }
 \end{figure}
 
@@ -79,10 +80,11 @@ Sensing is expensive, especially on the nanoscale. To see nanocars~\cite{Chiang2
 
 
 \begin{figure}
+\centering
 \begin{overpic}[width = \columnwidth]{ResVaryVis.pdf}\end{overpic}
-\caption{
-\label{fig:ResVaryVis} 
-Completion-time results for the four levels of visual feedback shown in Fig.~\ref{fig:Visualization}. Surprisingly, players perform better with limited feedback--subjects with only the mean + variance  outperformed all others.
+\vspace{-2em}
+\caption{\label{fig:ResVaryVis} Completion-time results for the four levels of visual feedback shown in Fig.~\ref{fig:Visualization}. Surprisingly, players perform better with limited feedback--subjects with only the mean + variance  outperformed all others.
+%\vspace{-2em}
 }
 \end{figure}
 
@@ -92,12 +94,14 @@ Completion-time results for the four levels of visual feedback shown in Fig.~\re
 \begin{overpic}[width =\figwid]{VaryVisCH.pdf}\put(10,15){Convex-hull}\end{overpic}
 \begin{overpic}[width =\figwid]{VaryVisMv.pdf}\put(10,15){Mean + var}\end{overpic}
 \begin{overpic}[width =\figwid]{VaryVisMe.pdf}\put(30,15){Mean}\end{overpic}
-\caption{
-\label{fig:Visualization} 
-Screenshots from task \emph{Vary Visualization}. This experiment challenges players to quickly steer 100 robots (blue discs) to push an object (green hexagon) into a goal region. We record the completion time and other statistics.}
+\vspace{-2em}
+\caption{\label{fig:Visualization}Screenshots from task \emph{Vary Visualization}. This experiment challenges players to quickly steer 100 robots (blue discs) to push an object (green hexagon) into a goal region. We record the completion time and other statistics.
+%\vspace{-1em}
+}
 \end{figure}
 
-To our surprise, our experiment indicates the opposite: players  with just the mean completed the task faster than those with full-state feedback.  As Fig.~\ref{fig:ResVaryVis} shows, the levels of feedback arranged by increasing completion time are [mean + variance, mean, full-state, convex-hull].  Anecdotal evidence from beta-testers who played the game suggests that tracking 100 robots is overwhelming---similar to schooling phenomenons that confuse predators---while working with just the mean + variance is like using a ``spongy'' manipulator. Our beta-testers found convex-hull feedback confusing and irritating.  A single robot left behind an obstacle will stretch the entire hull, obscuring what the rest of the swarm is doing.   
+To our surprise, our experiment indicates the opposite: players  with just the mean completed the task faster than those with full-state feedback.  As Fig.~\ref{fig:ResVaryVis} shows, the levels of feedback arranged by increasing completion time are [mean + variance, mean, full-state, convex-hull].  Anecdotal evidence from beta-testers who played the game suggests that tracking 100 robots is overwhelming---similar to schooling phenomenons that confuse predators---while working with just the mean + variance is like using a ``spongy'' manipulator. Our beta-testers found convex-hull feedback confusing and irritating.  A single robot left behind an obstacle will stretch the entire hull, obscuring the majority of the swarm.
+%obscuring what the rest of the swarm is doing.   
 
 \subsection{Varying Noise}
 Real-world microrobots and nanorobots are affected by turbulence caused by random collisions with molecules. The effect of these collisions is called Brownian motion.
@@ -112,10 +116,11 @@ Here $m_i,\psi_i$ are uniformly IID, with $m_i\in[0,M]$ and $\psi_i\in[0,2\pi]$,
 We hypothesized 200\% noise was the largest a human could be expected to control---at 200\% noise, the robots move erratically.  Disproving our hypothesis, the results in Fig.~\ref{fig:ResVaryNoise} show only a 40\% increase in completion time for the maximum noise.
 
 \begin{figure}
+\centering
 \begin{overpic}[width = \columnwidth]{ResVaryNoise.pdf}\end{overpic}
-\caption{
-\label{fig:ResVaryNoise} 
-Varying the noise from 0 to 200\% of the maximum control input resulted in only a small increase in completion time.
+\vspace{-2em}
+\caption{\label{fig:ResVaryNoise} Varying the noise from 0 to 200\% of the maximum control input resulted in only a small increase in completion time.
+%\vspace{-2em}
 }
 \end{figure}
 
@@ -123,11 +128,12 @@ Varying the noise from 0 to 200\% of the maximum control input resulted in only 
 This experiment examined how completion time scales with the number of robots $n$. Using a single square obstacle, users arranged $n\in[1,10]$ robots into a specified goal pattern.  The goal pattern formed a block `A' with 10 robots, and lesser numbers of robots used a subset of these goal positions. Our hypothesis was that completion time would increase linearly with the number of robots, as with our position control algorithm in \cite{Becker2013b}.  Our results roughly corroborate this, as shown in Fig.~\ref{fig:ResPositioning}.  Though the number of robots presented to game players is uniformly distributed, larger $n$ are more difficult, and the number of successful experiments drops steadily as $n$ increases.
 
 \begin{figure}
+\centering
 \begin{overpic}[width = \columnwidth]{ResPositioning.pdf}\end{overpic}
-\caption{
-\label{fig:ResPositioning} 
-Increasing the number of robots resulted in longer completion times.  For more than 4 robots the goal pattern contained a void, which may have caused the longer completion times.
+\vspace{-2em}
+\caption{\label{fig:ResPositioning}Increasing the number of robots resulted in longer completion times.  For more than 4 robots the goal pattern contained a void, which may have caused the longer completion times.
+%\vspace{-2em}
 }
 \end{figure}
 
-Note there is a bifurcation between $n=4$ and $n=5$ robots. For $n\in[1,4]$ the goal patterns are not hollow, but starting at $n=5$ they are.  A better experiment design would randomly place the goal positions.  Initially we tried this, but our beta-testers strongly disliked trying to arrange robots in random patterns.
+Note there is a bifurcation between $n$=4 and $n$=5 robots. For $n\in[1,4]$ the goal patterns are not hollow, but starting at $n$=5 they are.  A better experiment design would randomly place the goal positions.  Initially we tried this, but our beta-testers strongly disliked trying to arrange robots in random patterns.

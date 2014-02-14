@@ -15,13 +15,13 @@ Their research investigated robots with 3 levels of autonomy.  We use robots wit
 
 Squire, Trafton, and Parasuraman designed experiments showing that user-interface design had a high impact on the task effectiveness and the number of robots that could be controlled simultaneously in a multi-robot task \cite{Squire:2006:HCM:1121241.1121248}.
 
-A number of user studies compare methods for controlling large swarms of simulated robots, for example \cite{bashyal2008human,kolling2012towards,de2012controllability}.  These studies provide insights but are limited by cost to small user studies, have a closed-source code base, and focus on controlling intelligent, programmable agents.  
+A number of user studies compare methods for controlling large swarms of simulated robots, for example \cite{bashyal2008human,kolling2012towards,de2012controllability}.  These studies provide insights but are limited by cost to small user studies; have a closed-source code base; and focus on controlling intelligent, programmable agents.  
 For instance \cite{de2012controllability} was limited to a pool of 18 participants,  \cite{bashyal2008human} 5, and \cite{kolling2012towards} 32.
 	Using an online testing environment, we conduct similar studies but with much larger sample sizes.
 
-\subsection{Global-control of micro- and nano-robots}
+\subsection{Global-control of micro- and nanorobots}
 Small robots have been constructed with physical heterogeneity so that they respond differently to a global, broadcast control signal.  Examples include \emph{scratch-drive microrobots}, actuated and controlled by a DC voltage signal from a substrate \cite{Donald2006,Donald2008};   magnetic structures  with different cross-sections that could be independently steered \cite{Floyd2011,Diller2013};   \emph{MagMite} microrobots with different resonant frequencies and a global magnetic field \cite{Frutiger2008}; and  magnetically controlled nanoscale helical screws constructed to stop movement at different cutoff frequencies of a global magnetic field
-\cite{Peyer2013}. 
+\cite{Tottori2012,Peyer2013}. 
 %In our previous work with robots that can be modeled as nonholonomic unicycles~\cite{Becker2012k}, we showed that an inhomogeneity in turning speed is enough to make even an infinite number of robots controllable with regard to position. 
 %While these approaches theoretically scale to large populations, they also require both excellent state estimation and heterogeneous robots. 
 
@@ -81,18 +81,18 @@ Small robots have been constructed with physical heterogeneity so that they resp
 
 
 
-Similarly, our previous work \cite{Becker2012,Becker2012k} focused on exploiting inhomogeneity between robots.  These control algorithms theoretically apply to any number of robots---even robotic continuums---but in practice process noise cancels the differentiating effects of inhomogeneity for more than tens of robots.  We desire control algorithms that extend to many thousands of agents.
+Similarly, our previous work \cite{Becker2012,Becker2012k} focused on exploiting inhomogeneity between robots.  These control algorithms theoretically apply to any number of robots---even robotic continuums---but in practice process noise cancels the differentiating effects of inhomogeneity for more than tens of robots.  We desire control algorithms that extend to many thousands of robots.
 
   \subsection{Three challenges for massive manipulation}
- While it is now possible to create many micro- and nano-robots, there remain challenges in control, sensing, and computation. 
+ While it is now possible to create many micro- and nanorobots, there remain challenges in control, sensing, and computation. 
   
  \subsubsection{Control---global inputs}
- Many micro- and nano-robotic systems \cite{Tottori2012,Shirai2005,Chiang2011,Donald2006,Donald2008,Takahashi2006,Floyd2011,Diller2013,Frutiger2008,Peyer2013}
+ Many micro- and nanorobotic systems \cite{Tottori2012,Shirai2005,Chiang2011,Donald2006,Donald2008,Takahashi2006,Floyd2011,Diller2013,Frutiger2008,Peyer2013}
    rely on global inputs, where each robot receives an exact copy of the control signal.  Our experiments follow this global model.
    %Two reasonable questions are ``What tasks are possible with many robots, all under uniform control inputs?'' and ``What tasks are impossible with many robots, all under uniform control inputs?'' 
   
  \subsubsection{Sensing---large populations}
- Parallel control of $n$ differential-drive robots in a plane requires $3n$ state variables. Even holonomic robots require $2n$ state variables. Numerous methods exist for measuring this state in micro- and nanorobotics.  These solutions use computer vision systems to sense position and heading angle, with corresponding challenges of handling missed detections and registration of detections with corresponding robots.  These challenges are increased at the nanoscale where sensing competes with control for communication bandwidth.   We examine control when the operator has access to only the first and second moments of a population's position, or the convex-hull containing all robots of interest.
+ Parallel control of $n$ differential-drive robots in a plane requires $3n$ state variables. Even holonomic robots require $2n$ state variables. Numerous methods exist for measuring this state in micro- and nanorobotics.  These solutions use computer vision systems to sense position and heading angle, with corresponding challenges of handling missed detections and image registration between detections and robots.  These challenges are increased at the nanoscale where sensing competes with control for communication bandwidth.   We examine control when the operator has access to partial feedback, including only the first and/or second moments of a population's position, or only the convex-hull containing the robots.
  
 \subsubsection{Computation---calculating the control law}
 In our previous work the controllers required at best a summation over all the robot states \cite{Becker2012k} and at worst a matrix inversion \cite{Becker2012}. 
@@ -110,11 +110,11 @@ These operations become intractable for large populations of robots. By focusing
 %%OLD CONTENT
 %%%%
 %
-%\subsection{Micro- and Nano-Scale Manipulators}
-%Micro/nano-manipulation and assembly are the focus of considerable micro and nano-robotics research. Sitti, Yu, and Cecil provide surveys of nano-manipulation and assembly \cite{Sitti2001,Yu2003,Cecil2007}.  Savia and Koivo focus on a survey of contact strategies for micro manipulation \cite{Savia2009}.
-% Micro/nano-manipulation refers to manipulating components at the micro- and nano-scale, while assembly describes building structures from smaller components.  The ability to control position and track trajectories enables an ensemble of micro- and nano-robots to be used as a manipulator.  One advantage of using an ensemble control method over other methods, e.g.\ an atomic force microscope tip, is that ensemble methods allows the simultaneous manipulation of  multiple components.
+%\subsection{Micro- and Nanoscale Manipulators}
+%Micro/nanomanipulation and assembly are the focus of considerable micro and nanorobotics research. Sitti, Yu, and Cecil provide surveys of nanomanipulation and assembly \cite{Sitti2001,Yu2003,Cecil2007}.  Savia and Koivo focus on a survey of contact strategies for micro manipulation \cite{Savia2009}.
+% Micro/nanomanipulation refers to manipulating components at the micro- and nanoscale, while assembly describes building structures from smaller components.  The ability to control position and track trajectories enables an ensemble of micro- and nanorobots to be used as a manipulator.  One advantage of using an ensemble control method over other methods, e.g.\ an atomic force microscope tip, is that ensemble methods allows the simultaneous manipulation of  multiple components.
 %
-%We draw particular inspiration from our colleagues James Tour, Stephan Link, and their associates at Rice University, and their work with nanocars.  They have successfully synthesized a variety of molecular vehicles, or species of nanocars \cite{Vives2009,Vives2009a,Vives2009b,Sasaki2008,Sasaki2008a,Sasaki2008b,Morin2007,Shirai2006,Shirai2006a}.  At the nano-scale simply visualizing the molecules in real-time--key for closed-loop control--has required significant effort \cite{Claytor2009,Khatua2009}. 
+%We draw particular inspiration from our colleagues James Tour, Stephan Link, and their associates at Rice University, and their work with nanocars.  They have successfully synthesized a variety of molecular vehicles, or species of nanocars \cite{Vives2009,Vives2009a,Vives2009b,Sasaki2008,Sasaki2008a,Sasaki2008b,Morin2007,Shirai2006,Shirai2006a}.  At the nanoscale simply visualizing the molecules in real-time--key for closed-loop control--has required significant effort \cite{Claytor2009,Khatua2009}. 
 %Control thus far is rudimentary, designing nanocars that can either move straight \cite{Shirai2005} or turn \cite{Sasaki2008c} as a function of temperature.  More complex species incorporate a controllable motor, both thermally driven \cite{Morin2006} and light-driven  \cite{Chiang2011}.
 %  Due to the challenges and research timescales involved with fabricating and visualizing nanocars, our \href{http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file002.avi}{simulations and game models} will build on \href{http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file001.avi}{molecular dynamics models} by Kolomeisky et al.~\cite{Kimov2008,Konyukhov2010,Akimov2012}.
 %%simulation videos:  http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file001.avi and http://pubs.acs.org/doi/suppl/10.1021/ct7002594/suppl_file/ct7002594-file002.avi

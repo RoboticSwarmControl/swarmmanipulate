@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 23:22
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 23:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1016,17 +1016,19 @@ Package pdftex.def Info: ./pictures/pdf/VaryVisMe.pdf used on input line 102.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.123 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-5}) has been already used, duplicate ignored
+l.121 W
+       e hypothesized 200\% noise was the largest a human could be expected ...
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
+s been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.123 
-       <./pictures/pdf/timePlayed.pdf> <./pictures/pdf/ResVaryNum.pdf> <./pictu
-res/pdf/ResVaryNoise.pdf> <./pictures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVi
-sMe.pdf>]) (./discussion6pages.tex [5pdfTeX warning (ext4): destination with th
-e same identifier (name{figure.4}) has been already used, duplicate ignored
+l.121 W
+       e hypothesized 200\% noise was the largest a human could be expected ...
+ <./pictures/pdf/timePlayed.pdf> <./pictures/pdf/ResVaryNum.pdf> <./pictures/pd
+f/ResVaryNoise.pdf> <./pictures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVisMe.pd
+f>]) (./discussion6pages.tex [5pdfTeX warning (ext4): destination with the same
+ identifier (name{figure.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1063,7 +1065,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
 Here is how much of TeX's memory you used:
  14058 strings out of 493488
  221803 string characters out of 3141326
- 314996 words of memory out of 3000000
+ 314986 words of memory out of 3000000
  17039 multiletter control sequences out of 15000+200000
  42678 words of font info for 90 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1080,7 +1082,7 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate6pages.pdf (6 pages, 1385695 bytes).
+Output written on WebMassiveManipulate6pages.pdf (6 pages, 1385721 bytes).
 PDF statistics:
  506 PDF objects out of 1000 (max. 8388607)
  427 compressed objects within 5 object streams

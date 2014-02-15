@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 16:36
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 16:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1151,15 +1151,9 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./WebMassiveManipulate.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
+Package rerunfilecheck Info: File `WebMassiveManipulate.out' has not changed.
+(rerunfilecheck)             Checksum: CCE19E747C6023DF0E06CAA8E3B214F8;2735.
 
-
-Package rerunfilecheck Warning: File `WebMassiveManipulate.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `WebMassiveManipulate.out':
-(rerunfilecheck)             Before: 3A82B6D8EB1033B980583E2B8AA1B93E;2725
-(rerunfilecheck)             After:  CCE19E747C6023DF0E06CAA8E3B214F8;2735.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -1185,7 +1179,7 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate.pdf (8 pages, 2058688 bytes).
+Output written on WebMassiveManipulate.pdf (8 pages, 2058694 bytes).
 PDF statistics:
  638 PDF objects out of 1000 (max. 8388607)
  532 compressed objects within 6 object streams

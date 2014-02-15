@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 23:26
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  15 FEB 2014 09:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -236,6 +236,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip50
 )
+Package hyperref Info: Option `colorlinks' set `true' on input line 44.
+
 (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -782,7 +784,7 @@ LaTeX Font Info:    ... okay on input line 175.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
 LaTeX Font Info:    ... okay on input line 175.
 \AtBeginShipoutBox=\box48
-Package hyperref Info: Link coloring OFF on input line 175.
+Package hyperref Info: Link coloring ON on input line 175.
  (/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
@@ -899,7 +901,7 @@ File: ./pictures/pdf/ControlPos.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./pictures/pdf/ControlPos.pdf used on input line 34.
 (pdftex.def)             Requested size: 78.63159pt x 78.74553pt.
 ) (./relatedWork6pages.tex
-Underfull \vbox (badness 2538) has occurred while \output is active []
+Underfull \vbox (badness 2753) has occurred while \output is active []
 
  [1{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -923,7 +925,7 @@ Underfull \hbox (badness 1728) in paragraph at lines 75--79
  []
 
 ) (./expResults6pages.tex
-<./pictures/pdf/gamesPerPlayer.pdf, id=233, 361.35pt x 230.87857pt>
+<./pictures/pdf/gamesPerPlayer.pdf, id=236, 361.35pt x 230.87857pt>
 File: ./pictures/pdf/gamesPerPlayer.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/gamesPerPlayer.pdf>
@@ -931,7 +933,7 @@ Package pdftex.def Info: ./pictures/pdf/gamesPerPlayer.pdf used on input line 9
 .
 (pdftex.def)             Requested size: 117.94363pt x 75.35875pt.
 
-<./pictures/pdf/measureLearning.pdf, id=234, 361.35pt x 240.79561pt>
+<./pictures/pdf/measureLearning.pdf, id=237, 361.35pt x 240.79561pt>
 File: ./pictures/pdf/measureLearning.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/measureLearning.pdf>
@@ -939,21 +941,21 @@ Package pdftex.def Info: ./pictures/pdf/measureLearning.pdf used on input line
 10.
 (pdftex.def)             Requested size: 117.94363pt x 78.59567pt.
 
-<./pictures/pdf/timePlayed.pdf, id=235, 361.35pt x 253.09256pt>
+<./pictures/pdf/timePlayed.pdf, id=238, 361.35pt x 253.09256pt>
 File: ./pictures/pdf/timePlayed.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/timePlayed.pdf>
 Package pdftex.def Info: ./pictures/pdf/timePlayed.pdf used on input line 31.
 (pdftex.def)             Requested size: 147.43236pt x 103.26271pt.
 
-<./pictures/pdf/ResVaryNum.pdf, id=236, 361.35pt x 230.52423pt>
+<./pictures/pdf/ResVaryNum.pdf, id=239, 361.35pt x 230.52423pt>
 File: ./pictures/pdf/ResVaryNum.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryNum.pdf>
 Package pdftex.def Info: ./pictures/pdf/ResVaryNum.pdf used on input line 34.
 (pdftex.def)             Requested size: 172.00192pt x 109.72878pt.
 
-<./pictures/pdf/ResVaryNoise.pdf, id=237, 361.35pt x 234.48906pt>
+<./pictures/pdf/ResVaryNoise.pdf, id=240, 361.35pt x 234.48906pt>
 File: ./pictures/pdf/ResVaryNoise.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryNoise.pdf>
@@ -967,7 +969,7 @@ Package pdftex.def Info: ./pictures/pdf/ResVaryNoise.pdf used on input line 37.
                                                   \fi \fi 
 l.50 
       <./pictures/pdf/gamesPerPlayer.pdf> <./pictures/pdf/measureLearning.pdf>]
-<./pictures/pdf/ResVaryControl.pdf, id=270, 361.35pt x 205.10828pt>
+<./pictures/pdf/ResVaryControl.pdf, id=273, 361.35pt x 205.10828pt>
 File: ./pictures/pdf/ResVaryControl.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryControl.pdf>
@@ -975,14 +977,14 @@ Package pdftex.def Info: ./pictures/pdf/ResVaryControl.pdf used on input line 8
 2.
 (pdftex.def)             Requested size: 172.00192pt x 97.63086pt.
 
-<./pictures/pdf/ResVaryVis.pdf, id=271, 361.35pt x 209.13031pt>
+<./pictures/pdf/ResVaryVis.pdf, id=274, 361.35pt x 209.13031pt>
 File: ./pictures/pdf/ResVaryVis.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryVis.pdf>
 Package pdftex.def Info: ./pictures/pdf/ResVaryVis.pdf used on input line 85.
 (pdftex.def)             Requested size: 172.00192pt x 99.54533pt.
 
-<./pictures/pdf/ResPositioning.pdf, id=272, 361.35pt x 239.89825pt>
+<./pictures/pdf/ResPositioning.pdf, id=275, 361.35pt x 239.89825pt>
 File: ./pictures/pdf/ResPositioning.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResPositioning.pdf>
@@ -994,7 +996,7 @@ File: ./pictures/pdf/VaryVisFS.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./pictures/pdf/VaryVisFS.pdf used on input line 99.
 (pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
 
-<./pictures/pdf/VaryVisCH.pdf, id=275, 541.02126pt x 542.025pt>
+<./pictures/pdf/VaryVisCH.pdf, id=278, 541.02126pt x 542.025pt>
 File: ./pictures/pdf/VaryVisCH.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryVisCH.pdf>
@@ -1005,7 +1007,7 @@ File: ./pictures/pdf/VaryVisMV.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 101.
 (pdftex.def)             Requested size: 58.9737pt x 58.96954pt.
 
-<./pictures/pdf/VaryVisMe.pdf, id=276, 543.02875pt x 542.025pt>
+<./pictures/pdf/VaryVisMe.pdf, id=279, 543.02875pt x 542.025pt>
 File: ./pictures/pdf/VaryVisMe.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryVisMe.pdf>
@@ -1063,13 +1065,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
  ) 
 Here is how much of TeX's memory you used:
- 14058 strings out of 493488
- 221803 string characters out of 3141326
- 314986 words of memory out of 3000000
+ 14059 strings out of 493488
+ 221809 string characters out of 3141326
+ 315191 words of memory out of 3000000
  17039 multiletter control sequences out of 15000+200000
- 42678 words of font info for 90 fonts, out of 3000000 for 9000
+ 42977 words of font info for 91 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,10n,46p,1312b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,10n,46p,1312b,458s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
@@ -1082,10 +1084,10 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate6pages.pdf (6 pages, 1385721 bytes).
+Output written on WebMassiveManipulate6pages.pdf (6 pages, 1388100 bytes).
 PDF statistics:
- 506 PDF objects out of 1000 (max. 8388607)
- 427 compressed objects within 5 object streams
+ 509 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
  77 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 

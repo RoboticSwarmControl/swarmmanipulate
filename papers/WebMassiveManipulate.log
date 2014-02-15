@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 22:13
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  15 FEB 2014 09:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -236,6 +236,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip50
 )
+Package hyperref Info: Option `colorlinks' set `true' on input line 44.
+
 (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -778,7 +780,7 @@ LaTeX Font Info:    ... okay on input line 175.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
 LaTeX Font Info:    ... okay on input line 175.
 \AtBeginShipoutBox=\box48
-Package hyperref Info: Link coloring OFF on input line 175.
+Package hyperref Info: Link coloring ON on input line 175.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -1152,7 +1154,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
 Here is how much of TeX's memory you used:
  14111 strings out of 493488
  222796 string characters out of 3141326
- 311102 words of memory out of 3000000
+ 312108 words of memory out of 3000000
  17070 multiletter control sequences out of 15000+200000
  42678 words of font info for 90 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -1169,7 +1171,7 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate.pdf (8 pages, 2028738 bytes).
+Output written on WebMassiveManipulate.pdf (8 pages, 2028958 bytes).
 PDF statistics:
  627 PDF objects out of 1000 (max. 8388607)
  525 compressed objects within 6 object streams

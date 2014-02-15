@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 16:41
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  14 FEB 2014 22:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -236,8 +236,6 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip50
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 44.
-
 (/usr/local/texlive/2012/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -780,7 +778,7 @@ LaTeX Font Info:    ... okay on input line 175.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
 LaTeX Font Info:    ... okay on input line 175.
 \AtBeginShipoutBox=\box48
-Package hyperref Info: Link coloring ON on input line 175.
+Package hyperref Info: Link coloring OFF on input line 175.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -993,22 +991,19 @@ File: ./pictures/pdf/VaryVisCH.pdf Graphic file (type pdf)
 <use ./pictures/pdf/VaryVisCH.pdf>
 Package pdftex.def Info: ./pictures/pdf/VaryVisCH.pdf used on input line 94.
 (pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
-
-<./pictures/pdf/VaryVisMv.pdf, id=343, 542.025pt x 542.025pt>
-File: ./pictures/pdf/VaryVisMv.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/VaryVisMv.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisMv.pdf used on input line 95.
+File: ./pictures/pdf/VaryVisMV.pdf Graphic file (type pdf)
+ <use ./pictures/pdf/VaryVisMV.pdf>
+Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 95.
 (pdftex.def)             Requested size: 58.9737pt x 58.96954pt.
 
-<./pictures/pdf/VaryVisMe.pdf, id=344, 543.02875pt x 542.025pt>
+<./pictures/pdf/VaryVisMe.pdf, id=343, 543.02875pt x 542.025pt>
 File: ./pictures/pdf/VaryVisMe.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryVisMe.pdf>
 Package pdftex.def Info: ./pictures/pdf/VaryVisMe.pdf used on input line 96.
 (pdftex.def)             Requested size: 58.9737pt x 58.86203pt.
 
-<./pictures/pdf/ResVaryNoise.pdf, id=347, 361.35pt x 234.48906pt>
+<./pictures/pdf/ResVaryNoise.pdf, id=346, 361.35pt x 234.48906pt>
 File: ./pictures/pdf/ResVaryNoise.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryNoise.pdf>
@@ -1016,7 +1011,7 @@ Package pdftex.def Info: ./pictures/pdf/ResVaryNoise.pdf used on input line 120
 .
 (pdftex.def)             Requested size: 245.71811pt x 159.45403pt.
 
-<./pictures/pdf/ResPositioning.pdf, id=349, 361.35pt x 239.89825pt>
+<./pictures/pdf/ResPositioning.pdf, id=348, 361.35pt x 239.89825pt>
 File: ./pictures/pdf/ResPositioning.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResPositioning.pdf>
@@ -1042,9 +1037,8 @@ l.4
                                                   \fi \fi 
 l.4 
      <./pictures/pdf/ResVaryControl.pdf> <./pictures/pdf/ResVaryVis.pdf> <./pic
-tures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVisMv.pdf> <./pictures/pdf/VaryVis
-Me.pdf>]
-<./pictures/pdf/ScreenShotBeforePlay.pdf, id=425, 835.79593pt x 617.43484pt>
+tures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVisMe.pdf>]
+<./pictures/pdf/ScreenShotBeforePlay.pdf, id=414, 835.79593pt x 617.43484pt>
 File: ./pictures/pdf/ScreenShotBeforePlay.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ScreenShotBeforePlay.pdf>
@@ -1056,7 +1050,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--22
 [][]
  []
 
-<./pictures/pdf/ScreenShotSuccess.pdf, id=427, 998.73125pt x 747.79375pt>
+<./pictures/pdf/ScreenShotSuccess.pdf, id=416, 998.73125pt x 747.79375pt>
 File: ./pictures/pdf/ScreenShotSuccess.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ScreenShotSuccess.pdf>
@@ -1094,7 +1088,7 @@ l.44
 l.44 
       <./pictures/pdf/ResVaryNoise.pdf> <./pictures/pdf/ResPositioning.pdf> <./
 pictures/pdf/ScreenShotBeforePlay.pdf> <./pictures/pdf/ScreenShotSuccess.pdf>]
-<./pictures/pdf/Browsers.pdf, id=486, 682.19026pt x 307.96446pt>
+<./pictures/pdf/Browsers.pdf, id=475, 682.19026pt x 307.96446pt>
 File: ./pictures/pdf/Browsers.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/Browsers.pdf>
@@ -1106,7 +1100,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--59
  []
 
 ) (./conclusion.tex
-<./pictures/pdf/Worldbrowsing.pdf, id=493, 638.518pt x 422.41585pt>
+<./pictures/pdf/Worldbrowsing.pdf, id=482, 638.518pt x 422.41585pt>
 File: ./pictures/pdf/Worldbrowsing.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/Worldbrowsing.pdf>
@@ -1114,7 +1108,7 @@ Package pdftex.def Info: ./pictures/pdf/Worldbrowsing.pdf used on input line 8.
 
 (pdftex.def)             Requested size: 117.94363pt x 78.02324pt.
 
-<./pictures/pdf/USbrowsing.pdf, id=494, 603.8814pt x 371.21385pt>
+<./pictures/pdf/USbrowsing.pdf, id=483, 603.8814pt x 371.21385pt>
 File: ./pictures/pdf/USbrowsing.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/USbrowsing.pdf>
@@ -1153,17 +1147,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `WebMassiveManipulate.out' has not changed.
 (rerunfilecheck)             Checksum: CCE19E747C6023DF0E06CAA8E3B214F8;2735.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
  ) 
 Here is how much of TeX's memory you used:
- 14116 strings out of 493488
- 222940 string characters out of 3141326
- 312108 words of memory out of 3000000
- 17074 multiletter control sequences out of 15000+200000
+ 14111 strings out of 493488
+ 222796 string characters out of 3141326
+ 311102 words of memory out of 3000000
+ 17070 multiletter control sequences out of 15000+200000
  42678 words of font info for 90 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,10n,46p,1300b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1179,10 +1169,10 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate.pdf (8 pages, 2058694 bytes).
+Output written on WebMassiveManipulate.pdf (8 pages, 2028738 bytes).
 PDF statistics:
- 638 PDF objects out of 1000 (max. 8388607)
- 532 compressed objects within 6 object streams
+ 627 PDF objects out of 1000 (max. 8388607)
+ 525 compressed objects within 6 object streams
  94 named destinations out of 1000 (max. 500000)
- 423 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 418 words of extra memory for PDF output out of 10000 (max. 10000000)
 

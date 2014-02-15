@@ -1,0 +1,56 @@
+\section{Introduction}\label{sec:Intro}
+%This project studies system models and user interfaces for five multi-robot manipulation tasks with large populations of micro- and nanorobots.  We test several system models with different limitations on controllability and observability of the motion controller, and evaluate several different user interfaces.  We conduct user experiments to understand the impact of these limitations and design choices. 
+
+
+%Micro- and nanorobotics have the potential to revolutionize many applications including targeted material delivery, assembly, and surgery.  The same properties that promise breakthrough solutions---small size and large populations---present unique challenges to generating controlled motion.  
+Large populations of micro- and nanorobots are being produced in laboratories around the world, with diverse potential applications in drug delivery and construction \cite{Peyer2013,Shirai2005,Chiang2011}. These activities require robots that behave intelligently.
+Limited computation and communication rules out autonomous operation or direct control over individual units; instead we must rely on global control signals broadcast to the entire robot population.  It is not always practical to gather pose information on individual robots for feedback control; the robots might be difficult or impossible to sense individually due to their size and location. However, it is often possible to sense global properties of the group, such as mean position and density.  Finally, many promising applications will require direct human control, but user interfaces to thousands---or millions---of robots is a daunting human-swarm interaction (HSI) challenge. 
+
+The goal of this work is to provide a tool for investigating HSI methods through statistically significant numbers of experiments.  There is currently no comprehensive understanding of user interfaces for controlling multi-robot systems with massive populations.  We are particularly motivated by the sharp constraints in micro- and nanorobotic systems.  For example, full-state feedback with $10^6$ robots leads to operator overload.  
+Similarly, the user interaction required to individually control each robot scales linearly with robot population.   
+Instead, user interaction is often constrained to modifying a global input. This input may be nonstandard, such as the attraction/repulsion field from a scanning tunneling microscope (STM) tip. 
+
+Our previous work with over a hundred hardware robots and thousands of simulated robots~\cite{Becker2013b} demonstrated that direct human control of large swarms is possible. Unfortunately, the logistical challenges of repeated experiments with over one hundred robots prevented large-scale tests.
+
+\begin{figure}
+\renewcommand{\figwid}{0.32\columnwidth}
+\subfloat[][Vary Number]{\label{fig:VaryNum}
+\begin{overpic}[width =\figwid]{VaryNum.pdf}\end{overpic}}
+%
+\subfloat[][Vary Visual Feedback]{\label{fig:VaryVis}
+\begin{overpic}[width =\figwid]{VaryVisFS.pdf}\end{overpic}
+\begin{overpic}[width =\figwid]{VaryVisMV.pdf}\end{overpic}}\\
+%
+\subfloat[][Vary Control]{\label{fig:VaryControl}
+\begin{overpic}[width =\figwid]{VaryControl.pdf}\end{overpic}}
+%
+\subfloat[][Vary Noise]{\label{fig:VaryNoise}
+\begin{overpic}[width =\figwid]{VaryNoise.pdf}\end{overpic}}
+%
+\subfloat[][Control Position]{\label{fig:ControlPos}
+\begin{overpic}[width =\figwid]{ControlPos.pdf}\end{overpic}}
+%
+\caption{\label{fig:5experiments}
+Screenshots from our five online experiments controlling multi-robot systems with limited, global control.
+\textbf{(a)} Varying the number of robots from 1-500
+\textbf{(b)} Comparing 4 levels of visual feedback 
+\textbf{(c)} Comparing 3 control architectures
+\textbf{(d)} Varying noise from 0 to 200\% of control authority
+\textbf{(e)} Controlling the position of 1 to 10 robots.
+\href{http://youtu.be/HgNENj3hvEg}{See video overview at http://youtu.be/HgNENj3hvEg.}
+\vspace{-2em}
+}
+\end{figure}
+
+Our goal was to test several scenarios involving large-scale human-swarm interaction (HSI), and to do so with a statistically-significant sample size. Towards this end, we created \href{http://www.swarmcontrol.net/show_results}{SwarmControl.net}, an open-source online testing platform suitable for inexpensive deployment and data collection on a scale not yet seen in swarm robotics research. Screenshots from this platform are shown in Fig.~\ref{fig:5experiments}.  \href{https://github.com/crertel/swarmmanipulate.git}{All code}~\cite{Chris-Ertel2013}, \href{http://www.swarmcontrol.net/show_results}{and experimental results} are posted online.
+
+Our experiments show that numerous simple robots responding to global control inputs are directly controllable by a human operator without special training, that the visual feedback of the swarm state should be very simple in order to increase task performance, and that humans perform swarm-object manipulation faster using attractive control schemes than repulsive control schemes.
+
+For the extended version of this paper, see \cite{Becker2014e}.
+
+
+ %function and implementation function
+
+% Our paper is organized as follows.  After a discussion of related work in Section \ref{sec:RelatedWork}, we describe our experimental methods for an online human-user experiment in Section \ref{sec:expMethods}.  We report the results of our experiments in Section \ref{sec:expResults}, discuss the lessons learned in Section \ref{sec:discussion}, and end with concluding remarks in Section \ref{sec:conclusion}.
+
+

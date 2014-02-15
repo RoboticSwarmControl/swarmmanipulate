@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion and Future Work}\label{sec:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+We introduced \href{http://www.swarmcontrol.net/}{SwarmControl.net}, a new online environment for large-scale user experiments controlling 100+ populations of robots.  Over the period of one month this site conducted thousands of experiments with a worldwide user base, as shown in Fig.~\ref{fig:PlayerLocation}.   \href{https://github.com/crertel/swarmmanipulate.git}{All code is open source and downloadable from a public git repository}~\cite{Chris-Ertel2013}. \href{http://www.swarmcontrol.net/show_results}{All experiment results can be freely downloaded from our website}.  We implemented five unique experiments, and gathered data that corroborated past lab experiments, but with a testing pool two orders of magnitude larger than was possible before.
+
+\begin{figure}
+\begin{overpic}[width = 0.48\columnwidth]{Worldbrowsing.pdf}\end{overpic}
+\begin{overpic}[width = 0.48\columnwidth]{USbrowsing.pdf}\end{overpic}
+\vspace{-1em}
+\caption{\label{fig:PlayerLocation}Demographic information on game player's location, provided by Google Analytics. Game players from 84 countries and 49 US states visited our site.
+\vspace{-2em}
+}
+\end{figure}
+
+\paragraph{Site modifications}
+  The current site is optimized for desktop and laptop users, and we currently do not support mobile users. Our IRB allows us to conduct demographic questionnaires, and we will implement these questionnaires in a future release--currently our only source of demographic data is Google Analytics.
+  
+  We are pursuing partnerships to increase the educational content on our website. Our goal is to highlight a variety of the leading micro- and nano-robotics labs and the challenges they are working on.
+
+\paragraph{Additional experiments}
+There are many avenues for future work.  Manipulation by large populations of robots is an immature area and there are many open questions. Future work will invite other collaborators to submit their own experiments.
+Topics of interest include  control with nonuniform flow such as fluid in an artery, gradient control fields like that of an MRI, competitive playing, multi-modal control, and targeted drug delivery in a vascular network.
+
+\paragraph{Automatic controllers}
+We have compiled a large body of test results.  Our goal is to design automatic controllers using this data. One avenue is to identify the most proficient players and perform inverse optimal control algorithms to learn the cost functions used by the best players.  
+%%  demographics questionaires: 
+
+
+%We will use the video game described above as part of our outreach efforts.  The nature of ensemble control and the manipulation tasks will make this a puzzle game, where the user will need to determine the correct actions, and groups of actions, to accomplish the task.
+%Discovering when a task changes from `fun' to `frustrating' is an active problem in game design.  Game companies (\emph{e.g.} ReignDesign Fig.~\ref{fig:Flockwork}) depend heavily on beta-testing to discover the point at which a task becomes frustrating to a user.  A model of what makes a task frustrating would revolutionize the game industry. Our estimate of this difficulty metric for massive manipulation is shown in Fig.~\ref{fig:GameDifficulty}.  ReignDesign has experience and current contracts designing educational games.  We can incorporate real-world physics to simulate robot control at the micro and the nano scale.
+%
+%Currently, we can use our control theoretic results to determine what tasks are possible. Unfortunately, this gives us no metric of human difficulty -- which tasks are easy for a human pilot.  What tasks should be off-loaded for computer control?  Fortunately \emph{gamification} provides built-in tools to gather this data in a transparent manner with the user's consent by measuring the time and number of actions required to complete each task, and through \emph{leaderboards} \cite{Zichermann2011,Kapp2012}, which rank users based on the efficiency of their solutions.  Key to the success of this endeavor is an engaging story.  We have the genesis of the a game in \cite{Becker2012l}, with game play based on the desire to steer many robots equipped with suction-cup darts in a surprise attack against an older sister. Our hope is to use current micro- and nanorobotics research to create an engaging story users will delight to immerse themselves in.
+
+%In order to understand the difficulty of the tasks, we can measure the time and number of actions required to complete each task, as in Fig.~\ref{fig:Flockwork}.  This information will be collected to maintain a `top scores' list on the website, and help us answer questions about task difficulty.
+
+%hopefully a discussion about flockworks, a successful multi-agent simulation (but actually a mobile app) here....
+
+%http://gamification.org/wiki/Game_Features/Leaderboards
+
+%   - Chemistry, Micro/nano education, molecular dynamics

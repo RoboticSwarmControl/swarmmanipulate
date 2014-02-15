@@ -1,0 +1,96 @@
+\section{Discussion}\label{sec:discussion}
+
+During beta-testing and live deployment of SwarmControl.net we learned many things which will inform future experimentation. These lessons are directly applicable to designing better experiments, getting more results, and reaching more users.
+
+\subsection{Lessons learned: Beta-testing}
+
+While waiting on our IRB approval, we tested our experiment suite.  This gave us an opportunity to refine our software and to fix many flaws before they would have affected a larger audience; none of this data was used in our analysis.
+
+\subsubsection{Be accessible}
+
+Our original color scheme made heavy use of bright red, green, and blue colors. We tested for colorblind accessibility, and changed our color scheme. \href{http://colorfilter.wickline.org/}{http://colorfilter.wickline.org/} is an online service which displays a website as it appears to a colorblind user.
+
+\subsubsection{Have simple instructions}
+
+Beta-testers never looked at the instructions in the side-panel. To fix this, we overlaid simple, mostly pictorial instructions on the experiment canvas before play, as shown in Fig.~\ref{fig:ScreenShotBeforePlay}.
+
+\begin{figure}
+\begin{overpic}[width = \columnwidth]{ScreenShotBeforePlay.pdf}\end{overpic}
+\vspace{-2em}
+\caption{\label{fig:ScreenShotBeforePlay}Screenshot showing the \emph{Varying Number} experiment before gameplay.  At left are instructions and educational material, including a video. At right is the experiment canvas. Large instructions and bold arrows demonstrate the desired task---participants do not bother to read small print. 
+\vspace{-1em}
+}
+\end{figure}
+
+
+\subsubsection{Make the structure obvious}
+
+Beta-testers desired a more structured experience; initially we had only shown screenshots of the five experiments and each experiment had a replay button. Participants told us that they had no idea when they had finished, how they had performed, or why the experiment mattered.
+
+To signal completion of a task and to show participants how they had performed we added a results screen to the end of each experiment. When a user completes an experiment trial, they are congratulated, shown their completion time, and shown how their results compare with everyone else. Each experiment has a number of blank merit badge outlines showing how many trials the participant should complete. Finishing an experiment fills in one of these outlines. These additions are shown in Fig.~\ref{fig:ScreenShotSuccess}.
+
+\begin{figure}
+\begin{overpic}[width = \columnwidth]{ScreenShotSuccess.pdf}\end{overpic}
+\vspace{-2em}
+\caption{\label{fig:ScreenShotSuccess}Screenshot showing the \emph{Varying Visualization} experiment after a successful completion. Merit badges, feedback with comparison to other players, and a large \emph{Play again!} button contribute to encourage multiple experiments.
+\vspace{-2em}
+}
+\end{figure}
+
+To explain why the experiment matters, we added  \emph{The Science} sections on each page. These sections gave practical context to the experiment being performed, showing its utility in real-world situations.
+
+\subsubsection{Respect participant time}
+For experiments conducted online, it is important to waste as little of a participant's time as possible: you are in direct competition with a thousand other distractions. Our beta testers were frustrated by slow robots; in contrast, when we have conducted in-person tests with hardware robots in the lab, people have been more patient. To fix this problem we sped up our simulated robots by a factor of five.
+
+
+
+
+\subsubsection{Test multiple displays}
+
+Finally, many participants used laptop screens---displays much smaller than the desktops on which we designed the experiments. We changed our framework so that laptop participants could play without scrolling the screen.
+
+\subsection{Lessons learned: Live website}
+
+\begin{figure}
+\begin{overpic}[width = \columnwidth]{Browsers.pdf}\end{overpic}
+\vspace{-2em}
+\caption{\label{fig:Browsers}Overview of the browsers used by game players, provided by Google Analytics. 
+\vspace{-2em}
+}
+\end{figure}
+
+After beta-testing, we launched the website and monitored our traffic using saved results and tracking by Google Analytics. This information was helpful in finding several usage trends.
+
+\subsubsection{Mobile traffic}
+ Looking at this data, we found that visitors using a smartphone or tablet leave within 17 seconds on average. These participants are 10\% of our first-time visitors, and leave because our experiments require the use of a mouse and keyboard. To capture these participants, we plan to make a mobile-friendly version of our experiments.
+
+\subsubsection{Browser considerations}
+Browser information for our experiments is shown in Fig.~\ref{fig:Browsers}.
+For an online experiment, the experimenter cannot control the participant's browser. This imposes challenges for controlled experiments.
+
+A large screen and a small screen---unless designed for---may show content differently, leading to inconsistent results. We optimized for a small laptop screen.
+
+Additionally, certain browser/computer combinations will exhibit abysmal performance as the number of robots increases. Performance may suffer because of other processes the participant is running. Two ways to compensate for variance in performance are to conduct large numbers of experiments or to record performance data concurrently with experiment data. We attempted both: after one week of testing we began recording the user-agent string of participants' browsers. A better setup would benchmark a participant's browser before running an experiment.
+
+%current website optimized for research, not for education.
+
+\subsubsection{Bounce rates}
+Participants are easily put off by having to click through or sign-up for things~\cite{krug2009don}.  Our bounce rate of 42\% and average visit time of just over 4 minutes indicate that almost half potential testers never attempt an experiment. We saw an exponential decrease in the number of trials participants completed, as shown in Fig.~\ref{fig:Learning}.
+
+We originally designed a participant sign-up process, but removed it to let participants begin experiments faster. Now a participant can start an experiment in two clicks.
+
+%https://www.google.com/analytics/web/?hl=en&pli=1#report/visitors-overview/a42817804w72642836p74969041/
+
+\subsection{Other issues}
+
+There are ways to improve the quality of our experimentation.
+
+\subsubsection{Poor experiment design}
+
+We tried to design each experiment to measure the effect one parameter; we did not always succeed. In particular, the \emph{Position Control} experiment uses varying numbers of robots---however, there is no difference in input required to solve certain configurations. Identical input sequences solve $n$=1 and $n$=2, a problem also seen with $n$=3 and $n$=4.
+
+Additionally, there is a qualitative difference in difficulty when arranging the robots into a solid versus hollow shape; this is currently not controlled for. A possible solution would require goal states for all values of $n$ to be either solid or hollow.
+
+\subsubsection{Missing participant behavior}
+
+We only recorded results when a participant successfully completed a task---we did not track the case where a participant began but did not complete an experiment. It is important to account for every path a participant may take through an experiment. We did not, and found a discrepancy between the visits reported by Google Analytics and the number of experiment results recorded.

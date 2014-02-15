@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  15 FEB 2014 18:13
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  15 FEB 2014 18:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**WebMassiveManipulate6pages.tex
-(./WebMassiveManipulate6pages.tex
+**WebMassiveManipJames.tex
+(./WebMassiveManipJames.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
@@ -762,12 +762,8 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 LaTeX Info: Redefining \atan2 on input line 169.
 \c@theorem=\count302
 
-(./WebMassiveManipulate6pages.aux
-
-LaTeX Warning: Label `fig:someexperimentresults' multiply defined.
-
-)
-\openout1 = `WebMassiveManipulate6pages.aux'.
+(./WebMassiveManipJames.aux)
+\openout1 = `WebMassiveManipJames.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 175.
 LaTeX Font Info:    ... okay on input line 175.
@@ -785,7 +781,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
 LaTeX Font Info:    ... okay on input line 175.
 \AtBeginShipoutBox=\box48
 Package hyperref Info: Link coloring ON on input line 175.
- (/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 
 (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -797,9 +794,9 @@ LaTeX Info: Redefining \ref on input line 175.
 LaTeX Info: Redefining \pageref on input line 175.
 LaTeX Info: Redefining \nameref on input line 175.
 
-(./WebMassiveManipulate6pages.out) (./WebMassiveManipulate6pages.out)
+(./WebMassiveManipJames.out) (./WebMassiveManipJames.out)
 \@outlinefile=\write3
-\openout3 = `WebMassiveManipulate6pages.out'.
+\openout3 = `WebMassiveManipJames.out'.
 
 
 (/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -857,53 +854,50 @@ File: omspcr.fd
 )
 LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 204.
-
-(./intro6pages.tex
-<./pictures/pdf/VaryNum.pdf, id=125, 543.02875pt x 543.02875pt>
+ (./intro.tex
+<./pictures/pdf/VaryNum.pdf, id=105, 543.02875pt x 543.02875pt>
 File: ./pictures/pdf/VaryNum.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryNum.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryNum.pdf used on input line 19.
+Package pdftex.def Info: ./pictures/pdf/VaryNum.pdf used on input line 18.
 (pdftex.def)             Requested size: 78.63159pt x 78.62529pt.
 
-<./pictures/pdf/VaryVisFS.pdf, id=126, 541.02126pt x 542.025pt>
+<./pictures/pdf/VaryVisFS.pdf, id=106, 541.02126pt x 542.025pt>
 File: ./pictures/pdf/VaryVisFS.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryVisFS.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisFS.pdf used on input line 23.
+Package pdftex.def Info: ./pictures/pdf/VaryVisFS.pdf used on input line 22.
 (pdftex.def)             Requested size: 78.63159pt x 78.7777pt.
 
-<./pictures/pdf/VaryVisMV.pdf, id=127, 542.025pt x 542.025pt>
+<./pictures/pdf/VaryVisMV.pdf, id=107, 542.025pt x 542.025pt>
 File: ./pictures/pdf/VaryVisMV.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryVisMV.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 23.
+Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 22.
 (pdftex.def)             Requested size: 78.63159pt x 78.62881pt.
 
-<./pictures/pdf/VaryControl.pdf, id=128, 499.8675pt x 498.86375pt>
+<./pictures/pdf/VaryControl.pdf, id=108, 499.8675pt x 498.86375pt>
 File: ./pictures/pdf/VaryControl.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryControl.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryControl.pdf used on input line 28.
+Package pdftex.def Info: ./pictures/pdf/VaryControl.pdf used on input line 25.
 (pdftex.def)             Requested size: 78.63159pt x 78.47249pt.
 
-<./pictures/pdf/VaryNoise.pdf, id=129, 659.46375pt x 662.475pt>
+<./pictures/pdf/VaryNoise.pdf, id=109, 659.46375pt x 662.475pt>
 File: ./pictures/pdf/VaryNoise.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/VaryNoise.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryNoise.pdf used on input line 31.
+Package pdftex.def Info: ./pictures/pdf/VaryNoise.pdf used on input line 28.
 (pdftex.def)             Requested size: 78.63159pt x 78.98814pt.
 
-<./pictures/pdf/ControlPos.pdf, id=130, 661.47125pt x 662.475pt>
+<./pictures/pdf/ControlPos.pdf, id=110, 661.47125pt x 662.475pt>
 File: ./pictures/pdf/ControlPos.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ControlPos.pdf>
-Package pdftex.def Info: ./pictures/pdf/ControlPos.pdf used on input line 34.
+Package pdftex.def Info: ./pictures/pdf/ControlPos.pdf used on input line 31.
 (pdftex.def)             Requested size: 78.63159pt x 78.74553pt.
-) (./relatedWork6pages.tex
-Underfull \vbox (badness 2753) has occurred while \output is active []
-
- [1{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+) (./relatedWork.tex [1{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
@@ -911,21 +905,36 @@ s been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.12 
-      <./pictures/pdf/VaryNum.pdf> <./pictures/pdf/VaryVisFS.pdf> <./pictures/p
-df/VaryVisMV.pdf> <./pictures/pdf/VaryControl.pdf> <./pictures/pdf/VaryNoise.pd
-f> <./pictures/pdf/ControlPos.pdf>]) (./expMethods6pages.tex
+l.4 \section
+            {Related Work}\label{sec:RelatedWork} <./pictures/pdf/VaryNum.pdf> 
+<./pictures/pdf/VaryVisFS.pdf> <./pictures/pdf/VaryVisMV.pdf> <./pictures/pdf/V
+aryControl.pdf> <./pictures/pdf/VaryNoise.pdf> <./pictures/pdf/ControlPos.pdf>]
 
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 23.
+Underfull \hbox (badness 1609) in paragraph at lines 37--38
+ \OT1/ptm/m/it/10 2) Sensing---large pop-u-la-tions: [][][] \OT1/ptm/m/n/10 Par
+-al-lel con-trol of $\OML/cmm/m/it/10 n$
+ []
 
-[2]
-Underfull \hbox (badness 1728) in paragraph at lines 75--79
+) (./expMethods.tex [2]
+<./pictures/pdf/timePlayed.pdf, id=208, 361.35pt x 253.09256pt>
+File: ./pictures/pdf/timePlayed.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/timePlayed.pdf>
+Package pdftex.def Info: ./pictures/pdf/timePlayed.pdf used on input line 71.
+(pdftex.def)             Requested size: 221.14479pt x 154.89214pt.
+
+Underfull \hbox (badness 1728) in paragraph at lines 86--90
 \OT1/ptm/m/n/10 that up to $50/month. In the event of in-creased de-
  []
 
-) (./expResults6pages.tex
-<./pictures/pdf/gamesPerPlayer.pdf, id=236, 361.35pt x 230.87857pt>
+) (./expResults.tex [3pdfTeX warning (ext4): destination with the same identifi
+er (name{figure.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.7 
+     <./pictures/pdf/timePlayed.pdf>]
+<./pictures/pdf/gamesPerPlayer.pdf, id=234, 361.35pt x 230.87857pt>
 File: ./pictures/pdf/gamesPerPlayer.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/gamesPerPlayer.pdf>
@@ -933,7 +942,7 @@ Package pdftex.def Info: ./pictures/pdf/gamesPerPlayer.pdf used on input line 9
 .
 (pdftex.def)             Requested size: 117.94363pt x 75.35875pt.
 
-<./pictures/pdf/measureLearning.pdf, id=237, 361.35pt x 240.79561pt>
+<./pictures/pdf/measureLearning.pdf, id=235, 361.35pt x 240.79561pt>
 File: ./pictures/pdf/measureLearning.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/measureLearning.pdf>
@@ -941,103 +950,129 @@ Package pdftex.def Info: ./pictures/pdf/measureLearning.pdf used on input line
 10.
 (pdftex.def)             Requested size: 117.94363pt x 78.59567pt.
 
-<./pictures/pdf/timePlayed.pdf, id=238, 361.35pt x 253.09256pt>
-File: ./pictures/pdf/timePlayed.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/timePlayed.pdf>
-Package pdftex.def Info: ./pictures/pdf/timePlayed.pdf used on input line 31.
-(pdftex.def)             Requested size: 147.43236pt x 103.26271pt.
-
-<./pictures/pdf/ResVaryNum.pdf, id=239, 361.35pt x 230.52423pt>
+<./pictures/pdf/ResVaryNum.pdf, id=236, 361.35pt x 230.52423pt>
 File: ./pictures/pdf/ResVaryNum.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryNum.pdf>
 Package pdftex.def Info: ./pictures/pdf/ResVaryNum.pdf used on input line 34.
-(pdftex.def)             Requested size: 172.00192pt x 109.72878pt.
+(pdftex.def)             Requested size: 245.71811pt x 156.7579pt.
 
-<./pictures/pdf/ResVaryNoise.pdf, id=240, 361.35pt x 234.48906pt>
-File: ./pictures/pdf/ResVaryNoise.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/ResVaryNoise.pdf>
-Package pdftex.def Info: ./pictures/pdf/ResVaryNoise.pdf used on input line 37.
-
-(pdftex.def)             Requested size: 172.00192pt x 111.61603pt.
- [3pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.50 
-      <./pictures/pdf/gamesPerPlayer.pdf> <./pictures/pdf/measureLearning.pdf>]
-<./pictures/pdf/ResVaryControl.pdf, id=273, 361.35pt x 205.10828pt>
+<./pictures/pdf/ResVaryControl.pdf, id=239, 361.35pt x 205.10828pt>
 File: ./pictures/pdf/ResVaryControl.pdf Graphic file (type pdf)
 
 <use ./pictures/pdf/ResVaryControl.pdf>
-Package pdftex.def Info: ./pictures/pdf/ResVaryControl.pdf used on input line 8
-2.
-(pdftex.def)             Requested size: 172.00192pt x 97.63086pt.
-
-<./pictures/pdf/ResVaryVis.pdf, id=274, 361.35pt x 209.13031pt>
-File: ./pictures/pdf/ResVaryVis.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/ResVaryVis.pdf>
-Package pdftex.def Info: ./pictures/pdf/ResVaryVis.pdf used on input line 85.
-(pdftex.def)             Requested size: 172.00192pt x 99.54533pt.
-
-<./pictures/pdf/ResPositioning.pdf, id=275, 361.35pt x 239.89825pt>
-File: ./pictures/pdf/ResPositioning.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/ResPositioning.pdf>
-Package pdftex.def Info: ./pictures/pdf/ResPositioning.pdf used on input line 8
-8.
-(pdftex.def)             Requested size: 147.43236pt x 97.87938pt.
-File: ./pictures/pdf/VaryVisFS.pdf Graphic file (type pdf)
- <use ./pictures/pdf/VaryVisFS.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisFS.pdf used on input line 99.
-(pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
-
-<./pictures/pdf/VaryVisCH.pdf, id=278, 541.02126pt x 542.025pt>
-File: ./pictures/pdf/VaryVisCH.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/VaryVisCH.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisCH.pdf used on input line 100.
-(pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
-File: ./pictures/pdf/VaryVisMV.pdf Graphic file (type pdf)
- <use ./pictures/pdf/VaryVisMV.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 101.
-(pdftex.def)             Requested size: 58.9737pt x 58.96954pt.
-
-<./pictures/pdf/VaryVisMe.pdf, id=279, 543.02875pt x 542.025pt>
-File: ./pictures/pdf/VaryVisMe.pdf Graphic file (type pdf)
-
-<use ./pictures/pdf/VaryVisMe.pdf>
-Package pdftex.def Info: ./pictures/pdf/VaryVisMe.pdf used on input line 102.
-(pdftex.def)             Requested size: 58.9737pt x 58.86203pt.
+Package pdftex.def Info: ./pictures/pdf/ResVaryControl.pdf used on input line 6
+5.
+(pdftex.def)             Requested size: 245.71811pt x 139.4749pt.
  [4pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.121 W
-       e hypothesized 200\% noise was the largest a human could be expected ...
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
-s been already used, duplicate ignored
+l.75 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.4
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.121 W
-       e hypothesized 200\% noise was the largest a human could be expected ...
- <./pictures/pdf/timePlayed.pdf> <./pictures/pdf/ResVaryNum.pdf> <./pictures/pd
-f/ResVaryNoise.pdf> <./pictures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVisMe.pd
-f>]) (./discussion6pages.tex [5pdfTeX warning (ext4): destination with the same
- identifier (name{figure.4}) has been already used, duplicate ignored
+l.75 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.5
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.43 
-      <./pictures/pdf/ResVaryControl.pdf> <./pictures/pdf/ResVaryVis.pdf> <./pi
-ctures/pdf/ResPositioning.pdf>]) (./conclusion6pages.tex)
-(./WebMassiveManipulate6pages.bbl)
+l.75 
+      <./pictures/pdf/gamesPerPlayer.pdf> <./pictures/pdf/measureLearning.pdf> 
+<./pictures/pdf/ResVaryNum.pdf> <./pictures/pdf/ResVaryControl.pdf>]
+<./pictures/pdf/ResVaryVis.pdf, id=294, 361.35pt x 209.13031pt>
+File: ./pictures/pdf/ResVaryVis.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/ResVaryVis.pdf>
+Package pdftex.def Info: ./pictures/pdf/ResVaryVis.pdf used on input line 84.
+(pdftex.def)             Requested size: 245.71811pt x 142.20992pt.
+File: ./pictures/pdf/VaryVisFS.pdf Graphic file (type pdf)
+ <use ./pictures/pdf/VaryVisFS.pdf>
+Package pdftex.def Info: ./pictures/pdf/VaryVisFS.pdf used on input line 93.
+(pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
+
+<./pictures/pdf/VaryVisCH.pdf, id=297, 541.02126pt x 542.025pt>
+File: ./pictures/pdf/VaryVisCH.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/VaryVisCH.pdf>
+Package pdftex.def Info: ./pictures/pdf/VaryVisCH.pdf used on input line 94.
+(pdftex.def)             Requested size: 58.9737pt x 59.07707pt.
+File: ./pictures/pdf/VaryVisMV.pdf Graphic file (type pdf)
+ <use ./pictures/pdf/VaryVisMV.pdf>
+Package pdftex.def Info: ./pictures/pdf/VaryVisMV.pdf used on input line 95.
+(pdftex.def)             Requested size: 58.9737pt x 58.96954pt.
+
+<./pictures/pdf/VaryVisMe.pdf, id=298, 543.02875pt x 542.025pt>
+File: ./pictures/pdf/VaryVisMe.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/VaryVisMe.pdf>
+Package pdftex.def Info: ./pictures/pdf/VaryVisMe.pdf used on input line 96.
+(pdftex.def)             Requested size: 58.9737pt x 58.86203pt.
+
+<./pictures/pdf/ResVaryNoise.pdf, id=301, 361.35pt x 234.48906pt>
+File: ./pictures/pdf/ResVaryNoise.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/ResVaryNoise.pdf>
+Package pdftex.def Info: ./pictures/pdf/ResVaryNoise.pdf used on input line 120
+.
+(pdftex.def)             Requested size: 245.71811pt x 159.45403pt.
+
+<./pictures/pdf/ResPositioning.pdf, id=303, 361.35pt x 239.89825pt>
+File: ./pictures/pdf/ResPositioning.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/ResPositioning.pdf>
+Package pdftex.def Info: ./pictures/pdf/ResPositioning.pdf used on input line 1
+32.
+(pdftex.def)             Requested size: 245.71811pt x 163.1323pt.
+) (./conclusion.tex [5pdfTeX warning (ext4): destination with the same identifi
+er (name{figure.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.2 \section
+            {Conclusion and Future Work}\label{sec:conclusion}pdfTeX warning (e
+xt4): destination with the same identifier (name{figure.7}) has been already us
+ed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.2 \section
+            {Conclusion and Future Work}\label{sec:conclusion}pdfTeX warning (e
+xt4): destination with the same identifier (name{figure.8}) has been already us
+ed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.2 \section
+            {Conclusion and Future Work}\label{sec:conclusion}pdfTeX warning (e
+xt4): destination with the same identifier (name{figure.9}) has been already us
+ed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.2 \section
+            {Conclusion and Future Work}\label{sec:conclusion} <./pictures/pdf/
+ResVaryVis.pdf> <./pictures/pdf/VaryVisCH.pdf> <./pictures/pdf/VaryVisMe.pdf> <
+./pictures/pdf/ResVaryNoise.pdf> <./pictures/pdf/ResPositioning.pdf>]
+<./pictures/pdf/Worldbrowsing.pdf, id=386, 638.518pt x 422.41585pt>
+File: ./pictures/pdf/Worldbrowsing.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/Worldbrowsing.pdf>
+Package pdftex.def Info: ./pictures/pdf/Worldbrowsing.pdf used on input line 8.
+
+(pdftex.def)             Requested size: 117.94363pt x 78.02324pt.
+
+<./pictures/pdf/USbrowsing.pdf, id=387, 603.8814pt x 371.21385pt>
+File: ./pictures/pdf/USbrowsing.pdf Graphic file (type pdf)
+
+<use ./pictures/pdf/USbrowsing.pdf>
+Package pdftex.def Info: ./pictures/pdf/USbrowsing.pdf used on input line 9.
+(pdftex.def)             Requested size: 117.94363pt x 72.49686pt.
+) (./WebMassiveManipJames.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1049,29 +1084,31 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
-[6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
- (./WebMassiveManipulate6pages.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
-Package rerunfilecheck Info: File `WebMassiveManipulate6pages.out' has not chan
-ged.
-(rerunfilecheck)             Checksum: 134B9085C8783B6706F05F95D930D9BF;2002.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+[6pdfTeX warning (ext4): destination with the same identifier (name{figure.10})
+ has been already used, duplicate ignored
 
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.295 \end{document}
+                     <./pictures/pdf/Worldbrowsing.pdf> <./pictures/pdf/USbrows
+ing.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
+ (./WebMassiveManipJames.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
+Package rerunfilecheck Info: File `WebMassiveManipJames.out' has not changed.
+(rerunfilecheck)             Checksum: F089766B8D97FA943BE580D16C2C3134;1662.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
  ) 
 Here is how much of TeX's memory you used:
- 14059 strings out of 493488
- 221809 string characters out of 3141326
- 315194 words of memory out of 3000000
- 17039 multiletter control sequences out of 15000+200000
- 42977 words of font info for 91 fonts, out of 3000000 for 9000
+ 14052 strings out of 493488
+ 221547 string characters out of 3141326
+ 314837 words of memory out of 3000000
+ 17038 multiletter control sequences out of 15000+200000
+ 42678 words of font info for 90 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,10n,46p,1312b,458s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,10n,46p,1300b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
 xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
@@ -1084,10 +1121,10 @@ ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmbi8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on WebMassiveManipulate6pages.pdf (6 pages, 1388167 bytes).
+Output written on WebMassiveManipJames.pdf (6 pages, 1560761 bytes).
 PDF statistics:
  508 PDF objects out of 1000 (max. 8388607)
- 428 compressed objects within 5 object streams
- 77 named destinations out of 1000 (max. 500000)
- 321 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 421 compressed objects within 5 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 291 words of extra memory for PDF output out of 10000 (max. 10000000)
 

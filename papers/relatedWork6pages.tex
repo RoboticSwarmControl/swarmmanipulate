@@ -1,0 +1,42 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}\label{sec:RelatedWork}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Human-Swarm Interaction}
+Olson and Wood studied human \emph{fanout}, the number of robots a single human user could control~\cite{Jr2004}.  %Studied as a key aspect of human-robot interaction, 
+They postulated that the optimal number of robots was approximately  the autonomous time  divided by the interaction time required by each robot.  Their sample problem involved a multi-robot search task, where users could assign goals to robots.  Their user interaction studies with simulated planar robots  indicated a \emph{fanout plateau} of about 8 robots, after which there were diminishing returns.   They hypothesize that the location of this plateau is highly dependent on the underlying task, and our work indicated there are some tasks without plateaus. % (Lemmings is an example of this as well, for systems with autonomy
+Their research investigated robots with 3 levels of autonomy.  We use robots without autonomy, corresponding with their first-level robots.
+
+% Removed this -- 
+%Chen, Barnes, and Harper-Sciarini published a review of supervisory control but emphasized high levels of autonomy, using the 10-level taxonomy given by \cite{Parasuraman2000}.  The direct control techniques this paper examines are the lowest level.
+
+Squire, Trafton, and Parasuraman designed experiments showing that user-interface design had a high impact on the task effectiveness and the number of robots that could be controlled simultaneously in a multi-robot task \cite{Squire:2006:HCM:1121241.1121248}.
+
+A number of user studies compare methods for controlling large swarms of simulated robots, for example \cite{bashyal2008human,kolling2012towards,de2012controllability}.  These studies provide insights but are limited by cost to small user studies; have a closed-source code base; and focus on controlling intelligent, programmable agents.  
+For instance \cite{de2012controllability} was limited to a pool of 18 participants,  \cite{bashyal2008human} 5, and \cite{kolling2012towards} 32.
+	Using an online testing environment, we conduct similar studies but with much larger sample sizes.
+
+\subsection{Global-control of micro- and nanorobots}
+Small robots have been constructed with physical heterogeneity so that they respond differently to a global, broadcast control signal.  Examples include \emph{scratch-drive microrobots}, actuated and controlled by a DC voltage signal from a substrate \cite{Donald2008};   magnetic structures  with different cross-sections that could be independently steered \cite{Diller2013};   \emph{MagMite} microrobots with different resonant frequencies and a global magnetic field \cite{Frutiger2008}; and  magnetically controlled nanoscale helical screws constructed to stop movement at different cutoff frequencies of a global magnetic field
+\cite{Peyer2013}. 
+
+
+Similarly, our previous work \cite{Becker2012,Becker2012k} focused on exploiting inhomogeneity between robots.  These control algorithms theoretically apply to any number of robots---even robotic continuums---but in practice process noise cancels the differentiating effects of inhomogeneity for more than tens of robots.  We desire control algorithms that extend to many thousands of robots.
+
+%  \subsection{Three challenges for massive manipulation}
+% While it is now possible to create many micro- and nanorobots, there remain challenges in control, sensing, and computation. 
+%  
+% \subsubsection{Control---global inputs}
+% Many micro- and nanorobotic systems \cite{Tottori2012,Shirai2005,Chiang2011,Donald2006,Donald2008,Takahashi2006,Floyd2011,Diller2013,Frutiger2008,Peyer2013}
+%   rely on global inputs, where each robot receives an exact copy of the control signal.  Our experiments follow this global model.
+%
+%  
+% \subsubsection{Sensing---large populations}
+% Parallel control of $n$ differential-drive robots in a plane requires $3n$ state variables. Even holonomic robots require $2n$ state variables. Numerous methods exist for measuring this state in micro- and nanorobotics.  These solutions use computer vision systems to sense position and heading angle, with corresponding challenges of handling missed detections and image registration between detections and robots.  These challenges are increased at the nanoscale where sensing competes with control for communication bandwidth.   We examine control when the operator has access to partial feedback, including only the first and/or second moments of a population's position, or only the convex-hull containing the robots.
+% 
+%\subsubsection{Computation---calculating the control law}
+%In our previous work the controllers required at best a summation over all the robot states \cite{Becker2012k} and at worst a matrix inversion \cite{Becker2012}. 
+%These operations become intractable for large populations of robots. By focusing on \emph{human} control of large robot populations, we accentuate computational difficulties because the controllers are implemented by the unaided human operator. 

@@ -1,0 +1,308 @@
+% to submit http://www.icra2014.com/
+% This version is shorter
+
+%  account: http://swarmcontrol.herokuapp.com
+% see results at
+% login standard MRSL
+% Source is here:
+% https://github.com/crertel/swarmmanipulate
+% https://github.com/crertel/swarmmanipulate/subscription
+%http://createdbypete.com/articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/
+% which version of ruby? $ruby --version      ruby 1.9.3p429
+
+% to start the server running, type:
+%
+%$  cd ~/Desktop/git/swarmmanipulate/app/assets/javascripts/tasks/
+%$  rails s
+
+% to see the running application
+%$  http://localhost:3000
+% to update:  git push production
+% to get the latest: git pull
+
+
+% obstacles: red
+% robots: blue
+
+%(Note: The game industry has picked up on this -- for my NSF propose I talked with ReignGames (who makes Flockwork: Flockwork by ReignGames - YouTube) and included a letter from them.  Similar games are SuperFruitfall and Denki Blocks). 
+%
+%   TODO:
+%  1. the number of references is ridiculous.
+%  2. split this into sections.
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+\IEEEoverridecommandlockouts
+%\documentclass[12pt]{article}
+%\usepackage{times}
+\usepackage{calc}
+\usepackage{url}
+\usepackage{hyperref}
+%\hypersetup{
+%  colorlinks =true,
+%  urlcolor = black,
+%  linkcolor = black
+%}
+\usepackage{graphicx}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb}
+\usepackage{rotating}
+
+
+%\usepackage{xfrac}
+\usepackage{nicefrac}
+\usepackage{cite}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{colortbl}
+%\usepackage{caption}
+%\usepackage{wrapfig}
+\usepackage{overpic}
+%\usepackage{subfigure}
+%\usepackage{textcomp}
+\graphicspath{{./pictures/pdf/},{./pictures/ps/},{./pictures/png/},{./pictures/jpg/}}
+\usepackage{breqn} %for breaking equations automatically
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+%\usepackage{algorithmic}
+\usepackage{multirow}
+
+
+\newcommand{\todo}[1]{\vspace{5 mm}\par \noindent \framebox{\begin{minipage}[c]{0.98 \columnwidth} \ttfamily\flushleft \textcolor{red}{#1}\end{minipage}}\vspace{5 mm}\par}
+% uncomment this to hide all red todos
+%\renewcommand{\todo}{}
+
+%% ABBREVIATIONS
+\newcommand{\qstart}{q_{\text{start}}}
+\newcommand{\qgoal}{q_{\text{goal}}}
+\newcommand{\pstart}{p_{\text{start}}}
+\newcommand{\pgoal}{p_{\text{goal}}}
+\newcommand{\xstart}{x_{\text{start}}}
+\newcommand{\xgoal}{x_{\text{goal}}}
+\newcommand{\ystart}{y_{\text{start}}}
+\newcommand{\ygoal}{y_{\text{goal}}}
+\newcommand{\gammastart}{\gamma_{\text{start}}}
+\newcommand{\gammagoal}{\gamma_{\text{goal}}}
+\providecommand{\proc}[1]{\textsc{#1}}
+
+
+\newcommand{\ARLfull}{Aero\-space Ro\-bot\-ics La\-bora\-tory }
+\newcommand{\ARL}{\textsc{arl}}
+\newcommand{\JPL}{\textsc{jpl}}
+\newcommand{\PRM}{\textsc{prm}}
+
+\newcommand{\CM}{\textsc{cm}}
+\newcommand{\SVM}{\textsc{svm}}
+\newcommand{\NN}{\textsc{nn}}
+\newcommand{\prm}{\textsc{prm}}
+\newcommand{\lemur}{\textsc{lemur}}
+\newcommand{\Lemur}{\textsc{Lemur}}
+\newcommand{\LP}{\textsc{lp}} 
+\newcommand{\SOCP}{\textsc{socp}}
+\newcommand{\SDP}{\textsc{sdp}}
+\newcommand{\NP}{\textsc{np}}
+\newcommand{\SAT}{\textsc{sat}}
+\newcommand{\LMI}{\textsc{lmi}}
+\newcommand{\hrp}{\textsc{hrp\nobreakdash-2}}
+\newcommand{\DOF}{\textsc{dof}}
+\newcommand{\UIUC}{\textsc{uiuc}}
+%% MACROS
+
+
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\normn}[2]{\left\lVert#1\right\rVert_#2}
+\providecommand{\dualnorm}[1]{\norm{#1}_\ast}
+\providecommand{\dualnormn}[2]{\norm{#1}_{#2\ast}}
+\providecommand{\set}[1]{\lbrace\,#1\,\rbrace}
+\providecommand{\cset}[2]{\lbrace\,{#1}\nobreak\mid\nobreak{#2}\,\rbrace}
+\providecommand{\lscal}{<}
+\providecommand{\gscal}{>}
+\providecommand{\lvect}{\prec}
+\providecommand{\gvect}{\succ}
+\providecommand{\leqscal}{\leq}
+\providecommand{\geqscal}{\geq}
+\providecommand{\leqvect}{\preceq}
+\providecommand{\geqvect}{\succeq}
+\providecommand{\onevect}{\mathbf{1}}
+\providecommand{\zerovect}{\mathbf{0}}
+\providecommand{\field}[1]{\mathbb{#1}}
+\providecommand{\C}{\field{C}}
+\providecommand{\R}{\field{R}}
+\newcommand{\Cspace}{\mathcal{Q}}
+\newcommand{\Uspace}{\mathcal{U}}
+\providecommand{\Fspace}{\Cspace_\text{free}}
+\providecommand{\Hcal}{$\mathcal{H}$}
+\providecommand{\Vcal}{$\mathcal{V}$}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\homog}{homog}
+\DeclareMathOperator{\domain}{dom}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\sign}{sgn}
+\providecommand{\polar}{\triangle}
+\providecommand{\ainner}{\underline{a}}
+\providecommand{\aouter}{\overline{a}}
+\providecommand{\binner}{\underline{b}}
+\providecommand{\bouter}{\overline{b}}
+\newcommand{\D}{\nobreakdash-\textsc{d}}
+%\newcommand{\Fspace}{\mathcal{F}}
+\providecommand{\Fspace}{\Cspace_\text{free}}
+\providecommand{\free}{\text{\{}\mathsf{free}\text{\}}}
+\providecommand{\iff}{\Leftrightarrow}
+\providecommand{\subinner}[1]{#1_{\text{inner}}}
+\providecommand{\subouter}[1]{#1_{\text{outer}}}
+\providecommand{\Ppoly}{\mathcal{X}}
+\providecommand{\Pproj}{\mathcal{Y}}
+\providecommand{\Pinner}{\subinner{\Pproj}}
+\providecommand{\Pouter}{\subouter{\Pproj}}
+\DeclareMathOperator{\argmax}{arg\,max}
+\providecommand{\Aineq}{B}
+\providecommand{\Aeq}{A}
+\providecommand{\bineq}{u}
+\providecommand{\beq}{t}
+\DeclareMathOperator{\area}{area}
+\newcommand{\contact}[1]{\Cspace_{#1}}
+\newcommand{\feasible}[1]{\Fspace_{#1}}
+\newcommand{\dd}{\; \mathrm{d}}
+\newcommand{\figwid}{0.22\columnwidth}
+
+\DeclareMathOperator{\atan2}{atan2}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\begin{document}
+
+%%%%%%%%%%%%%% For debugging purposes, I like to display the TOC
+%    \tableofcontents
+%    \setcounter{tocdepth}{3}
+%\newpage
+%\mbox{}
+%\newpage
+%\mbox{}
+%\newpage
+
+%%%%%% END TOC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\LARGE \bf 
+Crowdsourcing Swarm Manipulation Experiments:\\
+A Massive Online User Study with Large Swarms of Simple Robots
+%Crowdsourcing Swarm Manipulation:
+%A massive online user study manipulation with large swarms of simple robots
+%Massive Online Open eXperiments: \\ %Swarm Manipulation:
+%Crowdsourcing Manipulation Experiments with Large Swarms of Simple Robots
+%Online Massive Manipulation:\\ A massive user study on controlling massive swarms of simple robots
+%Online Massive Manipulation:\\ A massive user study on controlling massive swarms of simple robots
+}
+\author{Aaron Becker, Chris Ertel, and James McLurkin%, 
+\thanks{{A. Becker  is with the Department of Cardiovascular Surgery,  Boston Children's Hospital and Harvard Medical School, Boston, MA, 02115 USA {\tt\small aaron.becker@childrens.harvard.edu}, C. Ertel, and J. McLurkin are with the Computer Science Department, Rice University, Houston, TX 77005 USA  {\tt\small  \{cre1, jmclurkin\}@rice.edu}
+}
+} %\end thanks
+} % end author block
+\maketitle
+
+\begin{abstract}
+Micro- and nanorobotics have the potential to revolutionize many applications including targeted material delivery, assembly, and surgery.  The same properties that promise breakthrough solutions---small size and large populations---present unique challenges to generating controlled motion. We want to use large swarms of robots to perform manipulation tasks; unfortunately, human-swarm interaction studies as conducted today are limited in sample size, are difficult to reproduce, and are prone to hardware failures. We present an alternative.
+
+This paper examines the perils, pitfalls, and possibilities we discovered by launching \href{http://www.swarmcontrol.net}{SwarmControl.net}, an online game where players steer swarms of up to 500 robots to complete manipulation challenges. We record statistics from thousands of players, and use the game to explore aspects of large-population robot control. We present the game framework as a new, open-source tool for large-scale user experiments. Our results have potential applications in human control of micro- and nanorobots, supply insight for automatic controllers, and provide a template for large online robotic research experiments.
+
+
+%{The introduction tells us the contribution here.  What did we learn?}
+  
+% Control of multi-robot systems with large populations is in its infancy, and would benefit from detailed user experiments.  Such experiments could help select the best control architectures and level of feedback and lead ultimately to efficient automatic controllers.
+% Unfortunately, large-scale user experiments have been prohibitively expensive.
+   
+%We present a survey of several control techniques for directing swarms,
+%and compare their efficacy under several different task scenarios. The
+%control rules used are either control strategies in the global frame,
+%strategies which depend on user input and function in a local frame, or
+%hybrid strategies that take into account both global frames and swarm state
+%These rules are tested for their utility in swarm positioning, in manipulating
+%objects through a maze, and in assembling objects.
+
+\end{abstract}
+
+
+%%%%%%%%%%% PAPER OUTLINE
+% INTRODUCTION
+%   micro/nano applications
+%	open questions in swarm control
+% 	difficulties in obtaining experimental data
+% Related work
+%%  HSI work
+%%  Global control work
+%%  online gamification
+% Experimental Methods
+%%  Platform  
+%%  Human Subjects
+%%% recruited through social media
+%%% IRB form  Protocol Number: 14-012E Protocol Title: Massive Manipulation: A n online user study on controlling large swarms of simple robot sApproval Date: 7/26/2013Expiration Date: 7/26/2014
+%%% Costs  for experiment:  ??
+%%% Instrumenting:
+%%%% Google analytics, airbrake, etc.
+% RESULTS
+%% EXPERIMENTAL RESULTS For each task, list the hypothesis, then give plot
+%% DEMOGRAPHIC data
+% Discussion and Future Work
+%% Lessons learned
+%%  Things that went wrong:   categorize what you can change in experiments without changing results (robot speed bad, color changes fine)
+%% Color change for colorblind
+%% not controlling for browser/computer speed.  Show statistics of what browsers used
+% Conclusion 
+%%  control with nonuniform flow
+%%  demographics questionaires: 
+
+
+%%%%%%%%%%%%%%%
+\input{intro6pages}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\input{relatedWork6pages}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\input{expMethods6pages}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\input{expResults6pages}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\input{discussion6pages}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\input{conclusion6pages}
+%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+\section{Acknowledgements}
+We acknowledge many \href{http://mrsl.rice.edu/}{mrsl.rice.edu} lab members who helped beta test \href{http://www.swarmcontrol.net}{SwarmControl.net}; helpful discussion with \href{http://www.jmtour.com/}{James Tour}, \href{http://slink.rice.edu/}{Stephan Link}, and Victor Garc\`ia L\`opez on fabrication and visualization challenges at the nanoscale with nanocars; and the \href{http://cttl.rice.edu/}{Rice Center for Technology in Teaching and Learning}.
+This work was partially supported by the National Science Foundation under 
+\href{http://www.nsf.gov/awardsearch/showAward?AWD_ID=1035716}{CPS-1035716}.  
+   
+   
+%   %To Decrease the space between bibliography items.
+%\let\realbibitem=\bibitem
+%\def\bibitem{\par \vspace{-.5ex}\realbibitem}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,aaronrefs}%,../../../ensemble/bib/aaronrefs}%,../aaronrefs}
+\end{document}
+
+
+%/Users/ab55/Desktop/svn/MRSL-Papers/Drafts-Current/2013-03-13-IROS-MassiveUniformManipulation/document
+%/Users/ab55/Desktop/svn/ensemble/bib
+
+
+
+
+

@@ -27,7 +27,7 @@ var swarmcontrol = {
                        "maze_positioning" : "Varying number",
                        "robot_positioning" : "Robot positioning",
                        "pyramid_building" : "Pyramid building",
-                       "foraging" : "Foraging"
+                       "forage" : "Foraging"
     }
 
 };

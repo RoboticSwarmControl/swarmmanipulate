@@ -48,20 +48,15 @@ C.~Ertel and A.~Becker. (2013, Sep.) Swarmcontrol git repository. [Online].
   Available: \url{https://github.com/crertel/swarmmanipulate.git}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Becker2014e}
+A.~Becker, C.~Ertel, and J.~McLurkin, ``Crowdsourcing swarm manipulation
+  experiments: A massive online user study with large swarms of simple
+  robots,'' \emph{ArXiv e-prints}, Feb. 2014.
+
 \bibitem{Jr2004}
 D.~R. {Olsen Jr} and S.~B. Wood, ``Fan-out: Measuring human control of multiple
   robots,'' in \emph{SIGCHI Conference on Human Factors in Computing Systems},
   Vienna, Austria, Apr. 2004, pp. 231--238.
-
-\bibitem{Squire:2006:HCM:1121241.1121248}
-\BIBentryALTinterwordspacing
-P.~Squire, G.~Trafton, and R.~Parasuraman, ``Human control of multiple unmanned
-  vehicles: effects of interface type on execution and task switching times,''
-  in \emph{Proceedings of the 1st ACM SIGCHI/SIGART conference on Human-robot
-  interaction}, ser. HRI '06.\hskip 1em plus 0.5em minus 0.4em\relax New York,
-  NY, USA: ACM, 2006, pp. 26--32. [Online]. Available:
-  \url{http://doi.acm.org/10.1145/1121241.1121248}
-\BIBentrySTDinterwordspacing
 
 \bibitem{bashyal2008human}
 S.~Bashyal and G.~K. Venayagamoorthy, ``Human swarm interaction for radiation
@@ -78,11 +73,6 @@ A.~Kolling, S.~Nunnally, and M.~Lewis, ``Towards human control of robot
 J.-P. de~la Croix and M.~Egerstedt, ``Controllability characterizations of
   leader-based swarm interactions,'' in \emph{2012 AAAI Fall Symposium Series},
   2012.
-
-\bibitem{Donald2006}
-B.~Donald, C.~Levey, C.~McGray, I.~Paprotny, and D.~Rus, ``An untethered,
-  electrostatic, globally controllable {MEMS} micro-robot,'' \emph{J. of
-  {MEMS}}, vol.~15, no.~1, pp. 1--15, Feb. 2006.
 
 \bibitem{Donald2008}
 B.~Donald, C.~Levey, and I.~Paprotny, ``Planar microassembly by parallel
@@ -107,6 +97,11 @@ D.~Frutiger, B.~Kratochvil, K.~Vollmers, and B.~J. Nelson, ``Magmites -
   wireless resonant magnetic microrobots,'' in \emph{IEEE Int. Conf. Rob.
   Aut.}, Pasadena, CA, May 2008.
 
+\bibitem{Tottori2012}
+S.~Tottori, L.~Zhang, F.~Qiu, K.~Krawczyk, A.~Franco-Obreg{\'o}n, and B.~J.
+  Nelson, ``Magnetic helical micromachines: Fabrication, controlled swimming,
+  and cargo transport,'' \emph{Advanced Materials}, vol.~24, no. 811, 2012.
+
 \bibitem{Becker2012}
 A.~Becker and T.~Bretl, ``Approximate steering of a unicycle under bounded
   model perturbation using ensemble control,'' \emph{{IEEE} Trans. Robot.},
@@ -117,11 +112,6 @@ A.~Becker, C.~Onyuksel, and T.~Bretl, ``Feedback control of many
   differential-drive robots with uniform control inputs,'' in \emph{IEEE/RSJ
   International Conference on Intelligent Robots and Systems (IROS)}, Oct.
   2012.
-
-\bibitem{Tottori2012}
-S.~Tottori, L.~Zhang, F.~Qiu, K.~Krawczyk, A.~Franco-Obreg{\'o}n, and B.~J.
-  Nelson, ``Magnetic helical micromachines: Fabrication, controlled swimming,
-  and cargo transport,'' \emph{Advanced Materials}, vol.~24, no. 811, 2012.
 
 \bibitem{Takahashi2006}
 \BIBentryALTinterwordspacing
@@ -149,9 +139,5 @@ P.~Avouris, ``Manipulation of matter at the atomic and molecular levels,''
 \bibitem{Cazes2001}
 J.~Cazes, \emph{Encyclopedia of Chromatography}, 2nd~ed.\hskip 1em plus 0.5em
   minus 0.4em\relax New York: Taylor \& Francis Group, 2005, vol.~2.
-
-\bibitem{krug2009don}
-S.~Krug, \emph{Don't make me think: A common sense approach to web
-  usability}.\hskip 1em plus 0.5em minus 0.4em\relax Pearson Education, 2009.
 
 \end{thebibliography}

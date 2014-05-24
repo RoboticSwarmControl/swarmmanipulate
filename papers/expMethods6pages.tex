@@ -13,7 +13,7 @@
 %%%% Google analytics, airbrake, etc.
 
 %% wherein we describe our framework
-\subsection{Framework}
+%\subsection{Framework}
 
 We have developed a flexible testing framework for online human-swarm interaction studies. There are two halves to our framework: the server backend and the client-side (in-browser) frontend. The server backend is responsible for tabulating results, serving webpages containing the frontend code, and for issuing unique identifiers to each experiment participant. The in-browser frontend is responsible for running an experiment---that is to say, accepting user input, updating the state of the robot swarm, and ultimately evaluating task completion.
 
@@ -33,7 +33,7 @@ The server backend is written in Ruby, using the Ruby-on-Rails (abbreviated \emp
 
 Each result is a database record containing the experiment name, the participant identifier, the duration of the experiment (time to completion), the number of robots involved, the detailed mode information of the experiment, and the user agent string of the browser running the experiment (which identifies the type of browser used by the participant). Rails automates the process of creating the relevant database-object bindings, and thus we spent little time creating or modifying the result records, allowing us to rapidly adapt the server to our needs--for example, adding tracking of the user agent and experiment mode both took less than five minutes of work on the server side.
 
-The experiment script file to be sent to the client is chosen with the uniform resource identifier (URI) for the experiment webpage; this done, the server will render the page requested by the participant and insert the script for the selected experiment. The Rails framework has a great deal of support for optimizing and compacting (\emph{minifying}) Javascript files.
+%The experiment script file to be sent to the client is chosen with the uniform resource identifier (URI) for the experiment webpage; this done, the server will render the page requested by the participant and insert the script for the selected experiment. The Rails framework has a great deal of support for optimizing and compacting (\emph{minifying}) Javascript files.
 
 %% wherein we decry the evils of javascript and explain why we use the browser
 \subsubsection{Frontend}
@@ -43,10 +43,10 @@ The client frontend which runs in the participant's browser is written in Javasc
 Our framework uses a base task to represent the lifecycle of an experiment---{\bf  instantiation, simulation, evaluation}, and {\bf submission}. A particular experiment inherits from this prototype but overrides particular methods and adds its own variables for bookkeeping; this allows new or modified tasks to be created rapidly with minimal boilerplate code.
 
 %\paragraph{Model}
-Our robots are disc-shaped, non-holonomic, and confined to the 2D plane.  The control input $u$ consists of a single bounded force vector that is applied to each robot, $|u|\le u_{max}$.  We include a linear ramp for this force value that starts at zero and increases to the maximum value in one second; this allows participants to do fine control of the robots by tapping the arrow keys.
-\begin{align}\label{eq:sysmodel}
-\dot{x}_i = u_x,  \qquad  \dot{y}_i = u_y.
- \end{align}
+Our robots are disc-shaped, non-holonomic, and confined to the 2D plane.  The control input $u$ consists of a single bounded force vector that is applied to each robot, $|u|\le u_{max}, \dot{x}_i = u_x,    \dot{y}_i = u_y$.  We include a linear ramp for this force value that starts at zero and increases to the maximum value in one second; this allows participants to do fine control of the robots by tapping the arrow keys.
+%\begin{align}\label{eq:sysmodel}
+%\dot{x}_i = u_x,  \qquad  \dot{y}_i = u_y.
+% \end{align}
 
 During the {\bf instantiation} phase, an experiment sets up the web page elements with help text and other information, and creates the obstacles, robots, and workpieces that will be present during the experiment. It will also randomly select which mode to run in, if applicable.
 
@@ -65,17 +65,6 @@ Because our study involved recording data from human subjects, it required IRB a
 %Rice Federal-Wide Assurance Number: 00003890
 
 Subjects were recruited using a combination of social network effects and coordinated news posts. We asked our friends and colleagues to send links to our site to their friends via their preferred social networks, generally Twitter, Facebook, Google+, and through email. Additionally, we posted our site to several news aggregators in hopes that it would be seen and visited. Our first such posting was to \href{https://news.ycombinator.com/item?id=6277052}{Hacker News}, an aggregator run by the Y-Combinator accelerator company; this posting resulted in our first thousand trials. A second posting was made to Reddit, but did not seem to cause much traffic. A third posting was made to the  \href{http://robohub.org/researchers-use-single-joystick-to-control-swarm-of-rc-robots/}{Robohub.org} site. The traffic generated by these postings is shown in Fig.~\ref{fig:timePlayed}. 
-
-\begin{figure}
-\centering
-\begin{overpic}[width = .9\columnwidth]{timePlayed.pdf}\end{overpic}
-\vspace{-2em}
-\caption{
-\label{fig:timePlayed}
-Cumulative time played for completed tests.
-}
-%\vspace{-2em}
-\end{figure}
 
 
 Concurrently, we contacted our university's  \href{http://news.rice.edu/contact-us/}{\emph{News and Media Relations Team}}. They sent a writer and photographer to our lab, worked with us to draft a \href{http://news.rice.edu/2013/09/09/a-swarm-on-every-desktop-robotics-experts-learn-from-public/ }{press release}, and publicized with news outlets and alumni. Most universities have a media team, and this is a valuable no-cost resource to gain publicity.

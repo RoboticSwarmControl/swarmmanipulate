@@ -8,10 +8,10 @@
 	"buffers":
 	[
 		{
-			"file": "conclusion.tex",
+			"file": "WebMassiveManipulate.tex",
 			"settings":
 			{
-				"buffer_size": 4975,
+				"buffer_size": 11283,
 				"line_ending": "Unix"
 			}
 		}
@@ -43,6 +43,10 @@
 	},
 	"file_history":
 	[
+		"/home/crertel/projects/swarmmanipulate/papers/discussion.tex",
+		"/home/crertel/projects/swarmmanipulate/papers/expMethods.tex",
+		"/home/crertel/projects/swarmmanipulate/papers/expResults.tex",
+		"/home/crertel/projects/swarmmanipulate/papers/conclusion.tex"
 	],
 	"find":
 	{
@@ -82,11 +86,11 @@
 			[
 				{
 					"buffer": 0,
-					"file": "conclusion.tex",
+					"file": "WebMassiveManipulate.tex",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 4975,
+						"buffer_size": 11283,
 						"regions":
 						{
 						},
@@ -102,7 +106,7 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 10114.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

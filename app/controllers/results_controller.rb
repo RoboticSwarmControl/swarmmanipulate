@@ -41,7 +41,10 @@ class ResultsController < ApplicationController
                 @resultscsv = CSV.generate do |csv|
                     csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count", "Aborted" ]
                     @results.each do |r|
+                        begin
                         csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}", "#{r.aborted || 'false'}"]
+                        rescue
+                        end
                     end
                 end
                 send_data @resultscsv

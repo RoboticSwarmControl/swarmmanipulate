@@ -26,7 +26,8 @@ var swarmcontrol = {
                        "varying_control" : "Varying control",
                        "maze_positioning" : "Varying number",
                        "robot_positioning" : "Robot positioning",
-                       "pyramid_building" : "Pyramid building"
+                       "pyramid_building" : "Pyramid building",
+                       "foraging" : "Foraging"
     }
 
 };

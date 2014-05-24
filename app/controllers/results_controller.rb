@@ -39,10 +39,10 @@ class ResultsController < ApplicationController
                 # wrapped up in the model somehow, or monkeypatch the array
                 # class to support a to_csv method.
                 @resultscsv = CSV.generate do |csv|
-                    csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count", "Aborted" ]
+                    csv << [ "Task", "Mode", "Participant", "Run time", "Created at", "Robot count"]
                     @results.each do |r|
                         begin
-                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}", "#{r.aborted || 'false'}"]
+                        csv << [ "#{r.task}", "#{r.mode}", "#{r.participant}", "#{r.runtime}", "#{r.created_at}", "#{r.robot_count}", "#{r.agent}"]
                         rescue
                         end
                     end

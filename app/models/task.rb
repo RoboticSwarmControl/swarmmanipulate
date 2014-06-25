@@ -4,7 +4,8 @@ class Task
                     "varying_visualization" => "Varying visualization",
                     "pyramid_building" => "Pyramid building",
                     "robot_positioning" => "Robot positioning",
-                    "forage" => "Foraging" }
+                    "forage" => "Foraging",
+                    "taskOpenLoop"=>"taskOpenLoop" }
 
     class << self
         def get_pretty_task_name name

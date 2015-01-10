@@ -23,3 +23,5 @@
 vendor/.DS_Store
 
 test/.DS_Store
+
+*.log

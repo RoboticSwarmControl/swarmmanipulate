@@ -13,7 +13,7 @@ var varyingControlTask = _.extend({}, baseTask, attractiveController, repulsiveC
     +' A very tiny sub-microscopic tip is charged with electrical potential, and this charge can be used to repulse like-charged molecules or attract differently-charged molecules. '
     +' The global controller represents using global field (formed by parallel lines of differently-charged conductors) to pull molecules all in the same direction. '
     +' See <a href="http://www.youtube.com/watch?v=px5RdSvGD2Q">video of a global controller</a>, or '
-    +'<a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper.</a>'
+    +'<a href="https://sites.google.com/site/aabecker/Becker2013b.pdf">our paper.</a>'
     +"</p>",
 
     _numrobots: 100, //Math.floor((Math.random()*500)+1),           // number of robots

@@ -13,7 +13,7 @@ var positionRobotsTask = _.extend({}, baseTask, baseController, {
     +' Knowing how a task scales with robot number lets us describe task difficulty. '
     +'<iframe width="270" height="295" src="//www.youtube.com/embed/5p_XIad5-Cw" frameborder="0" allowfullscreen></iframe>'
     +' See <a href="http://www.youtube.com/watch?v=5p_XIad5-Cw"> our video on swarm position control </a>'
-    +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/MassiveUniformManipulation_0.pdf">our paper</a>  for details.'
+    +' and <a href="https://sites.google.com/site/aabecker/Becker2013b.pdf">our paper</a>  for details.'
     +"</p>",
     
     _numrobots: Math.floor((Math.random()*10)+1),          // number of robots

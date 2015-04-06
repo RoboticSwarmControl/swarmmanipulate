@@ -11,7 +11,7 @@ var pyramidBuildingTask = _.extend({}, baseTask, baseController, {
     +' One way to counter disturbances is to use <a href="http://en.wikipedia.org/wiki/Feedback_control">feedback control:</a> '
     +' measure the swarm positions, and automatically calculate a new control value based on the current measurements. '
     +' See <a href="http://www.youtube.com/watch?v=MLr2YvghPns"> our video on feedback control of living one-celled organisms</a> '
-    +' and <a href="http://mrsl.rice.edu/sites/mrsl.rice.edu/files/papers/ControlManyPyriformis.pdf">paper</a> for details.'
+    +' and <a href="https://sites.google.com/site/aabecker/Becker2013a.pdf">paper</a> for details.'
     +"</p>",
 
     _numrobots: 8,                                          // number of robots

@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="RSCL.svg">
+   sodipodi:docname="RSCL.svg"
+   inkscape:export-filename="/Users/ab55/Desktop/git/swarmmanipulate/app/assets/images/RSCL.png"
+   inkscape:export-xdpi="5.3798528"
+   inkscape:export-ydpi="5.3798528">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -33,8 +36,8 @@
      showgrid="false"
      inkscape:window-width="864"
      inkscape:window-height="535"
-     inkscape:window-x="416"
-     inkscape:window-y="206"
+     inkscape:window-x="507"
+     inkscape:window-y="245"
      inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -48,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
